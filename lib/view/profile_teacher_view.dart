@@ -124,8 +124,8 @@ class ProfileTeacherView extends StatelessWidget {
                                             (heightScreen * 0.20) / 5,
                                         widthContainer: widthScreen * 0.55,
                                         textAlign: TextAlign.start),
-                                      SizedBox(
-                                      height: (heightScreen * 0.20)*0.15,
+                                    SizedBox(
+                                      height: (heightScreen * 0.20) * 0.15,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -344,10 +344,14 @@ class ProfileTeacherView extends StatelessWidget {
                                             itemCount: profileTeacherController
                                                 .coursesTeacher.length,
                                             gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount:MediaQuery.of(context).size.shortestSide < 600
-                                                  ? 2
-                                                  : 3,
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount:
+                                                  MediaQuery.of(context)
+                                                              .size
+                                                              .shortestSide <
+                                                          600
+                                                      ? 2
+                                                      : 3,
                                               childAspectRatio: (0.8),
                                             ),
                                             itemBuilder: (_, index) => InkWell(
@@ -415,100 +419,80 @@ class ProfileTeacherView extends StatelessWidget {
                                           itemCount: profileTeacherController
                                               .monthExamTeacher.length,
                                           gridDelegate:
-                                                SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: MediaQuery.of(context).size.shortestSide < 600
-                                                ? 2
-                                                : 3,
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount:
+                                                MediaQuery.of(context)
+                                                            .size
+                                                            .shortestSide <
+                                                        600
+                                                    ? 2
+                                                    : 3,
                                             childAspectRatio: (0.8),
                                           ),
                                           itemBuilder: (_, index) {
                                             return InkWell(
-                                              child: CustomCardMonthExam(
-                                                free: homeController
-                                                        .appleAndGoogleBool
-                                                        .value ||
-                                                    homeController.solvedExams
-                                                        .any((element) =>
-                                                            element.id ==
-                                                            profileTeacherController
-                                                                .monthExamTeacher[
-                                                                    index]
-                                                                .id) ||
-                                                    profileTeacherController
-                                                            .monthExamTeacher[
-                                                                index]
-                                                            .cost ==
-                                                        0,
-                                                cost: profileTeacherController
-                                                    .monthExamTeacher[index]
-                                                    .cost
-                                                    .toString(),
-                                                image:
-                                                    "https://edu-lens.com/images/teachers/${profileTeacherController.dateTeacher.image}",
-                                                title: profileTeacherController
-                                                    .monthExamTeacher[index]
-                                                    .title,
-                                              ),
-                                              onTap: () async {
-                                                if (homeController
-                                                        .appleAndGoogleBool
-                                                        .value ||
-                                                    profileTeacherController
-                                                            .monthExamTeacher[
-                                                                index]
-                                                            .cost ==
-                                                        0 ||
-                                                    homeController.solvedExams
-                                                        .any((element) =>
-                                                            element.id ==
-                                                            profileTeacherController
-                                                                .monthExamTeacher[
-                                                                    index]
-                                                                .id) ||
-                                                    homeController
-                                                            .studentProfile[0]
-                                                            .phone ==
-                                                        '01022535966') {
-                                                  if (!homeController
-                                                      .solvedExams
-                                                      .any((element) =>
-                                                          element.id ==
-                                                          profileTeacherController
-                                                              .monthExamTeacher[
-                                                                  index]
-                                                              .id)) {
-                                                    profileTeacherController
-                                                        .goToQuiz(index);
-                                                  } else if (homeController
-                                                              .solvedExams
-                                                              .where((v) =>
-                                                                  v.id ==
-                                                                  profileTeacherController
-                                                                      .monthExamTeacher[
-                                                                          index]
-                                                                      .id)
-                                                              .first
-                                                              .status !=
-                                                          2 &&
+                                              child: Obx(
+                                                () => CustomCardMonthExam(
+                                                  free: homeController
+                                                          .appleAndGoogleBool
+                                                          .value ||
                                                       homeController.solvedExams
                                                           .any((element) =>
                                                               element.id ==
                                                               profileTeacherController
                                                                   .monthExamTeacher[
                                                                       index]
-                                                                  .id)) {
-                                                    showCustomSnackBar(
-                                                        context: context,
-                                                        title: "note".tr,
-                                                        deck:
-                                                            "تم حل الامتحان من قبل",
-                                                        contentType: ContentType
-                                                            .failure);
-                                                  } else {
-                                                    profileTeacherController
-                                                        .goToQuiz(index);
-                                                  }
-                                                } else {
+                                                                  .id) ||
+                                                      profileTeacherController
+                                                              .monthExamTeacher[
+                                                                  index]
+                                                              .cost ==
+                                                          0,
+                                                  cost: profileTeacherController
+                                                      .monthExamTeacher[index]
+                                                      .cost
+                                                      .toString(),
+                                                  image:
+                                                      "https://edu-lens.com/images/teachers/${profileTeacherController.dateTeacher.image}",
+                                                  title:
+                                                      profileTeacherController
+                                                          .monthExamTeacher[
+                                                              index]
+                                                          .title,
+                                                ),
+                                              ),
+                                              onTap: () async {
+                                                if (homeController
+                                                        .appleAndGoogleBool
+                                                        .value ||
+                                                   ( profileTeacherController
+                                                            .monthExamTeacher[
+                                                                index]
+                                                            .cost ==
+                                                        0&&homeController
+                                                       .solvedExams
+                                                       .where((v) =>
+                                                   v.id ==
+                                                       profileTeacherController
+                                                           .monthExamTeacher[
+                                                       index]
+                                                           .id)
+                                                       .isEmpty) ||
+                                                    homeController
+                                                            .studentProfile[0]
+                                                            .phone ==
+                                                        '01022535966') {
+                                                  profileTeacherController
+                                                      .goToQuiz(index);
+                                                } else if (homeController
+                                                    .solvedExams
+                                                    .where((v) =>
+                                                        v.id ==
+                                                        profileTeacherController
+                                                            .monthExamTeacher[
+                                                                index]
+                                                            .id)
+                                                    .isEmpty) {
                                                   BottomSheetPey
                                                       .bottomSheetPaidForMonthExam(
                                                     dataMonthExam:
@@ -517,7 +501,87 @@ class ProfileTeacherView extends StatelessWidget {
                                                             index],
                                                     context: context,
                                                   );
+                                                } else if (homeController
+                                                        .solvedExams
+                                                        .where((v) =>
+                                                            v.id ==
+                                                            profileTeacherController
+                                                                .monthExamTeacher[
+                                                                    index]
+                                                                .id)
+                                                        .first
+                                                        .status ==
+                                                    0) {
+                                                  profileTeacherController
+                                                      .goToQuiz(index);
+                                                }else{
+                                                  showCustomSnackBar(
+                                                           context: context,
+                                                           title: "note".tr,
+                                                           deck:
+                                                           "تم حل الامتحان من قبل",
+                                                           contentType: ContentType
+                                                               .failure);
                                                 }
+                                                // if (homeController
+                                                //         .appleAndGoogleBool
+                                                //         .value ||
+                                                //     profileTeacherController
+                                                //             .monthExamTeacher[
+                                                //                 index]
+                                                //             .cost ==
+                                                //         0 ||
+                                                //     homeController.solvedExams
+                                                //         .any((element) =>
+                                                //             element.id ==
+                                                //             profileTeacherController
+                                                //                 .monthExamTeacher[
+                                                //                     index]
+                                                //                 .id) ||
+                                                //     homeController
+                                                //             .studentProfile[0]
+                                                //             .phone ==
+                                                //         '01022535966') {
+                                                //   if (homeController
+                                                //               .solvedExams
+                                                //               .where((v) =>
+                                                //                   v.id ==
+                                                //                   profileTeacherController
+                                                //                       .monthExamTeacher[
+                                                //                           index]
+                                                //                       .id)
+                                                //               .first
+                                                //               .status !=
+                                                //           2 &&
+                                                //       homeController.solvedExams
+                                                //           .any((element) =>
+                                                //               element.id ==
+                                                //               profileTeacherController
+                                                //                   .monthExamTeacher[
+                                                //                       index]
+                                                //                   .id)) {
+                                                //     profileTeacherController
+                                                //         .goToQuiz(index);
+                                                //   } else {
+                                                //     showCustomSnackBar(
+                                                //         context: context,
+                                                //         title: "note".tr,
+                                                //         deck:
+                                                //         "تم حل الامتحان من قبل",
+                                                //         contentType: ContentType
+                                                //             .failure);
+                                                //
+                                                //   }
+                                                // } else {
+                                                //   BottomSheetPey
+                                                //       .bottomSheetPaidForMonthExam(
+                                                //     dataMonthExam:
+                                                //         profileTeacherController
+                                                //                 .monthExamTeacher[
+                                                //             index],
+                                                //     context: context,
+                                                //   );
+                                                // }
                                               },
                                             );
                                           },
@@ -570,10 +634,14 @@ class ProfileTeacherView extends StatelessWidget {
                                             itemCount: profileTeacherController
                                                 .bookingTeacher.length,
                                             gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: MediaQuery.of(context).size.shortestSide < 600
-                                                  ? 2
-                                                  : 3,
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount:
+                                                  MediaQuery.of(context)
+                                                              .size
+                                                              .shortestSide <
+                                                          600
+                                                      ? 2
+                                                      : 3,
                                               childAspectRatio: (0.8),
                                             ),
                                             itemBuilder: (_, index) => Obx(

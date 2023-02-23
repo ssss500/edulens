@@ -21,7 +21,7 @@ class PackageController extends GetxController {
   var subjectTeachers = <TeacherModel>[].obs;
   var chapters = <ChapterModel>[].obs;
   final coursesTeacher = <CoursesModel>[].obs;
-  final checkList=[].obs;
+  RxList checkList=[].obs;
   late PlanModel selectedPackage;
   RxInt subjectId = 1.obs, chapterId = 0.obs;
   int indexSubject = 0;
@@ -77,7 +77,7 @@ class PackageController extends GetxController {
                       color: AppConstants.lightPrimaryColor,
                     ))
                   : CustomListView(
-                      padding: 0,
+                      padding: 40,
                       scroll: true,
                       itemCount: chapters.length,
                       itemBuilder: (BuildContext context, int indexChapters) {
@@ -143,6 +143,7 @@ class PackageController extends GetxController {
                                             }else{
                                               if(checkList.length<selectedPackage.chapterNumber){
                                               checkList.add(chapters[indexChapters].id);
+                                              debugPrint(checkList.toString());
                                               }else{
                                                 showCustomSnackBar(
                                                     context: context,

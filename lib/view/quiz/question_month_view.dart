@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class QuestionMonthView extends StatelessWidget {
   QuestionMonthView({Key? key}) : super(key: key);
@@ -60,13 +61,72 @@ class QuestionMonthView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // if (questionMonthController.duraction != 0 ||
-                    //     questionMonthController.duraction != null)
-                    //   StopWatchTimerPage(
-                    //     minutes: Duration(
-                    //         minutes: questionMonthController.duraction),
-                    //   ),
+                  children: [ const SizedBox(
+                    height: 10,
+                  ),
+                    Obx(
+                          () => questionMonthController.endTimerBool.value
+                          ? Container()
+                          : TweenAnimationBuilder<Duration>(
+                          duration: Duration(minutes: profileTeacherController.monthExamTeacher[questionMonthController.indexQuiz].duration! ),
+                          tween: Tween(
+                              begin: Duration(minutes:  profileTeacherController.monthExamTeacher[questionMonthController.indexQuiz].duration! ),
+                              end: Duration.zero),
+                          onEnd: () {
+                            questionMonthController.getFinalDegreeAndEndExam();
+                          },
+                          builder: (BuildContext context, Duration value,
+                              Widget? child) {
+                            final minutes = value.inMinutes;
+                            final seconds = value.inSeconds % 60;
+                            return LinearPercentIndicator(
+                              width:
+                              MediaQuery.of(context).size.width - 50,
+                              animation: false,
+                              lineHeight: 30.0,
+                              barRadius: const Radius.circular(15),
+                              alignment: MainAxisAlignment.center,
+                              animationDuration: 0,
+                              percent:
+                              value.inSeconds.toDouble() / ( profileTeacherController.monthExamTeacher[questionMonthController.indexQuiz].duration!  * 60),
+                              center: Row(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.timer,
+                                    color: Colors.white70,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  minutes > 1
+                                      ? Text('$minutes:00 ',
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                          color: Colors.white70,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15))
+                                      : Text(' 00:$seconds',
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                          color: Colors.white70,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15))
+                                ],
+                              ),
+                              linearStrokeCap: LinearStrokeCap.butt,
+                              progressColor: minutes > minutes / 5
+                                  ? Colors.green
+                                  : minutes < 1
+                                  ? Colors.red
+                                  : Colors.red.shade300,
+                            );
+                          }),
+                    ),
+
                     const SizedBox(
                       height: 10,
                     ),
@@ -224,8 +284,8 @@ class QuestionMonthView extends StatelessWidget {
                     ),
                     CustomButton(
                       function: () {
-                        // debugPrint(
-                        //     questionMonthController.questionList[0].toString());
+                        questionMonthController.endTimerBool.value = true;
+
                         try {
                           questionMonthController.checkTheQuestionAnswer(
                               context: context, controller: _controller);

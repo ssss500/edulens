@@ -1,13 +1,16 @@
 import 'dart:ui';
 
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:connectivity_widget/connectivity_widget.dart';
+import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/package_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/view/package_teacher/choose_teacher_for_package.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_buttom.dart';
+import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:edu_lens/view/widget/custom_list_view.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
@@ -81,10 +84,23 @@ PackageController packageController=Get.put(PackageController());
                               ),
                               CustomButton(
                                 function: () {
-                                  packageController.checkList.value=[];
-                                  packageController.selectedPackage=packageController.plansList[index];
-                                  Get.to(() =>   ChooseTeacherForPackages());
-                                },
+                                  HomeController homeController=Get.put(HomeController());
+                                  if(packageController.plansList[index].price<=homeController.studentProfile[0].bucket!){
+                                          packageController.checkList.value =
+                                              [];
+                                          packageController.selectedPackage =
+                                              packageController
+                                                  .plansList[index];
+                                          Get.to(
+                                              () => ChooseTeacherForPackages());
+                                        }else{
+                                    showCustomSnackBar(
+                                        context: context,
+                                        title: "note".tr,
+                                        deck: "رصيدك لا يكفي قم بالشحن اولا",
+                                        contentType: ContentType.warning);
+                                  }
+                                      },
                                 text: "choosePackagesText".tr,
                                 sizeText: 20,
                               )

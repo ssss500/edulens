@@ -237,7 +237,7 @@ class CreateAccountView extends StatelessWidget {
               hint: "*********",
               colorBorder: AppConstants.primaryColor,
               validator: (value) {
-                if (controller.password2.value!=controller.password.value) {
+                if (controller.password2.value.trim()!=controller.password.value.trim()) {
                   showCustomSnackBar(
                       context: context,
                       title: "note".tr,

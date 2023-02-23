@@ -24,8 +24,8 @@ class BookingModel {
     int? studentClassId,
     int? teacherId,
     int? subjectId,
-    String? createdAt,
-    String? updatedAt,
+    // String? createdAt,
+    // String? updatedAt,
   }) {
     _id = id;
     _name = name;
@@ -37,8 +37,8 @@ class BookingModel {
     _start = start;
     _end = end;
     _teacherId = teacherId;
-    _createdAt = createdAt;
-    _updatedAt = updatedAt;
+    // _createdAt = createdAt;
+    // _updatedAt = updatedAt;
   }
 
   BookingModel.fromJson(Map<dynamic, dynamic> json) {
@@ -47,8 +47,8 @@ class BookingModel {
     _studentClassId = json['student_class_id'];
     _subjectId = json['subject_id'];
     _cost = json['cost'];
-    _createdAt = json['created_at'];
-    _updatedAt = json['updated_at'];
+    // _createdAt = json['created_at'];
+    // _updatedAt = json['updated_at'];
     _desc = json['desc'];
     _year = json['year'];
     _start = json['start'];
@@ -61,8 +61,8 @@ class BookingModel {
   int? _studentClassId;
   int? _subjectId;
   int? _cost;
-  String? _createdAt;
-  String? _updatedAt;
+  // String? _createdAt;
+  // String? _updatedAt;
   String? _desc;
   String? _year;
   String? _start;
@@ -76,8 +76,8 @@ class BookingModel {
     int? subjectId,
     int? cost,
     String? createdBy,
-    String? createdAt,
-    String? updatedAt,
+    // String? createdAt,
+    // String? updatedAt,
     String? desc,
     String? year,
     String? start,
@@ -90,8 +90,8 @@ class BookingModel {
         studentClassId: studentClassId ?? _studentClassId,
         subjectId: subjectId ?? _subjectId,
         cost: cost ?? _cost,
-        createdAt: createdAt ?? _createdAt,
-        updatedAt: updatedAt ?? _updatedAt,
+        // createdAt: createdAt ?? _createdAt,
+        // updatedAt: updatedAt ?? _updatedAt,
         desc: desc ?? _desc,
         year: year ?? _year,
         start: start ?? _start,
@@ -109,9 +109,9 @@ class BookingModel {
 
   int? get cost => _cost;
 
-  String? get createdAt => _createdAt;
-
-  String? get updatedAt => _updatedAt;
+  // String? get createdAt => _createdAt;
+  //
+  // String? get updatedAt => _updatedAt;
 
   String? get desc => _desc;
 
@@ -130,8 +130,8 @@ class BookingModel {
     map['student_class_id'] = _studentClassId;
     map['subject_id'] = _subjectId;
     map['cost'] = _cost;
-    map['created_at'] = _createdAt;
-    map['updated_at'] = _updatedAt;
+    // map['created_at'] = _createdAt;
+    // map['updated_at'] = _updatedAt;
     map['desc'] = _desc;
     map['year'] = _year;
     map['start'] = _start;

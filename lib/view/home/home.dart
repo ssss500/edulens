@@ -56,7 +56,7 @@ class Home extends StatelessWidget {
                           messageController.getMessage();
                           Get.to(()=>MessageView());
                         },
-                        icon: const Icon(Icons.notifications_active),
+                        icon: const Icon(Icons.mark_email_unread_rounded),
                         key: ValueKey('icon1'),
                       )
                     : const Icon(null)),

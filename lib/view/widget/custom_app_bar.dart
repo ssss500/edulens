@@ -48,14 +48,11 @@ class CustomAppBar extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 55.0),
-          child: CustomText(
-            text: title.toString(),
-            color: Colors.white,
-            fontSize: 23,
-            maxLines: 1,
-          ),
+        title: CustomText(
+          text: title.toString(),
+          color: Colors.white,
+          fontSize: 23,
+          maxLines: 1,
         ),
         leading: bakeButtonBool
             ? IconButton(
@@ -76,6 +73,8 @@ class CustomAppBar extends StatelessWidget {
             : SizedBox(),
         actions: [
           Container(
+            height: 50,
+            width: 50,
             child: iconRight,
           )
 //          iconRight

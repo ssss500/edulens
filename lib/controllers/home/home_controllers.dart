@@ -103,7 +103,11 @@ class HomeController extends GetxController {
   }
 
   updateLecturePaid() async {
-    lecturePaid.value = (await services.getLecturePaid())!;
+    try{
+      lecturePaid.value = (await services.getLecturePaid())!;
+    }catch(e){
+      debugPrint("${e.toString()} catch 109 home controller");
+    }
     studentProfile.value = (await services.getDataUser())!;
 
   }
@@ -265,9 +269,11 @@ class HomeController extends GetxController {
     debugPrint(teachers.length.toString());
 
     idListTeacherLove.value = await getIdTeacherLoveFun();
-
-    lecturePaid.value = (await services.getLecturePaid())!;
-
+    try{
+      lecturePaid.value = (await services.getLecturePaid())!;
+    }catch(e){
+      debugPrint(e.toString());
+    }
     studentReservations.value = (await services.getReservations())!;
 
     chapterPaid.value = (await services.getChapterPaid())!;

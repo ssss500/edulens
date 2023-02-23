@@ -363,6 +363,8 @@ class RegisterController extends GetxController {
   }
 
   register(BuildContext context) async {
+    FocusManager.instance.primaryFocus?.unfocus();
+
     if (sectionName.value == "division".tr) {
       return showCustomSnackBar(
           context: context,
@@ -405,7 +407,7 @@ class RegisterController extends GetxController {
           context,
           RegisterModel(
             phone: phone.value,
-            password: password.value,
+            password: password.value.trim(),
             email: email.value,
             birthday: birthday.value,
             cityId: "${cityId.value}",
@@ -416,7 +418,7 @@ class RegisterController extends GetxController {
             lastName: lastName.value,
             parentName: parentName.value,
             parentPhone: parentPhone.value,
-            password2: password2.value,
+            password2: password2.value.trim(),
             school: school.value,
             studentClassId: "${studentClassId.value}",
             studentSectionId: "${studentSectionId.value}",
@@ -431,6 +433,7 @@ class RegisterController extends GetxController {
   }
 
   registerUniversity(BuildContext context) async {
+    FocusManager.instance.primaryFocus?.unfocus();
     // final sectionName = "division".tr.obs;
     // final classesName = "chooseYear".tr.obs;
     // final genderName = "${"nationality".tr} ${Platform.isIOS?"*":null}".obs;

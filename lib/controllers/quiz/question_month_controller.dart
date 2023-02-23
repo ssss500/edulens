@@ -22,6 +22,7 @@ class QuestionMonthController extends GetxController {
   int indexQuiz = 0;
   int finalDegree = 0;
   double? screenWidth = 0.0, screenHeight = 0.0;
+  RxBool endTimerBool=false.obs;
 
   checkTheQuestionAnswer({context, controller}) {
     if (!kDebugMode) {
@@ -198,8 +199,11 @@ class QuestionMonthController extends GetxController {
             ),
             InkWell(
               onTap: () async {
-                Get.back();
+                Get.dialog(CustomLoading());
+
                 await homeController.updateSolvedExams();
+                Get.back();
+                Get.back();
 
                 Get.back();
               },

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dio/src/response.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/helper/dio_integration.dart';
@@ -114,14 +115,9 @@ class GetHomeServices {
         "api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"
       });
 
-      // debugPrint(response.statusCode.toString());
-      // debugPrint("studentId ${response.dagetYearsta}");
-      // debugPrint(
-      //     " CacheHelper.getData(key: AppConst/ants.studentId) : ${CacheHelper.getData(key: AppConstants.studentId)}");
       if (response.statusCode == 200) {
         final mList = List<StudentModel>.from(
             response.data.map((i) => StudentModel.fromJson(i)));
-        // debugPrint(mList.length.toString());
         return mList;
       }
     } catch (e) {
@@ -170,10 +166,10 @@ class GetHomeServices {
     return null;
   }
 
-  Future<List<LecturePaidModel>?> getLecturePaid() async {
+  Future getLecturePaid() async {
     try {
-      late var response;
-      response = await dio!.post(AppConstants.studentLecture, queryParameters: {
+
+    final  response = await dio!.post(AppConstants.studentLecture, queryParameters: {
         "student_id": CacheHelper.getData(
           key: AppConstants.studentId,
         )
@@ -181,9 +177,17 @@ class GetHomeServices {
         "api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"
       });
       if (response.statusCode == 200) {
-        debugPrint("response Lecture: ${response.data} ");
-        final mList = List<LecturePaidModel>.from(
-            response.data.map((i) => LecturePaidModel.fromJson(i)));
+        debugPrint("response Lecture: ${response.data[0]} ");
+        var mList;
+       try {
+          mList = List<LecturePaidModel>.from(
+              response.data.map((i) => LecturePaidModel.fromJson(i)));
+        }catch(e){
+         mList=[];
+         debugPrint("catch : 186${e.toString()}");
+       }
+        debugPrint("response Lecture done");
+
         return mList;
       }
     } catch (e) {

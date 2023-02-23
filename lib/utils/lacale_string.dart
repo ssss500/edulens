@@ -39,7 +39,6 @@ class LocaleString extends Translations {
           "numberOfWrongAnswers": "عدد الإجابات الخاطئة",
           "numberOfQuestion": "عدد الاسئلة",
           "showModelAnswer": "عرض نموذج الاجابة",
-          "bakeToHomeText": "العودة للصفحة الرئيسية",
           "bakeToVideo": "العودة للصفحة الرئيسية",
           "tryAgain": "حاول مره اخري",
           "logoutText": "تسجيل الخروج",

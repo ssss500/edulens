@@ -29,7 +29,7 @@ class ChooseTeacherForPackages extends StatelessWidget {
           ()=> FloatingActionButton.extended(
           onPressed: () async {
             if(packageController.checkList.length<packageController.selectedPackage.chapterNumber){
-              debugPrint("ok");
+              // debugPrint("ok");
               showCustomSnackBar(
                   context: Get.context,
                   title: "note".tr,

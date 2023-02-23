@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/controllers/home/home_controllers.dart';
@@ -124,34 +126,46 @@ class GetPlansServices {
   Future<List?> puyChapter() async {
     PackageController packageController = Get.put(PackageController());
     HomeController homeController = Get.put(HomeController());
+    debugPrint("student_id: ${CacheHelper.getData(
+      key: AppConstants.studentId,
+    )}");
+    debugPrint("plan_id: ${packageController.selectedPackage.id}");
+    debugPrint("chapter_id: ${packageController.checkList}");
+    // Array<dynamic> array=packageController.checkList.value;
+
+    // var list =jsonEncode( packageController.checkList.map((e) => e.toJson()).toList());
+// debugPrint(list.toString());
 
     try {
-      final response = await dio!.post(AppConstants.subjectTeacher,
-          queryParameters: {
-        "subject_id": packageController.subjectId.value,
+    final response = await dio!.post(AppConstants.buyPlan, queryParameters: {
+      "chapter_id":  packageController.checkList ,
+        "student_id": CacheHelper.getData(
+          key: AppConstants.studentId,
+        ),
         "plan_id": packageController.selectedPackage.id,
-        "chapter_id": packageController.checkList,
-          },
-          data: {"api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"});
+      }, data: {
+        "api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"
+      });
+
+      log(response.data.toString().split(',')[0]);
+      log(response.statusCode.toString());
+      debugPrint("chapter_id: ${packageController.checkList}");
+
       if (response.statusCode == 200) {
-        // final mList = List<TeacherModel>.from(
-        //     response.data[0].map((i) => TeacherModel.fromJson(i)));
-        // debugPrint(mLis.length.toString());
-        log(response.data.toString());
         homeController.updateChapterPaid();
         showCustomSnackBar(
             context: Get.context,
             title: "note".tr,
             deck: "تم شراء الخطة بنجاح",
             contentType: ContentType.success);
-        packageController.checkList.value=[];
+        packageController.checkList.value = [];
         return null;
-      }else{
+      } else {
         showCustomSnackBar(
             context: Get.context,
             title: "note".tr,
-            deck: "${response.data}",
-            contentType: ContentType.success);
+            deck: response.data.toString().split(',')[0],
+            contentType: ContentType.failure);
       }
     } catch (e) {
       debugPrint(e.toString());

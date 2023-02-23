@@ -34,7 +34,7 @@ class LoginService {
           showCustomSnackBar(
             context: context,
             title: "note".tr,
-            deck: "${response.data}",
+            deck: response.data.toString().split(',')[0],
             contentType: ContentType.failure);
 
       }

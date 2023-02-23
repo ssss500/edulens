@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/video_controller.dart';
@@ -17,11 +19,11 @@ class QuestionController extends GetxController {
   VideoController videoController = Get.put(VideoController());
   int finalDegree = 0;
   double? screenWidth = 0.0, screenHeight = 0.0;
-
-  checkTheQuestionAnswer({context, controller,questionList}) {
+RxBool endTimerBool=false.obs;
+  checkTheQuestionAnswer({context, controller, questionList}) {
     if (!kDebugMode) {
-      for (int i = 0; i <  questionList.length; i++) {
-        if ( questionList[i].answer == null) {
+      for (int i = 0; i < questionList.length; i++) {
+        if (questionList[i].answer == null) {
           debugPrint((i + 1).toString());
           controller.animateToPage(i);
 
@@ -33,13 +35,13 @@ class QuestionController extends GetxController {
         }
       }
     }
-    return getFinalDegreeAndEndExam(questionList:questionList);
+    return getFinalDegreeAndEndExam(questionList: questionList);
   }
 
   getFinalDegreeAndEndExam({questionList}) async {
     Get.dialog(CustomLoading());
     finalDegree = 0;
-    for (var element in  questionList) {
+    for (var element in questionList) {
       for (var element2 in element.choices!) {
         if (element2.isCorrect == 1 && element2.choice == element.answer) {
           finalDegree++;
@@ -51,7 +53,7 @@ class QuestionController extends GetxController {
     final result = await videoController.endExam(degree: finalDegree);
     if (result == 200) {
       Get.back();
-      return openBottomSheet(questionList:questionList);
+      return openBottomSheet(questionList: questionList);
     }
     Get.back();
     return null;
@@ -125,8 +127,7 @@ class QuestionController extends GetxController {
                       height: 15,
                     ),
                     CustomText(
-                      text:
-                          "${questionList.length - finalDegree}",
+                      text: "${questionList.length - finalDegree}",
                       fontSize: 20,
                     ),
                   ],
@@ -142,7 +143,9 @@ class QuestionController extends GetxController {
                 Get.dialog(CustomLoading());
                 await homeController.updateSolvedExams();
                 Get.back();
-                Get.to(() => AnswerQuizView(questionList: questionList,));
+                Get.to(() => AnswerQuizView(
+                      questionList: questionList,
+                    ));
               },
               child: Container(
                   width: 300,

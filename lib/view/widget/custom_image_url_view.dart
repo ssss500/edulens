@@ -6,9 +6,10 @@ import 'package:photo_view/photo_view.dart';
 
 class CustomImageUrlView extends StatelessWidget {
   final image, colorLodingIcon, width;
-
+final fit;
   CustomImageUrlView(
       {required this.image,
+        this.fit=BoxFit.cover,
       this.colorLodingIcon = Colors.white,
       this.width = double.infinity});
 
@@ -31,7 +32,7 @@ class CustomImageUrlView extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
                 image: imageProvider,
-                fit: BoxFit.cover,
+                fit: fit,
               ),
             ),
           ),

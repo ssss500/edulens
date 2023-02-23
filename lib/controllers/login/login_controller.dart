@@ -16,6 +16,8 @@ class LoginController extends GetxController {
   var token, idDevice;
 
   login(BuildContext context) async {
+    FocusManager.instance.primaryFocus?.unfocus();
+
     loading.value = true;
     await _firebaseMessaging
         .getToken()

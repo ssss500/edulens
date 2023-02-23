@@ -73,32 +73,32 @@ class Choice {
     this.choice,
     this.isCorrect,
     this.questionId,
-    this.createdAt,
-    this.updatedAt,
+    // this.createdAt,
+    // this.updatedAt,
   });
 
   int? id;
   String? choice;
   int? isCorrect;
   int? questionId;
-  dynamic createdAt;
-  dynamic updatedAt;
+  // dynamic createdAt;
+  // dynamic updatedAt;
 
   Choice copyWith({
     int? id,
     String? choice,
     int? isCorrect,
     int? questionId,
-    dynamic createdAt,
-    dynamic updatedAt,
+    // dynamic createdAt,
+    // dynamic updatedAt,
   }) =>
       Choice(
         id: id ?? this.id,
         choice: choice ?? this.choice,
         isCorrect: isCorrect ?? this.isCorrect,
         questionId: questionId ?? this.questionId,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
+        // createdAt: createdAt ?? this.createdAt,
+        // updatedAt: updatedAt ?? this.updatedAt,
       );
 
   factory Choice.fromJson(Map<String, dynamic> json) => Choice(
@@ -106,8 +106,8 @@ class Choice {
     choice: json["choice"],
     isCorrect: json["is_correct"],
     questionId: json["question_id"],
-    createdAt: json["created_at"],
-    updatedAt: json["updated_at"],
+    // createdAt: json["created_at"],
+    // updatedAt: json["updated_at"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -115,7 +115,7 @@ class Choice {
     "choice": choice,
     "is_correct": isCorrect,
     "question_id": questionId,
-    "created_at": createdAt,
-    "updated_at": updatedAt,
+    // "created_at": createdAt,
+    // "updated_at": updatedAt,
   };
 }

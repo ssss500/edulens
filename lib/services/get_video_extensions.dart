@@ -34,7 +34,7 @@ class GetVideoExtensions {
       });
 
       debugPrint(response.statusCode.toString());
-      debugPrint(response.data.toString());
+      debugPrint("pdf ${response.data.toString()}");
       if (response.statusCode == 200) {
         final mList =
             List<PdfModel>.from(response.data.map((i) => PdfModel.fromJson(i)));

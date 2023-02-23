@@ -34,8 +34,8 @@ class SolvedExamsModel {
     this.lectureId,
     this.studentClassId,
     this.teacherId,
-    this.createdAt,
-    this.updatedAt,
+    // this.createdAt,
+    // this.updatedAt,
     this.pivot,
   });
 
@@ -63,8 +63,8 @@ class SolvedExamsModel {
   int? lectureId;
   int? studentClassId;
   int? teacherId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  // DateTime? createdAt;
+  // DateTime? updatedAt;
   Pivot? pivot;
 
   SolvedExamsModel copyWith({
@@ -92,8 +92,8 @@ class SolvedExamsModel {
     int? lectureId,
     int? studentClassId,
     int? teacherId,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    // DateTime? createdAt,
+    // DateTime? updatedAt,
     Pivot? pivot,
   }) =>
       SolvedExamsModel(
@@ -121,8 +121,8 @@ class SolvedExamsModel {
         lectureId: lectureId ?? this.lectureId,
         studentClassId: studentClassId ?? this.studentClassId,
         teacherId: teacherId ?? this.teacherId,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
+        // createdAt: createdAt ?? this.createdAt,
+        // updatedAt: updatedAt ?? this.updatedAt,
         pivot: pivot ?? this.pivot,
       );
 
@@ -151,8 +151,8 @@ class SolvedExamsModel {
     lectureId: json["lecture_id"],
     studentClassId: json["student_class_id"],
     teacherId: json["teacher_id"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
+    // createdAt: DateTime.parse(json["created_at"]),
+    // updatedAt: DateTime.parse(json["updated_at"]),
     pivot: Pivot.fromJson(json["pivot"]),
   );
 
@@ -181,8 +181,8 @@ class SolvedExamsModel {
     "lecture_id": lectureId,
     "student_class_id": studentClassId,
     "teacher_id": teacherId,
-    "created_at": createdAt?.toIso8601String(),
-    "updated_at": updatedAt?.toIso8601String(),
+    // "created_at": createdAt?.toIso8601String(),
+    // "updated_at": updatedAt?.toIso8601String(),
     "pivot": pivot!.toJson(),
   };
 }
@@ -194,8 +194,8 @@ class Pivot {
     this.degree,
     this.status,
     this.time,
-    this.createdAt,
-    this.updatedAt,
+    // this.createdAt,
+    // this.updatedAt,
   });
 
   int? studentId;
@@ -203,8 +203,8 @@ class Pivot {
   int? degree;
   int? status;
   String? time;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  // DateTime? createdAt;
+  // DateTime? updatedAt;
 
   Pivot copyWith({
     int? studentId,
@@ -212,8 +212,8 @@ class Pivot {
     int? degree,
     int? status,
     String? time,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    // DateTime? createdAt,
+    // DateTime? updatedAt,
   }) =>
       Pivot(
         studentId: studentId ?? this.studentId,
@@ -221,8 +221,8 @@ class Pivot {
         degree: degree ?? this.degree,
         status: status ?? this.status,
         time: time ?? this.time,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
+        // createdAt: createdAt ?? this.createdAt,
+        // updatedAt: updatedAt ?? this.updatedAt,
       );
 
   factory Pivot.fromJson(Map<String, dynamic> json) => Pivot(
@@ -231,8 +231,8 @@ class Pivot {
     degree: json["degree"],
     status: json["status"],
     time: json["time"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
+    // createdAt: DateTime.parse(json["created_at"]),
+    // updatedAt: DateTime.parse(json["updated_at"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -241,7 +241,7 @@ class Pivot {
     "degree": degree,
     "status": status,
     "time": time,
-    "created_at": createdAt?.toIso8601String(),
-    "updated_at": updatedAt?.toIso8601String(),
+    // "created_at": createdAt?.toIso8601String(),
+    // "updated_at": updatedAt?.toIso8601String(),
   };
 }

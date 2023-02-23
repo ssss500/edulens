@@ -10,14 +10,17 @@ import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class QuestionView extends StatelessWidget {
-  QuestionView({Key? key, this.questionList,this.quizList,this.indexQuiz}) : super(key: key);
+  QuestionView({Key? key, this.questionList, this.quizList, this.indexQuiz})
+      : super(key: key);
   final CarouselController _controller = CarouselController();
   QuestionController questionController = Get.put(QuestionController());
 
   // ignore: prefer_typing_uninitialized_variables
-  final questionList,quizList,indexQuiz;
+  final questionList, quizList, indexQuiz;
+
   @override
   Widget build(BuildContext context) {
     questionController.screenWidth = MediaQuery.of(context).size.width;
@@ -34,23 +37,12 @@ class QuestionView extends StatelessWidget {
         ),
       ),
       body: ConnectivityWidget(
-        onlineCallback: () {
-        },
+        onlineCallback: () {},
         builder: (context, isOnline) => Column(
           children: [
-            const SizedBox(
-              height: 10,
-            ),
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        spreadRadius: 2,
-                        blurRadius: 20,
-                        offset: Offset(0, 2), // changes position of shadow
-                      ),
-                    ],
                     borderRadius: BorderRadius.only(
                         topRight: Radius.elliptical(40, 40),
                         topLeft: Radius.elliptical(40, 40)),
@@ -67,6 +59,73 @@ class QuestionView extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
+                      Obx(
+                        () => questionController.endTimerBool.value
+                            ? Container()
+                            : TweenAnimationBuilder<Duration>(
+                                duration: Duration(minutes: quizList[indexQuiz].duration! ),
+                                tween: Tween(
+                                    begin: Duration(minutes: quizList[indexQuiz].duration! ),
+                                    end: Duration.zero),
+                                onEnd: () {
+                                  questionController.getFinalDegreeAndEndExam(
+                                      questionList: questionList);
+                                },
+                                builder: (BuildContext context, Duration value,
+                                    Widget? child) {
+                                  final minutes = value.inMinutes;
+                                  final seconds = value.inSeconds % 60;
+                                  return LinearPercentIndicator(
+                                    width:
+                                        MediaQuery.of(context).size.width - 50,
+                                    animation: false,
+                                    lineHeight: 30.0,
+                                    barRadius: const Radius.circular(15),
+                                    alignment: MainAxisAlignment.center,
+                                    animationDuration: 0,
+                                    percent:
+                                        value.inSeconds.toDouble() / (quizList[indexQuiz].duration!  * 60),
+                                    center: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.timer,
+                                          color: Colors.white70,
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        minutes > 1
+                                            ? Text('$minutes:00 ',
+                                                textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    color: Colors.white70,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15))
+                                            : Text(' 00:$seconds',
+                                                textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    color: Colors.white70,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15))
+                                      ],
+                                    ),
+                                    linearStrokeCap: LinearStrokeCap.butt,
+                                    progressColor: minutes > minutes / 5
+                                        ? Colors.green
+                                        : minutes < 1
+                                            ? Colors.red
+                                            : Colors.red.shade300,
+                                  );
+                                }),
+                      ),
+
+                      const SizedBox(
+                        height: 10,
+                      ),
                       CarouselSlider(
                         carouselController: _controller,
                         items: [
@@ -76,7 +135,8 @@ class QuestionView extends StatelessWidget {
                             Container(
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: AppConstants.primaryColor, width: 2.0),
+                                    color: AppConstants.primaryColor,
+                                    width: 2.0),
                                 borderRadius: BorderRadius.circular(30),
                               ), //              height: 400,
                               child: Padding(
@@ -102,7 +162,7 @@ class QuestionView extends StatelessWidget {
                                         child: Column(
                                           children: [
                                             //الصوره
-                                            if ( questionList[index].image !=
+                                            if (questionList[index].image !=
                                                 null)
                                               CustomImageUrlView(
                                                 image:
@@ -120,7 +180,8 @@ class QuestionView extends StatelessWidget {
                                               child: CustomText(
                                                 text:
                                                     "${questionList[index].title}",
-                                                textDirection: TextDirection.ltr,
+                                                textDirection:
+                                                    TextDirection.ltr,
                                                 fontSize: 20,
                                               ),
                                             ),
@@ -128,31 +189,35 @@ class QuestionView extends StatelessWidget {
                                               height: 30,
                                             ),
                                             //الازرار
-                                            for (var i in  questionList[index].choices!)
+                                            for (var i
+                                                in questionList[index].choices!)
                                               GetBuilder<VideoController>(
                                                   builder: (controller) {
                                                 return Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 10.0, right: 10),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10.0,
+                                                          right: 10),
                                                   child: InkWell(
                                                       onTap: () async {
-                                                         questionList[index]
+                                                        questionList[index]
                                                             .answer = i.choice!;
                                                         controller.update();
                                                       },
                                                       child: Container(
                                                         width: 300,
                                                         padding:
-                                                            const EdgeInsets.only(
+                                                            const EdgeInsets
+                                                                    .only(
                                                                 top: 9,
                                                                 bottom: 9,
                                                                 right: 7,
                                                                 left: 7),
-                                                        margin:
-                                                            const EdgeInsets.only(
-                                                                top: 20),
-                                                        decoration: BoxDecoration(
-                                                          color:  questionList[
+                                                        margin: const EdgeInsets
+                                                            .only(top: 20),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: questionList[
                                                                           index]
                                                                       .answer ==
                                                                   i.choice
@@ -161,7 +226,7 @@ class QuestionView extends StatelessWidget {
                                                               : AppConstants
                                                                   .primaryColor,
                                                           border: Border.all(
-                                                              color:  questionList[
+                                                              color: questionList[
                                                                               index]
                                                                           .answer ==
                                                                       i.choice
@@ -172,7 +237,8 @@ class QuestionView extends StatelessWidget {
                                                               width: 2.0),
                                                           borderRadius:
                                                               BorderRadius
-                                                                  .circular(30.0),
+                                                                  .circular(
+                                                                      30.0),
                                                         ),
                                                         child: Center(
                                                             child: CustomText(
@@ -217,8 +283,11 @@ class QuestionView extends StatelessWidget {
                       CustomButton(
                         function: () async {
                           try {
+                            questionController.endTimerBool.value = true;
                             questionController.checkTheQuestionAnswer(
-                                context: context, controller: _controller,questionList:questionList);
+                                context: context,
+                                controller: _controller,
+                                questionList: questionList);
                           } catch (E) {
                             debugPrint(E.toString());
                           }

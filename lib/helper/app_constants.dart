@@ -9,6 +9,7 @@ class AppConstants {
   static const String teachers = "class-teachers";
   static const String subject = "class-subjects";
   static const String subjectTeacher = "subject-teachers";
+  static const String buyPlan = "buy-plan";
   static const String classPlan = "class-plan";
   static const String login = "login";
   static const String register = "register";
@@ -43,6 +44,7 @@ class AppConstants {
   static const String reserveCourse = "reserve-course";
   static const String studentReservations = "student-reservations";
   static const String activateCouponLecture = "activate-coupon-lecture";
+  static const String activateCouponExam = "activate-coupon-exam";
   static const List<String> listYearString = [
     'الصف الأول الثانوي',
     'الصف الثاني الثانوي',

@@ -25,8 +25,8 @@ class CoursesModel {
     String? profit,
     String? note,
     String? createdBy,
-    String? createdAt,
-    String? updatedAt,
+    // String? createdAt,
+    // String? updatedAt,
     Map? pivot,
 
 
@@ -40,8 +40,8 @@ class CoursesModel {
     _profit = profit;
     _note = note;
     _createdBy = createdBy;
-    _createdAt = createdAt;
-    _updatedAt = updatedAt;
+    // _createdAt = createdAt;
+    // _updatedAt = updatedAt;
     _pivot = pivot;
   }
 
@@ -56,8 +56,8 @@ class CoursesModel {
     _note = json['note'];
     _pivot = json['pivot'];
     _createdBy = json['created_by'];
-    _createdAt = json['created_at'];
-    _updatedAt = json['updated_at'];
+    // _createdAt = json['created_at'];
+    // _updatedAt = json['updated_at'];
   }
 
   num? _id;
@@ -69,8 +69,8 @@ class CoursesModel {
   String? _profit;
   String? _note;
   String? _createdBy;
-  String? _createdAt;
-  String? _updatedAt;
+  // String? _createdAt;
+  // String? _updatedAt;
   Map? _pivot;
 
   CoursesModel copyWith({
@@ -83,8 +83,8 @@ class CoursesModel {
     String? profit,
     String? note,
     String? createdBy,
-    String? createdAt,
-    String? updatedAt,
+    // String? createdAt,
+    // String? updatedAt,
     Map? pivot,
   }) =>
       CoursesModel(
@@ -98,8 +98,8 @@ class CoursesModel {
         note: note ?? _note,
         pivot: pivot ?? _pivot,
         createdBy: createdBy ?? _createdBy,
-        createdAt: createdAt ?? _createdAt,
-        updatedAt: updatedAt ?? _updatedAt,
+        // createdAt: createdAt ?? _createdAt,
+        // updatedAt: updatedAt ?? _updatedAt,
       );
 
   num? get id => _id;
@@ -120,9 +120,9 @@ class CoursesModel {
 
   String? get createdBy => _createdBy;
 
-  String? get createdAt => _createdAt;
-
-  String? get updatedAt => _updatedAt;
+  // String? get createdAt => _createdAt;
+  //
+  // String? get updatedAt => _updatedAt;
 
   Map? get pivot => _pivot;
 
@@ -140,8 +140,8 @@ class CoursesModel {
     map['note'] = _note;
     map['pivot'] = _pivot;
     map['created_by'] = _createdBy;
-    map['created_at'] = _createdAt;
-    map['updated_at'] = _updatedAt;
+    // map['created_at'] = _createdAt;
+    // map['updated_at'] = _updatedAt;
     return map;
   }
 }

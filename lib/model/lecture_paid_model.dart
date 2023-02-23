@@ -1,4 +1,12 @@
+// To parse this JSON data, do
+//
+//     final lecturePaidModel = lecturePaidModelFromJson(jsonString);
 
+import 'dart:convert';
+
+// LecturePaidModel lecturePaidModelFromJson(String str) => LecturePaidModel.fromJson(json.decode(str));
+
+// String lecturePaidModelToJson(LecturePaidModel data) => json.encode(data.toJson());
 
 class LecturePaidModel {
   LecturePaidModel({
@@ -17,8 +25,8 @@ class LecturePaidModel {
     this.chapterId,
     this.teacherId,
     this.studentClassId,
-    this.createdAt,
-    this.updatedAt,
+    // this.createdAt,
+    // this.updatedAt,
     this.pivot,
   });
 
@@ -27,8 +35,8 @@ class LecturePaidModel {
   String? desc;
   String? note;
   String? video;
-  dynamic link;
-  dynamic vLink;
+  String? link;
+  String? vLink;
   String? image;
   int? cost;
   String? start;
@@ -37,8 +45,8 @@ class LecturePaidModel {
   int? chapterId;
   int? teacherId;
   int? studentClassId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  // DateTime? createdAt;
+  // DateTime? updatedAt;
   Pivot? pivot;
 
   LecturePaidModel copyWith({
@@ -47,8 +55,8 @@ class LecturePaidModel {
     String? desc,
     String? note,
     String? video,
-    dynamic link,
-    dynamic vLink,
+    String? link,
+    String? vLink,
     String? image,
     int? cost,
     String? start,
@@ -57,8 +65,8 @@ class LecturePaidModel {
     int? chapterId,
     int? teacherId,
     int? studentClassId,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+    // DateTime? createdAt,
+    // DateTime? updatedAt,
     Pivot? pivot,
   }) =>
       LecturePaidModel(
@@ -67,8 +75,8 @@ class LecturePaidModel {
         desc: desc ?? this.desc,
         note: note ?? this.note,
         video: video ?? this.video,
-        link: link ?? this.link,
-        vLink: vLink ?? this.vLink,
+        link: link??this.link,
+        vLink: vLink??this.vLink,
         image: image ?? this.image,
         cost: cost ?? this.cost,
         start: start ?? this.start,
@@ -77,8 +85,8 @@ class LecturePaidModel {
         chapterId: chapterId ?? this.chapterId,
         teacherId: teacherId ?? this.teacherId,
         studentClassId: studentClassId ?? this.studentClassId,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
+        // createdAt: createdAt ?? this.createdAt,
+        // updatedAt: updatedAt ?? this.updatedAt,
         pivot: pivot ?? this.pivot,
       );
 
@@ -98,8 +106,8 @@ class LecturePaidModel {
     chapterId: json["chapter_id"],
     teacherId: json["teacher_id"],
     studentClassId: json["student_class_id"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
+    // createdAt: DateTime.parse(json["created_at"]),
+    // updatedAt: DateTime.parse(json["updated_at"]),
     pivot: Pivot.fromJson(json["pivot"]),
   );
 
@@ -119,8 +127,8 @@ class LecturePaidModel {
     "chapter_id": chapterId,
     "teacher_id": teacherId,
     "student_class_id": studentClassId,
-    "created_at": createdAt?.toIso8601String(),
-    "updated_at": updatedAt?.toIso8601String(),
+    // "created_at": createdAt!.toIso8601String(),
+    // "updated_at": updatedAt!.toIso8601String(),
     "pivot": pivot!.toJson(),
   };
 }
@@ -129,14 +137,14 @@ class Pivot {
   Pivot({
     this.studentId,
     this.lectureId,
-    this.createdAt,
-    this.updatedAt,
+    // this.createdAt,
+    // this.updatedAt,
   });
 
   int? studentId;
   int? lectureId;
-  DateTime? createdAt;
-  dynamic updatedAt;
+  // DateTime? createdAt;
+  // DateTime? updatedAt;
 
   Pivot copyWith({
     int? studentId,
@@ -147,21 +155,21 @@ class Pivot {
       Pivot(
         studentId: studentId ?? this.studentId,
         lectureId: lectureId ?? this.lectureId,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
+        // createdAt: createdAt ?? this.createdAt,
+        // updatedAt: updatedAt ?? this.updatedAt,
       );
 
   factory Pivot.fromJson(Map<String, dynamic> json) => Pivot(
     studentId: json["student_id"],
     lectureId: json["lecture_id"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: json["updated_at"],
+    // createdAt: DateTime.parse(json["created_at"]),
+    // updatedAt: DateTime.parse(json["updated_at"]),
   );
 
   Map<String, dynamic> toJson() => {
     "student_id": studentId,
     "lecture_id": lectureId,
-    "created_at": createdAt?.toIso8601String(),
-    "updated_at": updatedAt,
+    // "created_at": createdAt ,
+    // "updated_at": updatedAt,
   };
 }

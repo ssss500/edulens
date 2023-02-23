@@ -25,8 +25,8 @@ class DioUtilNew {
       followRedirects: false,
       validateStatus: (status) => status! <= 500,
     );
-    options.connectTimeout = 20 * 1000; //10 sec
-    options.receiveTimeout = 20 * 1000; //20 sec
+    // options.connectTimeout = (20 * 1000) as Duration?; //10 sec
+    // options.receiveTimeout = (20 * 1000) as Duration?; //20 sec
     options.baseUrl = AppConstants.baseUrl;
     options.headers = {
       'Content-Type': 'application/json',
@@ -42,41 +42,56 @@ class DioUtilNew {
   }
 
   //this just returns the language key
-  static String handleDioError(DioError dioError) {
-    String errorDescription = "";
-    switch (dioError.type) {
-      case DioErrorType.cancel:
-        errorDescription = "request_cancelled";
-        break;
-      case DioErrorType.connectTimeout:
-        //Connection timeout with API server
-        errorDescription = "timeout";
-        break;
-      case DioErrorType.other:
-        errorDescription = "checkout_internet";
-        break;
-      case DioErrorType.receiveTimeout:
-        errorDescription = "timeout";
-        break;
-      case DioErrorType.response:
-        debugPrint("Received invalid status code: ${dioError.response!.statusCode}");
-        errorDescription = "unknown_error";
-        break;
-      case DioErrorType.sendTimeout:
-        errorDescription = "timeout";
-        break;
-    }
-    return errorDescription;
-  }
+  // static String handleDioError(DioError dioError) {
+  //   String errorDescription = "";
+  //   switch (dioError.type) {
+  //     case DioErrorType.cancel:
+  //       errorDescription = "request_cancelled";
+  //       break;
+  //     case DioErrorType.connectTimeout:
+  //       //Connection timeout with API server
+  //       errorDescription = "timeout";
+  //       break;
+  //     case DioErrorType.other:
+  //       errorDescription = "checkout_internet";
+  //       break;
+  //     case DioErrorType.receiveTimeout:
+  //       errorDescription = "timeout";
+  //       break;
+  //     case DioErrorType.response:
+  //       debugPrint("Received invalid status code: ${dioError.response!.statusCode}");
+  //       errorDescription = "unknown_error";
+  //       break;
+  //     case DioErrorType.sendTimeout:
+  //       errorDescription = "timeout";
+  //       break;
+  //     case DioErrorType.connectionTimeout:
+  //       // TODO: Handle this case.
+  //       break;
+  //     case DioErrorType.badCertificate:
+  //       // TODO: Handle this case.
+  //       break;
+  //     case DioErrorType.badResponse:
+  //       // TODO: Handle this case.
+  //       break;
+  //     case DioErrorType.connectionError:
+  //       // TODO: Handle this case.
+  //       break;
+  //     case DioErrorType.unknown:
+  //       // TODO: Handle this case.
+  //       break;
+  //   }
+  //   return errorDescription;
+  // }
 
-  static Future<Either<String, dynamic>> doNetworkRequest(
-    Future<dynamic> request,
-  ) async {
-    try {
-      final result = await request;
-      return Right(result);
-    } on DioError catch (e) {
-      return Left(DioUtilNew.handleDioError(e));
-    }
-  }
+  // static Future<Either<String, dynamic>> doNetworkRequest(
+  //   Future<dynamic> request,
+  // ) async {
+  //   try {
+  //     final result = await request;
+  //     return Right(result);
+  //   } on DioError catch (e) {
+  //     // return Left(DioUtilNew.handleDioError(e));
+  //   }
+  // }
 }

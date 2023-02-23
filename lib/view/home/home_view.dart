@@ -8,6 +8,7 @@ import 'package:edu_lens/controllers/subject_teacher_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/model/teacher_model.dart';
+import 'package:edu_lens/view/home/custom_video_player_for_ads_covers.dart';
 import 'package:edu_lens/view/profile_teacher_view.dart';
 import 'package:edu_lens/view/subject_teacher_view.dart';
 import 'package:edu_lens/view/widget/card_image_teacher.dart';
@@ -18,10 +19,12 @@ import 'package:edu_lens/view/widget/custom_list_view.dart';
 import 'package:edu_lens/view/widget/custom_refresher.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:video_player/video_player.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
@@ -29,6 +32,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return ConnectivityWidget(
       onlineCallback: () {
         homeController.refresherMethod();
@@ -45,7 +49,8 @@ class HomeView extends StatelessWidget {
                 children: [
                   homeController.covers.isEmpty
                       ? const SizedBox()
-                      : CarouselSlider.builder(
+                      :
+                  CarouselSlider.builder(
                           itemCount: homeController.covers.length,
                           itemBuilder: (BuildContext context, int itemIndex,
                                   int pageViewIndex) =>
@@ -55,13 +60,21 @@ class HomeView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(14),
                               color: Colors.grey.shade300,
                             ),
-                            child: CustomImageUrlView(
+                            child:homeController.covers[itemIndex].image
+                                .toString()
+                                .substring(homeController.covers[itemIndex].image
+                                .toString()
+                                .length -
+                                3)
+                                .toLowerCase()=="mp4"?
+                            VideoPlay(pathh:"https://edu-lens.com/images/covers/${homeController.covers[itemIndex].image.toString()}")
+                                : CustomImageUrlView(
                               image:
                                   "https://edu-lens.com/images/covers/${homeController.covers[itemIndex].image}",
                             ),
                           ),
                           options: CarouselOptions(
-                            autoPlay: true,
+                            autoPlay:kDebugMode?false: true,
                             enlargeCenterPage: true,
                             viewportFraction: 0.5,
                             aspectRatio: 2.0,
@@ -151,9 +164,9 @@ class HomeView extends StatelessWidget {
                     )))
                 : GridView.builder(
                     itemCount: homeController.teachers.length > 8
-                        ?  MediaQuery.of(context).size.shortestSide < 600
-                        ? 8
-                        : 9
+                        ? MediaQuery.of(context).size.shortestSide < 600
+                            ? 8
+                            : 9
                         : homeController.teachers.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount:

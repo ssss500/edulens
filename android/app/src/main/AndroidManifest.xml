@@ -1,12 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.edulens.edulens">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
    <application
-        android:label="Edulens"
-        android:name="${applicationName}"
-       android:icon="@drawable/logo">
+       android:name="${applicationName}"
+       android:icon="@drawable/logo"
+       android:label="Edulens"
+       android:requestLegacyExternalStorage="true"
+       android:usesCleartextTraffic="true"
+
+       tools:targetApi="m">
         <activity
             android:name=".MainActivity"
             android:exported="true"

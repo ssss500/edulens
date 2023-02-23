@@ -26,7 +26,7 @@ class BottomSheetPey {
     final paymentServices = PaymentServices();
     GlobalKey<FormState> formState = GlobalKey<FormState>();
     TextEditingController controller = TextEditingController();
-    String code = '';
+    // String code = '';
     Get.bottomSheet(
       ClipRRect(
         borderRadius: const BorderRadius.only(
@@ -121,11 +121,10 @@ class BottomSheetPey {
                         ),
                         InkWell(
                           onTap: () async {
-                            debugPrint(code);
                             if (formState.currentState!.validate()) {
                               Get.dialog(CustomLoading());
                               await paymentServices.buyLectureByCoupon(
-                                  code: code,
+                                  code: controller.text,
                                   lectureId: dataLecture.id,
                                   teacherId: dataLecture.teacherId,
                                   context: context);
@@ -228,7 +227,7 @@ class BottomSheetPey {
     final paymentServices = PaymentServices();
     GlobalKey<FormState> formState = GlobalKey<FormState>();
     TextEditingController controller = TextEditingController();
-    String code = '';
+    // String code = '';
     Get.bottomSheet(
       ClipRRect(
         borderRadius: const BorderRadius.only(
@@ -322,11 +321,10 @@ class BottomSheetPey {
                         ),
                         InkWell(
                           onTap: () async {
-                            debugPrint(code);
                             if (formState.currentState!.validate()) {
                               Get.dialog(CustomLoading());
                               await paymentServices.buyChapterByCoupon(
-                                  code: code,
+                                  code: controller.text,
                                   chapterId: dataChapter.id,
                                   teacherId: dataChapter.lectures![0].teacherId,
                                   context: context);
@@ -428,6 +426,8 @@ class BottomSheetPey {
   }) {
     HomeController homeController = Get.put(HomeController());
     final paymentServices = PaymentServices();
+    GlobalKey<FormState> formState = GlobalKey<FormState>();
+    TextEditingController controller = TextEditingController();
     Get.bottomSheet(
       ClipRRect(
         borderRadius: const BorderRadius.only(
@@ -463,6 +463,95 @@ class BottomSheetPey {
                     text: "${"costMonthExam".tr} : ${dataMonthExam.cost}",
                     fontSize: 18,
                     alignment: Alignment.centerRight,
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: AppConstants.primaryColor, width: 2.0),
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Form(
+                              key: formState,
+                              child: CustomTextFieldLogin(
+                                function: (v) {
+                                  controller.text = v;
+                                },
+                                iconData: Icons.credit_card_sharp,
+                                width:
+                                MediaQuery.of(Get.context!).size.width - 160,
+                                title: 'chapterCode'.tr,
+                                controller: controller,
+                                hint: "121212121212",
+                                textInputType: TextInputType.name,
+                                colorBorder: AppConstants.primaryColor,
+                                inputFormatters: [CodeFormatter()],
+                                validator: (v) {
+                                  if (v.length < 10) {
+                                    return "";
+                                  }
+                                },
+                              ),
+                            ),
+                            InkWell(
+                                onTap: () async {
+                                  controller.text =
+                                  await FlutterBarcodeScanner.scanBarcode(
+                                      '#ff6666', 'رجوع', true, ScanMode.QR);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      color: Colors.black26,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: const Icon(
+                                    Icons.qr_code,
+                                    color: Colors.white,
+                                  ),
+                                )),
+                          ],
+                        ),
+                        InkWell(
+                          onTap: () async {
+                            if (formState.currentState!.validate()) {
+                              Get.dialog(CustomLoading());
+                              await paymentServices.buyMonthExamByCoupon(
+                                  code: controller.text,
+                                  monthExamId: dataMonthExam.id,
+                                  teacherId: dataMonthExam.teacherId,
+                                  context: context);
+                              Get.back();
+                            }
+                          },
+                          child: Container(
+                              width: 150,
+                              padding: const EdgeInsets.only(
+                                  top: 9, bottom: 9, right: 7, left: 7),
+                              margin: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                color: AppConstants.primaryColor,
+                                border: Border.all(
+                                    color: AppConstants.primaryColor, width: 2.0),
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                              child: Center(
+                                  child: CustomText(
+                                    text: "payText".tr,
+                                    fontSize: 18,
+                                    textDirection: TextDirection.ltr,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ))),
+                        ),
+                      ],
+                    ),
                   ),
                   InkWell(
                     onTap: () async {

@@ -34,8 +34,8 @@ class QuizModel {
     this.lectureId,
     this.studentClassId,
     this.teacherId,
-    this.createdAt,
-    this.updatedAt,
+    // this.createdAt,
+    // this.updatedAt,
   });
 
   int? id;
@@ -62,8 +62,8 @@ class QuizModel {
   int? lectureId;
   int? studentClassId;
   int? teacherId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  // DateTime? createdAt;
+  // DateTime? updatedAt;
 
   QuizModel copyWith({
     int? id,
@@ -118,8 +118,8 @@ class QuizModel {
         lectureId: lectureId ?? this.lectureId,
         studentClassId: studentClassId ?? this.studentClassId,
         teacherId: teacherId ?? this.teacherId,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
+        // createdAt: createdAt ?? this.createdAt,
+        // updatedAt: updatedAt ?? this.updatedAt,
       );
 
   factory QuizModel.fromJson(Map<String, dynamic> json) => QuizModel(
@@ -147,8 +147,8 @@ class QuizModel {
     lectureId: json["lecture_id"],
     studentClassId: json["student_class_id"],
     teacherId: json["teacher_id"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
+    // createdAt: DateTime.parse(json["created_at"]),
+    // updatedAt: DateTime.parse(json["updated_at"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -176,7 +176,7 @@ class QuizModel {
     "lecture_id": lectureId,
     "student_class_id": studentClassId,
     "teacher_id": teacherId,
-    "created_at": createdAt,
-    "updated_at": updatedAt,
+    // "created_at": createdAt,
+    // "updated_at": updatedAt,
   };
 }

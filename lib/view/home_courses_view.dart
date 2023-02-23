@@ -21,7 +21,7 @@ class HomeCoursesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final heightScreen = MediaQuery.of(context).size.height;
+    // final heightScreen = MediaQuery.of(context).size.height;
     final widthScreen = MediaQuery.of(context).size.width;
 
     return CustomAppBar(
@@ -257,13 +257,13 @@ class HomeCoursesView extends StatelessWidget {
                                               const SizedBox(
                                                 height: 9,
                                               ),
-                                            if(!homeController.chapterPaid.any(
+                                           Obx(()=> !homeController.chapterPaid.any(
                                                     (element) =>
                                                 element.id ==
                                                     homeCoursesController
-                                                        .chapters[indexChapters].id))
-                                            if (!homeController
-                                                .appleAndGoogleBool.value)
+                                                        .chapters[indexChapters].id)?
+                                             !homeController
+                                                .appleAndGoogleBool.value?
                                               Obx(
                                                     ()=> CustomText(
                                                   text: homeController.lecturePaid
@@ -299,10 +299,10 @@ class HomeCoursesView extends StatelessWidget {
                                                           : Colors.red.shade300,
                                                   fontSize: 16,
                                                 ),
-                                              ),
+                                              ):SizedBox():SizedBox()),
 
                                             const SizedBox(
-                                              height: 9,
+                                              height: 5,
                                             ),
                                           ],
                                         ),
