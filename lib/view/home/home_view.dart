@@ -14,6 +14,7 @@ import 'package:edu_lens/view/subject_teacher_view.dart';
 import 'package:edu_lens/view/widget/card_image_teacher.dart';
 import 'package:edu_lens/view/widget/custom_buttom.dart';
 import 'package:edu_lens/view/widget/custom_dialog.dart';
+import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:edu_lens/view/widget/custom_list_view.dart';
 import 'package:edu_lens/view/widget/custom_refresher.dart';
@@ -21,9 +22,12 @@ import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
 class HomeView extends StatelessWidget {
@@ -32,7 +36,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ConnectivityWidget(
       onlineCallback: () {
         homeController.refresherMethod();
@@ -49,8 +52,7 @@ class HomeView extends StatelessWidget {
                 children: [
                   homeController.covers.isEmpty
                       ? const SizedBox()
-                      :
-                  CarouselSlider.builder(
+                      : CarouselSlider.builder(
                           itemCount: homeController.covers.length,
                           itemBuilder: (BuildContext context, int itemIndex,
                                   int pageViewIndex) =>
@@ -60,21 +62,25 @@ class HomeView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(14),
                               color: Colors.grey.shade300,
                             ),
-                            child:homeController.covers[itemIndex].image
-                                .toString()
-                                .substring(homeController.covers[itemIndex].image
-                                .toString()
-                                .length -
-                                3)
-                                .toLowerCase()=="mp4"?
-                            VideoPlay(pathh:"https://edu-lens.com/images/covers/${homeController.covers[itemIndex].image.toString()}")
+                            child: homeController.covers[itemIndex].image
+                                        .toString()
+                                        .substring(homeController
+                                                .covers[itemIndex].image
+                                                .toString()
+                                                .length -
+                                            3)
+                                        .toLowerCase() ==
+                                    "mp4"
+                                ? VideoPlay(
+                                    pathh:
+                                        "https://edu-lens.com/images/covers/${homeController.covers[itemIndex].image.toString()}")
                                 : CustomImageUrlView(
-                              image:
-                                  "https://edu-lens.com/images/covers/${homeController.covers[itemIndex].image}",
-                            ),
+                                    image:
+                                        "https://edu-lens.com/images/covers/${homeController.covers[itemIndex].image}",
+                                  ),
                           ),
                           options: CarouselOptions(
-                            autoPlay:kDebugMode?false: true,
+                            autoPlay: kDebugMode ? false : true,
                             enlargeCenterPage: true,
                             viewportFraction: 0.5,
                             aspectRatio: 2.0,
@@ -90,14 +96,19 @@ class HomeView extends StatelessWidget {
 
             ///subject
             Obx(
-              () => homeController.subject.isEmpty
+              () =>
+              homeController.subject.isEmpty &&
+                  homeController.apiLoadingSubject.value
                   ? const SizedBox(
-                      height: 170,
-                      child: Center(
-                          child: CircularProgressIndicator(
+                  height: 170,
+                  child: Center(
+                      child: CircularProgressIndicator(
                         color: AppConstants.lightPrimaryColor,
                       )))
-                  : SizedBox(
+                  : homeController.subject.isEmpty &&
+                  !homeController.apiLoadingSubject.value
+                  ? const SizedBox()
+               : SizedBox(
                       height: 170,
                       child: CustomListView(
                           itemCount: homeController.subject.length,
@@ -155,52 +166,209 @@ class HomeView extends StatelessWidget {
                           }),
                     ),
             ),
-            Obx(() => homeController.teachers.isEmpty
+            Obx(() => homeController.teachers.isEmpty &&
+                    homeController.apiLoadingTeacher.value
                 ? const SizedBox(
                     height: 170,
                     child: Center(
                         child: CircularProgressIndicator(
                       color: AppConstants.lightPrimaryColor,
                     )))
-                : GridView.builder(
-                    itemCount: homeController.teachers.length > 8
-                        ? MediaQuery.of(context).size.shortestSide < 600
-                            ? 8
-                            : 9
-                        : homeController.teachers.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount:
-                          MediaQuery.of(context).size.shortestSide < 600
-                              ? 2
-                              : 3,
-                      childAspectRatio: (0.8),
+                : homeController.teachers.isEmpty &&
+                        homeController.apiLoadingTeacher.value==false
+                    ? Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Image.asset(
+                    'assets/images/mirage-no-comments.png',
+
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: CustomText(text:"لا يوجد بيانات للعرض يمكن التواصل معا الدعم الفني من هنا"
+                    ,fontSize: 24,),
+                ),
+                 SizedBox(
+                      height: 40,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+
+                          IconButton(
+                            icon: const Icon(Icons.phone),
+                            iconSize: 25,
+                            onPressed: () {
+                              launchUrl(Uri(scheme: 'tel', path: "01092884278"));
+                            },
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "01092884278",
+                            style: GoogleFonts.cairo(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              final Uri _url = Uri.parse(
+                                  'whatsapp://send?phone=+201092884278');
+
+                              await launchUrl(_url);
+                            },
+                            child: Image.asset(
+                              "assets/images/whatsapp.png",
+                              height: 35,
+                              width: 35,
+                            ),
+                          ),
+
+                        ],
+                      ),
                     ),
-                    itemBuilder: (_, index) => InkWell(
-                      child: Hero(
-                          tag: "imageTeacher$index",
-                          child: CardImageTeacher(
-                            name: true,
-                            dateTeacher: homeController.teachers[index],
-                            // image:
-                            //     "https://edu-lens.com/images/teachers/${homeController.teachers[index].image}",
-                          )),
-                      onTap: () {
-                        ProfileTeacherController profileTeacherController =
-                            Get.put(ProfileTeacherController());
 
-                        profileTeacherController.dateTeacher =
-                            homeController.teachers[index];
+                 SizedBox(
+                      height: 40,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
 
-                        profileTeacherController.index = index;
-                        profileTeacherController.getCoursesAndExamAndBookings();
+                          IconButton(
+                            icon: const Icon(Icons.phone),
+                            iconSize: 25,
+                            onPressed: () {
+                              launchUrl(Uri(scheme: 'tel', path: "01153070885"));
+                            },
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "01153070885",
+                            style: GoogleFonts.cairo(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              final Uri _url = Uri.parse(
+                                  'whatsapp://send?phone=+201153070885');
 
-                        Get.to(() => ProfileTeacherView());
-                      },
+                              await launchUrl(_url);
+                            },
+                            child: Image.asset(
+                              "assets/images/whatsapp.png",
+                              height: 35,
+                              width: 35,
+                            ),
+                          ),
+
+                        ],
+                      ),
                     ),
-                    padding: const EdgeInsets.all(10),
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                  )),
+
+                  SizedBox(
+                      height: 40,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+
+                          IconButton(
+                            icon: const Icon(Icons.phone),
+                            iconSize: 25,
+                            onPressed: () {
+                              launchUrl(Uri(scheme: 'tel', path: "01099613267"));
+                            },
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "01099613267",
+                            style: GoogleFonts.cairo(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              final Uri _url = Uri.parse(
+                                  'whatsapp://send?phone=+201099613267');
+
+                              await launchUrl(_url);
+                            },
+                            child: Image.asset(
+                              "assets/images/whatsapp.png",
+                              height: 35,
+                              width: 35,
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ),
+
+              ],
+            )
+                    : GridView.builder(
+                        itemCount: homeController.teachers.length > 8
+                            ? MediaQuery.of(context).size.shortestSide < 600
+                                ? 8
+                                : 9
+                            : homeController.teachers.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount:
+                              MediaQuery.of(context).size.shortestSide < 600
+                                  ? 2
+                                  : 3,
+                          childAspectRatio: (0.8),
+                        ),
+                        itemBuilder: (_, index) => InkWell(
+                          child: Hero(
+                              tag: "imageTeacher$index",
+                              child: CardImageTeacher(
+                                name: true,
+                                dateTeacher: homeController.teachers[index],
+                                // image:
+                                //     "https://edu-lens.com/images/teachers/${homeController.teachers[index].image}",
+                              )),
+                          onTap: () {
+                            ProfileTeacherController profileTeacherController =
+                                Get.put(ProfileTeacherController());
+
+                            profileTeacherController.dateTeacher =
+                                homeController.teachers[index];
+
+                            profileTeacherController.index = index;
+                            profileTeacherController
+                                .getCoursesAndExamAndBookings();
+
+                            Get.to(() => ProfileTeacherView());
+                          },
+                        ),
+                        padding: const EdgeInsets.all(10),
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                      )),
           ],
         ),
       ),

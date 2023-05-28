@@ -12,7 +12,7 @@ class HomeCoursesController extends GetxController {
   int indexChapters = 0;
   final chapters = <ChapterModel>[].obs;
 
-  var chapterId;
+  var chapterId=0;
   // final lectures = <LectureModel>[].obs;
 
   // late BetterPlayerController betterPlayerController;

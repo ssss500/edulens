@@ -19,7 +19,7 @@ import 'package:get/get.dart';
 // final GlobalKey<ScaffoldState> bottomSheetKey = GlobalKey<ScaffoldState>();
 class BottomSheetPey {
   static void bottomSheetPaidForLecture({
-    required LectureModel dataLecture,
+    required Lecture dataLecture,
     required BuildContext context,
   }) {
     HomeController homeController = Get.put(HomeController());
@@ -82,16 +82,16 @@ class BottomSheetPey {
                             Form(
                               key: formState,
                               child: CustomTextFieldLogin(
-                                function: (v) {
-                                  controller.text = v;
-                                },
+                                // function: (v) {
+                                //   controller.text = v;
+                                // },
                                 iconData: Icons.credit_card_sharp,
                                 width:
                                     MediaQuery.of(Get.context!).size.width - 160,
                                 title: 'lectureCode'.tr,
                                 controller: controller,
                                 hint: "121212121212",
-                                textInputType: TextInputType.name,
+                                textInputType: TextInputType.number,
                                 colorBorder: AppConstants.primaryColor,
                                 inputFormatters: [CodeFormatter()],
                                 validator: (v) {
@@ -282,16 +282,16 @@ class BottomSheetPey {
                             Form(
                               key: formState,
                               child: CustomTextFieldLogin(
-                                function: (v) {
-                                  controller.text = v;
-                                },
+                                // function: (v) {
+                                //   controller.text = v;
+                                // },
                                 iconData: Icons.credit_card_sharp,
                                 width:
                                     MediaQuery.of(Get.context!).size.width - 160,
                                 title: 'chapterCode'.tr,
                                 controller: controller,
                                 hint: "121212121212",
-                                textInputType: TextInputType.name,
+                                textInputType: TextInputType.number,
                                 colorBorder: AppConstants.primaryColor,
                                 inputFormatters: [CodeFormatter()],
                                 validator: (v) {
@@ -326,7 +326,7 @@ class BottomSheetPey {
                               await paymentServices.buyChapterByCoupon(
                                   code: controller.text,
                                   chapterId: dataChapter.id,
-                                  teacherId: dataChapter.lectures![0].teacherId,
+                                  teacherId: dataChapter.lectures[0].teacherId,
                                   context: context);
                               Get.back();
                             }
@@ -481,16 +481,16 @@ class BottomSheetPey {
                             Form(
                               key: formState,
                               child: CustomTextFieldLogin(
-                                function: (v) {
-                                  controller.text = v;
-                                },
+                                // function: (v) {
+                                //   controller.text = v;
+                                // },
                                 iconData: Icons.credit_card_sharp,
                                 width:
                                 MediaQuery.of(Get.context!).size.width - 160,
                                 title: 'chapterCode'.tr,
                                 controller: controller,
                                 hint: "121212121212",
-                                textInputType: TextInputType.name,
+                                textInputType: TextInputType.number,
                                 colorBorder: AppConstants.primaryColor,
                                 inputFormatters: [CodeFormatter()],
                                 validator: (v) {

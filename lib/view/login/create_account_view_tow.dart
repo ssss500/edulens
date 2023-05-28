@@ -158,7 +158,7 @@ class CreateAccountViewTow extends StatelessWidget {
                       borderRadius: 16,
                       theme: Theme.of(context).copyWith(
                         primaryColor: AppConstants.primaryColor,
-                        accentColor: AppConstants.primaryColor,
+                        hintColor: AppConstants.primaryColor,
                         colorScheme: const ColorScheme.light(
                           primaryContainer: AppConstants.primaryColor,
                           primary: AppConstants.primaryColor,
@@ -189,6 +189,7 @@ class CreateAccountViewTow extends StatelessWidget {
                             width: 14,
                           ),
                           CustomText(
+                            // ignore: unnecessary_null_comparison
                             text: controller.newDateTime != null
                                 ? "${controller.newDateTime.value.year} / ${controller.newDateTime.value.month} / ${controller.newDateTime.value.day} *"
                                 : "0000/00/00",

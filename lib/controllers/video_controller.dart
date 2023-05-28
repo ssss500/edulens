@@ -8,6 +8,7 @@ import 'package:edu_lens/services/get_video_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pod_player/pod_player.dart';
+import 'package:screen_protector/screen_protector.dart';
 
 class VideoController extends GetxController {
   final services = GetVideoExtensions();
@@ -16,69 +17,49 @@ class VideoController extends GetxController {
   final questionList = <QuestionModel>[].obs;
   late final PodPlayerController controller;
   RxBool mustSolveExam = false.obs;
-  late String   idVideoForPaidModel = "",  idVideoForPaidModelYoutube;
+  late String idVideoForPaidModel = "", idVideoForPaidModelYoutube;
   var indexPdf = 0;
   var idQuiz = 0;
 
   var indexQuiz = 0;
 
   @override
-  void dispose() {
+  Future<void> dispose() async {
     super.dispose();
     try {
+      await ScreenProtector.preventScreenshotOff();
       controller.dispose();
     } catch (e) {
       debugPrint(e.toString());
     }
+  }
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+    await ScreenProtector.preventScreenshotOn();
+
   }
 
   openVideo() {
     HomeCoursesController homeCoursesController =
         Get.put(HomeCoursesController());
     debugPrint(
-        "youtube link : ${homeCoursesController.chapters[homeCoursesController.indexChapters].lectures![homeCoursesController.indexLectures].toJson()}");
+        "youtube link : ${homeCoursesController.chapters[homeCoursesController.indexChapters].lectures[homeCoursesController.indexLectures].toJson()}");
     if (homeCoursesController.chapters[homeCoursesController.indexChapters]
-            .lectures![homeCoursesController.indexLectures].video ==
+            .lectures[homeCoursesController.indexLectures].video ==
         null) {
-      // String idVideo = homeCoursesController
-      //     .chapters[homeCoursesController.indexChapters]
-      //     .lectures![homeCoursesController.indexLectures]
-      //     .vLink
-      //     .toString();
-      // debugPrint("idVideo : $idVideo");
-      // idVideo = idVideo.split("?")[0];
-      // debugPrint("idVideo : $idVideo");
-      //
-      // try {
-      //   controller = PodPlayerController(
-      //     playVideoFrom: PlayVideoFrom.vimeo(
-      //       idVideo,
-      //       videoPlayerOptions: VideoPlayerOptions(
-      //         allowBackgroundPlayback: true,
-      //       ),
-      //     ),
-      //   )..initialise();
-      // } catch (e) {
-      //   debugPrint(e.toString());
-      //   controller.changeVideo(
-      //     playVideoFrom: PlayVideoFrom.vimeo(
-      //       idVideo,
-      //       videoPlayerOptions: VideoPlayerOptions(
-      //         allowBackgroundPlayback: true,
-      //       ),
-      //     ),
-      //   );
-      // }
-    } else {
       String idVideo = homeCoursesController
           .chapters[homeCoursesController.indexChapters]
-          .lectures![homeCoursesController.indexLectures]
-          .video;
-      debugPrint(
-          "youtube link : ${homeCoursesController.chapters[homeCoursesController.indexChapters].lectures![homeCoursesController.indexLectures].toJson()}");
+          .lectures[homeCoursesController.indexLectures]
+          .vLink
+          .toString();
+      debugPrint("idVideo : $idVideo");
+      idVideo = idVideo.split("?")[0];
+      debugPrint("idVideo : $idVideo");
+
       try {
         controller = PodPlayerController(
-          playVideoFrom: PlayVideoFrom.youtube(
+          playVideoFrom: PlayVideoFrom.vimeo(
             idVideo,
             videoPlayerOptions: VideoPlayerOptions(
               allowBackgroundPlayback: true,
@@ -88,8 +69,36 @@ class VideoController extends GetxController {
       } catch (e) {
         debugPrint(e.toString());
         controller.changeVideo(
-          playVideoFrom: PlayVideoFrom.youtube(
+          playVideoFrom: PlayVideoFrom.vimeo(
             idVideo,
+            videoPlayerOptions: VideoPlayerOptions(
+              allowBackgroundPlayback: true,
+            ),
+          ),
+        );
+      }
+    } else {
+      String? idVideo = homeCoursesController
+          .chapters[homeCoursesController.indexChapters]
+          .lectures[homeCoursesController.indexLectures]
+          .video;
+      debugPrint(
+          "youtube link : ${homeCoursesController.chapters[homeCoursesController.indexChapters].lectures[homeCoursesController.indexLectures].toJson()}");
+      try {
+        controller = PodPlayerController(
+          playVideoFrom: PlayVideoFrom.youtube(
+            idVideo!,
+
+            videoPlayerOptions: VideoPlayerOptions(
+              allowBackgroundPlayback: true,
+            ),
+          ),
+        )..initialise();
+      } catch (e) {
+        debugPrint(e.toString());
+        controller.changeVideo(
+          playVideoFrom: PlayVideoFrom.youtube(
+            idVideo!,
             videoPlayerOptions: VideoPlayerOptions(
               allowBackgroundPlayback: true,
             ),
@@ -131,16 +140,13 @@ class VideoController extends GetxController {
       }
     }
   }
+
   openVideoPayed({required LecturePaidModel lecturePaidModel}) {
-    idVideoForPaidModelYoutube = lecturePaidModel
-        .video.toString();
+    idVideoForPaidModelYoutube = lecturePaidModel.video.toString();
     // ignore: unnecessary_null_comparison
-    if ( idVideoForPaidModelYoutube ==
-        'null'|| idVideoForPaidModelYoutube ==
-        '') {
-      String idVideo = lecturePaidModel
-          .vLink
-          .toString();
+    if (idVideoForPaidModelYoutube == 'null' ||
+        idVideoForPaidModelYoutube == '') {
+      String idVideo = lecturePaidModel.vLink.toString();
       debugPrint("idVideo : $idVideo");
       idVideoForPaidModel = idVideo.split("?")[0];
       debugPrint("idVideo : $idVideo");
@@ -166,7 +172,6 @@ class VideoController extends GetxController {
       //   );
       // }
     } else {
-
       try {
         controller = PodPlayerController(
           playVideoFrom: PlayVideoFrom.youtube(
@@ -192,7 +197,9 @@ class VideoController extends GetxController {
 
   getVideoExtensionsPayed({required LecturePaidModel lecturePaidModel}) async {
     checkMustSolveExam();
-    pdfList.value = (await services.getPDFPayed(lecturePaidModel:lecturePaidModel))!;
-    quizList.value = (await services.getQuizPayed(lecturePaidModel:lecturePaidModel))!;
+    pdfList.value =
+        (await services.getPDFPayed(lecturePaidModel: lecturePaidModel))!;
+    quizList.value =
+        (await services.getQuizPayed(lecturePaidModel: lecturePaidModel))!;
   }
 }

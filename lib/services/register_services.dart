@@ -62,6 +62,13 @@ class RegisterServices {
             deck:
                 "${errorModel.errors!.email!.isNotEmpty ? "${errorModel.errors!.email![0]}, " : ""} ${errorModel.errors!.phone!.isNotEmpty ? "${errorModel.errors!.phone![0]}, " : ""} ${errorModel.errors!.birthday!.isNotEmpty ? "${errorModel.errors!.birthday![0]}, " : ""}",
             contentType: ContentType.failure);
+      }else{
+        showCustomSnackBar(
+            context: context,
+            title: "note".tr,
+            deck:
+            "${response.statusCode} : ${response.data}",
+            contentType: ContentType.failure);
       }
     } catch (e) {
       showCustomSnackBar(

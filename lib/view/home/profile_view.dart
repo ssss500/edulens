@@ -408,21 +408,9 @@ class Profile extends StatelessWidget {
                       child: Container(
                         height: 50,
                         alignment: Alignment.center,
-                        margin: EdgeInsets.only(left: 10, right: 10),
+                        margin: const EdgeInsets.only(left: 10, right: 10),
                         decoration: BoxDecoration(
                             boxShadow: const [
-                              // BoxShadow(
-                              //   color: AppConstants.lightPrimaryColor,
-                              //   spreadRadius: 0.8,
-                              //   blurRadius: 30,
-                              //   offset: Offset(2, 2),
-                              // ),
-                              // BoxShadow(
-                              //   color: Colors.white,
-                              //   spreadRadius: 2,
-                              //   blurRadius: 10,
-                              //   offset: Offset(-4, -4),
-                              // )
                             ],
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(18),
@@ -448,20 +436,6 @@ class Profile extends StatelessWidget {
                       alignment: Alignment.center,
                       margin: const EdgeInsets.only(left: 10, right: 10),
                       decoration: BoxDecoration(
-                          // boxShadow: const [
-                          //   BoxShadow(
-                          //     color: AppConstants.lightPrimaryColor,
-                          //     spreadRadius: 0.8,
-                          //     blurRadius: 30,
-                          //     offset: Offset(2, 2),
-                          //   ),
-                          //   BoxShadow(
-                          //     color: Colors.white,
-                          //     spreadRadius: 2,
-                          //     blurRadius: 10,
-                          //     offset: Offset(-4, -4),
-                          //   )
-                          // ],
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(18),
                           border: Border.all(

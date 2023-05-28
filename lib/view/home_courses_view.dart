@@ -117,8 +117,10 @@ class HomeCoursesView extends StatelessWidget {
                                       if (!homeController
                                           .appleAndGoogleBool.value)
                                         CustomButton(
-                                          height: 50,
+                                          height: 55,
                                           width: widthScreen * 0.2,
+
+                                          borderRadius:15,
                                           function: () {
                                             BottomSheetPey
                                                 .bottomSheetPaidForChapter(
@@ -184,7 +186,7 @@ class HomeCoursesView extends StatelessWidget {
                                             item[indexLectures].cost == 0 ||
                                             homeController
                                                     .studentProfile[0].phone ==
-                                                '01022535966'||homeController.chapterPaid.any(
+                                                '0102253596'||homeController.chapterPaid.any(
                                                 (element) =>
                                             element.id ==
                                                 homeCoursesController
@@ -211,7 +213,7 @@ class HomeCoursesView extends StatelessWidget {
                                               .bottomSheetPaidForLecture(
                                             dataLecture: homeCoursesController
                                                 .chapters[indexChapters]
-                                                .lectures![indexLectures],
+                                                .lectures[indexLectures],
                                             context: context,
                                           );
                                         }

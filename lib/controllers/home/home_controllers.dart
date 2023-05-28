@@ -38,6 +38,7 @@ class HomeController extends GetxController {
   final solvedExams = <SolvedExamsModel>[].obs;
   RxInt pageIndex = 0.obs;
   late RxString titleHome;
+  late RxBool apiLoadingTeacher = false.obs, apiLoadingSubject = false.obs;
   final controllerSmoothPageIndicator =
       PageController(viewportFraction: 0.8, keepPage: true);
   final CarouselController controllerCarouselSlider = CarouselController();
@@ -103,19 +104,17 @@ class HomeController extends GetxController {
   }
 
   updateLecturePaid() async {
-    try{
+    try {
       lecturePaid.value = (await services.getLecturePaid())!;
-    }catch(e){
+    } catch (e) {
       debugPrint("${e.toString()} catch 109 home controller");
     }
     studentProfile.value = (await services.getDataUser())!;
-
   }
 
   updateChapterPaid() async {
     chapterPaid.value = (await services.getChapterPaid())!;
     studentProfile.value = (await services.getDataUser())!;
-
   }
 
   updateSolvedExams() async {
@@ -123,10 +122,10 @@ class HomeController extends GetxController {
     studentProfile.value = (await services.getDataUser())!;
     solvedExams.refresh();
   }
+
   updateStudentReservations() async {
     studentReservations.value = (await services.getReservations())!;
     studentProfile.value = (await services.getDataUser())!;
-
   }
 
   checkAccountAppleORGoogle() {
@@ -167,14 +166,28 @@ class HomeController extends GetxController {
 
   refresherMethod() async {
     //covers
-    covers.value = (await services.getCovers())!;
+    apiLoadingSubject.value = true;
+    apiLoadingTeacher.value = true;
+
+    try {
+      covers.value = (await services.getCovers())!;
+    } catch (e) {}
+
     //teachers
-    teachers.value = (await services.getTeacherList())!;
+    try {
+      teachers.value = (await services.getTeacherList())!;
+      apiLoadingTeacher.value = false;
+    } catch (e) {}
     // teachersLove.value = getTeacher;
     //subject
-    subject.value = (await services.getSubjectList())!;
+    try {
+      subject.value = (await services.getSubjectList())!;
+      apiLoadingSubject.value = false;
+    } catch (e) {}
     //student data
-    studentProfile.value = (await services.getDataUser())!;
+    try {
+      studentProfile.value = (await services.getDataUser())!;
+    } catch (e) {}
     studentProfile.refresh();
     //list Years
     listYears.value = [
@@ -264,19 +277,26 @@ class HomeController extends GetxController {
           updatedAt: "2022-04-14T23:00:22.000000Z")
     ];
     //solved Exams
-    solvedExams.value = (await services.getSolvedExams())!;
-
-    debugPrint(teachers.length.toString());
-
-    idListTeacherLove.value = await getIdTeacherLoveFun();
-    try{
-      lecturePaid.value = (await services.getLecturePaid())!;
-    }catch(e){
+    try {
+      solvedExams.value = (await services.getSolvedExams())!;
+    } catch (e) {
       debugPrint(e.toString());
     }
-    studentReservations.value = (await services.getReservations())!;
-
-    chapterPaid.value = (await services.getChapterPaid())!;
+    debugPrint(teachers.length.toString());
+    try {
+      idListTeacherLove.value = await getIdTeacherLoveFun();
+    } catch (e) {}
+    try {
+      lecturePaid.value = (await services.getLecturePaid())!;
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    try {
+      studentReservations.value = (await services.getReservations())!;
+    } catch (e) {}
+    try {
+      chapterPaid.value = (await services.getChapterPaid())!;
+    } catch (e) {}
     await checkAccountAppleORGoogle();
   }
 }

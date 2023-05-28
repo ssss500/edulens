@@ -1,94 +1,189 @@
-// {
-// "id": 173,
-// "name": "محاسبة مالية",
-// "cost": 500,
-// "course_id": 114,
-// "created_at": "2022-10-26T11:28:38.000000Z",
-// "updated_at": "2022-10-26T11:28:38.000000Z"
-// }
-import 'package:edu_lens/model/courses_models/lecture_model.dart';
+// To parse this JSON data, do
+//
+//     final chapterModel = chapterModelFromJson(jsonString);
+
+
 
 class ChapterModel {
   ChapterModel({
-    num? id,
-    String? name,
-    int? cost,
-    int? courseId,
-    String? createdAt,
-    String? updatedAt,
-    List? lectures,
-  }) {
-    _id = id;
-    _name = name;
-    _cost = cost;
-    _courseId = courseId;
-    _createdAt = createdAt;
-    _updatedAt = updatedAt;
-    _lectures = lectures;
-  }
+    required this.id,
+    required this.name,
+    required this.cost,
+    required this.courseId,
+    required this.status,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.lectures,
+  });
 
-  ChapterModel.fromJson(Map<dynamic, dynamic> json) {
-    _id = json['id'];
-    _name = json['name'];
-    _cost = json['cost'];
-    _courseId = json['course_id'];
-    _createdAt = json['created_at'];
-    _updatedAt = json['updated_at'];
-    _lectures = json['lectures'];
-  }
+  int id;
+  String name;
+  int cost;
+  int courseId;
+  int status;
+  DateTime createdAt;
+  DateTime updatedAt;
+  List<Lecture> lectures;
 
-  num? _id;
-  String? _name;
-  int? _cost;
-  int? _courseId;
-  String? _createdAt;
-  String? _updatedAt;
-  List? _lectures;
-
-  //
   ChapterModel copyWith({
-    num? id,
+    int? id,
     String? name,
     int? cost,
     int? courseId,
-    String? createdAt,
-    String? updatedAt,
-    List? lectures,
+    int? status,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    List<Lecture>? lectures,
   }) =>
       ChapterModel(
-        id: id ?? _id,
-        name: name ?? _name,
-        cost: cost ?? _cost,
-        courseId: courseId ?? _courseId,
-        createdAt: createdAt ?? _createdAt,
-        updatedAt: updatedAt ?? _updatedAt,
-        lectures: lectures ?? _lectures,
+        id: id ?? this.id,
+        name: name ?? this.name,
+        cost: cost ?? this.cost,
+        courseId: courseId ?? this.courseId,
+        status: status ?? this.status,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        lectures: lectures ?? this.lectures,
       );
 
-  num? get id => _id;
+  factory ChapterModel.fromJson(Map<String, dynamic> json) => ChapterModel(
+    id: json["id"],
+    name: json["name"],
+    cost: json["cost"],
+    courseId: json["course_id"],
+    status: json["status"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+    lectures: List<Lecture>.from(json["lectures"].map((x) => Lecture.fromJson(x))),
+  );
 
-  String? get name => _name;
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "cost": cost,
+    "course_id": courseId,
+    "status": status,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt.toIso8601String(),
+    "lectures": List<dynamic>.from(lectures.map((x) => x.toJson())),
+  };
+}
 
-  int? get courseId => _courseId;
+class Lecture {
+  Lecture({
+    required this.id,
+    required this.name,
+    required this.desc,
+    required this.note,
+    this.video,
+    this.link,
+    this.vLink,
+    required this.image,
+    required this.cost,
+    this.start,
+    this.end,
+    required this.status,
+    required this.chapterId,
+    required this.teacherId,
+    required this.studentClassId,
+    required this.createdAt,
+    required this.updatedAt,
+  });
 
-  int? get cost => _cost;
+  int id;
+  String name;
+  String desc;
+  String note;
+  String? video;
+  dynamic link;
+  String? vLink;
+  String image;
+  int cost;
+  String? start;
+  String? end;
+  int status;
+  int chapterId;
+  int teacherId;
+  int studentClassId;
+  DateTime createdAt;
+  DateTime updatedAt;
 
-  String? get createdAt => _createdAt;
+  Lecture copyWith({
+    int? id,
+    String? name,
+    String? desc,
+    String? note,
+    String? video,
+    dynamic link,
+    String? vLink,
+    String? image,
+    int? cost,
+    String? start,
+    String? end,
+    int? status,
+    int? chapterId,
+    int? teacherId,
+    int? studentClassId,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) =>
+      Lecture(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        desc: desc ?? this.desc,
+        note: note ?? this.note,
+        video: video ?? this.video,
+        link: link ?? this.link,
+        vLink: vLink ?? this.vLink,
+        image: image ?? this.image,
+        cost: cost ?? this.cost,
+        start: start ?? this.start,
+        end: end ?? this.end,
+        status: status ?? this.status,
+        chapterId: chapterId ?? this.chapterId,
+        teacherId: teacherId ?? this.teacherId,
+        studentClassId: studentClassId ?? this.studentClassId,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
 
-  String? get updatedAt => _updatedAt;
+  factory Lecture.fromJson(Map<String, dynamic> json) => Lecture(
+    id: json["id"],
+    name: json["name"],
+    desc: json["desc"],
+    note: json["note"],
+    video: json["video"],
+    link: json["link"],
+    vLink: json["v_link"],
+    image: json["image"],
+    cost: json["cost"],
+    start: json["start"],
+    end: json["end"],
+    status: json["status"],
+    chapterId: json["chapter_id"],
+    teacherId: json["teacher_id"],
+    studentClassId: json["student_class_id"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+  );
 
-  List? get lectures =>
-      List<LectureModel>.from(_lectures!.map((i) => LectureModel.fromJson(i)));
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = _id;
-    map['name'] = _name;
-    map['course_id'] = _courseId;
-    map['cost'] = _cost;
-    map['created_at'] = _createdAt;
-    map['updated_at'] = _updatedAt;
-    map['lectures'] = _lectures;
-    return map;
-  }
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "desc": desc,
+    "note": note,
+    "video": video,
+    "link": link,
+    "v_link": vLink,
+    "image": image,
+    "cost": cost,
+    "start": start,
+    "end": end,
+    "status": status,
+    "chapter_id": chapterId,
+    "teacher_id": teacherId,
+    "student_class_id": studentClassId,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt.toIso8601String(),
+  };
 }

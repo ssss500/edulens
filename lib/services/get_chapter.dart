@@ -22,13 +22,14 @@ class GetChapter {
       });
 
       debugPrint("statusCode : ${response.statusCode.toString()}");
-      // log(response.data.toString());
+      // log(response.data[1].toString());
       if (response.statusCode == 200) {
         final mList = List<ChapterModel>.from(
             response.data.map((i) => ChapterModel.fromJson(i)));
         idChapter = mList[0].id;
 
         ///   لكل شابتر هتجيب اللكتشر بتاعه Lectures
+        mList.removeWhere((element) => element.status == 0);
 
         return mList;
       }

@@ -142,126 +142,128 @@ class QuestionView extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.only(
                                     top: 4.0, right: 5, left: 5),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
-                                    //رقم السوال
-                                    CustomText(
-                                      text: "( ${index + 1} )",
-                                      fontSize: 30,
-                                    ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      //رقم السوال
+                                      CustomText(
+                                        text: "( ${index + 1} )",
+                                        fontSize: 30,
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
 
-                                    Center(
-                                      child: SingleChildScrollView(
-                                        child: Column(
-                                          children: [
-                                            //الصوره
-                                            if (questionList[index].image !=
-                                                null)
-                                              CustomImageUrlView(
-                                                image:
-                                                    "https://edu-lens.com/images/questions/${questionList[index].image}",
-                                                colorLodingIcon:
-                                                    AppConstants.primaryColor,
+                                      Center(
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            children: [
+                                              //الصوره
+                                              if (questionList[index].image !=
+                                                  null)
+                                                CustomImageUrlView(
+                                                  image:
+                                                      "https://edu-lens.com/images/questions/${questionList[index].image}",
+                                                  colorLodingIcon:
+                                                      AppConstants.primaryColor,
+                                                ),
+                                              const SizedBox(
+                                                height: 20,
                                               ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            //السوال
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 8.0, right: 8),
-                                              child: CustomText(
-                                                text:
-                                                    "${questionList[index].title}",
-                                                textDirection:
-                                                    TextDirection.ltr,
-                                                fontSize: 20,
+                                              //السوال
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 8.0, right: 8),
+                                                child: CustomText(
+                                                  text:
+                                                      "${questionList[index].title}",
+                                                  textDirection:
+                                                      TextDirection.ltr,
+                                                  fontSize: 20,
+                                                ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              height: 30,
-                                            ),
-                                            //الازرار
-                                            for (var i
-                                                in questionList[index].choices!)
-                                              GetBuilder<VideoController>(
-                                                  builder: (controller) {
-                                                return Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 10.0,
-                                                          right: 10),
-                                                  child: InkWell(
-                                                      onTap: () async {
-                                                        questionList[index]
-                                                            .answer = i.choice!;
-                                                        controller.update();
-                                                      },
-                                                      child: Container(
-                                                        width: 300,
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                top: 9,
-                                                                bottom: 9,
-                                                                right: 7,
-                                                                left: 7),
-                                                        margin: const EdgeInsets
-                                                            .only(top: 20),
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: questionList[
-                                                                          index]
-                                                                      .answer ==
-                                                                  i.choice
-                                                              ? AppConstants
-                                                                  .lightPrimaryColor
-                                                              : AppConstants
-                                                                  .primaryColor,
-                                                          border: Border.all(
-                                                              color: questionList[
-                                                                              index]
-                                                                          .answer ==
-                                                                      i.choice
-                                                                  ? AppConstants
-                                                                      .lightPrimaryColor
-                                                                  : AppConstants
-                                                                      .primaryColor,
-                                                              width: 2.0),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      30.0),
-                                                        ),
-                                                        child: Center(
-                                                            child: CustomText(
-                                                          text: "${i.choice}",
-                                                          fontSize: 18,
-                                                          textDirection:
-                                                              TextDirection.ltr,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold,
+                                              const SizedBox(
+                                                height: 30,
+                                              ),
+                                              //الازرار
+                                              for (var i
+                                                  in questionList[index].choices!)
+                                                GetBuilder<VideoController>(
+                                                    builder: (controller) {
+                                                  return Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10.0,
+                                                            right: 10),
+                                                    child: InkWell(
+                                                        onTap: () async {
+                                                          questionList[index]
+                                                              .answer = i.choice!;
+                                                          controller.update();
+                                                        },
+                                                        child: Container(
+                                                          width: 300,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 9,
+                                                                  bottom: 9,
+                                                                  right: 7,
+                                                                  left: 7),
+                                                          margin: const EdgeInsets
+                                                              .only(top: 20),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: questionList[
+                                                                            index]
+                                                                        .answer ==
+                                                                    i.choice
+                                                                ? AppConstants
+                                                                    .lightPrimaryColor
+                                                                : AppConstants
+                                                                    .primaryColor,
+                                                            border: Border.all(
+                                                                color: questionList[
+                                                                                index]
+                                                                            .answer ==
+                                                                        i.choice
+                                                                    ? AppConstants
+                                                                        .lightPrimaryColor
+                                                                    : AppConstants
+                                                                        .primaryColor,
+                                                                width: 2.0),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30.0),
+                                                          ),
+                                                          child: Center(
+                                                              child: CustomText(
+                                                            text: "${i.choice}",
+                                                            fontSize: 18,
+                                                            textDirection:
+                                                                TextDirection.ltr,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          )),
                                                         )),
-                                                      )),
-                                                );
-                                              }),
+                                                  );
+                                                }),
 
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                          ],
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

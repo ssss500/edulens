@@ -49,7 +49,9 @@ class RegisterController extends GetxController {
   final classesList = <ClassesModel>[].obs;
   final classes = <String>[].obs;
   final classesId = <String, num>{}.obs;
-  final listYearString = ['تعليم حر', 'تعليم جامعى', 'تعليم مدرسى'];
+  final listYearString = [
+    // 'تعليم حر',
+    'تعليم جامعى', 'تعليم مدرسى'];
   final sectionName = "division".tr.obs;
   final classesName = "chooseYear".tr.obs;
   final genderName = "${"nationality".tr} ${Platform.isIOS ? "*" : ""}".obs;
@@ -69,10 +71,46 @@ class RegisterController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     classesList.value = [
+      // ClassesModel(
+      //     id: 1,
+      //     name: "تعليم حر",
+      //     gradeId: 1,
+      //     createdAt: "2022-04-14T23:00:22.000000Z",
+      //     updatedAt: "2022-04-14T23:00:22.000000Z"),
       ClassesModel(
-          id: 1,
-          name: "تعليم حر",
-          gradeId: 1,
+          id: 9,
+          name: "الصف الأول الإعدادي",
+          gradeId: 3,
+          createdAt: "2022-04-14T23:00:22.000000Z",
+          updatedAt: "2022-04-14T23:00:22.000000Z"),
+      ClassesModel(
+          id: 10,
+          name: "الصف الثاني الإعدادي",
+          gradeId: 3,
+          createdAt: "2022-04-14T23:00:22.000000Z",
+          updatedAt: "2022-04-14T23:00:22.000000Z"),
+      ClassesModel(
+          id: 11,
+          name: "الصف الثالث الإعدادي",
+          gradeId: 3,
+          createdAt: "2022-04-14T23:00:22.000000Z",
+          updatedAt: "2022-04-14T23:00:22.000000Z"),
+      ClassesModel(
+          id: 12,
+          name: "الصف الأول الثانوي",
+          gradeId: 3,
+          createdAt: "2022-04-14T23:00:22.000000Z",
+          updatedAt: "2022-04-14T23:00:22.000000Z"),
+      ClassesModel(
+          id: 13,
+          name: "الصف الثاني الثانوي",
+          gradeId: 3,
+          createdAt: "2022-04-14T23:00:22.000000Z",
+          updatedAt: "2022-04-14T23:00:22.000000Z"),
+      ClassesModel(
+          id: 14,
+          name: "الصف الثالث الثانوي",
+          gradeId: 3,
           createdAt: "2022-04-14T23:00:22.000000Z",
           updatedAt: "2022-04-14T23:00:22.000000Z"),
       ClassesModel(
@@ -117,42 +155,6 @@ class RegisterController extends GetxController {
           gradeId: 2,
           createdAt: "2022-04-14T23:00:22.000000Z",
           updatedAt: "2022-04-14T23:00:22.000000Z"),
-      ClassesModel(
-          id: 9,
-          name: "الصف الأول الإعدادي",
-          gradeId: 3,
-          createdAt: "2022-04-14T23:00:22.000000Z",
-          updatedAt: "2022-04-14T23:00:22.000000Z"),
-      ClassesModel(
-          id: 10,
-          name: "الصف الثاني الإعدادي",
-          gradeId: 3,
-          createdAt: "2022-04-14T23:00:22.000000Z",
-          updatedAt: "2022-04-14T23:00:22.000000Z"),
-      ClassesModel(
-          id: 11,
-          name: "الصف الثالث الإعدادي",
-          gradeId: 3,
-          createdAt: "2022-04-14T23:00:22.000000Z",
-          updatedAt: "2022-04-14T23:00:22.000000Z"),
-      ClassesModel(
-          id: 12,
-          name: "الصف الأول الثانوي",
-          gradeId: 3,
-          createdAt: "2022-04-14T23:00:22.000000Z",
-          updatedAt: "2022-04-14T23:00:22.000000Z"),
-      ClassesModel(
-          id: 13,
-          name: "الصف الثاني الثانوي",
-          gradeId: 3,
-          createdAt: "2022-04-14T23:00:22.000000Z",
-          updatedAt: "2022-04-14T23:00:22.000000Z"),
-      ClassesModel(
-          id: 14,
-          name: "الصف الثالث الثانوي",
-          gradeId: 3,
-          createdAt: "2022-04-14T23:00:22.000000Z",
-          updatedAt: "2022-04-14T23:00:22.000000Z")
     ];
     cityList.value = [
       CityModel(
@@ -399,14 +401,18 @@ class RegisterController extends GetxController {
           contentType: ContentType.failure);
     } else {
       loading.value = true;
-      await _firebaseMessaging.getToken().then((value) => token = value);
+      try{
+        await _firebaseMessaging.getToken().then((value) => token = value);
+      }catch(e){
+        debugPrint(e.toString());
+      }
       idDevice = await getIDDevise();
       debugPrint(token.toString());
       // ignore: use_build_context_synchronously
       await services.register(
           context,
           RegisterModel(
-            phone: phone.value,
+            phone: phone.value.trim(),
             password: password.value.trim(),
             email: email.value,
             birthday: birthday.value,
@@ -467,15 +473,19 @@ class RegisterController extends GetxController {
           contentType: ContentType.failure);
     } else {
       loading.value = true;
-      await _firebaseMessaging.getToken().then((value) => token = value);
+      try{
+        await _firebaseMessaging.getToken().then((value) => token = value);
+      }catch(e){
+        debugPrint(e.toString());
+      }
       idDevice = await getIDDevise();
       debugPrint(token.toString());
       // ignore: use_build_context_synchronously
       await services.register(
           context,
           RegisterModel(
-            phone: phone.value,
-            password: password.value,
+            phone: phone.value.trim(),
+            password: password.value.trim(),
             email: email.value,
             birthday: birthday.value,
             cityId: "${cityId.value}",
@@ -486,7 +496,7 @@ class RegisterController extends GetxController {
             lastName: lastName.value,
             parentName: parentName.value,
             parentPhone: parentPhone.value,
-            password2: password2.value,
+            password2: password2.value.trim(),
             school: school.value,
             studentClassId: "${studentClassId.value}",
             studentSectionId: "${studentSectionId.value}",

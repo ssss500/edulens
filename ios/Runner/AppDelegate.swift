@@ -4,7 +4,7 @@ import Flutter
 import Firebase
 enum ChannelName {
     static let record = "samples.flutter.io/record"
-    static let screenShot = "samples.flutter.io/screenShot"
+//     static let screenShot = "samples.flutter.io/screenShot"
 }
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate , FlutterStreamHandler {
@@ -25,10 +25,10 @@ enum ChannelName {
 
            let recordChannel = FlutterEventChannel(name: ChannelName.record,
                                                  binaryMessenger: controller.binaryMessenger)
-           let screenShotChannel = FlutterEventChannel(name: ChannelName.screenShot,
-                                                 binaryMessenger: controller.binaryMessenger)
+//            let screenShotChannel = FlutterEventChannel(name: ChannelName.screenShot,
+//                                                  binaryMessenger: controller.binaryMessenger)
            recordChannel.setStreamHandler(self)
-           screenShotChannel.setStreamHandler(self)
+//            screenShotChannel.setStreamHandler(self)
   return super.application(application, didFinishLaunchingWithOptions: launchOptions)
 }
   public func onListen(withArguments arguments: Any?,
@@ -42,20 +42,20 @@ enum ChannelName {
         selector: #selector(AppDelegate.onRecord),
         name:UIScreen.capturedDidChangeNotification,
         object: nil)}
-      NotificationCenter.default.addObserver(
-        self,
-        selector: #selector(AppDelegate.screenShot),
-        name:UIApplication.userDidTakeScreenshotNotification,
-        object: nil)
+//       NotificationCenter.default.addObserver(
+//         self,
+//         selector: #selector(AppDelegate.screenShot),
+//         name:UIApplication.userDidTakeScreenshotNotification,
+//         object: nil)
     return nil
   }
 
     @objc private func onRecord(notification: NSNotification) {
         onRecordNotification()
     }
-    @objc private func screenShot(notification: NSNotification) {
-        onScreenShot()
-    }
+//     @objc private func screenShot(notification: NSNotification) {
+//         onScreenShot()
+//     }
     private func onRecordNotification(){
 
         let isCaptured = UIScreen.main.isCaptured
@@ -67,17 +67,17 @@ enum ChannelName {
         }
 
     }
-    private func onScreenShot(){
-
-
-        guard let eventSink = eventSink else {
-          return
-        }
-
-        eventSink(true)
-
-
-    }
+//     private func onScreenShot(){
+//
+//
+//         guard let eventSink = eventSink else {
+//           return
+//         }
+//
+//         eventSink(true)
+//
+//
+//     }
 
 
   public func onCancel(withArguments arguments: Any?) -> FlutterError? {

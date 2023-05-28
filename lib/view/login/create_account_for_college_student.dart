@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class CreateAccountForCollegeStudent extends StatelessWidget {
     CreateAccountForCollegeStudent({Key? key}) : super(key: key);
   RegisterController controller = Get.put(RegisterController());
@@ -286,7 +287,7 @@ class CreateAccountForCollegeStudent extends StatelessWidget {
                       borderRadius: 16,
                       theme: Theme.of(context).copyWith(
                         primaryColor: AppConstants.primaryColor,
-                        accentColor: AppConstants.primaryColor,
+                        hintColor: AppConstants.primaryColor,
                         colorScheme: const ColorScheme.light(
                           primaryContainer: AppConstants.primaryColor,
                           primary: AppConstants.primaryColor,

@@ -13,18 +13,23 @@ class LoginController extends GetxController {
   final phone = "".obs;
   final loading = false.obs;
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-  var token, idDevice;
+  var token='', idDevice;
 
   login(BuildContext context) async {
     FocusManager.instance.primaryFocus?.unfocus();
 
     loading.value = true;
-    await _firebaseMessaging
-        .getToken()
-        .then((value) => token = value);
+    try{
+      await _firebaseMessaging
+          .getToken()
+          .then((value) => token = value.toString());
+    }catch(e){
+      debugPrint(e.toString());
+    }
     idDevice = await getIDDevise();
     debugPrint(token.toString());
-    await services.login(context, password: password.value, phone: phone.value,deviceId:idDevice,token:token);
+    // ignore: use_build_context_synchronously
+    await services.login(context, password: password.value.trim(), phone: phone.value.trim(),deviceId:idDevice,token:token);
     loading.value = false;
   }
   getIDDevise() async {
@@ -32,12 +37,7 @@ class LoginController extends GetxController {
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-      // log(androidInfo.model);
-      // log(androidInfo.id);
-      // log(androidInfo.device);
       log(androidInfo.id.toString());
-      // log(androidInfo.version);
-      // idDevice = androidInfo.board;
       idDevice = androidInfo.id;
     } else if (Platform.isIOS) {
       IosDeviceInfo iosInfo = await deviceInfo.iosInfo;

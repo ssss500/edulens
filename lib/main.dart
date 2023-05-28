@@ -1,4 +1,3 @@
-// @dart=2.9
 import 'package:edu_lens/binding/view_model_binding.dart';
 import 'package:edu_lens/controllers/main_controller.dart';
 import 'package:edu_lens/firebase_options.dart';
@@ -15,12 +14,15 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:screen_protector/screen_protector.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioUtilNew.getInstance();
   await CacheHelper.init();
   await GetStorage.init();
+  await ScreenProtector.preventScreenshotOff();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -28,7 +30,7 @@ void main() async {
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return Material(
       child: Container(
-        color:AppConstants.primaryColor,
+        color: AppConstants.primaryColor,
         child: Text(
           details.exception.toString(),
           textAlign: TextAlign.center,
@@ -72,8 +74,6 @@ void main() async {
       platform: TargetPlatform.iOS,
     ),
   ));
-
-
 }
 
 // class MyApp extends StatelessWidget {

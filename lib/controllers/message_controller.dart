@@ -8,16 +8,19 @@ import 'package:get/get.dart';
 class MessageController extends GetxController {
   final messageList = [].obs;
   final dio = DioUtilNew.dio;
+  late RxBool apiLoadingMessage = false.obs;
 
 
 
    getMessage()  async {
     debugPrint("getMessage");
-    messageList.value =   (await getMessageApi()!) ;
+    messageList.value =   (await getMessageApi()!) ??[];
   }
 
    getMessageApi() async {
-    try {
+     apiLoadingMessage.value = true;
+
+     try {
       final response = await dio!.post(AppConstants.message, queryParameters: {
         "student_class_id": CacheHelper.getData(
           key: AppConstants.studentClassId,
@@ -31,12 +34,15 @@ class MessageController extends GetxController {
       if (response.statusCode == 200) {
         final mList = List<MessageModel>.from(
             response.data.map((i) => MessageModel.fromJson(i)));
+        apiLoadingMessage.value = false;
 
         return mList;
       }
     } catch (e) {
       debugPrint(e.toString());
     }
-    return null;
+     apiLoadingMessage.value = false;
+
+     return null;
   }
 }

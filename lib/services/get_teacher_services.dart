@@ -13,7 +13,10 @@ import 'package:edu_lens/model/student_reservations_model.dart';
 import 'package:edu_lens/model/subject_model.dart';
 import 'package:edu_lens/model/teacher_model.dart';
 import 'package:edu_lens/model/user_model.dart';
+import 'package:edu_lens/view/login/home_login_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 class GetHomeServices {
   final dio = DioUtilNew.dio;
@@ -118,6 +121,12 @@ class GetHomeServices {
       if (response.statusCode == 200) {
         final mList = List<StudentModel>.from(
             response.data.map((i) => StudentModel.fromJson(i)));
+        debugPrint("response user data : ${mList.length.toString()}");
+        if(mList.isEmpty){
+          GetStorage().remove("listTeacherLoves");
+          await CacheHelper.clearData();
+          Get.offAll(() =>  HomeLogin());
+        }
         return mList;
       }
     } catch (e) {

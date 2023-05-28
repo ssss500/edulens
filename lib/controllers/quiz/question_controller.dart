@@ -13,6 +13,7 @@ import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:screen_protector/screen_protector.dart';
 
 class QuestionController extends GetxController {
   HomeController homeController = Get.put(HomeController());
@@ -20,6 +21,20 @@ class QuestionController extends GetxController {
   int finalDegree = 0;
   double? screenWidth = 0.0, screenHeight = 0.0;
 RxBool endTimerBool=false.obs;
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+    await ScreenProtector.preventScreenshotOff();
+
+  }
+  @override
+
+  Future<void> onClose() async {
+    super.onClose();
+    await ScreenProtector.preventScreenshotOn();
+
+  }
+
   checkTheQuestionAnswer({context, controller, questionList}) {
     if (!kDebugMode) {
       for (int i = 0; i < questionList.length; i++) {
@@ -195,9 +210,10 @@ RxBool endTimerBool=false.obs;
               height: 18,
             ),
             InkWell(
-              onTap: () {
+              onTap: () async {
                 Get.back();
                 Get.back();
+                await ScreenProtector.preventScreenshotOn();
               },
               child: Container(
                   width: 300,

@@ -9,28 +9,32 @@ import 'package:edu_lens/view/widget/custom_list_view.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:screen_protector/screen_protector.dart';
 
 class AnswerQuizView extends StatelessWidget {
   AnswerQuizView({Key? key,required this.questionList}) : super(key: key);
 
-  // VideoController videoController = Get.put(VideoController());
   QuestionController questionController = Get.put(QuestionController());
   var questionList;
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () {
+      onWillPop: () async {
         Get.back();
         Get.back();
+        await ScreenProtector.preventScreenshotOn();
 
         return Future.value(true);
       },
       child: CustomAppBar(
           backgroundImageBool: false,
-          functionBake: () {
+          functionBake: () async {
             Get.back();
+
             Get.back();
+            await ScreenProtector.preventScreenshotOn();
+
           },
           title: "نموذج حل الامتحان",
           widget: CustomListView(

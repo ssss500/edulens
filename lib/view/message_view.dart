@@ -16,14 +16,39 @@ class MessageView extends StatelessWidget {
     return CustomAppBar(
       title: "messages title".tr,
       widget: Obx(
-        () => messageController.messageList.isEmpty
+        () =>messageController.messageList.isEmpty &&
+            messageController.apiLoadingMessage.value
             ? const SizedBox(
-                height: 170,
-                child: Center(
-                    child: CircularProgressIndicator(
+            height: 170,
+            child: Center(
+                child: CircularProgressIndicator(
                   color: AppConstants.lightPrimaryColor,
                 )))
-            : Padding(
+            : messageController.messageList.isEmpty &&
+            messageController.apiLoadingMessage.value == false
+            ? Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(right: 20),
+              child: Image.asset(
+                'assets/images/mirage-no-comments.png',
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: CustomText(
+                text:
+                "لا يوجد بيانات",
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+          ],
+        )
+            :  Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15,top: 20),
                 child: CustomListView(
                   itemCount: messageController.messageList.length,
