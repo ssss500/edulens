@@ -76,6 +76,7 @@ class Lecture {
     required this.desc,
     required this.note,
     this.video,
+    this.dailymotion,
     this.link,
     this.vLink,
     required this.image,
@@ -95,6 +96,7 @@ class Lecture {
   String desc;
   String note;
   String? video;
+  String? dailymotion;
   dynamic link;
   String? vLink;
   String image;
@@ -113,6 +115,7 @@ class Lecture {
     String? name,
     String? desc,
     String? note,
+    String? dailymotion,
     String? video,
     dynamic link,
     String? vLink,
@@ -134,6 +137,7 @@ class Lecture {
         note: note ?? this.note,
         video: video ?? this.video,
         link: link ?? this.link,
+        dailymotion: dailymotion ?? this.dailymotion,
         vLink: vLink ?? this.vLink,
         image: image ?? this.image,
         cost: cost ?? this.cost,
@@ -154,6 +158,7 @@ class Lecture {
     note: json["note"],
     video: json["video"],
     link: json["link"],
+    dailymotion: json["dailymotion"],
     vLink: json["v_link"],
     image: json["image"],
     cost: json["cost"],
@@ -173,6 +178,7 @@ class Lecture {
     "desc": desc,
     "note": note,
     "video": video,
+    "dailymotion": dailymotion,
     "link": link,
     "v_link": vLink,
     "image": image,

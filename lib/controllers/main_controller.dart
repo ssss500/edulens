@@ -2,18 +2,17 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/dio_integration.dart';
 import 'package:edu_lens/model/app_version_model.dart';
-import 'package:edu_lens/view/update_screen.dart';
-import 'package:edu_lens/view/widget/custom_dialog.dart';
-import 'package:edu_lens/view/widget/custom_social_media_icons.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../view/update_screen.dart';
+import '../view/widget/custom_social_media_icons.dart';
+// import 'package:package_info_plus/package_info_plus.dart';
 class MainController extends GetxController {
   final dio = DioUtilNew.dio;
   final appVersion = <AppVersionModel>[].obs;
@@ -22,9 +21,12 @@ class MainController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     // TODO: implement onInit
-    checkUpdate();
+        if(Platform.isIOS||Platform.isAndroid){
+      checkUpdate();
+      notificationMethod();
+
+        }
     debugPrint("onInit Main Controller");
-    notificationMethod();
   }
 
   checkUpdate() async {

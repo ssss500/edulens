@@ -40,19 +40,21 @@ class VideoController extends GetxController {
 
   }
 
-  openVideo() {
-    HomeCoursesController homeCoursesController =
-        Get.put(HomeCoursesController());
-    debugPrint(
-        "youtube link : ${homeCoursesController.chapters[homeCoursesController.indexChapters].lectures[homeCoursesController.indexLectures].toJson()}");
-    if (homeCoursesController.chapters[homeCoursesController.indexChapters]
+  openVideo({lecturePaidModel}) {
+    if(lecturePaidModel!=null){
+      idVideoForPaidModelYoutube = lecturePaidModel.video.toString();
+
+    }
+    HomeCoursesController homeCoursesController = Get.put(HomeCoursesController());
+     if (lecturePaidModel==null?homeCoursesController.chapters[homeCoursesController.indexChapters]
             .lectures[homeCoursesController.indexLectures].video ==
-        null) {
-      String idVideo = homeCoursesController
+        null:idVideoForPaidModelYoutube == 'null' ||
+         idVideoForPaidModelYoutube == '') {
+      String idVideo =lecturePaidModel==null? homeCoursesController
           .chapters[homeCoursesController.indexChapters]
           .lectures[homeCoursesController.indexLectures]
           .vLink
-          .toString();
+          .toString():lecturePaidModel.vLink.toString();
       debugPrint("idVideo : $idVideo");
       idVideo = idVideo.split("?")[0];
       debugPrint("idVideo : $idVideo");
@@ -78,12 +80,12 @@ class VideoController extends GetxController {
         );
       }
     } else {
-      String? idVideo = homeCoursesController
+      String? idVideo =lecturePaidModel==null?  homeCoursesController
           .chapters[homeCoursesController.indexChapters]
           .lectures[homeCoursesController.indexLectures]
-          .video;
-      debugPrint(
-          "youtube link : ${homeCoursesController.chapters[homeCoursesController.indexChapters].lectures[homeCoursesController.indexLectures].toJson()}");
+          .video:lecturePaidModel.video.toString();
+      // debugPrint(
+      //     "youtube link : ${homeCoursesController.chapters[homeCoursesController.indexChapters].lectures[homeCoursesController.indexLectures].toJson()}");
       try {
         controller = PodPlayerController(
           playVideoFrom: PlayVideoFrom.youtube(

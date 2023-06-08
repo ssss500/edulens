@@ -59,7 +59,7 @@ class PurchasedLectures extends StatelessWidget {
                       //     indexChapters;
                       VideoController videoController =
                       Get.put(VideoController());
-                      await videoController.openVideoPayed(lecturePaidModel:homeController.lecturePaid[index]);
+                      await videoController.openVideo(lecturePaidModel:homeController.lecturePaid[index]);
                       videoController.getVideoExtensionsPayed(lecturePaidModel:homeController.lecturePaid[index]);
                       Get.back();
                       Get.to(() => VideoView(title: homeController.lecturePaid[index].name.toString(),));

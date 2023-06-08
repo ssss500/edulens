@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:edu_lens/binding/view_model_binding.dart';
 import 'package:edu_lens/controllers/main_controller.dart';
 import 'package:edu_lens/firebase_options.dart';
@@ -14,6 +16,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+// import 'package:google_fonts/google_fonts.dart';
 import 'package:screen_protector/screen_protector.dart';
 
 void main() async {
@@ -21,11 +25,16 @@ void main() async {
   DioUtilNew.getInstance();
   await CacheHelper.init();
   await GetStorage.init();
-  await ScreenProtector.preventScreenshotOff();
+  if (Platform.isIOS) {
+    await ScreenProtector.preventScreenshotOff();
 
+  }
+if(Platform.isAndroid||Platform.isIOS){
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+}
+
   // final token = await CacheHelper.getData(key: AppConstants.token);
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return Material(
