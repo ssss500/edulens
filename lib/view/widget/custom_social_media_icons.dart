@@ -6,7 +6,6 @@ import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -38,7 +37,7 @@ Widget customSocialMediaIcons() {
                   context: Get.context!,
                   title: Text(
                     'للتواصل معا ايديو لينس',
-                    style: GoogleFonts.cairo(
+                    style: TextStyle(
                         fontSize: 27,
                         color: AppConstants.lightPrimaryColor,
                         fontWeight: FontWeight.bold),
@@ -82,7 +81,7 @@ Widget customSocialMediaIcons() {
                               ),
                               Text(
                                 "01092884278",
-                                style: GoogleFonts.cairo(
+                                style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold),
@@ -154,7 +153,7 @@ Widget customSocialMediaIcons() {
                               ),
                               Text(
                                 "01153070885",
-                                style: GoogleFonts.cairo(
+                                style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold),
@@ -226,7 +225,7 @@ Widget customSocialMediaIcons() {
                               ),
                               Text(
                                 "01099613267",
-                                style: GoogleFonts.cairo(
+                                style: TextStyle(
                                     fontSize: 20,
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold),

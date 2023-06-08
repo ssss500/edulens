@@ -82,30 +82,15 @@ class VideoView extends StatelessWidget {
                 children: [
                   if (!videoController.mustSolveExam.value)
                     FutureBuilder(builder: (context, snap) {
-                      try {
-                        debugPrint(
-                            " FutureBuilder try ${homeCoursesController.chapters[homeCoursesController.indexChapters].lectures![homeCoursesController.indexLectures].vLink!.split("?")[0]}");
-                        if (homeCoursesController
-                                .chapters[homeCoursesController.indexChapters]
-                                .lectures![homeCoursesController.indexLectures]
-                                .video ==
-                            null) {
-                          debugPrint(" FutureBuilder catch1");
+                      // try {
+                        // if (homeCoursesController
+                        //         .chapters[homeCoursesController.indexChapters]
+                        //         .lectures[homeCoursesController.indexLectures]
+                        //         .dailymotion!=
+                        //     null) {
+                        //   debugPrint(" FutureBuilder catch1");
 
-                          return AspectRatio(
-                            aspectRatio: 16 / 9,
-                            child: VimeoPlayer(
-                              videoId: homeCoursesController
-                                  .chapters[homeCoursesController.indexChapters]
-                                  .lectures[homeCoursesController.indexLectures]
-                                  .vLink!
-                                  .split("?")[0],
-                            ),
-                          );
-                        } else {
-                          debugPrint(" FutureBuilder catch2");
-
-                          return PodVideoPlayer(
+                          return     PodVideoPlayer(
                             controller: videoController.controller,
                             onVideoError: () => Stack(
                               children: [
@@ -121,66 +106,96 @@ class VideoView extends StatelessWidget {
                                     right: 0,
                                     child: CustomText(
                                       text:
-                                          ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
+                                      ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                     )),
                               ],
                             ),
                           );
-                        }
-                      } catch (e) {
-                        try {
-                          debugPrint(
-                              " FutureBuilder catch ${videoController.idVideoForPaidModelYoutube}");
+                      ///لو فتحت هنا تاني و كان مفيش مشاكل امسح ده
 
-                          // ignore: unnecessary_null_comparison
-                          if (videoController.idVideoForPaidModelYoutube ==
-                                  'null' ||
-                              videoController.idVideoForPaidModelYoutube ==
-                                  null ||
-                              videoController.idVideoForPaidModelYoutube ==
-                                  '') {
-                            debugPrint(" FutureBuilder catch3");
-
-                            debugPrint(
-                                "videoController.idVideoForPaidModel ${videoController.idVideoForPaidModel}");
-                            return AspectRatio(
-                              aspectRatio: 16 / 9,
-                              child: VimeoPlayer(
-                                videoId: videoController.idVideoForPaidModel,
-                              ),
-                            );
-                          } else {
-                            debugPrint(" FutureBuilder catch4");
-
-                            return PodVideoPlayer(
-                              controller: videoController.controller,
-                            );
-                          }
-                        } catch (e) {
-                          return Stack(
-                            children: [
-                              AspectRatio(
-                                  aspectRatio: 16 / 9,
-                                  child: Image.asset(
-                                    "assets/images/errorvideo.jpg",
-                                    fit: BoxFit.cover,
-                                  )),
-                              Positioned(
-                                  bottom: 10,
-                                  left: 0,
-                                  right: 0,
-                                  child: CustomText(
-                                    text:
-                                        ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            ],
-                          );
-                        }
-                      }
+                      // }
+                        // else {
+                        //   debugPrint(" FutureBuilder catch2");
+                        //
+                        //   return PodVideoPlayer(
+                        //     controller: videoController.controller,
+                        //     onVideoError: () => Stack(
+                        //       children: [
+                        //         AspectRatio(
+                        //             aspectRatio: 16 / 9,
+                        //             child: Image.asset(
+                        //               "assets/images/errorvideo.jpg",
+                        //               fit: BoxFit.cover,
+                        //             )),
+                        //         Positioned(
+                        //             bottom: 10,
+                        //             left: 0,
+                        //             right: 0,
+                        //             child: CustomText(
+                        //               text:
+                        //                   ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
+                        //               color: Colors.white,
+                        //               fontWeight: FontWeight.bold,
+                        //             )),
+                        //       ],
+                        //     ),
+                        //   );
+                        // }
+                        ///لو فتحت هنا تاني و كان مفيش مشاكل امسح ده
+                      // } catch (e) {
+                      //   try {
+                      //     debugPrint(
+                      //         " FutureBuilder catch ${videoController.idVideoForPaidModelYoutube}");
+                      //
+                      //     // ignore: unnecessary_null_comparison
+                      //     if (videoController.idVideoForPaidModelYoutube ==
+                      //             'null' ||
+                      //         videoController.idVideoForPaidModelYoutube ==
+                      //             null ||
+                      //         videoController.idVideoForPaidModelYoutube ==
+                      //             '') {
+                      //       debugPrint(" FutureBuilder catch3");
+                      //
+                      //       debugPrint(
+                      //           "videoController.idVideoForPaidModel ${videoController.idVideoForPaidModel}");
+                      //       return AspectRatio(
+                      //         aspectRatio: 16 / 9,
+                      //         child: VimeoPlayer(
+                      //           videoId: videoController.idVideoForPaidModel,
+                      //         ),
+                      //       );
+                      //     } else {
+                      //       debugPrint(" FutureBuilder catch4");
+                      //
+                      //       return PodVideoPlayer(
+                      //         controller: videoController.controller,
+                      //       );
+                      //     }
+                      //   } catch (e) {
+                      //     return Stack(
+                      //       children: [
+                      //         AspectRatio(
+                      //             aspectRatio: 16 / 9,
+                      //             child: Image.asset(
+                      //               "assets/images/errorvideo.jpg",
+                      //               fit: BoxFit.cover,
+                      //             )),
+                      //         Positioned(
+                      //             bottom: 10,
+                      //             left: 0,
+                      //             right: 0,
+                      //             child: CustomText(
+                      //               text:
+                      //                   ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
+                      //               color: Colors.white,
+                      //               fontWeight: FontWeight.bold,
+                      //             )),
+                      //       ],
+                      //     );
+                      //   }
+                      // }
                     })
                   else
                     Container(
@@ -569,59 +584,59 @@ class VideoView extends StatelessWidget {
 ///
 ///
 ///
-class VimeoPlayer extends StatelessWidget {
-  final String videoId;
-
-  ///constructor
-  ///
-  ///
-  ///
-  const VimeoPlayer({
-    Key? key,
-    required this.videoId,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return WebViewWidget(
-      controller: WebViewController()
-        ..setJavaScriptMode(
-          JavaScriptMode.unrestricted,
-        )
-        ..loadRequest(Uri.parse(_videoPage(videoId))),
-    );
-  }
-
-  ///web page containing iframe of the vimeo video
-  ///
-  ///
-  ///
-  ///
-  String _videoPage(String videoId) {
-    final html = '''
-            <html>
-              <head>
-                <style>
-                  body {
-                   background-color: lightgray;
-                   margin: 0px;
-                   }
-                </style>
-                <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
-                <meta http-equiv="Content-Security-Policy" 
-                content="default-src * gap:; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src *; 
-                img-src * data: blob: android-webview-video-poster:; style-src * 'unsafe-inline';">
-             </head>
-             <body>
-                <iframe 
-                src="https://player.vimeo.com/video/$videoId?loop=0&autoplay=0" 
-                width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen
-               ></iframe>
-             </body>
-            </html>
-            ''';
-    final String contentBase64 =
-        base64Encode(const Utf8Encoder().convert(html));
-    return 'data:text/html;base64,$contentBase64';
-  }
-}
+// class VimeoPlayer extends StatelessWidget {
+//   final String videoId;
+//
+//   ///constructor
+//   ///
+//   ///
+//   ///
+//   const VimeoPlayer({
+//     Key? key,
+//     required this.videoId,
+//   }) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return WebViewWidget(
+//       controller: WebViewController()
+//         ..setJavaScriptMode(
+//           JavaScriptMode.unrestricted,
+//         )
+//         ..loadRequest(Uri.parse(_videoPage(videoId))),
+//     );
+//   }
+//
+//   ///web page containing iframe of the vimeo video
+//   ///
+//   ///
+//   ///
+//   ///
+//   String _videoPage(String videoId) {
+//     final html = '''
+//             <html>
+//               <head>
+//                 <style>
+//                   body {
+//                    background-color: lightgray;
+//                    margin: 0px;
+//                    }
+//                 </style>
+//                 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
+//                 <meta http-equiv="Content-Security-Policy"
+//                 content="default-src * gap:; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src *;
+//                 img-src * data: blob: android-webview-video-poster:; style-src * 'unsafe-inline';">
+//              </head>
+//              <body>
+//                 <iframe
+//                 src="https://player.vimeo.com/video/$videoId?loop=0&autoplay=0"
+//                 width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen
+//                ></iframe>
+//              </body>
+//             </html>
+//             ''';
+//     final String contentBase64 =
+//         base64Encode(const Utf8Encoder().convert(html));
+//     return 'data:text/html;base64,$contentBase64';
+//   }
+// }

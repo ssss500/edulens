@@ -12,23 +12,17 @@ import 'package:edu_lens/view/home/custom_video_player_for_ads_covers.dart';
 import 'package:edu_lens/view/profile_teacher_view.dart';
 import 'package:edu_lens/view/subject_teacher_view.dart';
 import 'package:edu_lens/view/widget/card_image_teacher.dart';
-import 'package:edu_lens/view/widget/custom_buttom.dart';
-import 'package:edu_lens/view/widget/custom_dialog.dart';
-import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
+
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:edu_lens/view/widget/custom_list_view.dart';
-import 'package:edu_lens/view/widget/custom_refresher.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import 'package:url_launcher/url_launcher.dart';
-import 'package:video_player/video_player.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
@@ -209,9 +203,9 @@ class HomeView extends StatelessWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          Text(
+                          const Text(
                             "01092884278",
-                            style: GoogleFonts.cairo(
+                            style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
@@ -256,7 +250,7 @@ class HomeView extends StatelessWidget {
                           ),
                           Text(
                             "01153070885",
-                            style: GoogleFonts.cairo(
+                            style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
@@ -299,9 +293,9 @@ class HomeView extends StatelessWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          Text(
+                          const Text(
                             "01099613267",
-                            style: GoogleFonts.cairo(
+                            style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),

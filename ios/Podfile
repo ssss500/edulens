@@ -55,7 +55,7 @@ end
 
 target 'Runner' do
 
-  pod 'FirebaseFirestore/WithLeveldb', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '10.3.0'
+  pod 'FirebaseFirestore/WithLeveldb', :git => 'https://github.com/invertase/firestore-ios-sdk-frameworks.git', :tag => '10.9.0'
   use_frameworks!
   use_modular_headers!
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
