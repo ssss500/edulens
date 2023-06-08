@@ -1,8 +1,9 @@
-import 'package:dropdown_button2/custom_dropdown_button2.dart';
 import 'package:edu_lens/helper/app_constants.dart';
+import 'package:edu_lens/view/widget/custom_drop_down.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CustomDropdownButton extends StatelessWidget {
   String hint;
   Function(String?) function;
