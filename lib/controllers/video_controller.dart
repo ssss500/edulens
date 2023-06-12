@@ -7,7 +7,7 @@ import 'package:edu_lens/model/lecture_paid_model.dart';
 import 'package:edu_lens/services/get_video_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pod_player/pod_player.dart';
+// import 'package:pod_player/pod_player.dart';
 import 'package:screen_protector/screen_protector.dart';
 
 class VideoController extends GetxController {
@@ -15,7 +15,7 @@ class VideoController extends GetxController {
   final pdfList = <PdfModel>[].obs;
   final quizList = <QuizModel>[].obs;
   final questionList = <QuestionModel>[].obs;
-  late final PodPlayerController controller;
+  // late final PodPlayerController controller;
   RxBool mustSolveExam = false.obs;
   late String idVideoForPaidModel = "", idVideoForPaidModelYoutube;
   var indexPdf = 0;
@@ -28,7 +28,7 @@ class VideoController extends GetxController {
     super.dispose();
     try {
       await ScreenProtector.preventScreenshotOff();
-      controller.dispose();
+      // controller.dispose();
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -59,26 +59,26 @@ class VideoController extends GetxController {
       idVideo = idVideo.split("?")[0];
       debugPrint("idVideo : $idVideo");
 
-      try {
-        controller = PodPlayerController(
-          playVideoFrom: PlayVideoFrom.vimeo(
-            idVideo,
-            videoPlayerOptions: VideoPlayerOptions(
-              allowBackgroundPlayback: true,
-            ),
-          ),
-        )..initialise();
-      } catch (e) {
-        debugPrint(e.toString());
-        controller.changeVideo(
-          playVideoFrom: PlayVideoFrom.vimeo(
-            idVideo,
-            videoPlayerOptions: VideoPlayerOptions(
-              allowBackgroundPlayback: true,
-            ),
-          ),
-        );
-      }
+      // try {
+      //   controller = PodPlayerController(
+      //     playVideoFrom: PlayVideoFrom.vimeo(
+      //       idVideo,
+      //       videoPlayerOptions: VideoPlayerOptions(
+      //         allowBackgroundPlayback: true,
+      //       ),
+      //     ),
+      //   )..initialise();
+      // } catch (e) {
+      //   debugPrint(e.toString());
+      //   controller.changeVideo(
+      //     playVideoFrom: PlayVideoFrom.vimeo(
+      //       idVideo,
+      //       videoPlayerOptions: VideoPlayerOptions(
+      //         allowBackgroundPlayback: true,
+      //       ),
+      //     ),
+      //   );
+      // }
     } else {
       String? idVideo =lecturePaidModel==null?  homeCoursesController
           .chapters[homeCoursesController.indexChapters]
@@ -86,27 +86,27 @@ class VideoController extends GetxController {
           .video:lecturePaidModel.video.toString();
       // debugPrint(
       //     "youtube link : ${homeCoursesController.chapters[homeCoursesController.indexChapters].lectures[homeCoursesController.indexLectures].toJson()}");
-      try {
-        controller = PodPlayerController(
-          playVideoFrom: PlayVideoFrom.youtube(
-            idVideo!,
-
-            videoPlayerOptions: VideoPlayerOptions(
-              allowBackgroundPlayback: true,
-            ),
-          ),
-        )..initialise();
-      } catch (e) {
-        debugPrint(e.toString());
-        controller.changeVideo(
-          playVideoFrom: PlayVideoFrom.youtube(
-            idVideo!,
-            videoPlayerOptions: VideoPlayerOptions(
-              allowBackgroundPlayback: true,
-            ),
-          ),
-        );
-      }
+      // try {
+      //   controller = PodPlayerController(
+      //     playVideoFrom: PlayVideoFrom.youtube(
+      //       idVideo!,
+      //
+      //       videoPlayerOptions: VideoPlayerOptions(
+      //         allowBackgroundPlayback: true,
+      //       ),
+      //     ),
+      //   )..initialise();
+      // } catch (e) {
+      //   debugPrint(e.toString());
+      //   controller.changeVideo(
+      //     playVideoFrom: PlayVideoFrom.youtube(
+      //       idVideo!,
+      //       videoPlayerOptions: VideoPlayerOptions(
+      //         allowBackgroundPlayback: true,
+      //       ),
+      //     ),
+      //   );
+      // }
     }
   }
 
@@ -173,28 +173,29 @@ class VideoController extends GetxController {
       //     ),
       //   );
       // }
-    } else {
-      try {
-        controller = PodPlayerController(
-          playVideoFrom: PlayVideoFrom.youtube(
-            idVideoForPaidModelYoutube,
-            videoPlayerOptions: VideoPlayerOptions(
-              allowBackgroundPlayback: true,
-            ),
-          ),
-        )..initialise();
-      } catch (e) {
-        debugPrint(e.toString());
-        controller.changeVideo(
-          playVideoFrom: PlayVideoFrom.youtube(
-            idVideoForPaidModelYoutube,
-            videoPlayerOptions: VideoPlayerOptions(
-              allowBackgroundPlayback: true,
-            ),
-          ),
-        );
-      }
     }
+    // else {
+    //   try {
+    //     controller = PodPlayerController(
+    //       playVideoFrom: PlayVideoFrom.youtube(
+    //         idVideoForPaidModelYoutube,
+    //         videoPlayerOptions: VideoPlayerOptions(
+    //           allowBackgroundPlayback: true,
+    //         ),
+    //       ),
+    //     )..initialise();
+    //   } catch (e) {
+    //     debugPrint(e.toString());
+    //     controller.changeVideo(
+    //       playVideoFrom: PlayVideoFrom.youtube(
+    //         idVideoForPaidModelYoutube,
+    //         videoPlayerOptions: VideoPlayerOptions(
+    //           allowBackgroundPlayback: true,
+    //         ),
+    //       ),
+    //     );
+    //   }
+    // }
   }
 
   getVideoExtensionsPayed({required LecturePaidModel lecturePaidModel}) async {

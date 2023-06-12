@@ -55,52 +55,53 @@ class CustomTextFieldLogin extends StatelessWidget {
             validator: validator,
             autofillHints: autoFillHints,
             decoration: InputDecoration(
-                suffixIcon: Icon(
-                  iconData,
-                  color: colorIcon,
-                ),
-                errorText: null,
-                errorStyle: TextStyle(
-                  fontSize: 0,
-                  color: Colors.red.shade400,
-                  inherit: false,
+              suffixIcon: Icon(
+                iconData,
+                color: colorIcon,
+              ),
+              errorText: null,
+              errorStyle: TextStyle(
+                fontSize: 0,
+                color: Colors.red.shade400,
+                inherit: false,
 
-                  // fontWeight: FontWeight.bold,
-                ),
-                errorBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.red.shade400, width: 1),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(25),
-                    )),
-                focusedErrorBorder: OutlineInputBorder(
+                // fontWeight: FontWeight.bold,
+              ),
+              errorBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red.shade400, width: 1),
                   borderRadius: const BorderRadius.all(
                     Radius.circular(25),
-                  ),
-                  borderSide: BorderSide(color: colorBorder!, width: 1),
+                  )),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(25),
                 ),
-                contentPadding: const EdgeInsets.only(
-                  right: 25,
+                borderSide: BorderSide(color: colorBorder!, width: 1),
+              ),
+              contentPadding: const EdgeInsets.only(
+                right: 25,
+              ),
+              filled: true,
+              fillColor: Colors.white24,
+              hintText: hint,
+              hintStyle: TextStyle(
+                fontSize: 18,
+                color: color,
+                // fontWeight: FontWeight.bold,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(25),
                 ),
-                filled: true,
-                fillColor: Colors.white24,
-                hintText: hint,
-                hintStyle: TextStyle(
-                  fontSize: 18,
-                  color: color,
-                  // fontWeight: FontWeight.bold,
+                borderSide: BorderSide(color: colorBorder!, width: 1),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: colorBorder!, width: 1),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(25),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(25),
-                  ),
-                  borderSide: BorderSide(color: colorBorder!, width: 1),
-                ),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: colorBorder!, width: 1),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(25),
-                    ))),
+              ),
+            ),
           ),
           Positioned(
             right: 20,

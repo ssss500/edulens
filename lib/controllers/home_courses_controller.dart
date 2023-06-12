@@ -4,7 +4,6 @@ import 'package:edu_lens/services/get_chapter.dart';
 import 'package:edu_lens/services/get_teacher_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pod_player/pod_player.dart';
 
 class HomeCoursesController extends GetxController {
   final services = GetChapter();

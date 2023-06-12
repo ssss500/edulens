@@ -1,7 +1,7 @@
 import 'package:edu_lens/controllers/login/register_controller.dart';
-import 'package:edu_lens/view/login/create_account_for_college_student.dart';
-import 'package:edu_lens/view/login/create_account_view.dart';
-import 'package:edu_lens/view/login/login_view.dart';
+import 'package:edu_lens/view/login/mobile/create_account_for_college_student.dart';
+import 'package:edu_lens/view/login/mobile/create_account_view.dart';
+import 'package:edu_lens/view/login/mobile/login_view.dart';
 import 'package:edu_lens/view/widget/custom_buttom.dart';
 import 'package:edu_lens/view/widget/custom_buttom_deflated.dart';
 import 'package:edu_lens/view/widget/custom_scaffold_login.dart';

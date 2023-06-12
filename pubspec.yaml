@@ -46,8 +46,8 @@ dependencies:
   awesome_snackbar_content:
     path: ./package/awesome_snackbar_content-0.1.0/
   #  better_player: ^0.0.83
-  pod_player: any
-#  vimeo_video_player: ^0.0.6
+ # pod_player: any
+    #   vimeo_video_player: ^0.0.6
 #  vimeo_player_flutter: ^0.0.3+2
 #  vimeo_player_flutter: ^0.0.3+2
 #  vimeoplayer_trinity: ^0.2.3

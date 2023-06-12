@@ -1,12 +1,8 @@
 import 'dart:async';
-import 'dart:io';
-
 import 'package:edu_lens/controllers/login/switch_login.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/view/home/home.dart';
-import 'package:edu_lens/view/login/home_login_view.dart';
-import 'package:edu_lens/view/login/login_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

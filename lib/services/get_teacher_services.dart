@@ -13,7 +13,7 @@ import 'package:edu_lens/model/student_reservations_model.dart';
 import 'package:edu_lens/model/subject_model.dart';
 import 'package:edu_lens/model/teacher_model.dart';
 import 'package:edu_lens/model/user_model.dart';
-import 'package:edu_lens/view/login/home_login_view.dart';
+import 'package:edu_lens/view/login/mobile/home_login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

@@ -14,7 +14,7 @@ import 'package:edu_lens/model/register_model.dart';
 import 'package:edu_lens/model/section_model.dart';
 import 'package:edu_lens/model/sucess_model.dart';
 import 'package:edu_lens/view/home/home.dart';
-import 'package:edu_lens/view/login/login_view.dart';
+import 'package:edu_lens/view/login/mobile/login_view.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -79,7 +79,7 @@ class RegisterServices {
       debugPrint(e.toString());
       debugPrint("catch : 5--");
     }
-  }
+  }}
 
 // Future<List<CityModel>?> getCity() async {
 //   try {
@@ -355,4 +355,4 @@ class RegisterServices {
 //   }
 //   return null;
 // }
-}
+

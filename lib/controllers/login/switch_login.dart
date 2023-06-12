@@ -1,7 +1,7 @@
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/view/home/home.dart';
-import 'package:edu_lens/view/login/home_login_view.dart';
+import 'package:edu_lens/view/login/mobile/home_login_view.dart';
 import 'package:flutter/material.dart';
 
 class SwitchLogin extends StatelessWidget {

@@ -9,15 +9,16 @@ import 'package:edu_lens/model/section_model.dart';
 import 'package:edu_lens/model/register_model.dart';
 import 'package:edu_lens/services/register_services.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
-import 'package:edu_lens/view/widget/custom_loading.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:get_storage/get_storage.dart';
+
+import '../../services/register_windows_service.dart';
 
 class RegisterController extends GetxController {
   final services = RegisterServices();
+  final service = RegisterWindowsServices();
   final firstName = "".obs;
   final lastName = "".obs;
   final email = "".obs;
@@ -58,7 +59,6 @@ class RegisterController extends GetxController {
   final year = "المرحله الدراسيه".obs;
   final cityName = "${"governorate".tr} ${Platform.isIOS ? "*" : ""}".obs;
   final check = false.obs;
-  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   late Rx<DateTime> newDateTime = DateTime.parse('2012-01-01').obs;
 
   // ignore: prefer_typing_uninitialized_variables
@@ -66,6 +66,12 @@ class RegisterController extends GetxController {
   GlobalKey<FormState> formStateOne = GlobalKey<FormState>();
   GlobalKey<FormState> formStateUniversity = GlobalKey<FormState>();
   GlobalKey<FormState> formStateTow = GlobalKey<FormState>();
+  GlobalKey<FormState> formWindowsOne = GlobalKey<FormState>();
+  GlobalKey<FormState> formWindowsTwo = GlobalKey<FormState>();
+  GlobalKey<FormState> formWindowsThree = GlobalKey<FormState>();
+  GlobalKey<FormState> formWindowsUniOne = GlobalKey<FormState>();
+  GlobalKey<FormState> formWindowsUniTwo = GlobalKey<FormState>();
+  GlobalKey<FormState> formWindowsUniThree = GlobalKey<FormState>();
 
   @override
   Future<void> onInit() async {
@@ -360,11 +366,13 @@ class RegisterController extends GetxController {
       log('Running on ${iosInfo.identifierForVendor}');
       idDevice = iosInfo.identifierForVendor;
     }
-    log("idDevice " + idDevice.toString());
+    log('idDevice + ${idDevice.toString()}');
     return idDevice;
   }
 
   register(BuildContext context) async {
+    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
     FocusManager.instance.primaryFocus?.unfocus();
 
     if (sectionName.value == "division".tr) {
@@ -439,6 +447,8 @@ class RegisterController extends GetxController {
   }
 
   registerUniversity(BuildContext context) async {
+    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
     FocusManager.instance.primaryFocus?.unfocus();
     // final sectionName = "division".tr.obs;
     // final classesName = "chooseYear".tr.obs;
@@ -482,6 +492,158 @@ class RegisterController extends GetxController {
       debugPrint(token.toString());
       // ignore: use_build_context_synchronously
       await services.register(
+          context,
+          RegisterModel(
+            phone: phone.value.trim(),
+            password: password.value.trim(),
+            email: email.value,
+            birthday: birthday.value,
+            cityId: "${cityId.value}",
+            edara: department.value,
+            firstName: firstName.value,
+            genderId: "${genderId.value}",
+            gradeId: gradeId.value,
+            lastName: lastName.value,
+            parentName: parentName.value,
+            parentPhone: parentPhone.value,
+            password2: password2.value.trim(),
+            school: school.value,
+            studentClassId: "${studentClassId.value}",
+            studentSectionId: "${studentSectionId.value}",
+            token: token,
+            deviceId: idDevice,
+            university: university.value,
+            faculty: faculty.value,
+            department: department.value,
+          ));
+      loading.value = false;
+    }
+  }
+
+
+
+  //register for windows
+  registerForWindows(BuildContext context) async {
+    FocusManager.instance.primaryFocus?.unfocus();
+
+    if (sectionName.value == "division".tr) {
+      return showCustomSnackBar(
+          context: context,
+          title: "note".tr,
+          deck: "يجب عليك اختيار الشعبة",
+          contentType: ContentType.failure);
+    } else if (classesName.value == "chooseYear".tr) {
+      return showCustomSnackBar(
+          context: context,
+          title: "note".tr,
+          deck: "يجب عليك اخيتار السنة الدراسية",
+          contentType: ContentType.failure);
+    } else if (genderName.value ==
+        "${"nationality".tr} ${Platform.isIOS ? "*" : null}") {
+      return showCustomSnackBar(
+          context: context,
+          title: "note".tr,
+          deck: "يجب عليك اخيتار اذا كنت ذكر ام انثي",
+          contentType: ContentType.failure);
+    } else if (year.value == "المرحله الدراسيه") {
+      return showCustomSnackBar(
+          context: context,
+          title: "note".tr,
+          deck: "يجب عليك اختيار المرحلة الدراسية",
+          contentType: ContentType.failure);
+    } else if (cityName.value ==
+        "${"governorate".tr} ${Platform.isIOS ? "*" : null}") {
+      return showCustomSnackBar(
+          context: context,
+          title: "note".tr,
+          deck: "يجب عليك اختيار المحافظة",
+          contentType: ContentType.failure);
+    } else {
+      loading.value = true;
+      // try{
+      //   await _firebaseMessaging.getToken().then((value) => token = value);
+      // }catch(e){
+      //   debugPrint(e.toString());
+      // }
+      // idDevice = await getIDDevise();
+      // debugPrint(token.toString());
+      // ignore: use_build_context_synchronously
+      await service.registerForWindowsService(
+          context,
+          RegisterModel(
+            phone: phone.value.trim(),
+            password: password.value.trim(),
+            email: email.value,
+            birthday: birthday.value,
+            cityId: "${cityId.value}",
+            edara: department.value,
+            firstName: firstName.value,
+            genderId: "${genderId.value}",
+            gradeId: gradeId.value,
+            lastName: lastName.value,
+            parentName: parentName.value,
+            parentPhone: parentPhone.value,
+            password2: password2.value.trim(),
+            school: school.value,
+            studentClassId: "${studentClassId.value}",
+            studentSectionId: "${studentSectionId.value}",
+            token: token,
+            deviceId: idDevice,
+            university: university.value,
+            faculty: faculty.value,
+            department: department.value,
+          ));
+      loading.value = false;
+    }
+ }
+
+
+ // register for windows university
+  registerUniversityForWindows(BuildContext context) async {
+
+    FocusManager.instance.primaryFocus?.unfocus();
+    // final sectionName = "division".tr.obs;
+    // final classesName = "chooseYear".tr.obs;
+    // final genderName = "${"nationality".tr} ${Platform.isIOS?"*":null}".obs;
+    // final year = "المرحله الدراسيه".obs;
+    // final cityName =  "${"governorate".tr} ${Platform.isIOS?"*":null}".obs;
+    if (classesName.value == "chooseYear".tr) {
+      return showCustomSnackBar(
+          context: context,
+          title: "note".tr,
+          deck: "يجب عليك اخيتار السنة الدراسية",
+          contentType: ContentType.failure);
+    } else if (genderName.value ==
+        "${"nationality".tr} ${Platform.isIOS ? "*" : null}") {
+      return showCustomSnackBar(
+          context: context,
+          title: "note".tr,
+          deck: "يجب عليك اخيتار اذا كنت ذكر ام انثي",
+          contentType: ContentType.failure);
+    } else if (year.value == "المرحله الدراسيه") {
+      return showCustomSnackBar(
+          context: context,
+          title: "note".tr,
+          deck: "يجب عليك اختيار المرحلة الدراسية",
+          contentType: ContentType.failure);
+    } else if (cityName.value ==
+        "${"governorate".tr} ${Platform.isIOS ? "*" : null}") {
+      return showCustomSnackBar(
+          context: context,
+          title: "note".tr,
+          deck: "يجب عليك اختيار المحافظة",
+          contentType: ContentType.failure);
+    } else {
+      loading.value = true;
+      // try{
+      //   await _firebaseMessaging.getToken().then((value) => token = value);
+      // }catch(e){
+      //   debugPrint(e.toString());
+      // }
+      // idDevice = await getIDDevise();
+      // debugPrint(token.toString());
+      // ignore: use_build_context_synchronously
+      await service.registerForWindowsService(
           context,
           RegisterModel(
             phone: phone.value.trim(),

@@ -4,7 +4,7 @@ import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/package_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
-import 'package:edu_lens/view/login/home_login_view.dart';
+import 'package:edu_lens/view/login/mobile/home_login_view.dart';
 import 'package:edu_lens/view/package_teacher/choose_teacher_for_package.dart';
 import 'package:edu_lens/view/package_teacher/packages_view.dart';
 import 'package:edu_lens/view/purchasedLectures.dart';

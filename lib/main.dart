@@ -8,8 +8,9 @@ import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/helper/dio_integration.dart';
 import 'package:edu_lens/utils/lacale_string.dart';
 import 'package:edu_lens/view/home/home.dart';
-import 'package:edu_lens/view/login/login_view.dart';
 import 'package:edu_lens/view/splach_screen.dart';
+import 'package:edu_lens/view/root_screen.dart';
+import 'package:edu_lens/view/get_started_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,18 +23,23 @@ import 'package:screen_protector/screen_protector.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //await Firebase.initializeApp();
   DioUtilNew.getInstance();
   await CacheHelper.init();
   await GetStorage.init();
   if (Platform.isIOS) {
     await ScreenProtector.preventScreenshotOff();
-
   }
-if(Platform.isAndroid||Platform.isIOS){
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-}
+// if(Platform.isAndroid||Platform.isIOS ){
+//   await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+//   );
+// }
+// if(Platform.isWindows){
+//   await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform, // for web
+//   );
+// }
 
   // final token = await CacheHelper.getData(key: AppConstants.token);
   ErrorWidget.builder = (FlutterErrorDetails details) {
@@ -71,9 +77,10 @@ if(Platform.isAndroid||Platform.isIOS){
     locale: const Locale('ar', 'EG'),
     debugShowCheckedModeBanner: false,
     // home: token == null ? const LoginView() : Home(),
-    home: Scaffold(
-      body: SplachScreen(),
-    ),
+    home:const RootScreen(),
+    // Scaffold(
+    //   body: SplachScreen(),
+    // ),
     theme: ThemeData(
       // fontFamily: 'Font1',
 

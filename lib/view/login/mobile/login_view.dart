@@ -1,7 +1,7 @@
 import 'package:edu_lens/controllers/login/login_controller.dart';
 import 'package:edu_lens/controllers/phone_number_formatter.dart';
 import 'package:edu_lens/helper/app_constants.dart';
-import 'package:edu_lens/view/login/create_account_view.dart';
+import 'package:edu_lens/view/login/mobile/create_account_view.dart';
 import 'package:edu_lens/view/widget/custom_buttom.dart';
 import 'package:edu_lens/view/widget/custom_scaffold_login.dart';
 import 'package:edu_lens/view/widget/custom_social_media_icons.dart';
@@ -63,7 +63,8 @@ class LoginView extends StatelessWidget {
                   sizeText: 18,
                   height: 50,
                   width: 250,
-                )),
+                ),
+          ),
           const SizedBox(
             height: 20,
           ),

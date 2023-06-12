@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 
 class CreateAccountViewTow extends StatelessWidget {
 
-  CreateAccountViewTow({super.key});
+ const CreateAccountViewTow({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +29,8 @@ class CreateAccountViewTow extends StatelessWidget {
                     controller.sectionName.value = v!;
                     controller.studentSectionId.value =
                         controller.sectionsId[v]!.toInt();
-                    debugPrint(
-                        controller.studentSectionId.value.toString());
+                    // debugPrint(
+                    //     controller.studentSectionId.value.toString());
                   },
                   items: controller.sections,
                 )),

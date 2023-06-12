@@ -1,7 +1,6 @@
 import 'package:edu_lens/controllers/phone_number_formatter.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/view/home/home.dart';
-import 'package:edu_lens/view/login/create_account_view_tow.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_buttom.dart';
 import 'package:edu_lens/view/widget/custom_buttom_deflated.dart';
