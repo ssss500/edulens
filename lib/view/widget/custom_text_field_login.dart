@@ -12,6 +12,7 @@ class CustomTextFieldLogin extends StatelessWidget {
   final Color? color, colorBorder, colorTextInput;
   final int? maxLength;
   final double? width;
+  bool isMobile;
 
   // ignore: prefer_typing_uninitialized_variables
   final inputFormatters, autoFillHints;
@@ -19,8 +20,10 @@ class CustomTextFieldLogin extends StatelessWidget {
   final Color? colorIcon;
 
   CustomTextFieldLogin(
-      {this.hint,
-      this.title,
+      {super.key,
+      this.hint,
+      this.isMobile = true,
+      this.title = '',
       this.color = Colors.black26,
       this.width = 300,
       this.colorBorder = Colors.white54,
@@ -40,7 +43,8 @@ class CustomTextFieldLogin extends StatelessWidget {
     return Container(
       width: width,
       height: 70,
-      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+    margin: isMobile?const EdgeInsets.symmetric(vertical: 5, horizontal: 20): const EdgeInsets.all(0),
+    //  margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -103,27 +107,33 @@ class CustomTextFieldLogin extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            right: 20,
-            top: 1,
-            child: UnconstrainedBox(
-              child: Container(
-                height: 20,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
+          isMobile
+              ? Positioned(
+                  right: 20,
+                  top: 1,
+                  child: UnconstrainedBox(
+                    child: Container(
+                      height: 20,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppConstants.primaryColor,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Text(
+                        "$title",
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 11),
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox(
+                  height: 0,
+                  width: 0,
                 ),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppConstants.primaryColor,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Text(
-                  "$title",
-                  style: const TextStyle(color: Colors.white, fontSize: 11),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );

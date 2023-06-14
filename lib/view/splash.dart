@@ -1,20 +1,16 @@
 import 'dart:async';
-
 import 'package:edu_lens/view/get_started_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import '../helper/app_constants.dart';
-import '../helper/cashe_helper.dart';
 class Splash extends StatefulWidget {
-  const Splash({super.key});
-
+  const Splash({super.key, required this.fit});
+final BoxFit fit;
   @override
-  _SplashState createState() => _SplashState();
+  SplashState createState() => SplashState();
 }
 
-class _SplashState extends State<Splash> {
+class SplashState extends State<Splash> {
   bool openImage = true;
   fun() async {
     //final token = await CacheHelper.getData(key: AppConstants.token);
@@ -22,7 +18,7 @@ class _SplashState extends State<Splash> {
 //   print("");
 // }
     Timer(const  Duration(milliseconds:kDebugMode?1000:  3500), () {
-      Get.offAll(() => GetStartedScreen());
+      Get.offAll(() =>const  GetStartedScreen());
       // Get.offAll(() => token == null ? const LoginView() : Home());
     });
   }
@@ -41,7 +37,7 @@ class _SplashState extends State<Splash> {
         color: Colors.white,
         child: Image.asset(
           "assets/images/splach_screen.gif",
-          fit: BoxFit.fill,
+        fit:widget.fit,
         ),
       ),
     );

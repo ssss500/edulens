@@ -1,24 +1,16 @@
 import 'dart:io';
-
 import 'package:edu_lens/binding/view_model_binding.dart';
 import 'package:edu_lens/controllers/main_controller.dart';
-import 'package:edu_lens/firebase_options.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/helper/dio_integration.dart';
 import 'package:edu_lens/utils/lacale_string.dart';
-import 'package:edu_lens/view/home/home.dart';
-import 'package:edu_lens/view/splach_screen.dart';
 import 'package:edu_lens/view/root_screen.dart';
-import 'package:edu_lens/view/get_started_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-// import 'package:google_fonts/google_fonts.dart';
 import 'package:screen_protector/screen_protector.dart';
 
 void main() async {
@@ -77,7 +69,8 @@ void main() async {
     locale: const Locale('ar', 'EG'),
     debugShowCheckedModeBanner: false,
     // home: token == null ? const LoginView() : Home(),
-    home:const RootScreen(),
+   home:
+    const RootScreen(),
     // Scaffold(
     //   body: SplachScreen(),
     // ),

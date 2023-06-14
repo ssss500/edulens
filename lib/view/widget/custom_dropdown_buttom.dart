@@ -9,6 +9,7 @@ class CustomDropdownButton extends StatelessWidget {
   Function(String?) function;
   double width;
   List<String> items;
+  bool isMobile;
 
   CustomDropdownButton({
     super.key,
@@ -16,6 +17,7 @@ class CustomDropdownButton extends StatelessWidget {
     this.width = 300,
     required this.items,
     required this.function,
+    this.isMobile = true,
   });
 
   @override
@@ -26,22 +28,25 @@ class CustomDropdownButton extends StatelessWidget {
       child: CustomDropdownButton2(
         iconEnabledColor: Colors.black,
         iconSize: 15,
-        icon: const Icon(
-          Icons.arrow_drop_down_circle_outlined,
+        icon: Icon(
+          isMobile
+              ? Icons.arrow_drop_down_circle_outlined
+              : Icons.keyboard_arrow_down_rounded,
           color: AppConstants.primaryColor,
           size: 25,
         ),
         buttonWidth: MediaQuery.of(context).size.width - 60,
         // hint: hint,
-        hint:  CustomText(
+        hint: CustomText(
           text: hint,
           fontSize: 20,
           color: Colors.black,
           alignment: Alignment.centerRight,
         ),
-        dropdownWidth: MediaQuery.of(context).size.width - 150,
+        dropdownWidth: isMobile
+            ? MediaQuery.of(context).size.width - 150
+            : MediaQuery.of(context).size.width * 0.183,
         buttonDecoration: BoxDecoration(
-
           borderRadius: BorderRadius.circular(30),
           color: Colors.white24,
           border: Border.all(

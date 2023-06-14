@@ -2,13 +2,15 @@ import 'package:edu_lens/view/login/windows/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/login/login_controller.dart';
+import '../../../controllers/phone_number_formatter.dart';
 import '../../../helper/app_constants.dart';
 import '../../widget/custom_buttom.dart';
 import '../../widget/custom_text.dart';
-import '../../widget/input_component.dart';
+import '../../widget/custom_text_field_login.dart';
 import '../../widget/socialmedia_icons_windows.dart';
+
 class LoginScreen extends StatelessWidget {
-   LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
   final controller = Get.put(LoginController());
 
   @override
@@ -49,118 +51,139 @@ class LoginScreen extends StatelessWidget {
                     left: width * 0.03,
                     bottom: height * 0.065),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: height * 0.04,
+                          height: height * 0.015,
                         ),
-                        Text(
-                          'أهلا بك مجددا معنا!',
-                          style: TextStyle(
-                            fontSize: width * 0.021,
-                          ),
-                        ),
-                        SizedBox(
-                          height: height * 0.01,
-                        ),
-                        Text(
-                          'phoneNumberText'.tr,
-                          style: TextStyle(fontSize: width * 0.012),
-                        ),
-                        SizedBox(
-                          height: height * 0.01,
-                        ),
-                        InputComponent(
-                          textInputType: TextInputType.text,
-                          function: (String v) {
-                              controller.phone.value = v;
-                          },
-                          //inputFormatters: [PhoneNumberFormatter()],
-                          icon: Icons.phone_rounded,
-                          hint: '010010010010',
-                          width: width*0.183,
+                        RotatedBox(quarterTurns: 2,
+                            child: IconButton(onPressed: (){Get.back();}, icon: const Icon(Icons.arrow_back_ios_new_rounded))),
+                      ],
+                    ),
 
-                        ),
-                        SizedBox(
-                          height: height * 0.01,
-                        ),
-                        Text(
-                          'passwordText'.tr,
-                          style:  TextStyle(fontSize: width * 0.012),
-                        ),
-                        SizedBox(
-                          height: height * 0.01,
-                        ),
-                        InputComponent(
-                          textInputType: TextInputType.text,
-                          function: (String v) {
-                             controller.password.value = v;
-                          },
-                          icon: Icons.lock,
-                          hint: '************',
-                          width: width*0.183,
-                        ),
-                        SizedBox(
-                          height: height * 0.04,
-                        ),
-                        Obx(
-                          () => controller.loading.value
-                              ? const Center(
-                                  child: CircularProgressIndicator(
-                                    color: AppConstants.lightPrimaryColor,
-                                  ),
-                                )
-                          :
-                        CustomButton(
-                          function: () {
-                            controller.loginForWindows(context);
-                          },
-                          text: 'تسجيل دخول',
-                          sizeText: width * 0.014,
-                          height: height * 0.068,
-                          width: width * 0.18,
-                        ),
-                          ),
-                        SizedBox(
-                          height: height * 0.02,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            CustomText(
-                              text: 'ليس لديك حساب ؟    ',
-                              color: Colors.black87,
-                              fontSize: width * 0.01,
+                            SizedBox(
+                              height: height * 0.03,
+                            ),
+                            Row(
+                              children: [
+
+                                CustomText(
+                                  text: 'welcomeLogin'.tr,
+                                  fontSize: width * 0.021,
+                                ),
+                              ],
                             ),
                             SizedBox(
-                              width: width * 0.02,
+                              height: height * 0.03,
                             ),
-                            TextButton(
-                                onPressed: () {
-                                  Get.to(() => const RegisterScreen());
-                                },
-                                child: CustomText(
-                                  text: 'انشاء حساب',
-                                  fontSize: width * 0.011,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ))
+                            CustomText(
+                                text: 'phoneNumberText'.tr,
+                                fontSize: width * 0.012),
+                            SizedBox(
+                              height: height * 0.01,
+                            ),
+                            CustomTextFieldLogin(
+                              isMobile: false,
+                              function: (v) {
+                                controller.phone.value = v;
+                              },
+                              iconData: Icons.phone_rounded,
+                              hint: "01010101010",
+                              width: width * 0.183,
+                              textInputType: TextInputType.phone,
+                              colorBorder: AppConstants.primaryColor,
+                              inputFormatters: [PhoneNumberFormatter()],
+                            ),
+                            SizedBox(
+                              height: height * 0.01,
+                            ),
+                            CustomText(
+                                text: 'passwordText'.tr, fontSize: width * 0.012),
+                            SizedBox(
+                              height: height * 0.01,
+                            ),
+                            CustomTextFieldLogin(
+                              isMobile: false,
+                              function: (v) {
+                                controller.password.value = v;
+                              },
+                              width: width * 0.183,
+                              iconData: Icons.lock,
+                              hint: "*********",
+                              textInputType: TextInputType.visiblePassword,
+                              colorBorder: AppConstants.primaryColor,
+                            ),
+                            SizedBox(
+                              height: height * 0.04,
+                            ),
+                            Obx(
+                              () => controller.loading.value
+                                  ? const Center(
+                                      child: CircularProgressIndicator(
+                                        color: AppConstants.lightPrimaryColor,
+                                      ),
+                                    )
+                                  : CustomButton(
+                                      function: () {
+                                        controller.loginForWindows(context);
+                                      },
+                                      text: 'loginText'.tr,
+                                      sizeText: width * 0.014,
+                                      height: height * 0.068,
+                                      width: width * 0.18,
+                                    ),
+                            ),
+                            SizedBox(
+                              height: height * 0.02,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomText(
+                                  text: 'doNotHaveAnAccount'.tr,
+                                  color: Colors.black87,
+                                  fontSize: width * 0.01,
+                                ),
+                                SizedBox(
+                                  width: width * 0.02,
+                                ),
+                                TextButton(
+                                    onPressed: () {
+                                      Get.to(() => const RegisterScreen());
+                                    },
+                                    child: CustomText(
+                                      text: 'createAccountText'.tr,
+                                      fontSize: width * 0.011,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ))
+                              ],
+                            ),
+                            SizedBox(
+                              height: height * 0.01,
+                            ),
+                            const SocialMediaIconsWindows(),
                           ],
                         ),
                         SizedBox(
-                          height: height * 0.01,
+                          width: width*0.05,
                         ),
-                        const SocialMediaIconsWindows(),
+                        Image.asset(
+                          'assets/images/logo4.png',
+                          width: width * 0.4,
+                          height: height,
+                        ),
                       ],
-                    ),
-                    Image.asset(
-                      'assets/images/logo4.png',
-                      width: width * 0.4,
-                      height: height,
                     ),
                   ],
                 ),

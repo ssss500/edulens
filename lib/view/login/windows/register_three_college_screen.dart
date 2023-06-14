@@ -3,8 +3,8 @@ import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:get/get.dart';
 import '../../../controllers/login/register_controller.dart';
 import '../../../helper/app_constants.dart';
+import '../../widget/custom_dropdown_buttom.dart';
 import '../../widget/custom_text.dart';
-import '../../widget/drop_down_component.dart';
 import '../../widget/next_button.dart';
 
 class RegisterThreeCollegeScreen extends StatelessWidget {
@@ -45,7 +45,7 @@ class RegisterThreeCollegeScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(
                     right: width * 0.065,
-                    top: height * 0.03,
+                    top: height * 0.075,
                     left: width * 0.03,
                     bottom: height * 0.065),
                 child: Row(
@@ -59,80 +59,78 @@ class RegisterThreeCollegeScreen extends StatelessWidget {
                           SizedBox(
                             height: height * 0.04,
                           ),
-                          Text(
-                            'اكمل بياناتك لانشاء الحساب!',
-                            style: TextStyle(
-                              fontSize: width * 0.021,
-                            ),
-                          ),
+                          CustomText(
+                              text:  'welcomeCon'.tr, fontSize: width * 0.021),
                           SizedBox(
-                            height: height * 0.008,
+                            height: height * 0.02,
                           ),
 
-                          Text(
-                            'المحافظة',
-                            style: TextStyle(fontSize: width * 0.012),
-                          ),
+                          CustomText(
+                              text:  'governorate'.tr, fontSize: width * 0.012),
                           SizedBox(
-                            height: height * 0.005,
+                            height: height * 0.012,
                           ),
-                          DropDownComponent(
-                              items: controller.city,
-                              function: (String? v) {
-                                controller.cityName.value = v!;
-                                controller.cityId.value =
-                                    controller.citiesId[v]!;
-                              },
-                              hint: controller.cityName.value,
-                              width: width * 0.183),
+                          Obx(() => CustomDropdownButton(
+                            isMobile: false,
+                            hint: controller.cityName.value,
+                            function: (v) {
+                              controller.cityName.value = v!;
+                              controller.cityId.value = controller.citiesId[v]!;
+                              debugPrint(controller.cityId.value.toString());
+                            },
+                            items: controller.city,
+                              width: width * 0.183
+                          )),
                           SizedBox(
-                            height: height * 0.005,
+                            height: height * 0.015,
                           ),
-                          Text(
-                            'الجنس',
-                            style: TextStyle(fontSize: width * 0.012),
-                          ),
+                          CustomText(
+                              text:  'nationality'.tr, fontSize: width * 0.012),
                           SizedBox(
-                            height: height * 0.005,
+                            height: height * 0.012,
                           ),
-                          DropDownComponent(
-                              items: controller.genders,
-                              function: (String? v) {
-                                controller.genderName.value = v!;
-                                controller.genderId.value =
-                                    controller.gendersId[v]!.toInt();
-                              },
-                              hint: controller.genderName.value,
-                              width: width * 0.183),
+                          Obx(() => CustomDropdownButton(
+                            isMobile: false,
+                            hint: controller.genderName.value,
+                            function: (v) {
+                              controller.genderName.value = v!;
+                              controller.genderId.value =
+                                  controller.gendersId[v]!.toInt();
+                              debugPrint(controller.genderId.value.toString());
+                            },
+                            items: controller.genders,
+                              width: width * 0.183
+
+                          )),
 
                           SizedBox(
-                            height: height * 0.005,
+                            height: height * 0.015,
                           ),
-                          Text(
-                            'السنه الدراسية',
-                            style: TextStyle(fontSize: width * 0.012),
-                          ),
+                          CustomText(
+                              text:  'chooseYear'.tr, fontSize: width * 0.012),
                           SizedBox(
-                            height: height * 0.005,
+                            height: height * 0.012,
                           ),
-                          DropDownComponent(
-                              items: controller.classes,
-                              function: (String? v) {
-                                controller.classesName.value = v!;
-                                controller.studentClassId.value =
-                                    controller.classesId[v]!.toInt();
-                                debugPrint(controller.studentClassId.value.toString());
-
-                              },
-                              hint: controller.classesName.value,
-                              width: width * 0.183),
+                          Obx(() => CustomDropdownButton(
+                            width: width * 0.183,
+                            isMobile: false,
+                            hint: controller.classesName.value,
+                            function: (v) {
+                              controller.classesName.value = v!;
+                              controller.studentClassId.value =
+                                  controller.classesId[v]!.toInt();
+                              debugPrint(controller.studentClassId.value.toString());
+                            },
+                            items: controller.classes,
+                          )),
 
                           SizedBox(
-                            height: height * 0.005,
+                            height: height * 0.015,
                           ),
-                          Text(
-                            'سنه الميلاد ',
-                            style: TextStyle(fontSize: width * 0.012),
+                         CustomText(
+                              text:  'yearOfBirth'.tr, fontSize: width * 0.012),
+                          SizedBox(
+                            height: height * 0.012,
                           ),
                           Obx(
                             () => InkWell(
@@ -197,18 +195,8 @@ class RegisterThreeCollegeScreen extends StatelessWidget {
                                 )),
                           ),
 
-                          // Obx(
-                          //   () => controller.loading.value
-                          //       ? const Center(
-                          //           child: CircularProgressIndicator(
-                          //             color: AppConstants.lightPrimaryColor,
-                          //           ),
-                          //         )
-                          //   :
-
-                          //  ),
                           SizedBox(
-                            height: height * 0.04,
+                            height: height * 0.05,
                           ),
                           Padding(
                             padding: EdgeInsets.only(right: width * 0.04),
@@ -244,6 +232,7 @@ class RegisterThreeCollegeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+
                     Image.asset(
                       'assets/images/logo4.png',
                       width: width * 0.4,

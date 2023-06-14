@@ -33,7 +33,8 @@ class CreateAccountViewTow extends StatelessWidget {
                     //     controller.studentSectionId.value.toString());
                   },
                   items: controller.sections,
-                )),
+                ),
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -46,7 +47,8 @@ class CreateAccountViewTow extends StatelessWidget {
                     debugPrint(controller.studentClassId.value.toString());
                   },
                   items: controller.classes,
-                )),
+                ),
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -76,7 +78,8 @@ class CreateAccountViewTow extends StatelessWidget {
                     }
                   },
                   items: controller.listYearString,
-                )),
+                ),
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -133,7 +136,8 @@ class CreateAccountViewTow extends StatelessWidget {
                     debugPrint(controller.cityId.value.toString());
                   },
                   items: controller.city,
-                )),
+                ),
+            ),
             const SizedBox(
               height: 20,
             ),

@@ -1,13 +1,13 @@
-import 'dart:io';
-
 import 'package:edu_lens/view/login/windows/register_two_college_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-
 import '../../../controllers/login/register_controller.dart';
+import '../../../controllers/phone_number_formatter.dart';
+import '../../../helper/app_constants.dart';
 import '../../widget/custom_dialog/snackBar.dart';
-import '../../widget/input_component.dart';
+import '../../widget/custom_text.dart';
+import '../../widget/custom_text_field_login.dart';
 import '../../widget/next_button.dart';
 
 class RegisterOneCollegeScreen extends StatelessWidget {
@@ -47,212 +47,227 @@ class RegisterOneCollegeScreen extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.only(
-                    right: width * 0.065,
-                    top: height * 0.03,
+                    right: width * 0.08,
+                    top: height * 0.075,
                     left: width * 0.03,
                     bottom: height * 0.065),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
                   children: [
-                    Form(
-                      key: controller.formWindowsUniOne,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: height * 0.04,
-                          ),
-                          Text(
-                            'انضم الي ايديو لينس الأن!',
-                            style: TextStyle(
-                              fontSize: width * 0.018,
-                            ),
-                          ),
-                          SizedBox(
-                            height: height * 0.005,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: height * 0.024,
+                        ),
+                        RotatedBox(quarterTurns: 2,
+                            child: IconButton(onPressed: (){Get.back();}, icon: const Icon(Icons.arrow_back_ios_new_rounded))),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Form(
+                          key: controller.formWindowsUniOne,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              SizedBox(
+                                height: height * 0.04,
+                              ),
+
+                              CustomText(
+                                  text:  'welcomeRegister'.tr, fontSize: width * 0.018),
+                              SizedBox(
+                                height: height * 0.03,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'الاسم الاول',
-                                    style: TextStyle(fontSize: width * 0.012),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      CustomText(
+                                          text:  'firstName'.tr, fontSize: width * 0.012),
+                                      SizedBox(
+                                        height: height * 0.005,
+                                      ),
+                                      CustomTextFieldLogin(
+                                        isMobile: false,
+                                        textInputType: TextInputType.text,
+                                        function: (String v) {
+                                          controller.firstName.value = v;
+                                        },
+                                        width: width * 0.085,
+                                        iconData: Icons.person,
+                                        hint: 'سيف',
+                                      colorBorder: AppConstants.primaryColor,
+                                        validator: (value) {
+                                          if (value.length < 3) {
+                                            showCustomSnackBar(
+                                                context: context,
+                                                title: "note".tr,
+                                                deck:
+                                                "يجب كتابة الاسم الاول بشكل صحيح",
+                                                contentType: ContentType.failure);
+                                            return "";
+                                          }
+                                        },
+                                      ),
+
+                                    ],
                                   ),
                                   SizedBox(
-                                    height: height * 0.005,
+                                    width: width * 0.009,
                                   ),
-                                  InputComponent(
-                                    textInputType: TextInputType.text,
-                                    function: (String v) {
-                                      controller.firstName.value = v;
-                                    },
-                                    width: width * 0.085,
-                                    //inputFormatters: [PhoneNumberFormatter()],
-                                    icon: Icons.person,
-                                    hint: 'احمد',
-                                    validator: (value) {
-                                      if (value.length < 3) {
-                                        showCustomSnackBar(
-                                            context: context,
-                                            title: "note".tr,
-                                            deck:
-                                                "يجب كتابة اسم الطالب بشكل صحيح",
-                                            contentType: ContentType.failure);
-                                        return "";
-                                      }
-                                    },
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      CustomText(
+                                          text:  'lastName'.tr, fontSize: width * 0.012),
+                                      SizedBox(
+                                        height: height * 0.005,
+                                      ),
+                                      CustomTextFieldLogin(
+                                        function: (v) {
+                                          controller.lastName.value = v;
+                                        },
+                                        iconData: Icons.person,
+                                        isMobile:false,
+                                        hint: "احمد",
+                                        textInputType: TextInputType.name,
+                                        colorBorder: AppConstants.primaryColor,
+                                        width: width * 0.085,
+                                        validator: (value) {
+                                          if (value.length < 3) {
+                                            showCustomSnackBar(
+                                                context: context,
+                                                title: "note".tr,
+                                                deck: "يجب كتابة الاسم الاخير بشكل صحيح",
+                                                contentType: ContentType.failure);
+                                            return "";
+                                          }
+                                        },
+                                        // inputFormatters: [PhoneNumberFormatter()],
+                                      ),
+                                    ],
                                   ),
                                 ],
+                              ),
+
+                              CustomText(
+                                  text:  'phoneNumberText'.tr, fontSize: width * 0.012),
+                              SizedBox(
+                                height: height * 0.005,
+                              ),
+                              CustomTextFieldLogin(
+                                isMobile: false,
+                                function: (v) {
+                                  controller.phone.value = v;
+                                },
+                                iconData: Icons.phone,
+                                hint: "01010101010",
+                                textInputType: TextInputType.phone,
+                                colorBorder: AppConstants.primaryColor,
+                                inputFormatters: [PhoneNumberFormatter()],
+                                width: width * 0.183,
+                                validator: (value) {
+                                  if (value.length != 11) {
+                                    showCustomSnackBar(
+                                        context: context,
+                                        title: "note".tr,
+                                        deck: "يجب كتابة رقم الهاتف بشكل صحيح",
+                                        contentType: ContentType.failure);
+                                    return "";
+                                  }
+                                },
+                              ),
+
+                              CustomText(
+                                  text:  'passwordText'.tr, fontSize: width * 0.012),
+                              SizedBox(
+                                height: height * 0.005,
+                              ),
+                              CustomTextFieldLogin(
+                                isMobile:  false,
+                                function: (v) {
+                                  controller.password.value = v;
+                                },
+                                iconData: Icons.phone,
+                                hint: "*********",
+                                textInputType: TextInputType.phone,
+                                colorBorder: AppConstants.primaryColor,
+                                width: width * 0.183,
+                                validator: (value) {
+                                  if (value.length<5) {
+                                    showCustomSnackBar(
+                                        context: context,
+                                        title: "note".tr,
+                                        deck: "يجب كتابة كلمة المرور بشكل صحيح",
+                                        contentType: ContentType.failure);
+                                    return "";
+                                  }
+                                },
                               ),
                               SizedBox(
-                                width: width * 0.009,
+                                height: height * 0.005,
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'الاسم الاخير',
-                                    style: TextStyle(fontSize: width * 0.012),
-                                  ),
-                                  SizedBox(
-                                    height: height * 0.005,
-                                  ),
-                                  InputComponent(
-                                    textInputType: TextInputType.text,
-                                    function: (String v) {
-                                      controller.lastName.value = v;
-                                    },
-                                    validator: (value) {
-                                      if (value.length < 3) {
-                                        showCustomSnackBar(
-                                            context: context,
-                                            title: "note".tr,
-                                            deck:
-                                                "يجب كتابة الاسم الاخير بشكل صحيح",
-                                            contentType: ContentType.failure);
-                                        return "";
-                                      }
-                                    },
-                                    width: width * 0.085,
-                                    //inputFormatters: [PhoneNumberFormatter()],
-                                    icon: Icons.person,
-                                    hint: 'محمد',
-                                  ),
-                                ],
+
+                              CustomText(
+                                  text:  'confirmationPasswordText'.tr, fontSize: width * 0.012),
+                              SizedBox(
+                                height: height * 0.005,
                               ),
+                              CustomTextFieldLogin(
+                                isMobile: false,
+                                function: (v) {
+                                  controller.password2.value = v;
+                                },
+                                iconData: Icons.lock_reset,
+                                width: width * 0.183,
+                                hint: "*********",
+                                colorBorder: AppConstants.primaryColor,
+                                validator: (value) {
+                                  if (controller.password2.value !=
+                                      controller.password.value ||value.length<5) {
+                                    showCustomSnackBar(
+                                        context: context,
+                                        title: "note".tr,
+                                        deck: "يجب ان تكون كلمة المرور متطابقة",
+                                        contentType: ContentType.failure);
+                                    return "";
+                                  }
+                                },
+                              ),
+
+                              SizedBox(
+                                height: height * 0.025,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(right: width * 0.07),
+                                child: RotatedBox(
+                                    quarterTurns: 2,
+                                    child: NextButton(
+                                        function: () {
+                                          if (controller.formWindowsUniOne.currentState!.validate()) {
+                                            Get.to(() =>  RegisterTwoCollegeScreen());
+                                          }
+                                        },
+                                        icon: Icons.arrow_back_ios_new_outlined)),
+                              )
                             ],
                           ),
-                          Text(
-                            'phoneNumberText'.tr,
-                            style: TextStyle(fontSize: width * 0.012),
-                          ),
-                          SizedBox(
-                            height: height * 0.005,
-                          ),
-                          InputComponent(
-                            textInputType: TextInputType.phone,
-                            function: (String v) {
-                              controller.phone.value = v;
-                            },
-                            //inputFormatters: [PhoneNumberFormatter()],
-                            icon: Icons.phone,
-                            hint: '010010010010', width: width * 0.183,
-                            validator: (value) {
-                              if (value.length != 11) {
-                                showCustomSnackBar(
-                                    context: context,
-                                    title: "note".tr,
-                                    deck: "يجب كتابة رقم الهاتف بشكل صحيح",
-                                    contentType: ContentType.failure);
-                                return "";
-                              }
-                            },
-                          ),
-                          Text(
-                            'passwordText'.tr,
-                            style: TextStyle(fontSize: width * 0.012),
-                          ),
-                          SizedBox(
-                            height: height * 0.005,
-                          ),
-                          InputComponent(
-                            textInputType: TextInputType.visiblePassword,
-                            function: (String v) {
-                              controller.password.value = v;
-                            },
-                            //inputFormatters: [PhoneNumberFormatter()],
-                            icon: Icons.lock,
-                            hint: '**********', width: width * 0.183,
-                            validator: (value) {
-                              if (value.length < 5) {
-                                showCustomSnackBar(
-                                    context: context,
-                                    title: "note".tr,
-                                    deck: "يجب كتابة كلمة المرور بشكل صحيح",
-                                    contentType: ContentType.failure);
-                                return "";
-                              }
-                            },
-                          ),
-                          SizedBox(
-                            height: height * 0.005,
-                          ),
-                          Text(
-                            'confirmationPasswordText'.tr,
-                            style: TextStyle(fontSize: width * 0.012),
-                          ),
-                          SizedBox(
-                            height: height * 0.005,
-                          ),
-                          InputComponent(
-                            textInputType: TextInputType.visiblePassword,
-                            function: (String v) {
-                              controller.password2.value = v;
-                            },
-                            icon: Icons.lock,
-                            hint: '**********', width: width * 0.183,
-                            validator: (value) {
-                              if (controller.password2.value !=
-                                  controller.password.value) {
-                                showCustomSnackBar(
-                                    context: context,
-                                    title: "note".tr,
-                                    deck: "يجب ان تكون كلمة المرور متطابقة",
-                                    contentType: ContentType.failure);
-                                return "";
-                              }
-                            },
-                            // hintSize: 26,
-                          ),
-                          SizedBox(
-                            height: height * 0.005,
-                          ),
-
-                          SizedBox(
-                            height: height * 0.02,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(right: width * 0.07),
-                            child: RotatedBox(
-                                quarterTurns: 2,
-                                child: NextButton(
-                                    function: () {
-                                      if (controller.formWindowsUniOne.currentState!.validate()) {
-                                        Get.to(() =>  RegisterTwoCollegeScreen());
-                                      }
-                                    },
-                                    icon: Icons.arrow_back_ios_new_outlined)),
-                          )
-                        ],
-                      ),
-                    ),
-                    Image.asset(
-                      'assets/images/logo4.png',
-                      width: width * 0.4,
-                      height: height,
+                        ),
+                        SizedBox(
+                          width: width*0.1,
+                        ),
+                        Image.asset(
+                          'assets/images/logo4.png',
+                          width: width * 0.4,
+                          height: height,
+                        ),
+                      ],
                     ),
                   ],
                 ),

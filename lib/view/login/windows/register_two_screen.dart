@@ -1,12 +1,13 @@
-import 'dart:io';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 import 'package:edu_lens/controllers/login/register_controller.dart';
 import 'package:edu_lens/view/login/windows/regieter_three_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../helper/app_constants.dart';
 import '../../widget/custom_dialog/snackBar.dart';
-import '../../widget/input_component.dart';
+import '../../widget/custom_text.dart';
+import '../../widget/custom_text_field_login.dart';
 import '../../widget/next_button.dart';
 
 class RegisterTwoScreen extends StatelessWidget {
@@ -46,7 +47,7 @@ class RegisterTwoScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(
                     right: width * 0.065,
-                    top: height * 0.03,
+                    top: height * 0.075,
                     left: width * 0.03,
                     bottom: height * 0.065),
                 child: Row(
@@ -59,7 +60,7 @@ class RegisterTwoScreen extends StatelessWidget {
                           height: height * 0.04,
                         ),
                         Text(
-                          'اكمل بياناتك لانشاء الحساب!',
+                          'welcomeCon'.tr,
                           style: TextStyle(
                             fontSize: width * 0.02,
                           ),
@@ -68,76 +69,77 @@ class RegisterTwoScreen extends StatelessWidget {
                           height: height * 0.005,
                         ),
 
-                        Text(
-                          'اسم المدرسة',
-                          style: TextStyle(fontSize: width * 0.012),
-                        ),
+                        CustomText(
+                            text: 'school'.tr, fontSize: width * 0.012),
                         SizedBox(
                           height: height * 0.005,
                         ),
-                        InputComponent(
-                          textInputType: TextInputType.text,
-                          function: (String v) {
+                        CustomTextFieldLogin(
+                          isMobile:false,
+                          function: (v) {
                             controller.school.value = v;
                           },
-                          //inputFormatters: [PhoneNumberFormatter()],
-                          icon: Icons.school,
-                          validator: (value){
-                            if (value.length < 5) {
-                              showCustomSnackBar(
-                                  context: context,
-                                  title: "note".tr,
-                                  deck: "يجب كتابة اسم المدرسة بشكل صحيح",
-                                  contentType: ContentType.failure);
-                              return "";
+                          iconData: Icons.school,
+                          hint: "مدرسة المشاغبين",
+                          width: width * 0.183,
+                          textInputType: TextInputType.name,
+                          colorBorder: AppConstants.primaryColor,
+                          validator: (value) {
+                              if (value.length < 5) {
+                                showCustomSnackBar(
+                                    context: context,
+                                    title: "note".tr,
+                                    deck: "يجب كتابة اسم المدرسة بشكل صحيح",
+                                    contentType: ContentType.failure);
+                                return "";
                             }
                           },
-                          hint: 'مدرسة المشاغبين',width: width * 0.183,
                         ),
-                        Text(
-                          'الاداره التعليمية',
-                          style: TextStyle(fontSize: width * 0.012),
-                        ),
+
+                        CustomText(
+                            text: 'adara'.tr, fontSize: width * 0.012),
                         SizedBox(
                           height: height * 0.005,
                         ),
-                        InputComponent(
-                          textInputType: TextInputType.text,
-                          function: (String v) {
+                        CustomTextFieldLogin(
+                          isMobile: false,
+                          function: (v) {
                             controller.department.value = v;
                           },
-                          //inputFormatters: [PhoneNumberFormatter()],
-                          icon: Icons.location_on_rounded,
-                          hint: 'اداره',width: width * 0.183,
-                          validator: (value){
-                            if (value.length < 5) {
-                              showCustomSnackBar(
-                                  context: context,
-                                  title: "note".tr,
-                                  deck: "يجب كتابة اسم الادارة بشكل صحيح",
-                                  contentType: ContentType.failure);
-                              return "";
-                            }
+                          iconData: Icons.not_listed_location_rounded,
+                          hint: "اداره",width: width * 0.183,
+                          textInputType: TextInputType.name,
+                          colorBorder: AppConstants.primaryColor,
+                          validator: (value) {
+                              if (value.length < 5) {
+                                showCustomSnackBar(
+                                    context: context,
+                                    title: "note".tr,
+                                    deck: "يجب كتابة اسم الادارة بشكل صحيح",
+                                    contentType: ContentType.failure);
+                                return "";
+                              }
                           },
                         ),
                         SizedBox(
                           height: height * 0.005,
                         ),
-                        Text(
-                          'email'.tr,
-                          style:  TextStyle(fontSize: width * 0.012),
-                        ),
+                        CustomText(
+                            text: 'email'.tr, fontSize: width * 0.012),
                         SizedBox(
                           height: height * 0.005,
                         ),
-                        InputComponent(
-                          textInputType: TextInputType.text,
-                          function: (String v) {
+                        CustomTextFieldLogin(
+                          isMobile: false,
+                          function: (v) {
                             controller.email.value = v;
                           },
-                          icon: Icons.mail,
-                          hint: 'ahmed@gmail.com',width: width * 0.183,
-                          // hintSize: 26,
+                          iconData: Icons.email,
+                          title: 'email'.tr,
+                          hint: "saif@email.com",width: width * 0.183,
+                          textInputType: TextInputType.emailAddress,
+                          colorBorder: AppConstants.primaryColor,
+                          autoFillHints: const [AutofillHints.email],
                           validator: (value) {
                             if (!value.contains("@")||value.length<8) {
                               showCustomSnackBar(
@@ -158,23 +160,22 @@ class RegisterTwoScreen extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'الرقم السري',
-                                  style:  TextStyle(fontSize: width * 0.012),
-                                ),
+                                CustomText(
+                                    text: 'passwordText'.tr, fontSize: width * 0.012),
                                 SizedBox(
                                   height: height * 0.005,
                                 ),
-                                InputComponent(
-                                  textInputType: TextInputType.text,
-                                  function: (String v) {
+                                CustomTextFieldLogin(
+                                  isMobile:false,
+                                  function: (v) {
                                     controller.password.value = v;
                                   },
+                                  iconData: Icons.lock,
+                                  title: 'passwordText'.tr,
+                                  hint: "*********",
                                   width: width * 0.085,
-                                  //inputFormatters: [PhoneNumberFormatter()],
-                                  icon: Icons.lock,
-                                  hint:'*****',
-                                  validator:  (value) {
+                                  colorBorder: AppConstants.primaryColor,
+                                  validator: (value) {
                                     if (value.length<5) {
                                       showCustomSnackBar(
                                           context: context,
@@ -191,24 +192,23 @@ class RegisterTwoScreen extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'تأكيد الرقم السري',
-                                  style:  TextStyle(fontSize: width * 0.012),
-                                ),
+                                CustomText(
+                                    text: 'confirmationPasswordText'.tr, fontSize: width * 0.012),
                                 SizedBox(
                                   height: height * 0.005,
                                 ),
-                                InputComponent(
-                                  textInputType: TextInputType.text,
-                                  function: (String v) {
+                                CustomTextFieldLogin(
+                                  isMobile: false,
+                                  function: (v) {
                                     controller.password2.value = v;
                                   },
+                                  iconData: Icons.lock_reset,
+                                  title: 'confirmationPasswordText'.tr,
+                                  hint: "*********",
                                   width: width * 0.085,
-                                  //inputFormatters: [PhoneNumberFormatter()],
-                                  icon: Icons.lock,
-                                  hint: '*****',
+                                  colorBorder: AppConstants.primaryColor,
                                   validator: (value) {
-                                    if (controller.password2.value.trim()!=controller.password.value.trim()) {
+                                    if (controller.password2.value.trim()!=controller.password.value.trim()||value.length<5) {
                                       showCustomSnackBar(
                                           context: context,
                                           title: "note".tr,
@@ -222,16 +222,6 @@ class RegisterTwoScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        // Obx(
-                        //   () => controller.loading.value
-                        //       ? const Center(
-                        //           child: CircularProgressIndicator(
-                        //             color: AppConstants.lightPrimaryColor,
-                        //           ),
-                        //         )
-                        //   :
-
-                        //  ),
                         SizedBox(
                           height: height * 0.02,
                         ),
@@ -260,6 +250,10 @@ class RegisterTwoScreen extends StatelessWidget {
                         )
                       ],
                     ),),
+                    SizedBox(
+                      width: width*0.088,
+                    ),
+
                     Image.asset(
                       'assets/images/logo4.png',
                       width: width * 0.4,

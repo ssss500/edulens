@@ -1,13 +1,11 @@
-import 'dart:io';
-
 import 'package:edu_lens/view/login/windows/register_three_college_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-
 import '../../../controllers/login/register_controller.dart';
+import '../../../helper/app_constants.dart';
 import '../../widget/custom_dialog/snackBar.dart';
-import '../../widget/input_component.dart';
+import '../../widget/custom_text_field_login.dart';
 import '../../widget/next_button.dart';
 
 class RegisterTwoCollegeScreen extends StatelessWidget {
@@ -48,7 +46,7 @@ class RegisterTwoCollegeScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(
                     right: width * 0.065,
-                    top: height * 0.03,
+                    top: height * 0.075,
                     left: width * 0.03,
                     bottom: height * 0.065),
                 child: Row(
@@ -59,33 +57,36 @@ class RegisterTwoCollegeScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: height * 0.04,
-                          ),
+                          // SizedBox(
+                          //   height: height * 0.04,
+                          // ),
                           Text(
-                            'اكمل بياناتك لانشاء الحساب!',
+                            'welcomeCon'.tr,
                             style: TextStyle(
                               fontSize: width * 0.02,
                             ),
                           ),
                           SizedBox(
-                            height: height * 0.005,
+                            height: height * 0.0005,
                           ),
                           Text(
                             'email'.tr,
                             style:  TextStyle(fontSize: width * 0.012),
                           ),
                           SizedBox(
-                            height: height * 0.005,
+                            height: height * 0.0005,
                           ),
-                          InputComponent(
-                            textInputType: TextInputType.text,
-                            function: (String v) {
+                          CustomTextFieldLogin(
+                            isMobile: false,
+                            function: (v) {
                               controller.email.value = v;
                             },
-                            icon: Icons.mail,
-                            hint: 'ahmed@gmail.com',width: width * 0.183,
-                            // hintSize: 26,
+                            iconData: Icons.email,
+                            title: 'email'.tr,
+                            hint: "saif@email.com",width: width * 0.183,
+                            textInputType: TextInputType.emailAddress,
+                            colorBorder: AppConstants.primaryColor,
+                            autoFillHints: const [AutofillHints.email],
                             validator: (value) {
                               if (!value.contains("@") || value.length < 8) {
                                 showCustomSnackBar(
@@ -97,103 +98,105 @@ class RegisterTwoCollegeScreen extends StatelessWidget {
                               }
                             },
                           ),
+
                           SizedBox(
-                            height: height * 0.001,
+                            height: height * 0.0005,
                           ),
                            Text(
-                            'اسم الجامعة',
+                            'uniName'.tr,
                             style: TextStyle(fontSize: width * 0.012),
                           ),
                           SizedBox(
-                            height: height * 0.005,
+                            height: height * 0.0005,
                           ),
-                          InputComponent(
-                            textInputType: TextInputType.text,
-                            function: (String v) {
+                          CustomTextFieldLogin(
+                            isMobile: false,
+                            function: (v) {
                               controller.university.value = v;
                             },
-                            //inputFormatters: [PhoneNumberFormatter()],
-                            icon: Icons.school,
-                            hint: 'جامعة عين شمس',width: width * 0.183,
-                            validator: (value){
-                              if (value.length < 5) {
-                                showCustomSnackBar(
-                                    context: context,
-                                    title: "note".tr,
-                                    deck: "يجب كتابة اسم الجامعة بشكل صحيح",
-                                    contentType: ContentType.failure);
-                                return "";
+                            iconData: Icons.school,
+                            hint: "جامعة عين شمس",
+                            textInputType: TextInputType.name,width: width * 0.183,
+                            colorBorder: AppConstants.primaryColor,
+                            validator: (value) {
+
+                                if (value.length < 5) {
+                                  showCustomSnackBar(
+                                      context: context,
+                                      title: "note".tr,
+                                      deck: "يجب كتابة اسم الجامعة بشكل صحيح",
+                                      contentType: ContentType.failure);
+                                  return "";
+
                               }
                             },
+                            // inputFormatters: [PhoneNumberFormatter()],
                           ),
+
                           SizedBox(
-                            height: height * 0.001,
+                            height: height * 0.0005,
                           ),
                            Text(
-                            'اسم الكلية',
+                            'collegeName'.tr,
                             style: TextStyle(fontSize: width * 0.012),
                           ),
                           SizedBox(
-                            height: height * 0.005,
+                            height: height * 0.0005,
                           ),
-                          InputComponent(
-                            textInputType: TextInputType.text,
-                            function: (String v) {
+                          CustomTextFieldLogin(
+                            isMobile: false,
+                            function: (v) {
                               controller.faculty.value = v;
                             },
-                            //inputFormatters: [PhoneNumberFormatter()],
-                            icon: Icons.location_on_rounded,
-                            hint: 'كلية تجارة',width: width * 0.183,
-                            validator: (value){ if (value.length < 2) {
-                              showCustomSnackBar(
-                                  context: context,
-                                  title: "note".tr,
-                                  deck: "يجب كتابة اسم الكلية بشكل صحيح",
-                                  contentType: ContentType.failure);
-                              return "";
-                            }},
+                            iconData: Icons.not_listed_location_rounded,
+                            hint: "تجارة",
+                            textInputType: TextInputType.name,width: width * 0.183,
+                            colorBorder: AppConstants.primaryColor,
+                            validator: (value) {
+                                if (value.length < 2) {
+                                  showCustomSnackBar(
+                                      context: context,
+                                      title: "note".tr,
+                                      deck: "يجب كتابة اسم الكلية بشكل صحيح",
+                                      contentType: ContentType.failure);
+                                  return "";
+
+                              }
+                            },
+                            // inputFormatters: [PhoneNumberFormatter()],
                           ),
                           SizedBox(
-                            height: height * 0.001,
+                            height: height * 0.0005,
                           ),
-
                           Text(
-                            'القسم',
+                            'depName'.tr,
                             style:  TextStyle(fontSize: width * 0.012),
                           ),
                           SizedBox(
-                            height: height * 0.005,
+                            height: height * 0.0005,
                           ),
-                          InputComponent(
-                            textInputType: TextInputType.text,
-                            function: (String v) {
+                          CustomTextFieldLogin(
+                            isMobile: false,
+                            function: (v) {
                               controller.department.value = v;
                             },
-                            icon: Icons.location_on_rounded,
-                            hint: 'محاسبة',width: width * 0.183,
-                            validator: (value){
-                              if (value.length < 2) {
-                                showCustomSnackBar(
-                                    context: context,
-                                    title: "note".tr,
-                                    deck: "يجب كتابة اسم القسم بشكل صحيح",
-                                    contentType: ContentType.failure);
-                                return "";
+                            iconData: Icons.not_listed_location_rounded,
+                            hint: "محاسبة",
+                            textInputType: TextInputType.name,width: width * 0.183,
+                            colorBorder: AppConstants.primaryColor,
+                            validator: (value) {
+                                if (value.length < 2) {
+                                  showCustomSnackBar(
+                                      context: context,
+                                      title: "note".tr,
+                                      deck: "يجب كتابة اسم القسم بشكل صحيح",
+                                      contentType: ContentType.failure);
+                                  return "";
                               }
                             },
-                            // hintSize: 26,
+                            // inputFormatters: [PhoneNumberFormatter()],
                           ),
 
-                          // Obx(
-                          //   () => controller.loading.value
-                          //       ? const Center(
-                          //           child: CircularProgressIndicator(
-                          //             color: AppConstants.lightPrimaryColor,
-                          //           ),
-                          //         )
-                          //   :
-
-                          //  ),
                           SizedBox(
                             height: height * 0.03,
                           ),
@@ -223,6 +226,10 @@ class RegisterTwoCollegeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      width: width*0.058,
+                    ),
+
                     Image.asset(
                       'assets/images/logo4.png',
                       width: width * 0.4,
