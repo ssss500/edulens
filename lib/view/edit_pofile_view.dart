@@ -1,9 +1,7 @@
 import 'package:edu_lens/controllers/phone_number_formatter.dart';
 import 'package:edu_lens/helper/app_constants.dart';
-import 'package:edu_lens/view/home/home.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_buttom.dart';
-import 'package:edu_lens/view/widget/custom_buttom_deflated.dart';
 import 'package:edu_lens/view/widget/custom_dropdown_buttom.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:edu_lens/view/widget/custom_text_field_login.dart';
@@ -12,6 +10,7 @@ import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:get/get.dart';
 
 class EditProfileView extends StatelessWidget {
+   EditProfileView({super.key});
   late DateTime newDateTime=DateTime.now();
 
   @override
@@ -25,7 +24,7 @@ class EditProfileView extends StatelessWidget {
           padding: const EdgeInsets.only(left: 12.0, right: 12),
           child: Column(
             children: [
-              SizedBox(
+             const SizedBox(
                 height: 14,
               ),
               // //text filed my name

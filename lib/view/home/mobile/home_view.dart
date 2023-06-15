@@ -1,4 +1,3 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:connectivity_widget/connectivity_widget.dart';
@@ -6,23 +5,17 @@ import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/profile_teacher_controller.dart';
 import 'package:edu_lens/controllers/subject_teacher_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
-import 'package:edu_lens/helper/cashe_helper.dart';
-import 'package:edu_lens/model/teacher_model.dart';
-import 'package:edu_lens/view/home/custom_video_player_for_ads_covers.dart';
 import 'package:edu_lens/view/profile_teacher_view.dart';
 import 'package:edu_lens/view/subject_teacher_view.dart';
 import 'package:edu_lens/view/widget/card_image_teacher.dart';
-
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:edu_lens/view/widget/custom_list_view.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 import 'package:url_launcher/url_launcher.dart';
+import 'custom_video_player_for_ads_covers.dart';
 
 class HomeView extends StatelessWidget {
   HomeView({Key? key}) : super(key: key);
@@ -215,10 +208,10 @@ class HomeView extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () async {
-                              final Uri _url = Uri.parse(
+                              final Uri url = Uri.parse(
                                   'whatsapp://send?phone=+201092884278');
 
-                              await launchUrl(_url);
+                              await launchUrl(url);
                             },
                             child: Image.asset(
                               "assets/images/whatsapp.png",
@@ -248,7 +241,7 @@ class HomeView extends StatelessWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          Text(
+                         const Text(
                             "01153070885",
                             style: TextStyle(
                                 fontSize: 20,
@@ -260,10 +253,10 @@ class HomeView extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () async {
-                              final Uri _url = Uri.parse(
+                              final Uri url = Uri.parse(
                                   'whatsapp://send?phone=+201153070885');
 
-                              await launchUrl(_url);
+                              await launchUrl(url);
                             },
                             child: Image.asset(
                               "assets/images/whatsapp.png",
@@ -305,10 +298,10 @@ class HomeView extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () async {
-                              final Uri _url = Uri.parse(
+                              final Uri url = Uri.parse(
                                   'whatsapp://send?phone=+201099613267');
 
-                              await launchUrl(_url);
+                              await launchUrl(url);
                             },
                             child: Image.asset(
                               "assets/images/whatsapp.png",

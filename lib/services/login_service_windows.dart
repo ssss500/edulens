@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 import '../helper/cashe_helper.dart';
 import '../model/user_model.dart';
-import '../view/home/home_screen.dart';
 class LoginWindowsService {
   final dio = DioUtilNew.dio;
 

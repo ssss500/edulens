@@ -1,20 +1,11 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/controllers/login/switch_login.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/helper/dio_integration.dart';
-import 'package:edu_lens/model/city_model.dart';
-import 'package:edu_lens/model/classes_model.dart';
 import 'package:edu_lens/model/error_model.dart';
-import 'package:edu_lens/model/gender_model.dart';
 import 'package:edu_lens/model/register_model.dart';
-import 'package:edu_lens/model/section_model.dart';
-import 'package:edu_lens/model/sucess_model.dart';
-import 'package:edu_lens/view/home/home.dart';
-import 'package:edu_lens/view/login/mobile/login_view.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
