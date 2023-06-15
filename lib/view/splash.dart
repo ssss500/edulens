@@ -18,7 +18,7 @@ class SplashState extends State<Splash> {
 //   print("");
 // }
     Timer(const  Duration(milliseconds:kDebugMode?1000:  3500), () {
-      Get.offAll(() =>const  GetStartedScreen());
+      Get.offAllNamed("/start");
       // Get.offAll(() => token == null ? const LoginView() : Home());
     });
   }

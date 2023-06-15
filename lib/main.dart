@@ -4,6 +4,7 @@ import 'package:edu_lens/controllers/main_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/helper/dio_integration.dart';
+import 'package:edu_lens/routes.dart';
 import 'package:edu_lens/utils/lacale_string.dart';
 import 'package:edu_lens/view/root_screen.dart';
 import 'package:flutter/material.dart';
@@ -74,6 +75,7 @@ void main() async {
     // Scaffold(
     //   body: SplachScreen(),
     // ),
+getPages: Routes.pages,
     theme: ThemeData(
       // fontFamily: 'Font1',
 
@@ -83,6 +85,7 @@ void main() async {
       platform: TargetPlatform.iOS,
     ),
   ));
+
 }
 
 // class MyApp extends StatelessWidget {
@@ -117,3 +120,4 @@ void main() async {
 //     );
 //   }
 // }
+

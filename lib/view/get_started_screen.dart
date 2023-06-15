@@ -26,111 +26,118 @@ class GetStartedScreen extends StatelessWidget {
             height: height,
           ),
           Center(
-            child:
-                Container(
-                  width: width / 1.2,
-                  height: height / 1.2,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(20.00),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                   padding: EdgeInsets.only(right: width * 0.065, top : height *0.065, left: width*0.03, bottom:  height*0.065),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding:  EdgeInsets.only(top:height *0.065 ),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: height * 0.04,
-                              ),
-                              Text(
-                                'مرحبا بكم في ايديو لينس',
-                                style: TextStyle(fontSize: width * 0.021),
-                              ),
-                              SizedBox(
-                                height: height * 0.04,
-                              ),
-                              CustomButton(
-                                function: () {
-                                  Get.to(()=>const RegisterScreen());
-
-                                },
-                                text: 'انشاء حساب',
-                                sizeText: width * 0.014,
-                                height: height * 0.068,
-                                width: width*0.18,
-                              ),
-                              SizedBox(
-                                height: height * 0.04,
-                              ),
-                              //login button
-                              CustomButtonDeflated(
-                                function: () {
-                                  Get.to(()=> LoginScreen());
-                                },
-                                text: "تسجيل دخول",
-                                fontSize: width * 0.014,
-                                height: height * 0.068,
-                                width: width*0.18,
-                              ),
-                              SizedBox(
-                                height: height * 0.02,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CustomText(
-                                    text: "areYouCollegeStudent".tr,
-                                    color: Colors.black87,
-                                    fontSize: width*0.01,
-                                  ),
-                                  SizedBox(
-                                    width: width * 0.02,
-                                  ),
-                                  TextButton(
-                                      onPressed: () {
-                                        Get.to(()=>  RegisterOneCollegeScreen());
-                                      },
-                                      child: CustomText(
-                                        text: 'createAccountText'.tr,
-                                        fontSize: width*0.011,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                      ))
-                                ],
-                              ),
-                               SizedBox(
-                                height: height*0.04,
-                              ),
-                            const  SocialMediaIconsWindows(),
-                            ],
-                          ),
-                        ),
-                        Image.asset(
-                          'assets/images/logo4.png',
-                          width: width * 0.4,
-                          height: height,
-                        ),
-                      ],
-                    ),
-                  ),
+            child: Container(
+              width: width / 1.2,
+              height: height / 1.2,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(20.00),
                 ),
-
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(
+                    right: width * 0.065,
+                    top: height * 0.065,
+                    left: width * 0.03,
+                    bottom: height * 0.065),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: height * 0.065),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: height * 0.04,
+                            ),
+                            Text(
+                              'مرحبا بكم في ايديو لينس',
+                              style: TextStyle(fontSize: width * 0.021),
+                            ),
+                            SizedBox(
+                              height: height * 0.04,
+                            ),
+                            CustomButton(
+                              function: () {
+                                Get.toNamed('/register');
+                              },
+                              text: 'انشاء حساب',
+                              sizeText: width * 0.014,
+                              height: height * 0.068,
+                              width: width * 0.18,
+                            ),
+                            SizedBox(
+                              height: height * 0.04,
+                            ),
+                            //login button
+                            CustomButtonDeflated(
+                              function: () {
+                               Get.toNamed('/login');
+                              },
+                              text: "تسجيل دخول",
+                              fontSize: width * 0.014,
+                              height: height * 0.068,
+                              width: width * 0.18,
+                            ),
+                            SizedBox(
+                              height: height * 0.02,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomText(
+                                  text: "areYouCollegeStudent".tr,
+                                  color: Colors.black87,
+                                  fontSize: width * 0.01,
+                                ),
+                                SizedBox(
+                                  width: width * 0.02,
+                                ),
+                                TextButton(
+                                    onPressed: () {
+                                      Get.toNamed('/registerUni1');
+                                    },
+                                    child: CustomText(
+                                      text: 'createAccountText'.tr,
+                                      fontSize: width * 0.011,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ))
+                              ],
+                            ),
+                            SizedBox(
+                              height: height * 0.04,
+                            ),
+                            const SocialMediaIconsWindows(),
+                          ],
+                        ),
+                      ),
+                    ),
+                    width > 700
+                        ? Image.asset(
+                            'assets/images/logo4.png',
+                            width: width * 0.4,
+                            height: height,
+                          )
+                        :const SizedBox(
+                            height: 0,
+                            width: 0,
+                          ),
+                  ],
+                ),
+              ),
             ),
-
+          ),
         ],
       ),
     );

@@ -26,7 +26,7 @@ class LoginWindowsService {
         CacheHelper.saveData(
             key: AppConstants.studentClassId,
             value: userModel.student!.studentClassId);
-        Get.offAll(() => const HomeScreen());
+        Get.offAllNamed('/home');
       } else if (response.statusCode == 400) {
         showCustomSnackBar(
             context: context,

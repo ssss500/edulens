@@ -11,8 +11,8 @@ class RootScreen extends StatelessWidget {
   //  AppSetting.init(context);
 
     return const  Responsive(
-      mobile: Splash(fit: BoxFit.fill,),
-      desktop:  Splash(fit: BoxFit.fitHeight,),
+      mobile: Splash(fit: BoxFit.fitHeight,),
+      desktop:  Splash(fit: BoxFit.fill,),
     );
   }
 }

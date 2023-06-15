@@ -602,11 +602,10 @@ class RegisterController extends GetxController {
   registerUniversityForWindows(BuildContext context) async {
 
     FocusManager.instance.primaryFocus?.unfocus();
-    // final sectionName = "division".tr.obs;
-    // final classesName = "chooseYear".tr.obs;
-    // final genderName = "${"nationality".tr} ${Platform.isIOS?"*":null}".obs;
-    // final year = "المرحله الدراسيه".obs;
-    // final cityName =  "${"governorate".tr} ${Platform.isIOS?"*":null}".obs;
+    final classesName = "chooseYear".tr.obs;
+    final genderName = "nationality".tr.obs;
+    final year = "chooseYear".tr.obs;
+    final cityName =  "governorate".tr.obs;
     if (classesName.value == "chooseYear".tr) {
       return showCustomSnackBar(
           context: context,
@@ -614,20 +613,20 @@ class RegisterController extends GetxController {
           deck: "يجب عليك اخيتار السنة الدراسية",
           contentType: ContentType.failure);
     } else if (genderName.value ==
-        "${"nationality".tr} ${Platform.isIOS ? "*" : null}") {
+        "nationality".tr) {
       return showCustomSnackBar(
           context: context,
           title: "note".tr,
           deck: "يجب عليك اخيتار اذا كنت ذكر ام انثي",
           contentType: ContentType.failure);
-    } else if (year.value == "المرحله الدراسيه") {
+    } else if (year.value == "chooseYear".tr) {
       return showCustomSnackBar(
           context: context,
           title: "note".tr,
           deck: "يجب عليك اختيار المرحلة الدراسية",
           contentType: ContentType.failure);
     } else if (cityName.value ==
-        "${"governorate".tr} ${Platform.isIOS ? "*" : null}") {
+        "governorate".tr) {
       return showCustomSnackBar(
           context: context,
           title: "note".tr,
@@ -662,8 +661,8 @@ class RegisterController extends GetxController {
             school: school.value,
             studentClassId: "${studentClassId.value}",
             studentSectionId: "${studentSectionId.value}",
-            token: token,
-            deviceId: idDevice,
+            // token: token,
+            // deviceId: idDevice,
             university: university.value,
             faculty: faculty.value,
             department: department.value,
