@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 
 import '../helper/cashe_helper.dart';
 import '../model/user_model.dart';
-import '../view/home/home_screen.dart';
 class LoginWindowsService {
   final dio = DioUtilNew.dio;
 
@@ -19,14 +18,16 @@ class LoginWindowsService {
       });
       if (response.statusCode == 200) {
         UserModel userModel = UserModel.fromJson(response.data);
-     //  CacheHelper.saveData(key: AppConstants.token, value: userModel.token);
+      CacheHelper.saveData(key: AppConstants.token, value: userModel.token);
         CacheHelper.saveData(
             key: AppConstants.studentId,
             value: userModel.student!.id);
         CacheHelper.saveData(
             key: AppConstants.studentClassId,
             value: userModel.student!.studentClassId);
-        Get.offAllNamed('/home');
+        if(CacheHelper.getData(key: AppConstants.token) == null ){Get.offAllNamed('startWindows');} else {
+          Get.offAllNamed('home');
+        } ;
       } else if (response.statusCode == 400) {
         showCustomSnackBar(
             context: context,

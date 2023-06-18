@@ -1,0 +1,6 @@
+package edulens.tec.edulens
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}

@@ -52,11 +52,7 @@ class PurchasedLectures extends StatelessWidget {
                   itemBuilder: (_, index) => InkWell(
                     onTap: () async {
                       Get.dialog(CustomLoading());
-                      // await  homeCoursesController.controller.initialise();
-                      // homeCoursesController.indexLectures =
-                      //     indexLectures;
-                      // homeCoursesController.indexChapters =
-                      //     indexChapters;
+
                       VideoController videoController =
                       Get.put(VideoController());
                       await videoController.openVideo(lecturePaidModel:homeController.lecturePaid[index]);

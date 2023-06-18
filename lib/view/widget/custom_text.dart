@@ -18,7 +18,7 @@ class CustomText extends StatelessWidget {
   final FontWeight fontWeight;
   var textAlign;
 
-  CustomText({
+  CustomText({super.key,
     this.text = '',
     this.fontSize = 16,
     this.softWrap = true,

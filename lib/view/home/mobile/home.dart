@@ -2,18 +2,13 @@ import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/message_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
-import 'package:edu_lens/helper/app_constants.dart';
-import 'package:edu_lens/view/home/favourite_view.dart';
-import 'package:edu_lens/view/home/home_view.dart';
-import 'package:edu_lens/view/home/profile_view.dart';
-import 'package:edu_lens/view/home/question_bank_view.dart';
+import 'package:edu_lens/view/home/mobile/profile_view.dart';
 import 'package:edu_lens/view/message_view.dart';
-import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_dialog/exit_dialog.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'favourite_view.dart';
+import 'home_view.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
@@ -57,7 +52,7 @@ class Home extends StatelessWidget {
                           Get.to(()=>MessageView());
                         },
                         icon: const Icon(Icons.mark_email_unread_rounded),
-                        key: ValueKey('icon1'),
+                        key: const ValueKey('icon1'),
                       )
                     : const Icon(null)),
           ),

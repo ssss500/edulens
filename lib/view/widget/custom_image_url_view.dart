@@ -5,18 +5,18 @@ import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 
 class CustomImageUrlView extends StatelessWidget {
-  final image, colorLodingIcon, width;
-final fit;
+  final image, colorLodingIcon, width, height;
+  final fit;
   CustomImageUrlView(
       {required this.image,
-        this.fit=BoxFit.cover,
+        this.fit=BoxFit.cover,this.height=100.0,
       this.colorLodingIcon = Colors.white,
-      this.width = double.infinity});
+      this.width = 100.0});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: height,
       child: CachedNetworkImage(
         imageUrl: image,
         imageBuilder: (context, imageProvider) => InkWell(
