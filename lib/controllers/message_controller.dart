@@ -40,7 +40,9 @@ class MessageController extends GetxController {
       }
     } catch (e) {
       debugPrint(e.toString());
-    }
+      debugPrint('failed');
+
+     }
      apiLoadingMessage.value = false;
 
      return null;

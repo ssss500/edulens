@@ -1,11 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:carousel_slider/carousel_controller.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:edu_lens/controllers/main_controller.dart';
-import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/model/chapter_paid_model.dart';
 import 'package:edu_lens/model/classes_model.dart';
 import 'package:edu_lens/model/courses_models/solved_exams_model.dart';
@@ -17,6 +13,10 @@ import 'package:edu_lens/model/teacher_model.dart';
 import 'package:edu_lens/model/user_model.dart';
 import 'package:edu_lens/services/get_teacher_services.dart';
 import 'package:edu_lens/helper/app_constants.dart';
+import 'package:edu_lens/view/home/mobile/favourite_view.dart';
+import 'package:edu_lens/view/home/windows/home_screen.dart';
+import 'package:edu_lens/view/home/windows/paid_lectures.dart';
+import 'package:edu_lens/view/home/windows/teacher_profile.dart';
 import 'package:edu_lens/view/screen_for_screen_shot.dart';
 import 'package:edu_lens/view/widget/custom_dialog.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +25,19 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:root/root.dart';
 
+import '../../view/home/windows/messages_screen.dart';
+import '../../view/home/windows/packages.dart';
+
 class HomeController extends GetxController {
   final services = GetHomeServices();
+  Map<String, IconData> sideMenuItems = {
+    'الصفحة الرئيسية': Icons.home,
+    'المفضلة': Icons.favorite,
+    'الرسائل': Icons.mail,
+    'المحاضرات': Icons.school,
+    'الباقات': Icons.wallet
+  };
+  RxInt sideMenuItemIndex = 0.obs;
   final covers = <CoverModel>[].obs;
   final teachers = <TeacherModel>[].obs;
   final lecturePaid = <LecturePaidModel>[].obs;

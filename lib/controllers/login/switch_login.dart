@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import '../../view/home/mobile/home.dart';
 
 class SwitchLogin extends StatelessWidget {
+  const SwitchLogin({super.key});
+
 
   @override
   Widget build(BuildContext context) {

@@ -28,7 +28,7 @@ class LoginService {
         CacheHelper.saveData(
             key: AppConstants.studentClassId,
             value: userModel.student!.studentClassId);
-        Get.offAll(() => Home());
+        Get.offAllNamed('homeMobile');
       } else if (response.statusCode == 400) {
           showCustomSnackBar(
             context: context,

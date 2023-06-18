@@ -122,10 +122,10 @@ class GetHomeServices {
         final mList = List<StudentModel>.from(
             response.data.map((i) => StudentModel.fromJson(i)));
         debugPrint("response user data : ${mList.length.toString()}");
-        if(mList.isEmpty){
+        if (mList.isEmpty) {
           GetStorage().remove("listTeacherLoves");
           await CacheHelper.clearData();
-          Get.offAll(() =>  HomeLogin());
+          Get.offAll(() => HomeLogin());
         }
         return mList;
       }
@@ -135,28 +135,10 @@ class GetHomeServices {
     return null;
   }
 
-  // Future<List<ClassesModel>?> getYears() async {
-  //   try {
-  //     late var response;
-  //     response = await dio!.get(
-  //       AppConstants.classes,
-  //     );
-  //     if (response.statusCode == 200) {
-  //       log("get Years: ${response.data} ");
-  //       final mList = List<ClassesModel>.from(
-  //           response.data.map((i) => ClassesModel.fromJson(i)));
-  //       return mList;
-  //     }
-  //   } catch (e) {
-  //     debugPrint(e.toString());
-  //   }
-  //   return null;
-  // }
-
   Future<List<SolvedExamsModel>?> getSolvedExams() async {
     try {
-
-     final response = await dio!.post(AppConstants.studentExams, queryParameters: {
+      final response =
+          await dio!.post(AppConstants.studentExams, queryParameters: {
         "student_id": CacheHelper.getData(
           key: AppConstants.studentId,
         )
@@ -177,8 +159,8 @@ class GetHomeServices {
 
   Future getLecturePaid() async {
     try {
-
-    final  response = await dio!.post(AppConstants.studentLecture, queryParameters: {
+      final response =
+          await dio!.post(AppConstants.studentLecture, queryParameters: {
         "student_id": CacheHelper.getData(
           key: AppConstants.studentId,
         )
@@ -188,13 +170,13 @@ class GetHomeServices {
       if (response.statusCode == 200) {
         debugPrint("response Lecture: ${response.data[0]} ");
         var mList;
-       try {
+        try {
           mList = List<LecturePaidModel>.from(
               response.data.map((i) => LecturePaidModel.fromJson(i)));
-        }catch(e){
-         mList=[];
-         debugPrint("catch : 186${e.toString()}");
-       }
+        } catch (e) {
+          mList = [];
+          debugPrint("catch : 186${e.toString()}");
+        }
         debugPrint("response Lecture done");
 
         return mList;
@@ -249,4 +231,6 @@ class GetHomeServices {
     }
     return null;
   }
+
+
 }

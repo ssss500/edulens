@@ -38,7 +38,7 @@ class RegisterWindowsServices {
             deck: "تم انشاء الحساب بنجاح",
             contentType: ContentType.success);
         Timer(const Duration(milliseconds: 1000), () {
-          Get.offAllNamed('/home');
+          Get.offAllNamed('home');
            //Get.offAll(() => token == null ? const LoginView() : Home());
         });
       } else if (response.statusCode == 422) {
