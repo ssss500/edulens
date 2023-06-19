@@ -115,15 +115,21 @@ class Routes {
     GetPage(
       name: RoutesNames.message,
       page: () => MessageScreen(),
-      binding: ViewModelBinding(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<MessageController>(
+              () => MessageController(),
+        );
+      }),
     ),
-    GetPage(
-      name: RoutesNames.switchLogin,
-      page: () => const SwitchLogin(),
-    ),
+
     GetPage(
       name: RoutesNames.paidLecture,
       page: () => PaidLectureScreen(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<HomeController>(
+              () => HomeController(),
+        );
+      }),
     ),
   ];
 }
