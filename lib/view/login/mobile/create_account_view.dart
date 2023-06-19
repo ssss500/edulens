@@ -3,6 +3,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/controllers/phone_number_formatter.dart';
 import 'package:edu_lens/controllers/login/register_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/login/mobile/create_account_view_tow.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 import 'package:edu_lens/view/widget/custom_scaffold_login.dart';
@@ -258,7 +259,7 @@ class CreateAccountView extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   if (controller.formStateOne.currentState!.validate()) {
-                    Get.to(() => CreateAccountViewTow());
+                    Get.toNamed(RoutesNames.register2);
                   }
                 },
                 child:const Row(

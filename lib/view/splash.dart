@@ -1,44 +1,30 @@
 import 'dart:async';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
-import 'package:edu_lens/view/get_started_screen.dart';
+import 'package:edu_lens/view/login/windows/get_started_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../routes/routes_names.dart';
 
 class Splash extends StatefulWidget {
   const Splash({
     super.key,
   });
 
-  //    height: MediaQuery.of(context).size.height,
-  //         width: MediaQuery.of(context).size.width,
   @override
   SplashState createState() => SplashState();
 }
 
 class SplashState extends State<Splash> {
-  bool openImage = true;
 
   fun() async {
-    //final token = await CacheHelper.getData(key: AppConstants.token);
-// if (kDebugMode) {
-//   print("");
-// }
-
     Timer(const Duration(milliseconds: kDebugMode ? 1000 : 3500), () {
-      if (MediaQuery.of(context).size.width >= 800) {
-        if (CacheHelper.getData(key: AppConstants.token) == null) {
-          Get.offAllNamed("start");
-        } else {
-          Get.offAllNamed("home");
-        }
-      } else  {
-        if (CacheHelper.getData(key: AppConstants.token) == null) {
-          Get.offAllNamed("startMobile");
-        } else {
-          Get.offAllNamed("homeMobile");
-        }
+      if (CacheHelper.getData(key: AppConstants.token) == null) {
+        Get.offAllNamed(RoutesNames.welcomeScreen);
+      } else {
+        Get.offAllNamed(RoutesNames.home);
       }
     });
   }
