@@ -1,27 +1,21 @@
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/helper/app_constants.dart';
-<<<<<<< HEAD
-=======
-import 'package:edu_lens/view/home/windows/favourite.dart';
-import 'package:edu_lens/view/home/windows/home_view.dart';
-import 'package:edu_lens/view/home/windows/messages_screen.dart';
+
+
+ import 'package:edu_lens/view/home/windows/messages_screen.dart';
 import 'package:edu_lens/view/home/windows/packages.dart';
 import 'package:edu_lens/view/home/windows/paid_lectures.dart';
->>>>>>> origin/master
-import 'package:edu_lens/view/widget/custom_background.dart';
+ import 'package:edu_lens/view/widget/custom_background.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../helper/cashe_helper.dart';
 
-<<<<<<< HEAD
-class HomeMenuScreenWindows extends StatelessWidget {
+ class HomeMenuScreenWindows extends StatelessWidget {
   HomeMenuScreenWindows({Key? key}) : super(key: key);
-=======
-class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
->>>>>>> origin/master
+
+
   final HomeController controller = Get.put(HomeController());
 
   @override

@@ -13,8 +13,6 @@ import 'favourite_view.dart';
 class HomeMenuMobile extends StatelessWidget {
   HomeMenuMobile({Key? key}) : super(key: key);
 
-class Home extends StatelessWidget {
-  Home({Key? key}) : super(key: key);
 
   HomeController homeController = Get.put(HomeController());
 

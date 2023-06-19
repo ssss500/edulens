@@ -1,8 +1,7 @@
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/view/home/windows/favourite.dart';
-import 'package:edu_lens/view/home/windows/home_view.dart';
-import 'package:edu_lens/view/home/windows/messages_screen.dart';
+ import 'package:edu_lens/view/home/windows/messages_screen.dart';
 import 'package:edu_lens/view/home/windows/packages.dart';
 import 'package:edu_lens/view/home/windows/paid_lectures.dart';
 import 'package:edu_lens/view/widget/custom_background.dart';

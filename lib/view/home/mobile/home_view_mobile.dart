@@ -6,20 +6,17 @@ import 'package:edu_lens/controllers/profile_teacher_controller.dart';
 import 'package:edu_lens/controllers/subject_teacher_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/view/profile_teacher_view.dart';
-<<<<<<< HEAD
-import 'package:edu_lens/view/home/mobile/subject_teacher_view_mobile.dart';
-=======
-import 'package:edu_lens/view/subject_teacher_view.dart';
->>>>>>> origin/master
-import 'package:edu_lens/view/widget/card_image_teacher.dart';
-import 'package:edu_lens/view/widget/custom_image_url_view.dart';
-import 'package:edu_lens/view/widget/custom_list_view.dart';
-import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../widget/card_image_teacher.dart';
+import '../../widget/custom_image_url_view.dart';
+import '../../widget/custom_list_view.dart';
+import '../../widget/custom_text.dart';
 import 'custom_video_player_for_ads_covers.dart';
+import 'subject_teacher_view_mobile.dart';
 
 class HomeViewMobile extends StatelessWidget {
   HomeViewMobile({Key? key}) : super(key: key);
