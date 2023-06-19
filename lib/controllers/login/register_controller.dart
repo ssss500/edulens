@@ -371,9 +371,7 @@ class RegisterController extends GetxController {
   }
 
   register(BuildContext context) async {
-    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
-    FocusManager.instance.primaryFocus?.unfocus();
 
     if (sectionName.value == "division".tr) {
       return showCustomSnackBar(
@@ -408,14 +406,22 @@ class RegisterController extends GetxController {
           deck: "يجب عليك اختيار المحافظة",
           contentType: ContentType.failure);
     } else {
+
       loading.value = true;
-      try{
-        await _firebaseMessaging.getToken().then((value) => token = value);
-      }catch(e){
-        debugPrint(e.toString());
+      if(!Platform.isWindows&&!Platform.isMacOS){
+        debugPrint((!Platform.isWindows&&!Platform.isMacOS).toString());
+        final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+        try {
+          await _firebaseMessaging.getToken().then((value) => token = value);
+        } catch (e) {
+          debugPrint(e.toString());
+        }
+        idDevice = await getIDDevise();
+        FocusManager.instance.primaryFocus?.unfocus();
+
       }
-      idDevice = await getIDDevise();
-      debugPrint(token.toString());
+      // debugPrint(token.toString());
       // ignore: use_build_context_synchronously
       await services.register(
           context,
@@ -447,14 +453,7 @@ class RegisterController extends GetxController {
   }
 
   registerUniversity(BuildContext context) async {
-    final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
-    FocusManager.instance.primaryFocus?.unfocus();
-    // final sectionName = "division".tr.obs;
-    // final classesName = "chooseYear".tr.obs;
-    // final genderName = "${"nationality".tr} ${Platform.isIOS?"*":null}".obs;
-    // final year = "المرحله الدراسيه".obs;
-    // final cityName =  "${"governorate".tr} ${Platform.isIOS?"*":null}".obs;
     if (classesName.value == "chooseYear".tr) {
       return showCustomSnackBar(
           context: context,
@@ -483,12 +482,18 @@ class RegisterController extends GetxController {
           contentType: ContentType.failure);
     } else {
       loading.value = true;
-      try{
-        await _firebaseMessaging.getToken().then((value) => token = value);
-      }catch(e){
-        debugPrint(e.toString());
+      if(!Platform.isWindows&&!Platform.isMacOS){
+        final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+
+        FocusManager.instance.primaryFocus?.unfocus();
+        try{
+          await firebaseMessaging.getToken().then((value) => token = value);
+        }catch(e){
+          debugPrint(e.toString());
+        }
+        idDevice = await getIDDevise();
       }
-      idDevice = await getIDDevise();
+
       debugPrint(token.toString());
       // ignore: use_build_context_synchronously
       await services.register(
@@ -521,153 +526,4 @@ class RegisterController extends GetxController {
   }
 
 
-
-  //register for windows
-  registerForWindows(BuildContext context) async {
-    FocusManager.instance.primaryFocus?.unfocus();
-
-    if (sectionName.value == "division".tr) {
-      return showCustomSnackBar(
-          context: context,
-          title: "note".tr,
-          deck: "يجب عليك اختيار الشعبة",
-          contentType: ContentType.failure);
-    } else if (classesName.value == "chooseYear".tr) {
-      return showCustomSnackBar(
-          context: context,
-          title: "note".tr,
-          deck: "يجب عليك اخيتار السنة الدراسية",
-          contentType: ContentType.failure);
-    } else if (genderName.value ==
-        "${"nationality".tr} ${Platform.isIOS ? "*" : null}") {
-      return showCustomSnackBar(
-          context: context,
-          title: "note".tr,
-          deck: "يجب عليك اخيتار اذا كنت ذكر ام انثي",
-          contentType: ContentType.failure);
-    } else if (year.value == "المرحله الدراسيه") {
-      return showCustomSnackBar(
-          context: context,
-          title: "note".tr,
-          deck: "يجب عليك اختيار المرحلة الدراسية",
-          contentType: ContentType.failure);
-    } else if (cityName.value ==
-        "${"governorate".tr} ${Platform.isIOS ? "*" : null}") {
-      return showCustomSnackBar(
-          context: context,
-          title: "note".tr,
-          deck: "يجب عليك اختيار المحافظة",
-          contentType: ContentType.failure);
-    } else {
-      loading.value = true;
-      // try{
-      //   await _firebaseMessaging.getToken().then((value) => token = value);
-      // }catch(e){
-      //   debugPrint(e.toString());
-      // }
-      // idDevice = await getIDDevise();
-      // debugPrint(token.toString());
-      // ignore: use_build_context_synchronously
-      await service.registerForWindowsService(
-          context,
-          RegisterModel(
-            phone: phone.value.trim(),
-            password: password.value.trim(),
-            email: email.value,
-            birthday: birthday.value,
-            cityId: "${cityId.value}",
-            edara: department.value,
-            firstName: firstName.value,
-            genderId: "${genderId.value}",
-            gradeId: gradeId.value,
-            lastName: lastName.value,
-            parentName: parentName.value,
-            parentPhone: parentPhone.value,
-            password2: password2.value.trim(),
-            school: school.value,
-            studentClassId: "${studentClassId.value}",
-            studentSectionId: "${studentSectionId.value}",
-            token: token,
-            deviceId: idDevice,
-            university: university.value,
-            faculty: faculty.value,
-            department: department.value,
-          ));
-      loading.value = false;
-    }
- }
-
-
- // register for windows university
-  registerUniversityForWindows(BuildContext context) async {
-
-    FocusManager.instance.primaryFocus?.unfocus();
-    final classesName = "chooseYear".tr.obs;
-    final genderName = "nationality".tr.obs;
-    final year = "chooseYear".tr.obs;
-    final cityName =  "governorate".tr.obs;
-    if (classesName.value == "chooseYear".tr) {
-      return showCustomSnackBar(
-          context: context,
-          title: "note".tr,
-          deck: "يجب عليك اخيتار السنة الدراسية",
-          contentType: ContentType.failure);
-    } else if (genderName.value ==
-        "nationality".tr) {
-      return showCustomSnackBar(
-          context: context,
-          title: "note".tr,
-          deck: "يجب عليك اخيتار اذا كنت ذكر ام انثي",
-          contentType: ContentType.failure);
-    } else if (year.value == "chooseYear".tr) {
-      return showCustomSnackBar(
-          context: context,
-          title: "note".tr,
-          deck: "يجب عليك اختيار المرحلة الدراسية",
-          contentType: ContentType.failure);
-    } else if (cityName.value ==
-        "governorate".tr) {
-      return showCustomSnackBar(
-          context: context,
-          title: "note".tr,
-          deck: "يجب عليك اختيار المحافظة",
-          contentType: ContentType.failure);
-    } else {
-      loading.value = true;
-      // try{
-      //   await _firebaseMessaging.getToken().then((value) => token = value);
-      // }catch(e){
-      //   debugPrint(e.toString());
-      // }
-      // idDevice = await getIDDevise();
-      // debugPrint(token.toString());
-      // ignore: use_build_context_synchronously
-      await service.registerForWindowsService(
-          context,
-          RegisterModel(
-            phone: phone.value.trim(),
-            password: password.value.trim(),
-            email: email.value,
-            birthday: birthday.value,
-            cityId: "${cityId.value}",
-            edara: department.value,
-            firstName: firstName.value,
-            genderId: "${genderId.value}",
-            gradeId: gradeId.value,
-            lastName: lastName.value,
-            parentName: parentName.value,
-            parentPhone: parentPhone.value,
-            password2: password2.value.trim(),
-            school: school.value,
-            studentClassId: "${studentClassId.value}",
-            studentSectionId: "${studentSectionId.value}",
-            // token: token,
-            // deviceId: idDevice,
-            university: university.value,
-            faculty: faculty.value,
-            department: department.value,
-          ));
-      loading.value = false;
-    }
   }
-}

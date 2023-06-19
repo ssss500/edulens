@@ -45,13 +45,13 @@ class HomeView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomText(
-                          text: 'احدث العروض',
-                          fontWeight: FontWeight.bold,
-                          textAlign: TextAlign.right,
-                          fontSize: size.width*.015,
-                          color: Colors.black,
-                        ),
+                        // CustomText(
+                        //   text: 'احدث العروض',
+                        //   fontWeight: FontWeight.bold,
+                        //   textAlign: TextAlign.right,
+                        //   fontSize: size.width*.015,
+                        //   color: Colors.black,
+                        // ),
                         SizedBox(height: size.height*.02,),
                         SizedBox(
                           height: size.height / 3,

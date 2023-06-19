@@ -3,12 +3,13 @@ import 'package:edu_lens/controllers/login/register_controller.dart';
 import 'package:edu_lens/view/widget/custom_registration_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../helper/app_constants.dart';
-import '../../widget/custom_dialog/snackBar.dart';
-import '../../widget/custom_text.dart';
-import '../../widget/custom_text_field_login.dart';
-import '../../widget/next_button.dart';
+import '../../../../helper/app_constants.dart';
+import '../../../../routes/routes_names.dart';
+import '../../../widget/custom_dialog/snackBar.dart';
+import '../../../widget/custom_text.dart';
+import '../../../widget/custom_text_field_login.dart';
 
+// ignore: must_be_immutable
 class RegisterTwoScreen extends StatelessWidget {
   RegisterTwoScreen({Key? key}) : super(key: key);
   RegisterController controller = Get.find();
@@ -35,7 +36,7 @@ class RegisterTwoScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: height * 0.005,
+                height: height * 0.03,
               ),
               CustomText(text: 'school'.tr, fontSize: width * 0.012),
               SizedBox(
@@ -193,39 +194,13 @@ class RegisterTwoScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: height * 0.02,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 65.0),
-                child: Row(
-                  children: [
-                    RotatedBox(
-                      quarterTurns: 2,
-                      child: NextButton(
-                          function: () {
-                            if (controller.formWindowsTwo.currentState!
-                                .validate()) {
-                              Get.toNamed('register3');
-                            }
-                          },
-                          icon: Icons.arrow_back_ios_new_outlined),
-                    ),
-                    SizedBox(
-                      width: width * 0.03,
-                    ),
-                    NextButton(
-                        function: () {
-                          Get.back();
-                        },
-                        icon: Icons.arrow_back_ios_new_outlined),
-                  ],
-                ),
-              )
             ],
           ),
         ),
-      ),
+      ), funNextButton: (){  if (controller.formWindowsTwo.currentState!
+        .validate()) {
+      Get.toNamed(RoutesNames.register3);
+    }},
     );
   }
 }

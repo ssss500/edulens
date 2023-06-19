@@ -7,10 +7,15 @@ import 'package:get/get.dart';
 
 import '../helper/cashe_helper.dart';
 import '../model/user_model.dart';
+
 class LoginWindowsService {
   final dio = DioUtilNew.dio;
 
-  Future<void> loginWindows(BuildContext context, {String? password, String? phone, }) async {
+  Future<void> loginWindows(
+    BuildContext context, {
+    String? password,
+    String? phone,
+  }) async {
     try {
       final response = await dio!.post(AppConstants.login, data: {
         "password": password,
@@ -18,16 +23,17 @@ class LoginWindowsService {
       });
       if (response.statusCode == 200) {
         UserModel userModel = UserModel.fromJson(response.data);
-      CacheHelper.saveData(key: AppConstants.token, value: userModel.token);
+        CacheHelper.saveData(key: AppConstants.token, value: userModel.token);
         CacheHelper.saveData(
-            key: AppConstants.studentId,
-            value: userModel.student!.id);
+            key: AppConstants.studentId, value: userModel.student!.id);
         CacheHelper.saveData(
             key: AppConstants.studentClassId,
             value: userModel.student!.studentClassId);
-        if(CacheHelper.getData(key: AppConstants.token) == null ){Get.offAllNamed('startWindows');} else {
+        if (CacheHelper.getData(key: AppConstants.token) == null) {
+          Get.offAllNamed('startWindows');
+        } else {
           Get.offAllNamed('home');
-        } ;
+        }
       } else if (response.statusCode == 400) {
         showCustomSnackBar(
             context: context,
@@ -36,7 +42,6 @@ class LoginWindowsService {
             contentType: ContentType.failure);
       }
     } catch (e) {
-
       debugPrint(e.toString());
     }
   }
