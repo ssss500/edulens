@@ -1,4 +1,5 @@
 import 'package:edu_lens/controllers/login/register_controller.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/login/mobile/create_account_for_college_student.dart';
 import 'package:edu_lens/view/login/mobile/create_account_view.dart';
 import 'package:edu_lens/view/login/mobile/login_view.dart';
@@ -10,9 +11,11 @@ import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class HomeLogin extends StatelessWidget {
-    HomeLogin({Key? key}) : super(key: key);
-  RegisterController registerController=Get.put(RegisterController());
+  HomeLogin({Key? key}) : super(key: key);
+  RegisterController registerController = Get.put(RegisterController());
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -31,7 +34,7 @@ class HomeLogin extends StatelessWidget {
           ),
           //welcome text
           SizedBox(
-            width: screenWidth*0.88,
+            width: screenWidth * 0.88,
             child: CustomText(
               text: "welcome".tr,
               fontSize: 34,
@@ -43,8 +46,10 @@ class HomeLogin extends StatelessWidget {
           //create account button
           CustomButton(
             function: () {
+              Get.toNamed(RoutesNames.register1);
+
               Get.to(
-                  ()=> const CreateAccountView(),
+                () => const CreateAccountView(),
               );
             },
             text: "createAccountText".tr,
@@ -55,7 +60,7 @@ class HomeLogin extends StatelessWidget {
           //login button
           CustomButtonDeflated(
             function: () {
-              Get.to(()=>  LoginView());
+              Get.toNamed(RoutesNames.login);
             },
             text: "loginText".tr,
             height: 50,
@@ -74,7 +79,7 @@ class HomeLogin extends StatelessWidget {
               ),
               TextButton(
                   onPressed: () {
-                    Get.to(() =>   CreateAccountForCollegeStudent());
+                    Get.toNamed(RoutesNames.registerUni1);
                   },
                   child: CustomText(
                     text: 'createAccountText'.tr,
@@ -85,11 +90,11 @@ class HomeLogin extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height:40,
+            height: 40,
           ),
           customSocialMediaIcons(),
           const SizedBox(
-            height:40,
+            height: 40,
           ),
         ],
       ),

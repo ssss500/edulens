@@ -5,6 +5,7 @@ import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/helper/dio_integration.dart';
 import 'package:edu_lens/routes/routes.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/utils/lacale_string.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,8 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:screen_protector/screen_protector.dart';
 import 'firebase_options.dart';
 import 'package:desktop_window/desktop_window.dart';
+
+import 'view/not_found_route_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,41 +38,23 @@ void main() async {
 //     await DesktopWindow.setMinWindowSize(Size(1920,1080));
 //     await DesktopWindow.setMaxWindowSize(Size(1920,1080));
 //   }
-if(Platform.isAndroid||Platform.isIOS ){
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-}
-else{
-  Size size = await DesktopWindow.getWindowSize();
-  print(size);
+  if (Platform.isAndroid || Platform.isIOS) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } else {
+    try {
+      Size size = await DesktopWindow.getWindowSize();
+      print(size);
 
-   DesktopWindow.setMinWindowSize(Size(1530,800));
-   DesktopWindow.setMaxWindowSize(Size(1530,800));
+      DesktopWindow.setMinWindowSize(const Size(1530, 800));
+      DesktopWindow.setMaxWindowSize(const Size(1530, 800));
 
-   DesktopWindow.resetMaxWindowSize();
-   DesktopWindow.toggleFullScreen();
-   DesktopWindow.setFullScreen(true);
-  // setWindowMaxSize(const Size(1024, 768));
-  // setWindowMinSize(const Size(512, 384));
-  // Future<Null>.delayed(Duration(seconds: 1), () {
-  //   setWindowFrame(Rect.fromCenter(center: Offset(1000, 500), width: 600, height: 1000));
-  // });
-  // await windowManager.ensureInitialized();
-  //
-  // WindowOptions windowOptions = const WindowOptions(
-  //   size: Size(1200,900),
-  //   center: true,
-  //   backgroundColor: Colors.transparent,
-  //   windowButtonVisibility: true,
-  //   skipTaskbar: true
-  // );
-  // windowManager.waitUntilReadyToShow(windowOptions, () async {
-  //   await windowManager.show();
-  //   await windowManager.focus();
-  // });
-}
-
+      DesktopWindow.resetMaxWindowSize();
+      DesktopWindow.toggleFullScreen();
+      DesktopWindow.setFullScreen(true);
+    } catch (e) {}
+  }
 
   // final token = await CacheHelper.getData(key: AppConstants.token);
   ErrorWidget.builder = (FlutterErrorDetails details) {
@@ -103,26 +88,18 @@ else{
     transitionDuration: Get.defaultDialogTransitionDuration,
     textDirection: TextDirection.rtl,
     translations: LocaleString(),
-    initialBinding: ViewModelBinding(),
+    initialRoute: RoutesNames.splash,
+    // initialBinding: ViewModelBinding(),
     locale: const Locale('ar', 'EG'),
+    getPages: Routes.pages,
+    unknownRoute: GetPage(
+        name: RoutesNames.notFoundRoutes, page: () => const NotFoundView()),
     debugShowCheckedModeBanner: false,
-   // home: HomeScreen(),
-    // home: token == null ? const LoginView() : Home(),
-   // const RootScreen(),
-    // Scaffold(
-    //   body: SplachScreen(),
-    // ),
-getPages: Routes.pages,
     theme: ThemeData(
-      // fontFamily: 'Font1',
-
-      // fontFamily: GoogleFonts.tajawal().fontFamily,
       fontFamily: GoogleFonts.cairo().fontFamily,
-      // fontFamily: GoogleFonts.notoSansArabic().fontFamily,
       platform: TargetPlatform.iOS,
     ),
   ));
-
 }
 
 // class MyApp extends StatelessWidget {
@@ -157,4 +134,3 @@ getPages: Routes.pages,
 //     );
 //   }
 // }
-

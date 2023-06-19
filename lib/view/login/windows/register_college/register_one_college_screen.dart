@@ -2,13 +2,13 @@ import 'package:edu_lens/view/widget/custom_registration_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import '../../../controllers/login/register_controller.dart';
-import '../../../controllers/phone_number_formatter.dart';
-import '../../../helper/app_constants.dart';
-import '../../widget/custom_dialog/snackBar.dart';
-import '../../widget/custom_text.dart';
-import '../../widget/custom_text_field_login.dart';
-import '../../widget/next_button.dart';
+import '../../../../controllers/login/register_controller.dart';
+import '../../../../controllers/phone_number_formatter.dart';
+import '../../../../helper/app_constants.dart';
+import '../../../widget/custom_dialog/snackBar.dart';
+import '../../../widget/custom_text.dart';
+import '../../../widget/custom_text_field_login.dart';
+import '../../../widget/next_button.dart';
 
 class RegisterOneCollegeScreen extends StatelessWidget {
   RegisterOneCollegeScreen({Key? key}) : super(key: key);
@@ -206,26 +206,30 @@ class RegisterOneCollegeScreen extends StatelessWidget {
                   },
                 ),
 
-                SizedBox(
-                  height: height * 0.025,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(right: width * 0.07),
-                  child: RotatedBox(
-                      quarterTurns: 2,
-                      child: NextButton(
-                          function: () {
-                            if (controller.formWindowsUniOne.currentState!.validate()) {
-                              Get.toNamed('registerUni2');
-                            }
-                          },
-                          icon: Icons.arrow_back_ios_new_outlined)),
-                )
+                // SizedBox(
+                //   height: height * 0.025,
+                // ),
+                // Padding(
+                //   padding: EdgeInsets.only(right: width * 0.07),
+                //   child: RotatedBox(
+                //       quarterTurns: 2,
+                //       child: NextButton(
+                //           function: () {
+                //             if (controller.formWindowsUniOne.currentState!.validate()) {
+                //               Get.toNamed('registerUni2');
+                //             }
+                //           },
+                //           icon: Icons.arrow_back_ios_new_outlined)),
+                // ),
               ],
             ),
           ),
         ),
       ],
-    ),);
+    ), funNextButton: (){
+      if (controller.formWindowsUniOne.currentState!.validate()) {
+        Get.toNamed('registerUni2');
+      }
+    },);
   }
 }

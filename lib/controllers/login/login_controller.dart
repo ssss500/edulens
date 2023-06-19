@@ -53,7 +53,7 @@ class LoginController extends GetxController {
 
       log('Running on ${iosInfo.identifierForVendor}');
       idDevice = iosInfo.identifierForVendor;
-    } else if (Platform.isWindows) {
+    } else if (!Platform.isWindows&&!Platform.isMacOS) {
       WindowsDeviceInfo windowsDeviceInfo = await deviceInfo.windowsInfo;
 
       idDevice = windowsDeviceInfo.platformId;
@@ -63,7 +63,7 @@ class LoginController extends GetxController {
   }
 
   loginForWindows(BuildContext context) async {
-    FocusManager.instance.primaryFocus?.unfocus();
+    // FocusManager.instance.primaryFocus?.unfocus();
 
     loading.value = true;
     // try{

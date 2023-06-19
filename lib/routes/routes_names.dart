@@ -1,22 +1,19 @@
-class RoutesNames{
-  static const String root ='/';
-  static const String splash='/splash';
-  static const String startWindows= '/start';
-  static const String startMobile='/startMobile';
-  static const String login='/login';
-  static const String register1='/register1';
-  static const String register2='/register2';
-  static const String register3='/register3';
-  static const String registerUni1='/registerUni1';
-  static const String registerUni2='/registerUni2';
-  static const String registerUni3='/registerUni3';
-  static const String home='/home';
-  static const String homeMobile='/homeMobile';
+class RoutesNames {
+  static const String splash = '/splash';
+  static const String welcomeScreen = '/welcomeScreen';
+  static const String login = '$welcomeScreen/login';
+  static const String register1 = '$welcomeScreen/register1';
+  static const String register2 = '$register1/register2';
+  static const String register3 = '$register2/register3';
+  static const String registerUni1 = '$welcomeScreen/registerUni1';
+  static const String registerUni2 = '$registerUni1/registerUni2';
+  static const String registerUni3 = '$registerUni2/registerUni3';
+  static const String home = '/home';
+  static const notFoundRoutes = '/notFound';
 
-  static const String packages='/packages';
-  static const String favourite='/favourite';
-  static const String message='/message';
-  static const String paidLecture='/paidLecture';
+  static const String packages = '/packages';
+  static const String favourite = '/favourite';
+  static const String message = '/message';
+  static const String paidLecture = '/paidLecture';
   static const String switchLogin = '/switchLogin';
-
 }
