@@ -1,10 +1,5 @@
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/helper/app_constants.dart';
-import 'package:edu_lens/view/home/windows/favourite.dart';
-import 'package:edu_lens/view/home/windows/home_view.dart';
-import 'package:edu_lens/view/home/windows/messages_screen.dart';
-import 'package:edu_lens/view/home/windows/packages.dart';
-import 'package:edu_lens/view/home/windows/paid_lectures.dart';
 import 'package:edu_lens/view/widget/custom_background.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -12,15 +7,15 @@ import 'package:get/get.dart';
 
 import '../../../helper/cashe_helper.dart';
 
+class HomeMenuScreenWindows extends StatelessWidget {
+  HomeMenuScreenWindows({Key? key}) : super(key: key);
+  final HomeController controller = Get.put(HomeController());
 
-class HomeScreen extends StatelessWidget {
-   HomeScreen({Key? key}) : super(key: key);
- final HomeController controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size);
 
-    List<Widget> menuItems=[const HomeView(),const Favourite(),MessageScreen(), PaidLectureScreen(),const Packages(),];
+    // List<Widget> menuItems=[const HomeView(),const Favourite(),MessageScreen(), PaidLectureScreen(),const Packages(),];
     final size = MediaQuery.of(context).size;
     return CustomBackground(
         child: Padding(
@@ -28,7 +23,7 @@ class HomeScreen extends StatelessWidget {
       child: Row(
         children: [
           Flexible(
-            flex:1,
+            flex: 1,
             child: Container(
               alignment: Alignment.topCenter,
               padding: EdgeInsets.all(size.width * 0.02),
@@ -128,19 +123,26 @@ class HomeScreen extends StatelessWidget {
                   // ),
                   Expanded(
                     child: ListView.separated(
-                        itemBuilder: (context, index) => Obx((){ return InkWell(
-                          onTap: (){
-                            controller.sideMenuItemIndex.value=index;
-                            if (index == 2){
-
-                            }
-                            print(controller.sideMenuItemIndex.toInt());
-                          },
-                          child: CustomItem(
-                            name: controller.sideMenuItems.keys.elementAt(index),
-                                icon: controller.sideMenuItems.values.elementAt(index),
-                                isActive: index == controller.sideMenuItemIndex.value ? true : false,
-                              ),);},),
+                        itemBuilder: (context, index) => Obx(
+                              () {
+                                return InkWell(
+                                  onTap: () {
+                                    controller.sideMenuItemIndex.value = index;
+                                    if (index == 2) {}
+                                    print(controller.sideMenuItemIndex.toInt());
+                                  },
+                                  child: CustomItem(
+                                    name:
+                                        controller.sideMenuItems[index].title!,
+                                    icon: controller.sideMenuItems[index].icon!,
+                                    isActive: index ==
+                                            controller.sideMenuItemIndex.value
+                                        ? true
+                                        : false,
+                                  ),
+                                );
+                              },
+                            ),
                         separatorBuilder: (context, index) => Container(
                               height: 1,
                               color: Colors.white54,
@@ -158,7 +160,7 @@ class HomeScreen extends StatelessWidget {
                           color: Colors.white54,
                         ),
                         InkWell(
-                          onTap: ()async{
+                          onTap: () async {
                             await CacheHelper.clearData();
                             Get.offAllNamed('startWindows');
                           },
@@ -197,7 +199,8 @@ class HomeScreen extends StatelessWidget {
           ),
           Flexible(
               flex: 2,
-              child: Obx(()=> menuItems[controller.sideMenuItemIndex.value])),
+              child: Obx(() => controller
+                  .sideMenuItems[controller.sideMenuItemIndex.value].screen!)),
         ],
       ),
     ));
@@ -205,11 +208,12 @@ class HomeScreen extends StatelessWidget {
 }
 
 class CustomItem extends StatelessWidget {
-  const CustomItem({Key? key, this.isActive = false, required this.name, required this.icon}) : super(key: key);
+  const CustomItem(
+      {Key? key, this.isActive = false, required this.name, required this.icon})
+      : super(key: key);
   final bool isActive;
   final String name;
   final IconData icon;
-
 
   @override
   Widget build(BuildContext context) {
@@ -233,7 +237,7 @@ class CustomItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 9,right: size.width*.035),
+            padding: EdgeInsets.only(bottom: 9, right: size.width * .035),
             child: Icon(
               icon,
               color: Colors.white,

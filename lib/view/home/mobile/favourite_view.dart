@@ -14,12 +14,12 @@ import 'package:get_storage/get_storage.dart';
 // ignore: must_be_immutable
 // List<TeacherModel> listTeacherLoves=teachersLove;
 
-class Favourite extends StatefulWidget {
+class FavouriteMobile extends StatefulWidget {
   @override
-  State<Favourite> createState() => _FavouriteState();
+  State<FavouriteMobile> createState() => _FavouriteMobileState();
 }
 
-class _FavouriteState extends State<Favourite> {
+class _FavouriteMobileState extends State<FavouriteMobile> {
   // HomeController homeController = Get.put(HomeController());
   List<TeacherModel> teachersLove = [];
 

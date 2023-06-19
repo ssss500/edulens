@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../../controllers/message_controller.dart';
 import '../../../helper/app_constants.dart';
 import '../../widget/custom_list_view.dart';
-import 'message_card.dart';
+import '../../widget/message_card.dart';
 
 class MessageScreen extends StatelessWidget {
   MessageScreen({Key? key}) : super(key: key);

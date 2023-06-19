@@ -6,7 +6,7 @@ import 'package:edu_lens/controllers/message_controller.dart';
 import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/login/common_view/login_view_common.dart';
 import 'package:edu_lens/view/login/windows/get_started_screen.dart';
-import 'package:edu_lens/view/home/windows/home_screen.dart';
+import 'package:edu_lens/view/home/windows/home_menu_scren_windows.dart';
 import 'package:edu_lens/view/home/windows/messages_screen.dart';
 import 'package:edu_lens/view/home/windows/paid_lectures.dart';
 import 'package:edu_lens/view/login/mobile/home_login_view.dart';
@@ -22,7 +22,7 @@ import 'package:get/get.dart';
 
 import '../binding/view_model_binding.dart';
 import '../view/home/common_view/home_common.dart';
-import '../view/home/mobile/home.dart';
+import '../view/home/mobile/home_menu_mobile.dart';
 import '../view/login/common_view/register_common.dart';
 import '../view/login/common_view/register_tow_common.dart';
 import '../view/login/common_view/welcom_view_common.dart';

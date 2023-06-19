@@ -9,7 +9,7 @@ class EmptyMessagesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
-      title: "messages title".tr,
+      title: "messagesTitle".tr,
       widget: Center(
         child:  Padding(
           padding: const EdgeInsets.symmetric(

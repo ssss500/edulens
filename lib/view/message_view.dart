@@ -1,6 +1,6 @@
 import 'package:edu_lens/controllers/message_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
-import 'package:edu_lens/view/home/windows/message_card.dart';
+import 'package:edu_lens/view/widget/message_card.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:edu_lens/view/widget/custom_list_view.dart';
@@ -16,7 +16,7 @@ class MessageView extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return CustomAppBar(
-      title: "messages title".tr,
+      title: "messagesTitle".tr,
       widget: Obx(
         () =>messageController.messageList.isEmpty &&
             messageController.apiLoadingMessage.value

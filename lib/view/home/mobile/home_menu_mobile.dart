@@ -8,10 +8,10 @@ import 'package:edu_lens/view/widget/custom_dialog/exit_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'favourite_view.dart';
-import 'home_view.dart';
+import 'home_view_mobile.dart';
 
-class Home extends StatelessWidget {
-  Home({Key? key}) : super(key: key);
+class HomeMenuMobile extends StatelessWidget {
+  HomeMenuMobile({Key? key}) : super(key: key);
 
   HomeController homeController = Get.put(HomeController());
 
@@ -44,6 +44,7 @@ class Home extends StatelessWidget {
                           : Tween<double>(begin: 0.75, end: 1).animate(anim),
                       child: ScaleTransition(scale: anim, child: child),
                     ),
+                // ignore: unrelated_type_equality_checks
                 child: homeController.pageIndex == 0
                     ? IconButton(
                         onPressed: () {
@@ -114,8 +115,8 @@ class Home extends StatelessWidget {
                   controller: homeController.pageController,
                   physics: const NeverScrollableScrollPhysics(),
                   children: <Widget>[
-                    HomeView(),
-                    Favourite(),
+                    HomeViewMobile(),
+                    FavouriteMobile(),
                     Profile(),
                   ],
                 ),

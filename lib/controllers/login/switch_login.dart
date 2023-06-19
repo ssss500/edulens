@@ -3,7 +3,7 @@
 // import 'package:edu_lens/view/login/mobile/home_login_view.dart';
 // import 'package:flutter/material.dart';
 //
-// import '../../view/home/mobile/home.dart';
+// import '../../view/home/mobile/home_menu_mobile.dart';
 //
 // class SwitchLogin extends StatelessWidget {
 //   const SwitchLogin({super.key});

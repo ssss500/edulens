@@ -5,7 +5,7 @@ class LocaleString extends Translations {
   Map<String, Map<String, String>> get keys => {
         "ar_EG": {
           "homeTitle": "الصفحة الرئيسية",
-          "messages title":" صفحه الرسائل",
+          "messagesTitle":"الرسائل",
           "favourites": "المفضلات",
           "questionBank": "بنك الاسئلة",
           "profile": "الملف الشخصي",
@@ -41,11 +41,13 @@ class LocaleString extends Translations {
           "saveAnswer": "حفظ الاجابة",
           "imageErrorMessage": "حدث خظا اثناء تحميل الصورة",
           "packagesText": "اختيار الباقة",
+          "packages": "الباقات",
           "editProfileView": "تعديل الملف الشخصي",
           "choosePackagesText": "اختر الباقة",
           "youCanChooseMoreThanOneChapterText": "يمكنك اختيار اكثر من فصل",
           "payText": "شراء",
           "purchasedLectures": "المحاضرات التي تم شراؤها",
+          "lectures": "المحاضرات",
           "saveEdit": "حفظ التغيرات",
           "numberOfCorrectAnswers": "عدد الإجابات الصحيحة",
           "numberOfWrongAnswers": "عدد الإجابات الخاطئة",

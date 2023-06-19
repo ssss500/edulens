@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controllers/message_controller.dart';
-import '../../../helper/app_constants.dart';
-import '../../widget/custom_image_url_view.dart';
-import '../../widget/custom_text.dart';
+import '../../controllers/message_controller.dart';
+import '../../helper/app_constants.dart';
+import 'custom_image_url_view.dart';
+import 'custom_text.dart';
 
 class MessageCard extends StatelessWidget {
   const MessageCard({Key? key, required this.index}) : super(key: key);

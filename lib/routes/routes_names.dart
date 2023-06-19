@@ -15,5 +15,11 @@ class RoutesNames {
   static const String favourite = '/favourite';
   static const String message = '/message';
   static const String paidLecture = '/paidLecture';
-  static const String switchLogin = '/switchLogin';
+
+  static String teacherProfileFromHome(id) => '$home/teacher/:$id';
+
+  static String subject(id) => '$home/subject/:$id';
+
+  static String teacherProfileFromSubjects({idSubject, idTeacher}) =>
+      '${subject(idSubject)}/teacher/:$idTeacher';
 }

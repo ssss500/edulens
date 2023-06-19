@@ -11,10 +11,12 @@ import 'package:edu_lens/model/student_reservations_model.dart';
 import 'package:edu_lens/model/subject_model.dart';
 import 'package:edu_lens/model/teacher_model.dart';
 import 'package:edu_lens/model/user_model.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/services/get_teacher_services.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/view/home/mobile/favourite_view.dart';
-import 'package:edu_lens/view/home/windows/home_screen.dart';
+import 'package:edu_lens/view/home/windows/favourite.dart';
+import 'package:edu_lens/view/home/windows/home_menu_scren_windows.dart';
 import 'package:edu_lens/view/home/windows/paid_lectures.dart';
 import 'package:edu_lens/view/home/windows/teacher_profile.dart';
 import 'package:edu_lens/view/screen_for_screen_shot.dart';
@@ -25,18 +27,47 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:root/root.dart';
 
+import '../../model/side_menu_item_model.dart';
+import '../../view/home/windows/home_view_windows.dart';
 import '../../view/home/windows/messages_screen.dart';
 import '../../view/home/windows/packages.dart';
 
 class HomeController extends GetxController {
   final services = GetHomeServices();
-  Map<String, IconData> sideMenuItems = {
-    'الصفحة الرئيسية': Icons.home,
-    'المفضلة': Icons.favorite,
-    'الرسائل': Icons.mail,
-    'المحاضرات': Icons.school,
-    'الباقات': Icons.wallet
-  };
+
+  List<SideMenuItemModel> sideMenuItems = [
+    SideMenuItemModel(
+      title: "homeTitle".tr,
+      icon: Icons.home,
+      routeScreen: RoutesNames.home,
+      screen: HomeView(),
+    ),
+    SideMenuItemModel(
+      title: "favourites".tr,
+      icon: Icons.favorite,
+      routeScreen: RoutesNames.favourite,
+      screen: const FavouriteWindows()
+    ),
+    SideMenuItemModel(
+      title: "messagesTitle".tr,
+      icon: Icons.mail,
+      screen: MessageScreen(),
+      routeScreen: RoutesNames.message,
+    ),
+    SideMenuItemModel(
+      title: "lectures".tr,
+      icon: Icons.school,
+      screen: PaidLectureScreen(),
+      routeScreen: RoutesNames.paidLecture,
+    ),
+    SideMenuItemModel(
+      title: "packages".tr,
+      icon: Icons.wallet,
+      screen: Packages(),
+      routeScreen: RoutesNames.packages,
+    ),
+  ];
+
   RxInt sideMenuItemIndex = 0.obs;
   final covers = <CoverModel>[].obs;
   final teachers = <TeacherModel>[].obs;
