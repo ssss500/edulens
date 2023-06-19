@@ -89,7 +89,7 @@ void main() async {
     textDirection: TextDirection.rtl,
     translations: LocaleString(),
     initialRoute: RoutesNames.splash,
-    initialBinding: ViewModelBinding(),
+    // initialBinding: ViewModelBinding(),
     locale: const Locale('ar', 'EG'),
     getPages: Routes.pages,
     unknownRoute: GetPage(

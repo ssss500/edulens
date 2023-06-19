@@ -9,7 +9,12 @@ class MessageController extends GetxController {
   final messageList = [].obs;
   final dio = DioUtilNew.dio;
   late RxBool apiLoadingMessage = false.obs;
-
+@override
+  void onInit() {
+    // TODO: implement onInit
+  getMessage();
+    super.onInit();
+  }
 
 
    getMessage()  async {

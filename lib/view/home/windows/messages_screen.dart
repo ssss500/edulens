@@ -7,14 +7,12 @@ import '../../../helper/app_constants.dart';
 import '../../widget/custom_list_view.dart';
 import '../../widget/message_card.dart';
 
-class MessageScreen extends StatelessWidget {
+class MessageScreen extends GetView<MessageController> {
   MessageScreen({Key? key}) : super(key: key);
-  final MessageController messageController = Get.find();
+  // final MessageController messageController = Get.find();
 
   @override
   Widget build(BuildContext context) {
- messageController.getMessageApi();
- messageController.getMessage();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -23,16 +21,16 @@ class MessageScreen extends StatelessWidget {
           color: AppConstants.lightPrimaryColor, fontSize: 24,fontWeight: FontWeight.bold,
         ),
         Obx(
-          () => messageController.messageList.isEmpty &&
-                  messageController.apiLoadingMessage.value
+          () => controller.messageList.isEmpty &&
+                  controller.apiLoadingMessage.value
               ? const SizedBox(
                   height: 170,
                   child: Center(
                       child: CircularProgressIndicator(
                     color: AppConstants.lightPrimaryColor,
                   )))
-              : messageController.messageList.isEmpty &&
-                      messageController.apiLoadingMessage.value == false
+              : controller.messageList.isEmpty &&
+              controller.apiLoadingMessage.value == false
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +60,7 @@ class MessageScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 15, right: 15, top: 20),
                       child: CustomListView(
-                        itemCount: messageController.messageList.length,
+                        itemCount: controller.messageList.length,
                         itemBuilder: (context, index) =>
                             MessageCard(index: index),
                         axis: Axis.vertical,

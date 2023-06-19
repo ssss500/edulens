@@ -11,18 +11,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../helper/cashe_helper.dart';
+import '../../../routes/routes_names.dart';
 
  class HomeMenuScreenWindows extends StatelessWidget {
   HomeMenuScreenWindows({Key? key}) : super(key: key);
-
 
   final HomeController controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size);
-
-    // List<Widget> menuItems=[const HomeView(),const Favourite(),MessageScreen(), PaidLectureScreen(),const Packages(),];
     final size = MediaQuery.of(context).size;
     return CustomBackground(
         child: Padding(
@@ -135,7 +132,7 @@ import '../../../helper/cashe_helper.dart';
                                 return InkWell(
                                   onTap: () {
                                     controller.sideMenuItemIndex.value = index;
-                                    if (index == 2) {}
+                                    // if (index == 2) {}
                                     print(controller.sideMenuItemIndex.toInt());
                                   },
                                   child: CustomItem(
@@ -155,7 +152,7 @@ import '../../../helper/cashe_helper.dart';
                               color: Colors.white54,
                               margin: EdgeInsets.all(size.height * .013),
                             ),
-                        itemCount: 5),
+                        itemCount: controller.sideMenuItems.length),
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
@@ -169,7 +166,7 @@ import '../../../helper/cashe_helper.dart';
                         InkWell(
                           onTap: () async {
                             await CacheHelper.clearData();
-                            Get.offAllNamed('startWindows');
+                            Get.offAllNamed(RoutesNames.welcomeScreen);
                           },
                           child: Container(
                             width: size.width / 5,

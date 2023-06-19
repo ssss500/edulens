@@ -109,6 +109,9 @@ class Routes {
         Get.lazyPut<HomeController>(
               () => HomeController(),
         );
+        Get.lazyPut<MessageController>(
+              () => MessageController(),
+        );
       }),
     ),
 
@@ -116,9 +119,7 @@ class Routes {
       name: RoutesNames.message,
       page: () => MessageScreen(),
       binding: BindingsBuilder(() {
-        Get.lazyPut<MessageController>(
-              () => MessageController(),
-        );
+
       }),
     ),
 

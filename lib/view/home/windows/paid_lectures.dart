@@ -8,13 +8,12 @@ import '../../widget/custom_image_url_view.dart';
 import '../../widget/custom_loading.dart';
 import '../../widget/custom_text.dart';
 
-class PaidLectureScreen extends StatelessWidget {
+class PaidLectureScreen extends GetView<HomeController> {
   PaidLectureScreen({Key? key}) : super(key: key);
-  final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
-    return homeController.lecturePaid.isEmpty
+    return controller.lecturePaid.isEmpty
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +43,7 @@ class PaidLectureScreen extends StatelessWidget {
                     width: 750,
                     height: 620,
                     child: GridView.builder(
-                      itemCount: homeController.lecturePaid.length,
+                      itemCount: controller.lecturePaid.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount:
                             MediaQuery.of(context).size.shortestSide < 600
@@ -59,10 +58,10 @@ class PaidLectureScreen extends StatelessWidget {
                               Get.put(VideoController());
                           await videoController.openVideo(
                               lecturePaidModel:
-                                  homeController.lecturePaid[index]);
+                              controller.lecturePaid[index]);
                           videoController.getVideoExtensionsPayed(
                               lecturePaidModel:
-                                  homeController.lecturePaid[index]);
+                              controller.lecturePaid[index]);
                           Get.back();
                           // Get.to(() => VideoView(
                           //       title: homeController.lecturePaid[index].name
@@ -80,7 +79,7 @@ class PaidLectureScreen extends StatelessWidget {
                               children: [
                                 CustomImageUrlViewNotZoom(
                                   image:
-                                      "https://edu-lens.com/images/courses/lectures/${homeController.lecturePaid[index].image}",
+                                      "https://edu-lens.com/images/courses/lectures/${controller.lecturePaid[index].image}",
                                   fit: BoxFit.cover,
                                   height: double.infinity,
                                 ),
@@ -100,7 +99,7 @@ class PaidLectureScreen extends StatelessWidget {
                                           left: 6, right: 6, bottom: 3, top: 3),
                                       child: CustomText(
                                         text:
-                                            "${homeController.lecturePaid[index].name}",
+                                            "${controller.lecturePaid[index].name}",
                                         color: Colors.white,
                                       ),
                                     ),

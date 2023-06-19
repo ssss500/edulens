@@ -22,16 +22,16 @@ import '../../widget/custom_image_url_view.dart';
 import '../../widget/custom_list_view.dart';
 import '../mobile/custom_video_player_for_ads_covers.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
+class HomeView extends GetView<HomeController> {
+    HomeView({Key? key}) : super(key: key);
+  // final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
-    final homeController = Get.put(HomeController());
     final size = MediaQuery.of(context).size;
     return ConnectivityWidget(
         onlineCallback: () {
-          homeController.refresherMethod();
+          controller.refresherMethod();
         },
         builder: (context, isOnline) => Column(
           children: [
@@ -60,9 +60,9 @@ class HomeView extends StatelessWidget {
                           height: size.height / 3,
                           width: size.width / 1.2,
                           child: Obx(
-                            () => homeController.covers.isNotEmpty
+                            () => controller.covers.isNotEmpty
                                 ? CarouselSlider.builder(
-                                    itemCount: homeController.covers.length,
+                                    itemCount: controller.covers.length,
                                     itemBuilder: (BuildContext context, int itemIndex,
                                             int pageViewIndex) =>
                                         Container(
@@ -71,9 +71,9 @@ class HomeView extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(14),
                                         color: Colors.grey.shade300,
                                       ),
-                                      child: homeController.covers[itemIndex].image
+                                      child: controller.covers[itemIndex].image
                                                   .toString()
-                                                  .substring(homeController
+                                                  .substring(controller
                                                           .covers[itemIndex].image
                                                           .toString()
                                                           .length -
@@ -82,11 +82,11 @@ class HomeView extends StatelessWidget {
                                               "mp4"
                                           ? VideoPlay(
                                               pathh:
-                                                  "https://edu-lens.com/images/covers/${homeController.covers[itemIndex].image.toString()}")
+                                                  "https://edu-lens.com/images/covers/${controller.covers[itemIndex].image.toString()}")
                                           : CustomImageUrlView(
                                               fit: BoxFit.fill,
                                               image:
-                                                  "https://edu-lens.com/images/covers/${homeController.covers[itemIndex].image}",
+                                                  "https://edu-lens.com/images/covers/${controller.covers[itemIndex].image}",
                                             ),
                                     ),
                                     options: CarouselOptions(
@@ -118,21 +118,21 @@ class HomeView extends StatelessWidget {
                           width: size.width / 1.75,
                           child: Obx(
                                 () =>
-                            homeController.subject.isEmpty &&
-                                homeController.apiLoadingSubject.value
+                            controller.subject.isEmpty &&
+                                controller.apiLoadingSubject.value
                                 ? const SizedBox(
                                 height: 170,
                                 child: Center(
                                     child: CircularProgressIndicator(
                                       color: AppConstants.lightPrimaryColor,
                                     )))
-                                : homeController.subject.isEmpty &&
-                                !homeController.apiLoadingSubject.value
+                                : controller.subject.isEmpty &&
+                                !controller.apiLoadingSubject.value
                                 ? const SizedBox()
                                 : SizedBox(
                               height: 170,
                               child: CustomListView(
-                                  itemCount: homeController.subject.length,
+                                  itemCount: controller.subject.length,
                                   axis: Axis.horizontal,
                                   scroll: true,
                                   itemBuilder: (context, index) {
@@ -147,7 +147,7 @@ class HomeView extends StatelessWidget {
                                       },
                                       child: CachedNetworkImage(
                                         imageUrl:
-                                        "https://edu-lens.com/images/subjects/${homeController.subject[index].image!}",
+                                        "https://edu-lens.com/images/subjects/${controller.subject[index].image!}",
                                         imageBuilder: (context, imageProvider) =>
                                             Container(
                                               margin:
@@ -197,16 +197,16 @@ class HomeView extends StatelessWidget {
                           color: Colors.black,
                         ),
                         SizedBox(height: size.height*.02,),
-                        Obx(() => homeController.teachers.isEmpty &&
-                            homeController.apiLoadingTeacher.value
+                        Obx(() => controller.teachers.isEmpty &&
+                            controller.apiLoadingTeacher.value
                             ? const SizedBox(
                             height: 170,
                             child: Center(
                                 child: CircularProgressIndicator(
                                   color: AppConstants.lightPrimaryColor,
                                 )))
-                            : homeController.teachers.isEmpty &&
-                            homeController.apiLoadingTeacher.value==false
+                            : controller.teachers.isEmpty &&
+                            controller.apiLoadingTeacher.value==false
                             ? Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -363,11 +363,11 @@ class HomeView extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 80.0),
                               child: SizedBox(height: size.height*1.35,width: size.width/1.85,
                                 child: GridView.builder(
-                          itemCount: homeController.teachers.length > 8
+                          itemCount: controller.teachers.length > 8
                                   ? MediaQuery.of(context).size.shortestSide < 600
                                   ? 8
                                   : 9
-                                  : homeController.teachers.length,
+                                  : controller.teachers.length,
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount:
                                 MediaQuery.of(context).size.shortestSide < 600
@@ -380,16 +380,16 @@ class HomeView extends StatelessWidget {
                                     tag: "imageTeacher$index",
                                     child: CardImageTeacher(
                                       name: true,
-                                      dateTeacher: homeController.teachers[index],
+                                      dateTeacher: controller.teachers[index],
                                       // image:
-                                      //     "https://edu-lens.com/images/teachers/${homeController.teachers[index].image}",
+                                      //     "https://edu-lens.com/images/teachers/${controller.teachers[index].image}",
                                     )),
                                 onTap: () {
                                   ProfileTeacherController profileTeacherController =
                                   Get.put(ProfileTeacherController());
 
                                   profileTeacherController.dateTeacher =
-                                  homeController.teachers[index];
+                                  controller.teachers[index];
 
                                   profileTeacherController.index = index;
                                   profileTeacherController
