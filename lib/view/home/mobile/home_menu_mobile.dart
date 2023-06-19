@@ -8,10 +8,13 @@ import 'package:edu_lens/view/widget/custom_dialog/exit_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'favourite_view.dart';
-import 'home_view_mobile.dart';
+ import 'home_view_mobile.dart';
 
 class HomeMenuMobile extends StatelessWidget {
   HomeMenuMobile({Key? key}) : super(key: key);
+
+class Home extends StatelessWidget {
+  Home({Key? key}) : super(key: key);
 
   HomeController homeController = Get.put(HomeController());
 
@@ -116,7 +119,10 @@ class HomeMenuMobile extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   children: <Widget>[
                     HomeViewMobile(),
+
                     FavouriteMobile(),
+
+
                     Profile(),
                   ],
                 ),

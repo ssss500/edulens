@@ -13,7 +13,10 @@ import '../../../controllers/home/home_controllers.dart';
 import '../../../controllers/profile_teacher_controller.dart';
 import '../../../controllers/subject_teacher_controller.dart';
 import '../../profile_teacher_view.dart';
+// <<<<<<< HEAD
 import '../mobile/subject_teacher_view_mobile.dart';
+// =======
+ // >>>>>>> origin/master
 import '../../widget/card_image_teacher.dart';
 import '../../widget/custom_image_url_view.dart';
 import '../../widget/custom_list_view.dart';
