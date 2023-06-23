@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,25 +8,23 @@ import 'package:photo_view/photo_view.dart';
 class CustomImageUrlView extends StatelessWidget {
   final image, colorLodingIcon, width, height;
   final fit;
-  CustomImageUrlView(
-      {required this.image,
+  const CustomImageUrlView(
+      {super.key, required this.image,
         this.fit=BoxFit.cover,this.height=100.0,
       this.colorLodingIcon = Colors.white,
       this.width = 100.0});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: height,
       child: CachedNetworkImage(
         imageUrl: image,
         imageBuilder: (context, imageProvider) => InkWell(
           onTap: () {
-            Get.to(
-                () => ZoomImageView(
-                      imageUrl: image,
-                    ),
-                preventDuplicates: false);
+            Get.toNamed(RoutesNames.zoomImageView, arguments: {
+              'imageUrl': image,
+            }, preventDuplicates: false);
           },
           child: Container(
             decoration: BoxDecoration(
@@ -110,13 +109,14 @@ class CustomImageUrlViewNotZoom extends StatelessWidget {
 }
 
 class ZoomImageView extends StatelessWidget {
-  final imageUrl;
+ // final imageUrl;
 
-  ZoomImageView({this.imageUrl});
+  const ZoomImageView({super.key, });
 
   @override
   Widget build(BuildContext context) {
     // debugPrint(imageUrl);
+    String imageUrl = Get.arguments['imageUrl'];
     return Hero(
       tag: 'imageZoom',
       child: PhotoView(

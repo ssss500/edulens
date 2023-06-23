@@ -5,7 +5,7 @@ import 'custom_social_media_icons.dart';
 
 class CustomScaffoldLogin extends StatelessWidget {
   CustomScaffoldLogin(
-      {required this.widget,
+      {super.key, required this.widget,
       required this.screenHeight,
       required this.screenWidth});
 

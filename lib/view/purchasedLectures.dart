@@ -2,6 +2,7 @@ import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/video_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/model/lecture_paid_model.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/video/video_view.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
@@ -13,7 +14,7 @@ import 'package:get/get.dart';
 
 class PurchasedLectures extends StatelessWidget {
   PurchasedLectures({Key? key}) : super(key: key);
-  HomeController homeController = Get.put(HomeController());
+  HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,7 @@ class PurchasedLectures extends StatelessWidget {
                       await videoController.openVideo(lecturePaidModel:homeController.lecturePaid[index]);
                       videoController.getVideoExtensionsPayed(lecturePaidModel:homeController.lecturePaid[index]);
                       Get.back();
-                      Get.to(() => VideoView(title: homeController.lecturePaid[index].name.toString(),));
+                      Get.toNamed(RoutesNames.videoView, arguments: {'title': homeController.lecturePaid[index].name.toString()});
                     },
                     child: Container(
                         margin: const EdgeInsets.only(

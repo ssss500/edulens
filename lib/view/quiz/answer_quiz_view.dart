@@ -1,8 +1,5 @@
 import 'package:edu_lens/controllers/quiz/question_controller.dart';
-import 'package:edu_lens/controllers/video_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
-import 'package:edu_lens/helper/app_constants.dart';
-import 'package:edu_lens/view/video/video_view.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:edu_lens/view/widget/custom_list_view.dart';
@@ -12,13 +9,14 @@ import 'package:get/get.dart';
 import 'package:screen_protector/screen_protector.dart';
 
 class AnswerQuizView extends StatelessWidget {
-  AnswerQuizView({Key? key,required this.questionList}) : super(key: key);
+  AnswerQuizView({Key? key,}) : super(key: key);
 
   QuestionController questionController = Get.put(QuestionController());
-  var questionList;
+ // var questionList;
 
   @override
   Widget build(BuildContext context) {
+    List questionList = Get.arguments['questionList'];
     return WillPopScope(
       onWillPop: () async {
         Get.back();

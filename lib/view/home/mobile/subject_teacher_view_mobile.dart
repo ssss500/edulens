@@ -2,6 +2,7 @@ import 'package:connectivity_widget/connectivity_widget.dart';
 import 'package:edu_lens/controllers/profile_teacher_controller.dart';
 import 'package:edu_lens/controllers/subject_teacher_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/profile_teacher_view.dart';
 import 'package:edu_lens/view/widget/card_image_teacher.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
@@ -12,7 +13,7 @@ import 'package:get/get.dart';
 class SubjectTeacher extends StatelessWidget {
   SubjectTeacher({Key? key}) : super(key: key);
   SubjectTeacherController subjectController =
-      Get.put(SubjectTeacherController());
+      Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,7 @@ class SubjectTeacher extends StatelessWidget {
                           profileTeacherController.index = index;
                           profileTeacherController
                               .getCoursesAndExamAndBookings();
-                          Get.to(() => ProfileTeacherView());
+                          Get.toNamed(RoutesNames.profileTeacherView);
                         },
                       ),
                       padding: const EdgeInsets.all(10),

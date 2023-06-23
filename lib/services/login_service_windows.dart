@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 import '../helper/cashe_helper.dart';
 import '../model/user_model.dart';
+import '../routes/routes_names.dart';
 
 class LoginWindowsService {
   final dio = DioUtilNew.dio;
@@ -30,9 +31,9 @@ class LoginWindowsService {
             key: AppConstants.studentClassId,
             value: userModel.student!.studentClassId);
         if (CacheHelper.getData(key: AppConstants.token) == null) {
-          Get.offAllNamed('startWindows');
+          Get.offAllNamed(RoutesNames.welcomeScreen);
         } else {
-          Get.offAllNamed('home');
+          Get.offAllNamed(RoutesNames.home);
         }
       } else if (response.statusCode == 400) {
         showCustomSnackBar(

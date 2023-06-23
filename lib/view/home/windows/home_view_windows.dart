@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:connectivity_widget/connectivity_widget.dart';
 import 'package:edu_lens/helper/app_constants.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/home/windows/teacher_profile.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/foundation.dart';
@@ -23,7 +24,7 @@ import '../../widget/custom_list_view.dart';
 import '../mobile/custom_video_player_for_ads_covers.dart';
 
 class HomeView extends GetView<HomeController> {
-    HomeView({Key? key}) : super(key: key);
+    const HomeView({Key? key}) : super(key: key);
   // final HomeController homeController = Get.put(HomeController());
 
   @override
@@ -143,7 +144,7 @@ class HomeView extends GetView<HomeController> {
                                         Get.put(SubjectTeacherController());
                                         subjectController.indexSubject = index;
                                         subjectController.getSubjectTeacherMethod();
-                                        Get.to(() => SubjectTeacher());
+                                        Get.toNamed(RoutesNames.subjectView);
                                       },
                                       child: CachedNetworkImage(
                                         imageUrl:
@@ -395,7 +396,7 @@ class HomeView extends GetView<HomeController> {
                                   profileTeacherController
                                       .getCoursesAndExamAndBookings();
 
-                                  Get.to(() =>const TeacherProfile());
+                                  Get.toNamed(RoutesNames.teacherView);
                                 },
                           ),
                           padding: const EdgeInsets.all(10),

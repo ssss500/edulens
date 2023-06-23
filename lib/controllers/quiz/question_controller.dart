@@ -3,6 +3,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/video_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/quiz/answer_quiz_view.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 import 'package:edu_lens/view/widget/custom_loading.dart';
@@ -155,9 +156,9 @@ RxBool endTimerBool=false.obs;
                 Get.dialog(CustomLoading());
                 await homeController.updateSolvedExams();
                 Get.back();
-                Get.to(() => AnswerQuizView(
-                      questionList: questionList,
-                    ));
+                Get.toNamed(RoutesNames.answerQuizView, arguments:  {
+                  'questionList':  questionList,
+                });
               },
               child: Container(
                   width: 300,

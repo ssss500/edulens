@@ -7,6 +7,7 @@ import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/package_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/app_constants.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/package_teacher/choose_teacher_for_package.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_buttom.dart';
@@ -19,7 +20,7 @@ import 'package:get/get.dart';
 
 class PackagesView extends StatelessWidget {
   PackagesView({Key? key}) : super(key: key);
-PackageController packageController=Get.put(PackageController());
+PackageController packageController=Get.find();
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
@@ -91,8 +92,7 @@ PackageController packageController=Get.put(PackageController());
                                           packageController.selectedPackage =
                                               packageController
                                                   .plansList[index];
-                                          Get.to(
-                                              () => ChooseTeacherForPackages());
+                                          Get.toNamed(RoutesNames.chooseTeacherForPackages);
                                         }else{
                                     showCustomSnackBar(
                                         context: context,

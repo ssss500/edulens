@@ -1,6 +1,4 @@
 import 'dart:io';
-
-// import 'package:connectivity/connectivity.dart';
 import 'package:edu_lens/view/widget/custom_buttom_deflated.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +14,7 @@ showDialogDelete(fun) {
       size: 50,
       color: Colors.red,
     ),
-    content: Container(
+    content: SizedBox(
         height: 40,
         child: CustomText(
           fontSize: 20,
@@ -60,7 +58,7 @@ alertDialogDone() {
         Center(child: CustomText(text: 'note'.tr)),
       ],
     ),
-    content: Container(
+    content: SizedBox(
         height: 54,
         child: CustomText(
           text: "successRegistrationText",

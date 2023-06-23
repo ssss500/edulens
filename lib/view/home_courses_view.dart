@@ -14,10 +14,13 @@ import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../routes/routes_names.dart';
+
 class HomeCoursesView extends StatelessWidget {
-  HomeCoursesController homeCoursesController =
-      Get.put(HomeCoursesController());
-  HomeController homeController = Get.put(HomeController());
+  HomeCoursesView({super.key});
+
+  HomeCoursesController homeCoursesController = Get.find();
+  HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +61,7 @@ class HomeCoursesView extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                   right: 18.0, top: 15, bottom: 10, left: 18),
                               child: Obx(
-                                ()=> Row(
+                                () => Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
@@ -72,7 +75,8 @@ class HomeCoursesView extends StatelessWidget {
                                             height: 40,
                                             child: CustomText(
                                               text: homeCoursesController
-                                                  .chapters[indexChapters].name!,
+                                                  .chapters[indexChapters]
+                                                  .name!,
                                               color: Colors.white,
                                               textAlign: TextAlign.start,
                                               alignment: Alignment.centerRight,
@@ -102,7 +106,8 @@ class HomeCoursesView extends StatelessWidget {
                                                 text:
                                                     "سعر الفصل كامل :  ${homeCoursesController.chapters[indexChapters].cost!} جنيها",
                                                 textAlign: TextAlign.start,
-                                                alignment: Alignment.centerRight,
+                                                alignment:
+                                                    Alignment.centerRight,
                                                 color: Colors.white,
                                                 fontSize: 14,
                                               )
@@ -119,8 +124,7 @@ class HomeCoursesView extends StatelessWidget {
                                         CustomButton(
                                           height: 55,
                                           width: widthScreen * 0.2,
-
-                                          borderRadius:15,
+                                          borderRadius: 15,
                                           function: () {
                                             BottomSheetPey
                                                 .bottomSheetPaidForChapter(
@@ -134,9 +138,8 @@ class HomeCoursesView extends StatelessWidget {
                                         )
                                       else
                                         const SizedBox()
-                                    else
-                                      if (!homeController
-                                          .appleAndGoogleBool.value)
+                                    else if (!homeController
+                                        .appleAndGoogleBool.value)
                                       Container(
                                         decoration: BoxDecoration(
                                             color: Colors.green.shade400,
@@ -186,11 +189,13 @@ class HomeCoursesView extends StatelessWidget {
                                             item[indexLectures].cost == 0 ||
                                             homeController
                                                     .studentProfile[0].phone ==
-                                                '0102253596'||homeController.chapterPaid.any(
+                                                '0102253596' ||
+                                            homeController.chapterPaid.any(
                                                 (element) =>
-                                            element.id ==
-                                                homeCoursesController
-                                                    .chapters[indexChapters].id)) {
+                                                    element.id ==
+                                                    homeCoursesController
+                                                        .chapters[indexChapters]
+                                                        .id)) {
                                           Get.dialog(CustomLoading());
                                           // await  homeCoursesController.controller.initialise();
                                           homeCoursesController.indexLectures =
@@ -198,16 +203,17 @@ class HomeCoursesView extends StatelessWidget {
                                           homeCoursesController.indexChapters =
                                               indexChapters;
                                           VideoController videoController =
-                                              Get.put(VideoController());
+                                              Get.find();
                                           await videoController.openVideo();
                                           videoController.getVideoExtensions();
                                           Get.back();
-                                          Get.to(() => VideoView(
-                                                title: homeCoursesController
+                                          Get.toNamed(RoutesNames.videoView,
+                                              arguments: {
+                                                'title': homeCoursesController
                                                     .chapters[indexChapters]
                                                     .lectures![indexLectures]
                                                     .name,
-                                              ));
+                                              });
                                         } else {
                                           BottomSheetPey
                                               .bottomSheetPaidForLecture(
@@ -249,59 +255,71 @@ class HomeCoursesView extends StatelessWidget {
                                               color: Colors.white,
                                               fontSize: 23,
                                             ),
-                                            if(!homeController.chapterPaid.any(
-                                                    (element) =>
-                                                element.id ==
+                                            if (!homeController.chapterPaid.any(
+                                                (element) =>
+                                                    element.id ==
                                                     homeCoursesController
-                                                        .chapters[indexChapters].id))
-                                            if (!homeController
-                                                .appleAndGoogleBool.value)
-                                              const SizedBox(
-                                                height: 9,
-                                              ),
-                                           Obx(()=> !homeController.chapterPaid.any(
-                                                    (element) =>
-                                                element.id ==
-                                                    homeCoursesController
-                                                        .chapters[indexChapters].id)?
-                                             !homeController
-                                                .appleAndGoogleBool.value?
-                                              Obx(
-                                                    ()=> CustomText(
-                                                  text: homeController.lecturePaid
-                                                          .any((element) =>
-                                                              element.id ==
-                                                              homeCoursesController
-                                                                  .chapters[
-                                                                      indexChapters]
-                                                                  .lectures![
-                                                                      indexLectures]
-                                                                  .id)
-                                                      ? "تم شراء المحاضرة"
-                                                      : item[indexLectures]
-                                                                  .cost ==
-                                                              0
-                                                          ? "المحاضرة مجانية"
-                                                          : "سعر المحاضرة: ${item[indexLectures].cost} جنيها ",
-                                                  color: homeController
-                                                          .lecturePaid
-                                                          .any((element) =>
-                                                              element.id ==
-                                                              homeCoursesController
-                                                                  .chapters[
-                                                                      indexChapters]
-                                                                  .lectures![
-                                                                      indexLectures]
-                                                                  .id)
-                                                      ? Colors.black54
-                                                      : item[indexLectures]
-                                                                  .cost ==
-                                                              0
-                                                          ? Colors.green.shade800
-                                                          : Colors.red.shade300,
-                                                  fontSize: 16,
+                                                        .chapters[indexChapters]
+                                                        .id))
+                                              if (!homeController
+                                                  .appleAndGoogleBool.value)
+                                                const SizedBox(
+                                                  height: 9,
                                                 ),
-                                              ):SizedBox():SizedBox()),
+                                            Obx(() => !homeController
+                                                    .chapterPaid
+                                                    .any((element) =>
+                                                        element.id ==
+                                                        homeCoursesController
+                                                            .chapters[
+                                                                indexChapters]
+                                                            .id)
+                                                ? !homeController
+                                                        .appleAndGoogleBool
+                                                        .value
+                                                    ? Obx(
+                                                        () => CustomText(
+                                                          text: homeController
+                                                                  .lecturePaid
+                                                                  .any((element) =>
+                                                                      element
+                                                                          .id ==
+                                                                      homeCoursesController
+                                                                          .chapters[
+                                                                              indexChapters]
+                                                                          .lectures![
+                                                                              indexLectures]
+                                                                          .id)
+                                                              ? "تم شراء المحاضرة"
+                                                              : item[indexLectures]
+                                                                          .cost ==
+                                                                      0
+                                                                  ? "المحاضرة مجانية"
+                                                                  : "سعر المحاضرة: ${item[indexLectures].cost} جنيها ",
+                                                          color: homeController
+                                                                  .lecturePaid
+                                                                  .any((element) =>
+                                                                      element
+                                                                          .id ==
+                                                                      homeCoursesController
+                                                                          .chapters[
+                                                                              indexChapters]
+                                                                          .lectures![
+                                                                              indexLectures]
+                                                                          .id)
+                                                              ? Colors.black54
+                                                              : item[indexLectures]
+                                                                          .cost ==
+                                                                      0
+                                                                  ? Colors.green
+                                                                      .shade800
+                                                                  : Colors.red
+                                                                      .shade300,
+                                                          fontSize: 16,
+                                                        ),
+                                                      )
+                                                    : SizedBox()
+                                                : SizedBox()),
 
                                             const SizedBox(
                                               height: 5,

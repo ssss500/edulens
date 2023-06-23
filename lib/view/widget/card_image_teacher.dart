@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:edu_lens/controllers/home/home_controllers.dart';
-import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/model/teacher_model.dart';
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';

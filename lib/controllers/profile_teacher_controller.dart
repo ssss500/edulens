@@ -9,6 +9,8 @@ import 'package:edu_lens/view/widget/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../routes/routes_names.dart';
+
 class ProfileTeacherController extends GetxController {
   final services = GetCourses();
   final coursesTeacher = <CoursesModel>[].obs;
@@ -70,8 +72,8 @@ class ProfileTeacherController extends GetxController {
     await questionMonthController
         .getQuestions();
     Get.back();
-    Get.to(() =>
-        QuestionMonthView());
+    Get.toNamed(RoutesNames.qMonthView);
+
   }
 
 }

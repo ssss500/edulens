@@ -1,8 +1,8 @@
-import 'package:edu_lens/controllers/login/register_controller.dart';
-import 'package:get/get.dart';
-
-import '../controllers/message_controller.dart';
-
+// import 'package:edu_lens/controllers/login/register_controller.dart';
+// import 'package:get/get.dart';
+//
+// import '../controllers/message_controller.dart';
+//
 
 // class ViewModelBinding extends Bindings {
 //   @override

@@ -7,7 +7,7 @@ class CustomListView extends StatelessWidget {
   final Axis axis;
   final bool scroll;
 
-  CustomListView({this.scroll=true,required this.itemCount, required this.itemBuilder, this.padding=10,this.axis=Axis.vertical});
+  const CustomListView({super.key, this.scroll=true,required this.itemCount, required this.itemBuilder, this.padding=10,this.axis=Axis.vertical});
 
   @override
   Widget build(BuildContext context) {

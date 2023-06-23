@@ -1,10 +1,9 @@
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CustomCardMonthExam extends StatelessWidget {
-  CustomCardMonthExam(
+  const CustomCardMonthExam(
       {super.key,
       this.height,
       this.width,

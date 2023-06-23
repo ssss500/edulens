@@ -12,6 +12,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../routes/routes_names.dart';
+
 class QuestionMonthController extends GetxController {
   HomeController homeController = Get.put(HomeController());
   final questionList = <QuestionModel>[].obs;
@@ -148,7 +150,7 @@ class QuestionMonthController extends GetxController {
                 await homeController.updateSolvedExams();
                 Get.back();
 
-                Get.to(() => AnswerQuizMonthView());
+                Get.toNamed( RoutesNames.answerQuizMonthView);
               },
               child: Container(
                   width: 300,

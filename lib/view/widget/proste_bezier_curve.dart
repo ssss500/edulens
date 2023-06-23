@@ -5,7 +5,7 @@ import 'package:proste_bezier_curve/proste_bezier_curve.dart';
 class CustomLoginBezierCurve extends StatelessWidget {
   late double screenWidth;
 
-  CustomLoginBezierCurve(this.screenWidth);
+  CustomLoginBezierCurve(this.screenWidth, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class CustomLoginBezierCurve extends StatelessWidget {
             position: ClipPosition.bottom,
             list: [
               BezierCurveSection(
-                start: Offset(0, 125),
+                start: const Offset(0, 125),
                 top: Offset(screenWidth / 4, 190),
                 end: Offset(screenWidth / 2, 165),
               ),
@@ -37,7 +37,7 @@ class CustomLoginBezierCurve extends StatelessWidget {
             position: ClipPosition.bottom,
             list: [
               BezierCurveSection(
-                start: Offset(0, 125),
+                start: const Offset(0, 125),
                 top: Offset(screenWidth / 4, 150),
                 end: Offset(screenWidth / 2, 125),
               ),

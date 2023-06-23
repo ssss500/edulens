@@ -26,11 +26,13 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 
 class ProfileTeacherView extends StatelessWidget {
+   ProfileTeacherView({super.key});
+
   ProfileTeacherController profileTeacherController =
-      Get.put(ProfileTeacherController());
+      Get.find();
   final QuestionMonthController questionMonthController =
-      Get.put(QuestionMonthController());
-  HomeController homeController = Get.put(HomeController());
+      Get.find();
+  HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -357,14 +359,13 @@ class ProfileTeacherView extends StatelessWidget {
                                             itemBuilder: (_, index) => InkWell(
                                               onTap: () {
                                                 HomeCoursesController
-                                                    homeCourses = Get.put(
-                                                        HomeCoursesController());
+                                                    homeCourses = Get.find();
                                                 homeCourses.chapterId =
                                                     profileTeacherController
                                                         .coursesTeacher[index]
                                                         .pivot!['course_id'];
                                                 homeCourses.getChapters();
-                                                Get.to(() => HomeCoursesView());
+                                                Get.toNamed('/coursesFromHome');
                                               },
                                               child: CustomCardCurses(
                                                 image:

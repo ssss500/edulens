@@ -10,6 +10,8 @@ import 'package:edu_lens/view/widget/custom_text_field_login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../routes/routes_names.dart';
+
 class LoginView extends StatelessWidget {
   LoginView({Key? key}) : super(key: key);
   final controller = Get.put(LoginController());
@@ -78,7 +80,7 @@ class LoginView extends StatelessWidget {
               ),
               TextButton(
                   onPressed: () {
-                    Get.to(() => CreateAccountView());
+                    Get.toNamed(RoutesNames.createAccountView);
                   },
                   child: CustomText(
                     text: 'createAccountText'.tr,

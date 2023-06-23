@@ -13,6 +13,7 @@ import 'package:edu_lens/model/student_reservations_model.dart';
 import 'package:edu_lens/model/subject_model.dart';
 import 'package:edu_lens/model/teacher_model.dart';
 import 'package:edu_lens/model/user_model.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/login/mobile/home_login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -125,7 +126,7 @@ class GetHomeServices {
         if (mList.isEmpty) {
           GetStorage().remove("listTeacherLoves");
           await CacheHelper.clearData();
-          Get.offAll(() => HomeLogin());
+          Get.offAllNamed(RoutesNames.welcomeScreen);
         }
         return mList;
       }

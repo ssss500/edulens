@@ -38,7 +38,7 @@ class RegisterServices {
             deck: "تم انشاء الحساب بنجاح",
             contentType: ContentType.success);
         Timer(const Duration(milliseconds: 1000), () {
-          Get.offAllNamed('switchLogin');
+          //Get.offAllNamed('switchLogin');
           // Get.offAll(() => token == null ? const LoginView() : Home());
         });
       } else if (response.statusCode == 422) {

@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 class SubjectTeacher extends StatelessWidget {
   SubjectTeacher({Key? key}) : super(key: key);
   SubjectTeacherController subjectController =
-      Get.put(SubjectTeacherController());
+      Get.find();
 
   @override
   Widget build(BuildContext context) {

@@ -17,6 +17,7 @@ class RegisterThreeScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
+    
     return CustomRegistrationView(
       widget: Form(
         key: controller.formWindowsThree,
@@ -93,26 +94,33 @@ class RegisterThreeScreen extends StatelessWidget {
                   items: controller.classes,
                 ),
               ),
-              // Obx(
-              //       () => CustomDropdownButton(
-              //     width: width * 0.183,
-              //     isMobile: false,
-              //     hint: controller.year.value,
-              //     function: (v) {
-              //       controller.year.value = v!;
-              //       if (controller.year.value == "تعليم حر") {
-              //         controller.gradeId.value = "1";
-              //       } else if (controller.year.value ==
-              //           "تعليم جامعى") {
-              //         controller.gradeId.value = "2";
-              //       } else if (controller.year.value ==
-              //           "تعليم مدرسى") {
-              //         controller.gradeId.value = "3";
-              //       }
-              //     },
-              //     items: controller.listYearString,
-              //   ),
-              // ),
+              SizedBox(
+                height: height * 0.015,
+              ),
+              CustomText(text: 'chooseLevel'.tr, fontSize: width * 0.012),
+              SizedBox(
+                height: height * 0.012,
+              ),
+              Obx(
+                    () => CustomDropdownButton(
+                  width: width * 0.183,
+                  isMobile: false,
+                  hint: controller.year.value,
+                  function: (v) {
+                    controller.year.value = v!;
+                    if (controller.year.value == "تعليم حر") {
+                      controller.gradeId.value = "1";
+                    } else if (controller.year.value ==
+                        "تعليم جامعى") {
+                      controller.gradeId.value = "2";
+                    } else if (controller.year.value ==
+                        "تعليم مدرسى") {
+                      controller.gradeId.value = "3";
+                    }
+                  },
+                  items: controller.listYearString,
+                ),
+              ),
 
               SizedBox(
                 height: height * 0.015,
@@ -199,40 +207,6 @@ class RegisterThreeScreen extends StatelessWidget {
                     )),
               ),
 
-              // SizedBox(
-              //   height: height * 0.03,
-              // ),
-              // Padding(
-              //   padding: EdgeInsets.only(right: width * 0.035),
-              //   child: Row(
-              //     children: [
-              //       Obx(
-              //             () => controller.loading.value
-              //             ? const Center(
-              //           child: CircularProgressIndicator(
-              //             color:
-              //             AppConstants.lightPrimaryColor,
-              //           ),
-              //         )
-              //             : NextButton(
-              //             function: () {
-              //               controller
-              //                   .register(context);
-              //               // Get.to(()=> const HomeScreen());
-              //             },
-              //             icon: Icons.done),
-              //       ),
-              //       SizedBox(
-              //         width: width * 0.03,
-              //       ),
-              //       NextButton(
-              //           function: () {
-              //             Get.back();
-              //           },
-              //           icon: Icons.arrow_back_ios_new_outlined),
-              //     ],
-              //   ),
-              // )
             ],
           ),
         ),

@@ -7,8 +7,8 @@ class CustomLoading extends StatelessWidget {
   final double doubleUploadTask;
   final String? textLoading;
 
-  CustomLoading(
-      {this.boolUploading = false,
+  const CustomLoading(
+      {super.key, this.boolUploading = false,
       this.doubleUploadTask = 0.0,
       this.textLoading});
 

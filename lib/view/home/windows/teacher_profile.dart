@@ -9,6 +9,7 @@ import '../../../controllers/home_courses_controller.dart';
 import '../../../controllers/profile_teacher_controller.dart';
 import '../../../controllers/quiz/question_month_controller.dart';
 import '../../../helper/app_constants.dart';
+import '../../../routes/routes_names.dart';
 import '../../buttom_sheet_paid.dart';
 import '../../home_courses_view.dart';
 import '../../widget/CustomCardMonthExam.dart';
@@ -25,8 +26,8 @@ class TeacherProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     final heightScreen = MediaQuery.of(context).size.height;
     final widthScreen = MediaQuery.of(context).size.width;
-    final profileTeacherController = Get.put(ProfileTeacherController());
-    final homeController = Get.put(HomeController());
+    final profileTeacherController = Get.find();
+    final homeController = Get.find();
 
     return CustomBackground(
         child: ConnectivityWidget(
@@ -331,8 +332,7 @@ class TeacherProfile extends StatelessWidget {
                                                             .coursesTeacher[index]
                                                             .pivot!['course_id'];
                                                     homeCourses.getChapters();
-                                                    Get.to(
-                                                        () => HomeCoursesView());
+                                                    Get.toNamed(RoutesNames.coursesFromHome);
                                                   },
                                                   child: CustomCardCurses(
                                                     image:

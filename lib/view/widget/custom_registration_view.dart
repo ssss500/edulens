@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import 'next_button.dart';
 class CustomRegistrationView extends StatelessWidget {
-    CustomRegistrationView({Key? key, required this.widget,  this.funNextButton,this.buttonBack=true}) : super(key: key);
+    const CustomRegistrationView({Key? key, required this.widget,  this.funNextButton,this.buttonBack=true}) : super(key: key);
   final Widget widget;
   final Function? funNextButton;
   final bool buttonBack;
@@ -48,40 +48,42 @@ class CustomRegistrationView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      widget,
-                      if(buttonBack)
-                      SizedBox(
-                        height: height * 0.03,
-                      ),
-                      if(buttonBack)
-                        Center(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              RotatedBox(
-                                quarterTurns: 2,
-                                child: NextButton(
-                                    function:(){
-                                      funNextButton!();
+                  SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SingleChildScrollView(child: widget),
+                        if(buttonBack)
+                        SizedBox(
+                          height: height * 0.03,
+                        ),
+                        if(buttonBack)
+                          Center(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RotatedBox(
+                                  quarterTurns: 2,
+                                  child: NextButton(
+                                      function:(){
+                                        funNextButton!();
+                                      },
+                                      icon: Icons.arrow_back_ios_new_outlined),
+                                ),
+                                SizedBox(
+                                  width: width * 0.03,
+                                ),
+                                NextButton(
+                                    function: () {
+                                      Get.back();
                                     },
                                     icon: Icons.arrow_back_ios_new_outlined),
-                              ),
-                              SizedBox(
-                                width: width * 0.03,
-                              ),
-                              NextButton(
-                                  function: () {
-                                    Get.back();
-                                  },
-                                  icon: Icons.arrow_back_ios_new_outlined),
-                            ],
-                          ),
-                        )
-                    ],
+                              ],
+                            ),
+                          )
+                      ],
+                    ),
                   ),
                     if(width > 800)
                       Image.asset(

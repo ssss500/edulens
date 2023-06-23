@@ -1,13 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:edu_lens/controllers/pdf_controller.dart';
-import 'package:edu_lens/controllers/video_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/model/courses_models/pdf_model.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
@@ -15,9 +12,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class PdfView extends StatefulWidget {
-  PdfModel pdfModel;
+  //PdfModel pdfModel;
 
-  PdfView({required this.pdfModel});
+  PdfView({super.key,});
+  PdfModel pdfModel = Get.arguments['pdfModel'];
 
   @override
   _PdfViewState createState() => _PdfViewState();

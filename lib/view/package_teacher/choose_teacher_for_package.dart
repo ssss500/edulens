@@ -18,8 +18,8 @@ import 'package:get/get.dart';
 
 class ChooseTeacherForPackages extends StatelessWidget {
   ChooseTeacherForPackages({Key? key}) : super(key: key);
-  HomeController homeController = Get.put(HomeController());
-  PackageController packageController = Get.put(PackageController());
+  HomeController homeController = Get.find();
+  PackageController packageController = Get.find();
 
   @override
   Widget build(BuildContext context) {

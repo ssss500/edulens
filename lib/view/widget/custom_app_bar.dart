@@ -70,9 +70,9 @@ class CustomAppBar extends StatelessWidget {
                   Get.back();
                 },
               )
-            : SizedBox(),
+            : const SizedBox(),
         actions: [
-          Container(
+          SizedBox(
             height: 50,
             width: 50,
             child: iconRight,

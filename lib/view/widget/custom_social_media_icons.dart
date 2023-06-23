@@ -20,9 +20,7 @@ RxString versionName = ''.obs;
 
 Widget customSocialMediaIcons() {
   return Column(
-    // crossAxisAlignment: CrossAxisAlignment.center,
-    // mainAxisAlignment: MainAxisAlignment.center,
-    // mainAxisSize: MainAxisSize.max,
+
     children: [
       Padding(
         padding: const EdgeInsets.only(left: 15,right: 15),
@@ -35,7 +33,7 @@ Widget customSocialMediaIcons() {
               function: () async {
                 showAdaptiveActionSheet(
                   context: Get.context!,
-                  title: Text(
+                  title: const Text(
                     'للتواصل معا ايديو لينس',
                     style: TextStyle(
                         fontSize: 27,
@@ -79,7 +77,7 @@ Widget customSocialMediaIcons() {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text(
+                              const Text(
                                 "01092884278",
                                 style: TextStyle(
                                     fontSize: 20,
@@ -91,10 +89,10 @@ Widget customSocialMediaIcons() {
                               ),
                               InkWell(
                                 onTap: () async {
-                                  final Uri _url = Uri.parse(
+                                  final Uri url = Uri.parse(
                                       'whatsapp://send?phone=+201092884278');
 
-                                  await launchUrl(_url);
+                                  await launchUrl(url);
                                 },
                                 child: Image.asset(
                                   "assets/images/whatsapp.png",
@@ -151,7 +149,7 @@ Widget customSocialMediaIcons() {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text(
+                              const Text(
                                 "01153070885",
                                 style: TextStyle(
                                     fontSize: 20,
@@ -163,10 +161,10 @@ Widget customSocialMediaIcons() {
                               ),
                               InkWell(
                                 onTap: () async {
-                                  final Uri _url = Uri.parse(
+                                  final Uri url = Uri.parse(
                                       'whatsapp://send?phone=+201153070885');
 
-                                  await launchUrl(_url);
+                                  await launchUrl(url);
                                 },
                                 child: Image.asset(
                                   "assets/images/whatsapp.png",
@@ -223,7 +221,7 @@ Widget customSocialMediaIcons() {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text(
+                              const Text(
                                 "01099613267",
                                 style: TextStyle(
                                     fontSize: 20,
@@ -235,10 +233,10 @@ Widget customSocialMediaIcons() {
                               ),
                               InkWell(
                                 onTap: () async {
-                                  final Uri _url = Uri.parse(
+                                  final Uri url = Uri.parse(
                                       'whatsapp://send?phone=+201099613267');
 
-                                  await launchUrl(_url);
+                                  await launchUrl(url);
                                 },
                                 child: Image.asset(
                                   "assets/images/whatsapp.png",

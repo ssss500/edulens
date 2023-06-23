@@ -12,7 +12,7 @@ class HowWeAreView extends StatelessWidget {
       title: "من نحن",
       widget: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Column(
             children: [
               BiuldMyCard(

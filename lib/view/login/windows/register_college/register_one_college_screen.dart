@@ -1,3 +1,4 @@
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/widget/custom_registration_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -228,7 +229,7 @@ class RegisterOneCollegeScreen extends StatelessWidget {
       ],
     ), funNextButton: (){
       if (controller.formWindowsUniOne.currentState!.validate()) {
-        Get.toNamed('registerUni2');
+        Get.toNamed(RoutesNames.registerUni2);
       }
     },);
   }

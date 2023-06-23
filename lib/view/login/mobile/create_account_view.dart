@@ -19,7 +19,7 @@ class CreateAccountView extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    final controller = Get.put(RegisterController());
+    final controller = Get.find();
     return CustomScaffoldLogin(
       screenHeight: screenHeight,
       screenWidth: screenWidth,

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../../../controllers/home/home_controllers.dart';
 import '../../../controllers/video_controller.dart';
 import '../../../helper/app_constants.dart';
+import '../../../routes/routes_names.dart';
 import '../../video/video_view.dart';
 import '../../widget/custom_image_url_view.dart';
 import '../../widget/custom_loading.dart';
@@ -10,6 +11,7 @@ import '../../widget/custom_text.dart';
 
 class PaidLectureScreen extends GetView<HomeController> {
   PaidLectureScreen({Key? key}) : super(key: key);
+  HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,12 @@ class PaidLectureScreen extends GetView<HomeController> {
           )
         : Column(
             children: [
-              CustomText(text: 'المحاضرات التي تم شراؤها', color: AppConstants.lightPrimaryColor, fontSize: 24,fontWeight: FontWeight.bold,),
+              CustomText(
+                text: 'المحاضرات التي تم شراؤها',
+                color: AppConstants.lightPrimaryColor,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SingleChildScrollView(
@@ -57,16 +64,14 @@ class PaidLectureScreen extends GetView<HomeController> {
                           VideoController videoController =
                               Get.put(VideoController());
                           await videoController.openVideo(
-                              lecturePaidModel:
-                              controller.lecturePaid[index]);
+                              lecturePaidModel: controller.lecturePaid[index]);
                           videoController.getVideoExtensionsPayed(
-                              lecturePaidModel:
-                              controller.lecturePaid[index]);
+                              lecturePaidModel: controller.lecturePaid[index]);
                           Get.back();
-                          // Get.to(() => VideoView(
-                          //       title: homeController.lecturePaid[index].name
-                          //           .toString(),
-                          //     ));
+                          Get.toNamed(RoutesNames.videoView, arguments: {
+                            'title': homeController.lecturePaid[index].name
+                                .toString(),
+                          });
                         },
                         child: Container(
                             margin: const EdgeInsets.only(
@@ -93,7 +98,8 @@ class PaidLectureScreen extends GetView<HomeController> {
                                       height: 50,
                                       decoration: BoxDecoration(
                                         color: Colors.black45,
-                                        borderRadius: BorderRadius.circular(20.0),
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
                                       padding: const EdgeInsets.only(
                                           left: 6, right: 6, bottom: 3, top: 3),

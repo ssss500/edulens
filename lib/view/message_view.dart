@@ -2,7 +2,6 @@ import 'package:edu_lens/controllers/message_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/view/widget/message_card.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
-import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:edu_lens/view/widget/custom_list_view.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,7 @@ import 'package:get/get.dart';
 
 class MessageView extends StatelessWidget {
   MessageView({Key? key}) : super(key: key);
-  MessageController messageController = Get.put(MessageController());
+  MessageController messageController = Get.find();
 
   @override
   Widget build(BuildContext context) {

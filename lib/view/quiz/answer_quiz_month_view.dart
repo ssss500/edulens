@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 class AnswerQuizMonthView extends StatelessWidget {
   AnswerQuizMonthView({Key? key}) : super(key: key);
-  QuestionMonthController questionMonthController = Get.put(QuestionMonthController());
+  QuestionMonthController questionMonthController = Get.find();
 
   @override
   Widget build(BuildContext context) {

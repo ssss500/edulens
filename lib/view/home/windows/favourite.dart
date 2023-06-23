@@ -5,8 +5,6 @@ class FavouriteWindows extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-     child: Center(child:Text('fav')),
-    );
+    return const Center(child:Text('fav'));
   }
 }

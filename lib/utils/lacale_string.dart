@@ -36,6 +36,7 @@ class LocaleString extends Translations {
           "adara":"الادارة",
           "region": "المنطقة",
           "chooseYear": "اختر السنة",
+          "chooseLevel": "اختر المرحلة الدراسية",
           "yearOfBirth": "سنه الميلاد",
           "messageText": "الاشعارات",
           "saveAnswer": "حفظ الاجابة",

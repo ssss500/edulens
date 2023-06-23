@@ -1,14 +1,10 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/controllers/home/home_controllers.dart';
-import 'package:edu_lens/controllers/payment_controller.dart';
 import 'package:edu_lens/controllers/phone_number_formatter.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/model/courses_models/chapter_model.dart';
-import 'package:edu_lens/model/courses_models/lecture_model.dart';
 import 'package:edu_lens/model/profile_teacher_models/booking_model.dart';
 import 'package:edu_lens/model/profile_teacher_models/month_exam_model.dart';
 import 'package:edu_lens/services/payment_services.dart';
-import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 import 'package:edu_lens/view/widget/custom_loading.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:edu_lens/view/widget/custom_text_field_login.dart';
@@ -16,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:get/get.dart';
 
-// final GlobalKey<ScaffoldState> bottomSheetKey = GlobalKey<ScaffoldState>();
 class BottomSheetPey {
   static void bottomSheetPaidForLecture({
     required Lecture dataLecture,
@@ -26,7 +21,6 @@ class BottomSheetPey {
     final paymentServices = PaymentServices();
     GlobalKey<FormState> formState = GlobalKey<FormState>();
     TextEditingController controller = TextEditingController();
-    // String code = '';
     Get.bottomSheet(
       ClipRRect(
         borderRadius: const BorderRadius.only(

@@ -357,6 +357,11 @@ class RegisterController extends GetxController {
   getIDDevise() async {
     var idDevice;
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+
+    if(Platform.isWindows){
+      final windowsInfo = await deviceInfo.windowsInfo;
+      idDevice=windowsInfo.deviceId;
+    }
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
       log(androidInfo.id.toString());
@@ -417,10 +422,11 @@ class RegisterController extends GetxController {
         } catch (e) {
           debugPrint(e.toString());
         }
-        idDevice = await getIDDevise();
+
         FocusManager.instance.primaryFocus?.unfocus();
 
       }
+      idDevice = await getIDDevise();
       // debugPrint(token.toString());
       // ignore: use_build_context_synchronously
       await services.register(
@@ -467,13 +473,15 @@ class RegisterController extends GetxController {
           title: "note".tr,
           deck: "يجب عليك اخيتار اذا كنت ذكر ام انثي",
           contentType: ContentType.failure);
-    } else if (year.value == "المرحله الدراسيه") {
-      return showCustomSnackBar(
-          context: context,
-          title: "note".tr,
-          deck: "يجب عليك اختيار المرحلة الدراسية",
-          contentType: ContentType.failure);
-    } else if (cityName.value ==
+    }
+    // else if (year.value == "المرحله الدراسيه") {
+    //   return showCustomSnackBar(
+    //       context: context,
+    //       title: "note".tr,
+    //       deck: "يجب عليك اختيار المرحلة الدراسية",
+    //       contentType: ContentType.failure);
+   // }
+    else if (cityName.value ==
         "${"governorate".tr} ${Platform.isIOS ? "*" : null}") {
       return showCustomSnackBar(
           context: context,
@@ -491,9 +499,8 @@ class RegisterController extends GetxController {
         }catch(e){
           debugPrint(e.toString());
         }
-        idDevice = await getIDDevise();
       }
-
+      idDevice = await getIDDevise();
       debugPrint(token.toString());
       // ignore: use_build_context_synchronously
       await services.register(

@@ -8,7 +8,7 @@ import '../../widget/custom_list_view.dart';
 import '../../widget/message_card.dart';
 
 class MessageScreen extends GetView<MessageController> {
-  MessageScreen({Key? key}) : super(key: key);
+  const MessageScreen({Key? key}) : super(key: key);
   // final MessageController messageController = Get.find();
 
   @override
@@ -43,7 +43,7 @@ class MessageScreen extends GetView<MessageController> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 50,
                         ),
                         Container(

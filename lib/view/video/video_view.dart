@@ -1,4 +1,3 @@
-// import 'package:better_player/better_player.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/home_courses_controller.dart';
@@ -7,6 +6,7 @@ import 'package:edu_lens/controllers/quiz/question_controller.dart';
 import 'package:edu_lens/controllers/video_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/pdf_view.dart';
 import 'package:edu_lens/view/quiz/question_view.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
@@ -29,28 +29,22 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:screen_protector/screen_protector.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-// import 'package:webview_flutter/webview_flutter.dart';
-
-// import 'package:vimeo_player_flutter/vimeo_player_flutter.dart';
-// import 'package:vimeo_player_flutter/vimeo_player_flutter.dart';
-// import 'package:vimeo_video_player/vimeo_video_player.dart';
-// import 'package:vimeo_video_player/vimeo_video_player.dart';
-// import 'package:vimeoplayer/vimeoplayer.dart';
-// import 'package:vimeoplayer_trinity/vimeoplayer_trinity.dart';
 
 class VideoView extends StatelessWidget {
-  VideoController videoController = Get.put(VideoController());
+  VideoController videoController = Get.find();
 
-  HomeController homeController = Get.put(HomeController());
-  HomeCoursesController homeCoursesController =
-      Get.put(HomeCoursesController());
+  HomeController homeController = Get.find();
+  HomeCoursesController homeCoursesController = Get.find();
 
-  VideoView({required this.title});
+  VideoView({
+    super.key,
+  });
 
-  String title;
+  //String title;
 
   @override
   Widget build(BuildContext context) {
+    String title = Get.arguments['title'];
     SystemChrome.setPreferredOrientations([
       // DeviceOrientation.portraitUp,
       // DeviceOrientation.portraitDown,
@@ -81,123 +75,123 @@ class VideoView extends StatelessWidget {
               () => Column(
                 children: [
                   ///
-                 // if (!videoController.mustSolveExam.value)
-                    // FutureBuilder(builder: (context, snap) {
-                    //   // try {
-                    //     // if (homeCoursesController
-                    //     //         .chapters[homeCoursesController.indexChapters]
-                    //     //         .lectures[homeCoursesController.indexLectures]
-                    //     //         .dailymotion!=
-                    //     //     null) {
-                    //     //   debugPrint(" FutureBuilder catch1");
-                    //
-                    //       return     PodVideoPlayer(
-                    //         controller: videoController.controller,
-                    //         onVideoError: () => Stack(
-                    //           children: [
-                    //             AspectRatio(
-                    //                 aspectRatio: 16 / 9,
-                    //                 child: Image.asset(
-                    //                   "assets/images/errorvideo.jpg",
-                    //                   fit: BoxFit.cover,
-                    //                 )),
-                    //             Positioned(
-                    //                 bottom: 10,
-                    //                 left: 0,
-                    //                 right: 0,
-                    //                 child: CustomText(
-                    //                   text:
-                    //                   ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
-                    //                   color: Colors.white,
-                    //                   fontWeight: FontWeight.bold,
-                    //                 )),
-                    //           ],
-                    //         ),
-                    //       );
-                    //   ///لو فتحت هنا تاني و كان مفيش مشاكل امسح ده
-                    //
-                    //   // }
-                    //     // else {
-                    //     //   debugPrint(" FutureBuilder catch2");
-                    //     //
-                    //     //   return PodVideoPlayer(
-                    //     //     controller: videoController.controller,
-                    //     //     onVideoError: () => Stack(
-                    //     //       children: [
-                    //     //         AspectRatio(
-                    //     //             aspectRatio: 16 / 9,
-                    //     //             child: Image.asset(
-                    //     //               "assets/images/errorvideo.jpg",
-                    //     //               fit: BoxFit.cover,
-                    //     //             )),
-                    //     //         Positioned(
-                    //     //             bottom: 10,
-                    //     //             left: 0,
-                    //     //             right: 0,
-                    //     //             child: CustomText(
-                    //     //               text:
-                    //     //                   ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
-                    //     //               color: Colors.white,
-                    //     //               fontWeight: FontWeight.bold,
-                    //     //             )),
-                    //     //       ],
-                    //     //     ),
-                    //     //   );
-                    //     // }
-                    //     ///لو فتحت هنا تاني و كان مفيش مشاكل امسح ده
-                    //   // } catch (e) {
-                    //   //   try {
-                    //   //     debugPrint(
-                    //   //         " FutureBuilder catch ${videoController.idVideoForPaidModelYoutube}");
-                    //   //
-                    //   //     // ignore: unnecessary_null_comparison
-                    //   //     if (videoController.idVideoForPaidModelYoutube ==
-                    //   //             'null' ||
-                    //   //         videoController.idVideoForPaidModelYoutube ==
-                    //   //             null ||
-                    //   //         videoController.idVideoForPaidModelYoutube ==
-                    //   //             '') {
-                    //   //       debugPrint(" FutureBuilder catch3");
-                    //   //
-                    //   //       debugPrint(
-                    //   //           "videoController.idVideoForPaidModel ${videoController.idVideoForPaidModel}");
-                    //   //       return AspectRatio(
-                    //   //         aspectRatio: 16 / 9,
-                    //   //         child: VimeoPlayer(
-                    //   //           videoId: videoController.idVideoForPaidModel,
-                    //   //         ),
-                    //   //       );
-                    //   //     } else {
-                    //   //       debugPrint(" FutureBuilder catch4");
-                    //   //
-                    //   //       return PodVideoPlayer(
-                    //   //         controller: videoController.controller,
-                    //   //       );
-                    //   //     }
-                    //   //   } catch (e) {
-                    //   //     return Stack(
-                    //   //       children: [
-                    //   //         AspectRatio(
-                    //   //             aspectRatio: 16 / 9,
-                    //   //             child: Image.asset(
-                    //   //               "assets/images/errorvideo.jpg",
-                    //   //               fit: BoxFit.cover,
-                    //   //             )),
-                    //   //         Positioned(
-                    //   //             bottom: 10,
-                    //   //             left: 0,
-                    //   //             right: 0,
-                    //   //             child: CustomText(
-                    //   //               text:
-                    //   //                   ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
-                    //   //               color: Colors.white,
-                    //   //               fontWeight: FontWeight.bold,
-                    //   //             )),
-                    //   //       ],
-                    //   //     );
-                    //   //   }
-                    //   // }
-                    // })
+                  // if (!videoController.mustSolveExam.value)
+                  // FutureBuilder(builder: (context, snap) {
+                  //   // try {
+                  //     // if (homeCoursesController
+                  //     //         .chapters[homeCoursesController.indexChapters]
+                  //     //         .lectures[homeCoursesController.indexLectures]
+                  //     //         .dailymotion!=
+                  //     //     null) {
+                  //     //   debugPrint(" FutureBuilder catch1");
+                  //
+                  //       return     PodVideoPlayer(
+                  //         controller: videoController.controller,
+                  //         onVideoError: () => Stack(
+                  //           children: [
+                  //             AspectRatio(
+                  //                 aspectRatio: 16 / 9,
+                  //                 child: Image.asset(
+                  //                   "assets/images/errorvideo.jpg",
+                  //                   fit: BoxFit.cover,
+                  //                 )),
+                  //             Positioned(
+                  //                 bottom: 10,
+                  //                 left: 0,
+                  //                 right: 0,
+                  //                 child: CustomText(
+                  //                   text:
+                  //                   ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
+                  //                   color: Colors.white,
+                  //                   fontWeight: FontWeight.bold,
+                  //                 )),
+                  //           ],
+                  //         ),
+                  //       );
+                  //   ///لو فتحت هنا تاني و كان مفيش مشاكل امسح ده
+                  //
+                  //   // }
+                  //     // else {
+                  //     //   debugPrint(" FutureBuilder catch2");
+                  //     //
+                  //     //   return PodVideoPlayer(
+                  //     //     controller: videoController.controller,
+                  //     //     onVideoError: () => Stack(
+                  //     //       children: [
+                  //     //         AspectRatio(
+                  //     //             aspectRatio: 16 / 9,
+                  //     //             child: Image.asset(
+                  //     //               "assets/images/errorvideo.jpg",
+                  //     //               fit: BoxFit.cover,
+                  //     //             )),
+                  //     //         Positioned(
+                  //     //             bottom: 10,
+                  //     //             left: 0,
+                  //     //             right: 0,
+                  //     //             child: CustomText(
+                  //     //               text:
+                  //     //                   ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
+                  //     //               color: Colors.white,
+                  //     //               fontWeight: FontWeight.bold,
+                  //     //             )),
+                  //     //       ],
+                  //     //     ),
+                  //     //   );
+                  //     // }
+                  //     ///لو فتحت هنا تاني و كان مفيش مشاكل امسح ده
+                  //   // } catch (e) {
+                  //   //   try {
+                  //   //     debugPrint(
+                  //   //         " FutureBuilder catch ${videoController.idVideoForPaidModelYoutube}");
+                  //   //
+                  //   //     // ignore: unnecessary_null_comparison
+                  //   //     if (videoController.idVideoForPaidModelYoutube ==
+                  //   //             'null' ||
+                  //   //         videoController.idVideoForPaidModelYoutube ==
+                  //   //             null ||
+                  //   //         videoController.idVideoForPaidModelYoutube ==
+                  //   //             '') {
+                  //   //       debugPrint(" FutureBuilder catch3");
+                  //   //
+                  //   //       debugPrint(
+                  //   //           "videoController.idVideoForPaidModel ${videoController.idVideoForPaidModel}");
+                  //   //       return AspectRatio(
+                  //   //         aspectRatio: 16 / 9,
+                  //   //         child: VimeoPlayer(
+                  //   //           videoId: videoController.idVideoForPaidModel,
+                  //   //         ),
+                  //   //       );
+                  //   //     } else {
+                  //   //       debugPrint(" FutureBuilder catch4");
+                  //   //
+                  //   //       return PodVideoPlayer(
+                  //   //         controller: videoController.controller,
+                  //   //       );
+                  //   //     }
+                  //   //   } catch (e) {
+                  //   //     return Stack(
+                  //   //       children: [
+                  //   //         AspectRatio(
+                  //   //             aspectRatio: 16 / 9,
+                  //   //             child: Image.asset(
+                  //   //               "assets/images/errorvideo.jpg",
+                  //   //               fit: BoxFit.cover,
+                  //   //             )),
+                  //   //         Positioned(
+                  //   //             bottom: 10,
+                  //   //             left: 0,
+                  //   //             right: 0,
+                  //   //             child: CustomText(
+                  //   //               text:
+                  //   //                   ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
+                  //   //               color: Colors.white,
+                  //   //               fontWeight: FontWeight.bold,
+                  //   //             )),
+                  //   //       ],
+                  //   //     );
+                  //   //   }
+                  //   // }
+                  // })
                   // else
                   //   Container(
                   //     decoration: const BoxDecoration(
@@ -289,7 +283,8 @@ class VideoView extends StatelessWidget {
           pdfController.loadPDF();
           pdfController.onInit();
           // debugPrint(videoController.pdfList.first.toJson().toString());
-          Get.to(() => PdfView(pdfModel: videoController.pdfList[index]));
+          Get.toNamed(RoutesNames.pdfView,
+              arguments: {'pdfModel': videoController.pdfList[index]});
         },
         child: Container(
           height: 90,
@@ -359,11 +354,11 @@ class VideoView extends StatelessWidget {
             // questionController.start.value=videoController.quizList[indexQuiz].duration!;
             // questionController.startTimer();
             questionController.endTimerBool.value = false;
-            Get.to(() => QuestionView(
-                  questionList: videoController.questionList,
-                  quizList: videoController.quizList,
-                  indexQuiz: videoController.indexQuiz,
-                ));
+            Get.toNamed(RoutesNames.questionView, arguments: {
+              'questionList': videoController.questionList,
+              'quizList': videoController.quizList,
+              'indexQuiz': videoController.indexQuiz,
+            });
           } else {
             showCustomSnackBar(
                 context: Get.context,

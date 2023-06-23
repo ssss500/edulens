@@ -4,6 +4,7 @@ import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/home_courses_controller.dart';
 import 'package:edu_lens/controllers/profile_teacher_controller.dart';
 import 'package:edu_lens/model/teacher_model.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/profile_teacher_view.dart';
 import 'package:edu_lens/view/widget/card_image_teacher.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
@@ -86,7 +87,7 @@ class _FavouriteMobileState extends State<FavouriteMobile> {
                 profileTeacherController.index = index;
                 profileTeacherController.getCoursesAndExamAndBookings();
 
-                Get.to(() => ProfileTeacherView());
+                Get.toNamed(RoutesNames.profileTeacherView);
               },
             ),
             padding: const EdgeInsets.all(10),

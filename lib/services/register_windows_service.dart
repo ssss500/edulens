@@ -5,6 +5,7 @@ import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/helper/dio_integration.dart';
 import 'package:edu_lens/model/error_model.dart';
 import 'package:edu_lens/model/register_model.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,7 +39,7 @@ class RegisterWindowsServices {
             deck: "تم انشاء الحساب بنجاح",
             contentType: ContentType.success);
         Timer(const Duration(milliseconds: 1000), () {
-          Get.offAllNamed('home');
+          Get.offAllNamed(RoutesNames.home);
            //Get.offAll(() => token == null ? const LoginView() : Home());
         });
       } else if (response.statusCode == 422) {

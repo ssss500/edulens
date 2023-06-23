@@ -18,9 +18,9 @@ class QuestionMonthView extends StatelessWidget {
   QuestionMonthView({Key? key}) : super(key: key);
   final CarouselController _controller = CarouselController();
   QuestionMonthController questionMonthController =
-      Get.put(QuestionMonthController());
+      Get.find();
   ProfileTeacherController profileTeacherController =
-      Get.put(ProfileTeacherController());
+      Get.find();
 
   @override
   Widget build(BuildContext context) {

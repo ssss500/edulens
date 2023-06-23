@@ -4,6 +4,7 @@ import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/package_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/login/mobile/home_login_view.dart';
 import 'package:edu_lens/view/package_teacher/choose_teacher_for_package.dart';
 import 'package:edu_lens/view/package_teacher/packages_view.dart';
@@ -252,7 +253,7 @@ class Profile extends StatelessWidget {
                     if (!homeController.appleAndGoogleBool.value)
                       buildItem(
                         onTap: () {
-                          Get.to(() => PurchasedLectures());
+                          Get.toNamed(RoutesNames.purchasedLecture);
                         },
                         // color: Colors.blue,
                         icon: Icons.book,
@@ -288,7 +289,7 @@ class Profile extends StatelessWidget {
                           PackageController packageController=Get.put(PackageController());
                           packageController.getPackages();
                           // Get.to(() =>   ChooseTeacherForPackages());
-                          Get.to(() =>   PackagesView());
+                          Get.toNamed(RoutesNames.packageView);
                         },
                         icon: Icons.wallet,
                         text: "اختر باقتك"),
@@ -304,7 +305,7 @@ class Profile extends StatelessWidget {
                   children: [
                     buildItem(
                         onTap: () {
-                          Get.to(() => HowWeAreView());
+                          Get.toNamed(RoutesNames.howWeAre);
                         },
                         // color: Colors.purple,
                         icon: Icons.search_off,

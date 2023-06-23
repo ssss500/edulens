@@ -89,6 +89,8 @@ class RegisterThreeCollegeScreen extends StatelessWidget {
               SizedBox(
                 height: height * 0.015,
               ),
+
+
               CustomText(text: 'yearOfBirth'.tr, fontSize: width * 0.012),
               SizedBox(
                 height: height * 0.012,

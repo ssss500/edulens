@@ -22,4 +22,23 @@ class RoutesNames {
 
   static String teacherProfileFromSubjects({idSubject, idTeacher}) =>
       '${subject(idSubject)}/teacher/:$idTeacher';
+
+  static String videoView = '/videoView';
+  static String coursesFromHome = '/coursesFromHome';
+  static String chooseTeacherForPackages = '/chooseTeacherForPackages';
+  static String createAccountView = '/createAccountView';
+  static String subjectView = '/subjectView';
+  static String teacherView = '/teacherView';
+  static String profileTeacherView = '/profileTeacherView';
+  static String purchasedLecture ='/purchasedLecture';
+  static String packageView = '/packageView';
+  static String howWeAre = '/howWeAre';
+  static String subjectTeacher = '/subjectTeacher';
+  static String messageView = '/messageView';
+  static String qMonthView = '/qMonthView';
+  static String answerQuizMonthView= '/answerQuizMonthView';
+  static String pdfView = '/pdfView';
+  static String questionView = '/questionView';
+  static String zoomImageView = '/oomImageView';
+  static String answerQuizView = '/answerQuizView';
 }

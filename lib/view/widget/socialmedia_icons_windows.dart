@@ -42,7 +42,6 @@ class SocialMediaIconsWindows extends StatelessWidget {
         InkWell(
           onTap: () async {
             final Uri url = Uri.parse('whatsapp://send?phone=+201092884278');
-
             await launchUrl(url);
           },
           child: Image.asset(

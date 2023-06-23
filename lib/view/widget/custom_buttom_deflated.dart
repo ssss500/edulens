@@ -10,7 +10,7 @@ class CustomButtonDeflated extends StatelessWidget {
   final double height, width,fontSize;
   final Color color;
 
-  CustomButtonDeflated(
+  const CustomButtonDeflated(
       {required this.function,
       required this.text,
       this.height = 30,

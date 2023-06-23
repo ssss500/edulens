@@ -2,6 +2,7 @@ import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/message_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/home/mobile/profile_view.dart';
 import 'package:edu_lens/view/message_view.dart';
 import 'package:edu_lens/view/widget/custom_dialog/exit_dialog.dart';
@@ -51,7 +52,7 @@ class HomeMenuMobile extends StatelessWidget {
                         onPressed: () {
                           MessageController messageController=Get.put(MessageController());
                           messageController.getMessage();
-                          Get.to(()=>MessageView());
+                          Get.toNamed(RoutesNames.messageView);
                         },
                         icon: const Icon(Icons.mark_email_unread_rounded),
                         key: const ValueKey('icon1'),

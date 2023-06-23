@@ -5,6 +5,7 @@ import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/profile_teacher_controller.dart';
 import 'package:edu_lens/controllers/subject_teacher_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/profile_teacher_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -110,7 +111,7 @@ class HomeViewMobile extends StatelessWidget {
                                     Get.put(SubjectTeacherController());
                                 subjectController.indexSubject = index;
                                 subjectController.getSubjectTeacherMethod();
-                                Get.to(() => SubjectTeacher());
+                                Get.toNamed(RoutesNames.subjectTeacher);
                               },
                               child: CachedNetworkImage(
                                 imageUrl:
@@ -350,7 +351,7 @@ class HomeViewMobile extends StatelessWidget {
                             profileTeacherController
                                 .getCoursesAndExamAndBookings();
 
-                            Get.to(() => ProfileTeacherView());
+                            Get.toNamed(RoutesNames.profileTeacherView);
                           },
                         ),
                         padding: const EdgeInsets.all(10),
