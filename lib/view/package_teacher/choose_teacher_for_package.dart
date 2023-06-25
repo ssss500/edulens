@@ -16,19 +16,19 @@ import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ChooseTeacherForPackages extends StatelessWidget {
+class ChooseTeacherForPackages extends GetView<PackageController> {
   ChooseTeacherForPackages({Key? key}) : super(key: key);
   HomeController homeController = Get.find();
-  PackageController packageController = Get.find();
+  //PackageController packageController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
-        title: packageController.selectedPackage.name,
+        title: controller.selectedPackage.name,
       floatingActionButton:Obx(
           ()=> FloatingActionButton.extended(
           onPressed: () async {
-            if(packageController.checkList.length<packageController.selectedPackage.chapterNumber){
+            if(controller.checkList.length<controller.selectedPackage.chapterNumber){
               // debugPrint("ok");
               showCustomSnackBar(
                   context: Get.context,
@@ -37,12 +37,12 @@ class ChooseTeacherForPackages extends StatelessWidget {
                   contentType: ContentType.warning);
             }else{
               Get.dialog(CustomLoading());
-              packageController.puyChapter();
+              controller.puyChapter();
               Get.back();
             }
 
           },
-          label:   Text("عدد الفصول المحددة ${packageController.checkList.length} من ${packageController.selectedPackage.chapterNumber}"),
+          label:   Text("عدد الفصول المحددة ${controller.checkList.length} من ${controller.selectedPackage.chapterNumber}"),
           backgroundColor: AppConstants.primaryColor,
         ),
       ),
@@ -74,11 +74,11 @@ class ChooseTeacherForPackages extends StatelessWidget {
                                     onTap: () async {
                                       debugPrint(
                                           "homeController.subject[index].id! :${homeController.subject[index].id!}");
-                                      packageController.indexSubject = index;
-                                      packageController.subjectTeachers.clear();
+                                      controller.indexSubject = index;
+                                      controller.subjectTeachers.clear();
                                       debugPrint(
-                                          "packageController.subjectId: ${packageController.subjectId.value}");
-                                      packageController
+                                          "packageController.subjectId: ${controller.subjectId.value}");
+                                      controller
                                           .getSubjectTeacherMethod();
                                     },
                                     child: Obx(
@@ -88,7 +88,7 @@ class ChooseTeacherForPackages extends StatelessWidget {
                                                 BorderRadius.circular(14),
                                             color: homeController
                                                         .subject[index].id ==
-                                                    packageController
+                                                controller
                                                         .subjectId.value
                                                 ? AppConstants.lightPrimaryColor
                                                 : AppConstants.primaryColor,
@@ -116,10 +116,10 @@ class ChooseTeacherForPackages extends StatelessWidget {
               ),
               ConnectivityWidget(
                 onlineCallback: () {
-                  packageController.getSubjectTeacherMethod();
+                  controller.getSubjectTeacherMethod();
                 },
                 builder: (context, isOnline) =>
-                    Obx(() => packageController.subjectTeachers.isEmpty
+                    Obx(() => controller.subjectTeachers.isEmpty
                         ? const SizedBox(
                             height: 170,
                             child: Center(
@@ -127,7 +127,7 @@ class ChooseTeacherForPackages extends StatelessWidget {
                               color: AppConstants.lightPrimaryColor,
                             )))
                         : GridView.builder(
-                            itemCount: packageController.subjectTeachers.length,
+                            itemCount: controller.subjectTeachers.length,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount:
@@ -139,14 +139,14 @@ class ChooseTeacherForPackages extends StatelessWidget {
                             itemBuilder: (_, index) => InkWell(
                               child: CardImageTeacher(
                                 dateTeacher:
-                                    packageController.subjectTeachers[index],
+                                controller.subjectTeachers[index],
                                 name: true,
                                 love: false,
                               ),
                               onTap: () {
-                                packageController.getChapters(packageController
+                                controller.getChapters(controller
                                     .subjectTeachers[index].id);
-                                packageController.bottomSheetSelectCourse(
+                                controller.bottomSheetSelectCourse(
                                     context: context);
                               },
                             ),

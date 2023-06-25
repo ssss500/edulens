@@ -10,8 +10,7 @@ import '../../widget/custom_loading.dart';
 import '../../widget/custom_text.dart';
 
 class PaidLectureScreen extends GetView<HomeController> {
-  PaidLectureScreen({Key? key}) : super(key: key);
-  HomeController homeController = Get.find();
+  const PaidLectureScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +68,7 @@ class PaidLectureScreen extends GetView<HomeController> {
                               lecturePaidModel: controller.lecturePaid[index]);
                           Get.back();
                           Get.toNamed(RoutesNames.videoView, arguments: {
-                            'title': homeController.lecturePaid[index].name
+                            'title': controller.lecturePaid[index].name
                                 .toString(),
                           });
                         },

@@ -12,11 +12,11 @@ import 'package:get/get.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class QuestionView extends StatelessWidget {
+class QuestionView extends GetView<QuestionController> {
   QuestionView({Key? key, })
       : super(key: key);
   final CarouselController _controller = CarouselController();
-  QuestionController questionController = Get.put(QuestionController());
+ // QuestionController questionController = Get.put(QuestionController());
 
   // ignore: prefer_typing_uninitialized_variables
  // final questionList, quizList, indexQuiz;
@@ -25,8 +25,8 @@ class QuestionView extends StatelessWidget {
     List questionList = Get.arguments['questionList'];
     List quizList = Get.arguments ['quizList'];
     int indexQuiz =Get.arguments['indexQuiz'];
-    questionController.screenWidth = MediaQuery.of(context).size.width;
-    questionController.screenHeight = MediaQuery.of(context).size.height;
+    controller.screenWidth = MediaQuery.of(context).size.width;
+    controller.screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: AppConstants.primaryColor,
@@ -62,7 +62,7 @@ class QuestionView extends StatelessWidget {
                         height: 10,
                       ),
                       Obx(
-                        () => questionController.endTimerBool.value
+                        () => controller.endTimerBool.value
                             ? Container()
                             : TweenAnimationBuilder<Duration>(
                                 duration: Duration(minutes: quizList[indexQuiz].duration! ),
@@ -70,7 +70,7 @@ class QuestionView extends StatelessWidget {
                                     begin: Duration(minutes: quizList[indexQuiz].duration! ),
                                     end: Duration.zero),
                                 onEnd: () {
-                                  questionController.getFinalDegreeAndEndExam(
+                                  controller.getFinalDegreeAndEndExam(
                                       questionList: questionList);
                                 },
                                 builder: (BuildContext context, Duration value,
@@ -287,8 +287,8 @@ class QuestionView extends StatelessWidget {
                       CustomButton(
                         function: () async {
                           try {
-                            questionController.endTimerBool.value = true;
-                            questionController.checkTheQuestionAnswer(
+                            controller.endTimerBool.value = true;
+                            controller.checkTheQuestionAnswer(
                                 context: context,
                                 controller: _controller,
                                 questionList: questionList);

@@ -30,7 +30,7 @@ import 'package:flutter/material.dart';
 import 'package:screen_protector/screen_protector.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class VideoView extends StatelessWidget {
+class VideoView extends GetView {
   VideoController videoController = Get.find();
 
   HomeController homeController = Get.find();

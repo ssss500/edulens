@@ -14,16 +14,16 @@ import 'package:get/get.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-class QuestionMonthView extends StatelessWidget {
+class QuestionMonthView extends GetView {
   QuestionMonthView({Key? key}) : super(key: key);
   final CarouselController _controller = CarouselController();
-  QuestionMonthController questionMonthController =
-      Get.find();
-  ProfileTeacherController profileTeacherController =
-      Get.find();
 
   @override
   Widget build(BuildContext context) {
+    QuestionMonthController questionMonthController =
+    Get.find();
+    ProfileTeacherController profileTeacherController =
+    Get.find();
     questionMonthController.screenWidth = MediaQuery.of(context).size.width;
     questionMonthController.screenHeight = MediaQuery.of(context).size.height;
 

@@ -16,6 +16,8 @@ import 'package:get_storage/get_storage.dart';
 // List<TeacherModel> listTeacherLoves=teachersLove;
 
 class FavouriteMobile extends StatefulWidget {
+  const FavouriteMobile({super.key});
+
   @override
   State<FavouriteMobile> createState() => _FavouriteMobileState();
 }

@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:screen_protector/screen_protector.dart';
 
-class AnswerQuizView extends StatelessWidget {
-  AnswerQuizView({Key? key,}) : super(key: key);
+class AnswerQuizView extends GetView<QuestionController> {
+ const AnswerQuizView({Key? key,}) : super(key: key);
 
-  QuestionController questionController = Get.put(QuestionController());
+  //QuestionController questionController = Get.put(QuestionController());
  // var questionList;
 
   @override

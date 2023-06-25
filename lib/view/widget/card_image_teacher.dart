@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-class CardImageTeacher extends StatelessWidget {
+class CardImageTeacher extends GetView<HomeController> {
   CardImageTeacher(
       {super.key,
       this.height,
@@ -24,7 +24,7 @@ class CardImageTeacher extends StatelessWidget {
 
   final bool? love;
   final bool? name;
-  HomeController homeController = Get.put(HomeController());
+ // HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +99,7 @@ class CardImageTeacher extends StatelessWidget {
                                 await homeController.getIdTeacherLoveFun();
                             homeController.idListTeacherLove.refresh();
                           },
-                          child: homeController.idListTeacherLove
+                          child: controller.idListTeacherLove
                                   .contains(dateTeacher.id)
                               ? const Icon(Icons.favorite)
                               : const Icon(Icons.favorite_border)),

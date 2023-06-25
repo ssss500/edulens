@@ -10,9 +10,9 @@ import '../../widget/custom_text.dart';
 import '../../widget/custom_text_field_login.dart';
 import '../../widget/socialmedia_icons_windows.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
-  final controller = Get.put(LoginController());
+class LoginScreen extends GetView<LoginController> {
+  const LoginScreen({Key? key}) : super(key: key);
+ // final controller = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {

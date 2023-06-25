@@ -4,24 +4,23 @@ import 'package:edu_lens/controllers/message_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/home/mobile/profile_view.dart';
-import 'package:edu_lens/view/message_view.dart';
 import 'package:edu_lens/view/widget/custom_dialog/exit_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'favourite_view.dart';
  import 'home_view_mobile.dart';
 
-class HomeMenuMobile extends StatelessWidget {
-  HomeMenuMobile({Key? key}) : super(key: key);
+class HomeMenuMobile extends GetView<HomeController> {
+const  HomeMenuMobile({Key? key}) : super(key: key);
 
 
-  HomeController homeController = Get.put(HomeController());
+  //HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        Get.dialog(ExitDialog());
+        Get.dialog(const ExitDialog());
         return Future.value(false);
       },
       child: Scaffold(
@@ -30,7 +29,7 @@ class HomeMenuMobile extends StatelessWidget {
           automaticallyImplyLeading: true,
           title: Obx(
             () => Text(
-              homeController.titleHome.toString(),
+              controller.titleHome.toString(),
               style: const TextStyle(fontSize: 25),
             ),
           ),
@@ -47,7 +46,7 @@ class HomeMenuMobile extends StatelessWidget {
                       child: ScaleTransition(scale: anim, child: child),
                     ),
                 // ignore: unrelated_type_equality_checks
-                child: homeController.pageIndex == 0
+                child: controller.pageIndex == 0
                     ? IconButton(
                         onPressed: () {
                           MessageController messageController=Get.put(MessageController());
@@ -102,11 +101,11 @@ class HomeMenuMobile extends StatelessWidget {
                           backgroundColor: AppConstants.primaryColor,
                           color: const Color(0xFFf1fafd),
                           colorSelected: Colors.white,
-                          indexSelected: homeController.pageIndex.value,
+                          indexSelected: controller.pageIndex.value,
                           styleIconFooter: StyleIconFooter.dot,
                           onTap: (int index) async {
                             debugPrint(index.toString());
-                            homeController.changePage(index);
+                            controller.changePage(index);
                           },
                         ),
                       ),
@@ -114,15 +113,12 @@ class HomeMenuMobile extends StatelessWidget {
                   ),
                 ),
                 body: PageView(
-                  controller: homeController.pageController,
+                  controller: controller.pageController,
                   physics: const NeverScrollableScrollPhysics(),
-                  children: <Widget>[
-                    HomeViewMobile(),
-
+                  children:const <Widget>  [
+                     HomeViewMobile(),
                     FavouriteMobile(),
-
-
-                    Profile(),
+                     Profile(),
                   ],
                 ),
               ),

@@ -5,13 +5,13 @@ import '../../helper/app_constants.dart';
 import 'custom_image_url_view.dart';
 import 'custom_text.dart';
 
-class MessageCard extends StatelessWidget {
+class MessageCard extends GetView<MessageController> {
   const MessageCard({Key? key, required this.index}) : super(key: key);
   final int index;
 
   @override
   Widget build(BuildContext context) {
-    MessageController messageController = Get.find();
+    //MessageController messageController = Get.find();
     double width = MediaQuery.of(context).size.width;
     if (width >= 800) {
       return Column(
@@ -54,7 +54,7 @@ class MessageCard extends StatelessWidget {
                         children: [
                           CustomText(
                             text:
-                                "${messageController.messageList[index].title}",
+                                "${controller.messageList[index].title}",
                             color: Colors.white,
                             textAlign: TextAlign.end,
                             alignment: Alignment.centerRight,
@@ -64,7 +64,7 @@ class MessageCard extends StatelessWidget {
                             height: 6,
                           ),
                           Text(
-                            "${messageController.messageList[index].body}",
+                            "${controller.messageList[index].body}",
                             style: const TextStyle(
                                 color: Colors.white, fontSize: 14),
                             textAlign: TextAlign.start,
@@ -72,7 +72,7 @@ class MessageCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    if (messageController.messageList[index]!.image != null)
+                    if (controller.messageList[index]!.image != null)
                       Flexible(
                         flex: 1,
                         child: Container(
@@ -80,7 +80,7 @@ class MessageCard extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           child: CustomImageUrlView(
                             image:
-                                "https://edu-lens.com/images/messages/${messageController.messageList[index].image}",
+                                "https://edu-lens.com/images/messages/${controller.messageList[index].image}",
                             height: 150.0,
                             width: 150,
                             fit: BoxFit.fill,
@@ -111,14 +111,14 @@ class MessageCard extends StatelessWidget {
                 )),
             child: Column(
               children: [
-                messageController.messageList[index].image == null
+                controller.messageList[index].image == null
                     ? const SizedBox()
                     : Container(
                         height: 200,
                         padding: const EdgeInsets.all(8),
                         child: CustomImageUrlView(
                           image:
-                              "https://edu-lens.com/images/messages/${messageController.messageList[index].image}",
+                              "https://edu-lens.com/images/messages/${controller.messageList[index].image}",
                           fit: BoxFit.fitHeight,
                         ),
                       ),
@@ -157,7 +157,7 @@ class MessageCard extends StatelessWidget {
                         children: [
                           CustomText(
                             text:
-                                "${messageController.messageList[index].title}",
+                                "${controller.messageList[index].title}",
                             color: Colors.white,
                             textAlign: TextAlign.end,
                             alignment: Alignment.centerRight,
@@ -167,7 +167,7 @@ class MessageCard extends StatelessWidget {
                             height: 6,
                           ),
                           Text(
-                            "${messageController.messageList[index].body}",
+                            "${controller.messageList[index].body}",
                             style:const TextStyle(color: Colors.white, fontSize: 14),
                             textAlign: TextAlign.start,
                           ),

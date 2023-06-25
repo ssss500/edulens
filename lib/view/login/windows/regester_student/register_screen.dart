@@ -11,14 +11,14 @@ import '../../../widget/custom_text.dart';
 import '../../../widget/custom_text_field_login.dart';
 import '../../../widget/next_button.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends GetView<RegisterController> {
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    final controller = Get.put(RegisterController());
+   // final controller = Get.put(RegisterController());
 
     return CustomRegistrationView(
       widget: Form(

@@ -8,9 +8,9 @@ import '../../../../helper/app_constants.dart';
 import '../../../widget/custom_dropdown_buttom.dart';
 import '../../../widget/custom_text.dart';
 
-class RegisterThreeScreen extends StatelessWidget {
-  RegisterThreeScreen({Key? key}) : super(key: key);
-  final RegisterController controller = Get.find();
+class RegisterThreeScreen extends GetView<RegisterController> {
+  const RegisterThreeScreen({Key? key}) : super(key: key);
+//  final RegisterController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

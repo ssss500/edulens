@@ -1,17 +1,30 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:edu_lens/controllers/login/switch_login.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/helper/dio_integration.dart';
 import 'package:edu_lens/model/error_model.dart';
 import 'package:edu_lens/model/register_model.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterServices {
   final dio = DioUtilNew.dio;
+  getWindowsId() async{
+    String? idDevice;
+    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+
+    if(Platform.isWindows){
+      final windowsInfo = await deviceInfo.windowsInfo;
+      idDevice=windowsInfo.deviceId;
+    }
+    return idDevice;
+  }
 
   register(BuildContext context, RegisterModel registerModel) async {
     debugPrint(
@@ -23,9 +36,16 @@ class RegisterServices {
       debugPrint(response.data.toString());
       debugPrint("1");
       if (response.statusCode == 200) {
+        if(Platform.isWindows) {
+          var idDevice = await getWindowsId();
+          CacheHelper.saveData(
+              key: AppConstants.token, value:idDevice);
+        }else{
+          CacheHelper.saveData(
+              key: AppConstants.token, value: response.data['token']);
+        }
         debugPrint("2--");
-        CacheHelper.saveData(
-            key: AppConstants.token, value: response.data['token']);
+
         CacheHelper.saveData(
             key: AppConstants.studentId, value: response.data['student']['id']);
         CacheHelper.saveData(
@@ -39,6 +59,7 @@ class RegisterServices {
             contentType: ContentType.success);
         Timer(const Duration(milliseconds: 1000), () {
           //Get.offAllNamed('switchLogin');
+          Get.toNamed(RoutesNames.home);
           // Get.offAll(() => token == null ? const LoginView() : Home());
         });
       } else if (response.statusCode == 422) {

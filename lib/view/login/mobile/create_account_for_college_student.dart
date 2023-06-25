@@ -14,9 +14,8 @@ import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class CreateAccountForCollegeStudent extends StatelessWidget {
-    CreateAccountForCollegeStudent({Key? key}) : super(key: key);
-  RegisterController controller = Get.put(RegisterController());
+class CreateAccountForCollegeStudent extends GetView<RegisterController> {
+    const CreateAccountForCollegeStudent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

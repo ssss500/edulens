@@ -1,23 +1,15 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/login/login_controller.dart';
 import 'package:edu_lens/controllers/login/register_controller.dart';
-import 'package:edu_lens/controllers/login/switch_login.dart';
 import 'package:edu_lens/controllers/message_controller.dart';
 import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/login/common_view/login_view_common.dart';
-import 'package:edu_lens/view/login/windows/get_started_screen.dart';
-import 'package:edu_lens/view/home/windows/home_menu_scren_windows.dart';
 import 'package:edu_lens/view/home/windows/messages_screen.dart';
 import 'package:edu_lens/view/home/windows/paid_lectures.dart';
-import 'package:edu_lens/view/login/mobile/home_login_view.dart';
-import 'package:edu_lens/view/login/windows/login_screen.dart';
 import 'package:edu_lens/view/login/windows/regester_student/regieter_three_screen.dart';
 import 'package:edu_lens/view/login/windows/register_college/register_one_college_screen.dart';
-import 'package:edu_lens/view/login/windows/regester_student/register_screen.dart';
 import 'package:edu_lens/view/login/windows/register_college/register_three_college_screen.dart';
 import 'package:edu_lens/view/login/windows/register_college/register_two_college_screen.dart';
-import 'package:edu_lens/view/login/windows/regester_student/register_two_screen.dart';
 import 'package:edu_lens/view/package_teacher/choose_teacher_for_package.dart';
 import 'package:edu_lens/view/package_teacher/packages_view.dart';
 import 'package:edu_lens/view/pdf_view.dart';
@@ -25,7 +17,6 @@ import 'package:edu_lens/view/splash.dart';
 import 'package:edu_lens/view/who_we_are_view.dart';
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:get/get.dart';
-import '../binding/view_model_binding.dart';
 import '../controllers/home_courses_controller.dart';
 import '../controllers/package_controller.dart';
 import '../controllers/pdf_controller.dart';
@@ -35,7 +26,6 @@ import '../controllers/quiz/question_month_controller.dart';
 import '../controllers/subject_teacher_controller.dart';
 import '../controllers/video_controller.dart';
 import '../view/home/common_view/home_common.dart';
-import '../view/home/mobile/home_menu_mobile.dart';
 import '../view/home/mobile/subject_teacher_view.dart';
 import '../view/home/windows/teacher_profile.dart';
 import '../view/home_courses_view.dart';
@@ -91,7 +81,7 @@ class Routes {
     ),
     GetPage(
       name: RoutesNames.register3,
-      page: () => RegisterThreeScreen(),
+      page: () => const RegisterThreeScreen(),
       binding: BindingsBuilder(() {
         Get.lazyPut<RegisterController>(
           () => RegisterController(),
@@ -100,7 +90,7 @@ class Routes {
     ),
     GetPage(
       name: RoutesNames.registerUni1,
-      page: () => RegisterOneCollegeScreen(),
+      page: () => const RegisterOneCollegeScreen(),
       binding: BindingsBuilder(() {
         Get.lazyPut<RegisterController>(
           () => RegisterController(),
@@ -109,7 +99,7 @@ class Routes {
     ),
     GetPage(
       name: RoutesNames.registerUni2,
-      page: () => RegisterTwoCollegeScreen(),
+      page: () => const RegisterTwoCollegeScreen(),
       binding: BindingsBuilder(() {
         Get.lazyPut<RegisterController>(
           () => RegisterController(),
@@ -118,7 +108,7 @@ class Routes {
     ),
     GetPage(
       name: RoutesNames.registerUni3,
-      page: () => RegisterThreeCollegeScreen(),
+      page: () => const RegisterThreeCollegeScreen(),
       binding: BindingsBuilder(() {
         Get.lazyPut<RegisterController>(
           () => RegisterController(),
@@ -137,6 +127,8 @@ class Routes {
         Get.lazyPut<MessageController>(
           () => MessageController(),
         );
+
+
       }),
     ),
 
@@ -148,12 +140,8 @@ class Routes {
 
     GetPage(
       name: RoutesNames.paidLecture,
-      page: () =>  PaidLectureScreen(),
-      binding: BindingsBuilder(() {
-        Get.lazyPut<HomeController>(
-          () => HomeController(),
-        );
-      }),
+      page: () =>  const PaidLectureScreen(),
+
     ),
     GetPage(
       name: RoutesNames.videoView,
@@ -174,7 +162,7 @@ class Routes {
     ),
     GetPage(
         name: RoutesNames.coursesFromHome,
-        page: () => HomeCoursesView(),
+        page: () => const HomeCoursesView(),
         bindings: [
           BindingsBuilder(() {
             Get.lazyPut<HomeCoursesController>(
@@ -216,7 +204,7 @@ class Routes {
 
     GetPage(
       name: RoutesNames.subjectView,
-      page: () => SubjectTeacher(),
+      page: () => const SubjectTeacher(),
       binding: BindingsBuilder(() {
         Get.lazyPut<SubjectTeacherController>(
           () => SubjectTeacherController(),
@@ -241,7 +229,7 @@ class Routes {
         ]),
     GetPage(
         name: RoutesNames.profileTeacherView,
-        page: () => ProfileTeacherView(),
+        page: () => const ProfileTeacherView(),
         bindings: [
           BindingsBuilder(() {
             Get.lazyPut<ProfileTeacherController>(
@@ -262,7 +250,7 @@ class Routes {
 
     GetPage(
       name: RoutesNames.purchasedLecture,
-      page: () => PurchasedLectures(),
+      page: () => const PurchasedLectures(),
       binding: BindingsBuilder(() {
         Get.lazyPut<HomeController>(
           () => HomeController(),
@@ -272,7 +260,7 @@ class Routes {
 
     GetPage(
       name: RoutesNames.packageView,
-      page: () => PackagesView(),
+      page: () => const PackagesView(),
       binding: BindingsBuilder(() {
         Get.lazyPut<PackageController>(
           () => PackageController(),
@@ -285,7 +273,7 @@ class Routes {
     ),
     GetPage(
       name: RoutesNames.subjectTeacher,
-      page: () => SubjectTeacher(),
+      page: () => const SubjectTeacher(),
       binding: BindingsBuilder(() {
         Get.lazyPut<SubjectTeacherController>(
           () => SubjectTeacherController(),
@@ -294,7 +282,7 @@ class Routes {
     ),
     GetPage(
       name: RoutesNames.messageView,
-      page: () => MessageView(),
+      page: () => const MessageView(),
       binding: BindingsBuilder(() {
         Get.lazyPut<MessageController>(
           () => MessageController(),
@@ -319,7 +307,7 @@ class Routes {
         ]),
     GetPage(
       name: RoutesNames.answerQuizMonthView,
-      page: () => AnswerQuizMonthView(),
+      page: () => const AnswerQuizMonthView(),
       binding: BindingsBuilder(() {
         Get.lazyPut<QuestionMonthController>(
               () => QuestionMonthController(),
@@ -356,7 +344,7 @@ class Routes {
     ),
     GetPage(
       name: RoutesNames.answerQuizView,
-      page: () =>  AnswerQuizView(),
+      page: () =>  const AnswerQuizView(),
       binding: BindingsBuilder(() {
         Get.lazyPut<QuestionController>(
               () => QuestionController(),
@@ -365,4 +353,3 @@ class Routes {
     ),
   ];
 }
-//AnswerQuizView

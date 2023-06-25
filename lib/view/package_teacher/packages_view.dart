@@ -18,20 +18,20 @@ import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PackagesView extends StatelessWidget {
-  PackagesView({Key? key}) : super(key: key);
-PackageController packageController=Get.find();
+class PackagesView extends GetView<PackageController> {
+ const PackagesView({Key? key}) : super(key: key);
+//PackageController packageController=Get.find();
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
         title: "packagesText".tr,
         widget: ConnectivityWidget(
           onlineCallback: () {
-            packageController.getPackages();
+            controller.getPackages();
           },
           builder: (context, isOnline) =>
           Obx(()=>
-          packageController.plansList.isEmpty
+          controller.plansList.isEmpty
               ? const Center(
                   child: CircularProgressIndicator(
                     color: AppConstants.lightPrimaryColor,
@@ -39,7 +39,7 @@ PackageController packageController=Get.find();
               :Padding(
             padding: const EdgeInsets.all(8.0),
             child:  CustomListView(
-                itemCount: packageController.plansList.length,
+                itemCount: controller.plansList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     // padding: const EdgeInsets.only(right: 30,top: 20,bottom: 20,left: 20),
@@ -58,7 +58,7 @@ PackageController packageController=Get.find();
                             children: [
                               // SizedBox(height: 20,),
                               CustomText(
-                                text:  packageController.plansList[index].name,
+                                text:  controller.plansList[index].name,
                                 fontSize: 30,
                                 alignment: Alignment.centerRight,
                               ),
@@ -66,7 +66,7 @@ PackageController packageController=Get.find();
                                 height: 20,
                               ),
                               CustomText(
-                                text: "سعر الباقة ${packageController.plansList[index].price} جنيها",
+                                text: "سعر الباقة ${controller.plansList[index].price} جنيها",
                                 fontSize: 17,
                                 color: Colors.green,
                                 alignment: Alignment.centerRight,
@@ -75,7 +75,7 @@ PackageController packageController=Get.find();
                                 height: 20,
                               ),
                               CustomText(
-                                text: "عدد الفصول المتاحة لك: ${packageController.plansList[index].chapterNumber} فصول",
+                                text: "عدد الفصول المتاحة لك: ${controller.plansList[index].chapterNumber} فصول",
                                 fontSize: 17,
                                 color: Colors.red.shade500,
                                 alignment: Alignment.centerRight,
@@ -86,11 +86,11 @@ PackageController packageController=Get.find();
                               CustomButton(
                                 function: () {
                                   HomeController homeController=Get.put(HomeController());
-                                  if(packageController.plansList[index].price<=homeController.studentProfile[0].bucket!){
-                                          packageController.checkList.value =
+                                  if(controller.plansList[index].price<=homeController.studentProfile[0].bucket!){
+                                    controller.checkList.value =
                                               [];
-                                          packageController.selectedPackage =
-                                              packageController
+                                    controller.selectedPackage =
+                                    controller
                                                   .plansList[index];
                                           Get.toNamed(RoutesNames.chooseTeacherForPackages);
                                         }else{

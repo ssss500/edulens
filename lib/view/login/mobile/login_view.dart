@@ -12,9 +12,9 @@ import 'package:get/get.dart';
 
 import '../../../routes/routes_names.dart';
 
-class LoginView extends StatelessWidget {
-  LoginView({Key? key}) : super(key: key);
-  final controller = Get.put(LoginController());
+class LoginView extends GetView<LoginController> {
+  const LoginView({Key? key}) : super(key: key);
+ // final controller = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {

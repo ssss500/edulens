@@ -10,9 +10,9 @@ import '../../../widget/custom_dialog/snackBar.dart';
 import '../../../widget/custom_text_field_login.dart';
 import '../../../widget/next_button.dart';
 
-class RegisterTwoCollegeScreen extends StatelessWidget {
-  RegisterTwoCollegeScreen({Key? key}) : super(key: key);
-  RegisterController controller = Get.find();
+class RegisterTwoCollegeScreen extends GetView<RegisterController> {
+ const RegisterTwoCollegeScreen({Key? key}) : super(key: key);
+ // RegisterController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

@@ -10,9 +10,9 @@ import '../../../widget/custom_text.dart';
 import '../../../widget/custom_text_field_login.dart';
 
 // ignore: must_be_immutable
-class RegisterTwoScreen extends StatelessWidget {
-  RegisterTwoScreen({Key? key}) : super(key: key);
-  RegisterController controller = Get.find();
+class RegisterTwoScreen extends GetView<RegisterController> {
+ const RegisterTwoScreen({Key? key}) : super(key: key);
+ // RegisterController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {

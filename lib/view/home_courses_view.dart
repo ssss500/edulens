@@ -16,14 +16,15 @@ import 'package:get/get.dart';
 
 import '../routes/routes_names.dart';
 
-class HomeCoursesView extends StatelessWidget {
-  HomeCoursesView({super.key});
+class HomeCoursesView extends GetView {
+  const HomeCoursesView({super.key});
 
-  HomeCoursesController homeCoursesController = Get.find();
-  HomeController homeController = Get.find();
+
 
   @override
   Widget build(BuildContext context) {
+    HomeCoursesController homeCoursesController = Get.find();
+    HomeController homeController = Get.find();
     // final heightScreen = MediaQuery.of(context).size.height;
     final widthScreen = MediaQuery.of(context).size.width;
 

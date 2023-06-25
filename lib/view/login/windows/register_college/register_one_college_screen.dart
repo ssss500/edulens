@@ -11,9 +11,9 @@ import '../../../widget/custom_text.dart';
 import '../../../widget/custom_text_field_login.dart';
 import '../../../widget/next_button.dart';
 
-class RegisterOneCollegeScreen extends StatelessWidget {
-  RegisterOneCollegeScreen({Key? key}) : super(key: key);
-  RegisterController controller = Get.put(RegisterController());
+class RegisterOneCollegeScreen extends GetView<RegisterController> {
+  const RegisterOneCollegeScreen({Key? key}) : super(key: key);
+ // RegisterController controller = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {

@@ -40,7 +40,7 @@ class HomeController extends GetxController {
       title: "homeTitle".tr,
       icon: Icons.home,
       routeScreen: RoutesNames.home,
-      screen: HomeView(),
+      screen: const HomeView(),
     ),
     SideMenuItemModel(
       title: "favourites".tr,
@@ -51,19 +51,19 @@ class HomeController extends GetxController {
     SideMenuItemModel(
       title: "messagesTitle".tr,
       icon: Icons.mail,
-      screen: MessageScreen(),
+      screen: const MessageScreen(),
       routeScreen: RoutesNames.message,
     ),
     SideMenuItemModel(
       title: "lectures".tr,
       icon: Icons.school,
-      screen: PaidLectureScreen(),
+      screen: const PaidLectureScreen(),
       routeScreen: RoutesNames.paidLecture,
     ),
     SideMenuItemModel(
       title: "packages".tr,
       icon: Icons.wallet,
-      screen: Packages(),
+      screen: const Packages(),
       routeScreen: RoutesNames.packages,
     ),
   ];

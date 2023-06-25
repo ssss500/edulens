@@ -9,9 +9,9 @@ import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AnswerQuizMonthView extends StatelessWidget {
-  AnswerQuizMonthView({Key? key}) : super(key: key);
-  QuestionMonthController questionMonthController = Get.find();
+class AnswerQuizMonthView extends GetView<QuestionMonthController> {
+ const AnswerQuizMonthView({Key? key}) : super(key: key);
+ // QuestionMonthController questionMonthController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class AnswerQuizMonthView extends StatelessWidget {
           },
           title: "نموذج حل الامتحان",
           widget: CustomListView(
-              itemCount: questionMonthController.questionList.length,
+              itemCount: controller.questionList.length,
               itemBuilder: (context, index) {
                 return Container(
                   margin: const EdgeInsets.all(20),
@@ -58,10 +58,10 @@ class AnswerQuizMonthView extends StatelessWidget {
                           ),
 
                           //الصوره
-                          if (questionMonthController.questionList[index].image != null)
+                          if (controller.questionList[index].image != null)
                             CustomImageUrlView(
                               image:
-                              "https://edu-lens.com/images/questions/${questionMonthController.questionList[index].image}",
+                              "https://edu-lens.com/images/questions/${controller.questionList[index].image}",
                               colorLodingIcon: AppConstants.primaryColor,
                             ),
                           const SizedBox(
@@ -72,7 +72,7 @@ class AnswerQuizMonthView extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 8.0, right: 8),
                             child: CustomText(
                               text:
-                              "${questionMonthController.questionList[index].title}",
+                              "${controller.questionList[index].title}",
                               textDirection: TextDirection.ltr,
                               fontSize: 20,
                             ),
@@ -82,7 +82,7 @@ class AnswerQuizMonthView extends StatelessWidget {
                           ),
                           //الازرار
                           for (var i
-                          in questionMonthController.questionList[index].choices!)
+                          in controller.questionList[index].choices!)
                             Padding(
                               padding:
                               const EdgeInsets.only(left: 10.0, right: 10),
@@ -99,7 +99,7 @@ class AnswerQuizMonthView extends StatelessWidget {
                                     // :AppConstants
                                     // .lightPrimaryColor
 
-                                        : questionMonthController.questionList[index]
+                                        : controller.questionList[index]
                                         .answer ==
                                         i.choice
                                         ? Colors.red

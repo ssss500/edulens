@@ -10,23 +10,32 @@
 class UserModel {
   UserModel({
     StudentModel? student,
-      String? token,}){
+    String? token,
+  }) {
     _student = student;
     _token = token;
-}
+  }
 
   UserModel.fromJson(dynamic json) {
-    _student = json['student'] != null ? StudentModel.fromJson(json['student']) : null;
+    _student =
+        json['student'] != null ? StudentModel.fromJson(json['student']) : null;
     _token = json['token'];
   }
+
   StudentModel? _student;
   String? _token;
-UserModel copyWith({  StudentModel? student,
-  String? token,
-}) => UserModel(  student: student ?? _student,
-  token: token ?? _token,
-);
+
+  UserModel copyWith({
+    StudentModel? student,
+    String? token,
+  }) =>
+      UserModel(
+        student: student ?? _student,
+        token: token ?? _token,
+      );
+
   StudentModel? get student => _student;
+
   String? get token => _token;
 
   Map<String, dynamic> toJson() {
@@ -37,7 +46,6 @@ UserModel copyWith({  StudentModel? student,
     map['token'] = _token;
     return map;
   }
-
 }
 
 /// id : 707
@@ -70,33 +78,34 @@ UserModel copyWith({  StudentModel? student,
 
 class StudentModel {
   Student({
-      num? id, 
-      String? firstName, 
-      String? lastName, 
-      String? email, 
-      String? phone, 
-      String? password, 
-      dynamic image, 
-      dynamic university, 
-      dynamic faculty, 
-      dynamic department, 
-      num? cityId, 
-      num? gradeId, 
-      num? studentClassId, 
-      num? studentSectionId, 
-      int? genderId,
-      String? edara, 
-      String? school, 
-      String? parentName, 
-      String? parentPhone, 
-      String? birthday, 
-      num? bucket, 
-      dynamic note, 
-      num? status, 
-      String? lastSession, 
-      dynamic createdBy, 
-      String? createdAt, 
-      String? updatedAt,}){
+    num? id,
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? phone,
+    String? password,
+    dynamic image,
+    dynamic university,
+    dynamic faculty,
+    dynamic department,
+    num? cityId,
+    num? gradeId,
+    num? studentClassId,
+    num? studentSectionId,
+    int? genderId,
+    String? edara,
+    String? school,
+    String? parentName,
+    String? parentPhone,
+    String? birthday,
+    num? bucket,
+    dynamic note,
+    num? status,
+    String? lastSession,
+    dynamic createdBy,
+    String? createdAt,
+    String? updatedAt,
+  }) {
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
@@ -124,7 +133,7 @@ class StudentModel {
     _createdBy = createdBy;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
-}
+  }
 
   StudentModel.fromJson(dynamic json) {
     _id = json['id'];
@@ -155,6 +164,7 @@ class StudentModel {
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
   }
+
   num? _id;
   String? _firstName;
   String? _lastName;
@@ -182,87 +192,118 @@ class StudentModel {
   dynamic _createdBy;
   String? _createdAt;
   String? _updatedAt;
-  StudentModel copyWith({  num? id,
-  String? firstName,
-  String? lastName,
-  String? email,
-  String? phone,
-  String? password,
-  dynamic image,
-  dynamic university,
-  dynamic faculty,
-  dynamic department,
-  num? cityId,
-  num? gradeId,
-  num? studentClassId,
-  num? studentSectionId,
-  int? genderId,
-  String? edara,
-  String? school,
-  String? parentName,
-  String? parentPhone,
-  String? birthday,
-  num? bucket,
-  dynamic note,
-  num? status,
-  String? lastSession,
-  dynamic createdBy,
-  String? createdAt,
-  String? updatedAt,
-}) => Student(  id: id ?? _id,
-  firstName: firstName ?? _firstName,
-  lastName: lastName ?? _lastName,
-  email: email ?? _email,
-  phone: phone ?? _phone,
-  password: password ?? _password,
-  image: image ?? _image,
-  university: university ?? _university,
-  faculty: faculty ?? _faculty,
-  department: department ?? _department,
-  cityId: cityId ?? _cityId,
-  gradeId: gradeId ?? _gradeId,
-  studentClassId: studentClassId ?? _studentClassId,
-  studentSectionId: studentSectionId ?? _studentSectionId,
-  genderId: genderId ?? _genderId,
-  edara: edara ?? _edara,
-  school: school ?? _school,
-  parentName: parentName ?? _parentName,
-  parentPhone: parentPhone ?? _parentPhone,
-  birthday: birthday ?? _birthday,
-  bucket: bucket ?? _bucket,
-  note: note ?? _note,
-  status: status ?? _status,
-  lastSession: lastSession ?? _lastSession,
-  createdBy: createdBy ?? _createdBy,
-  createdAt: createdAt ?? _createdAt,
-  updatedAt: updatedAt ?? _updatedAt,
-);
+
+  StudentModel copyWith({
+    num? id,
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? phone,
+    String? password,
+    dynamic image,
+    dynamic university,
+    dynamic faculty,
+    dynamic department,
+    num? cityId,
+    num? gradeId,
+    num? studentClassId,
+    num? studentSectionId,
+    int? genderId,
+    String? edara,
+    String? school,
+    String? parentName,
+    String? parentPhone,
+    String? birthday,
+    num? bucket,
+    dynamic note,
+    num? status,
+    String? lastSession,
+    dynamic createdBy,
+    String? createdAt,
+    String? updatedAt,
+  }) =>
+      Student(
+        id: id ?? _id,
+        firstName: firstName ?? _firstName,
+        lastName: lastName ?? _lastName,
+        email: email ?? _email,
+        phone: phone ?? _phone,
+        password: password ?? _password,
+        image: image ?? _image,
+        university: university ?? _university,
+        faculty: faculty ?? _faculty,
+        department: department ?? _department,
+        cityId: cityId ?? _cityId,
+        gradeId: gradeId ?? _gradeId,
+        studentClassId: studentClassId ?? _studentClassId,
+        studentSectionId: studentSectionId ?? _studentSectionId,
+        genderId: genderId ?? _genderId,
+        edara: edara ?? _edara,
+        school: school ?? _school,
+        parentName: parentName ?? _parentName,
+        parentPhone: parentPhone ?? _parentPhone,
+        birthday: birthday ?? _birthday,
+        bucket: bucket ?? _bucket,
+        note: note ?? _note,
+        status: status ?? _status,
+        lastSession: lastSession ?? _lastSession,
+        createdBy: createdBy ?? _createdBy,
+        createdAt: createdAt ?? _createdAt,
+        updatedAt: updatedAt ?? _updatedAt,
+      );
+
   num? get id => _id;
+
   String? get firstName => _firstName;
+
   String? get lastName => _lastName;
+
   String? get email => _email;
+
   String? get phone => _phone;
+
   String? get password => _password;
+
   dynamic get image => _image;
+
   dynamic get university => _university;
+
   dynamic get faculty => _faculty;
+
   dynamic get department => _department;
+
   num? get cityId => _cityId;
+
   num? get gradeId => _gradeId;
+
   num? get studentClassId => _studentClassId;
+
   num? get studentSectionId => _studentSectionId;
+
   int? get genderId => _genderId;
+
   String? get edara => _edara;
+
   String? get school => _school;
+
   String? get parentName => _parentName;
+
   String? get parentPhone => _parentPhone;
+
   String? get birthday => _birthday;
+
   num? get bucket => _bucket;
+
   dynamic get note => _note;
+
   num? get status => _status;
+
   String? get lastSession => _lastSession;
+
   dynamic get createdBy => _createdBy;
+
   String? get createdAt => _createdAt;
+
   String? get updatedAt => _updatedAt;
 
   Map<String, dynamic> toJson() {
@@ -296,5 +337,4 @@ class StudentModel {
     map['updated_at'] = _updatedAt;
     return map;
   }
-
 }

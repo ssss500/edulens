@@ -25,17 +25,18 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 
-class ProfileTeacherView extends StatelessWidget {
-   ProfileTeacherView({super.key});
+class ProfileTeacherView extends GetView {
+ const   ProfileTeacherView({super.key});
 
-  ProfileTeacherController profileTeacherController =
-      Get.find();
-  final QuestionMonthController questionMonthController =
-      Get.find();
-  HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
+
+    ProfileTeacherController profileTeacherController =
+    Get.find();
+    final QuestionMonthController questionMonthController =
+    Get.find();
+    HomeController homeController = Get.find();
     final heightScreen = MediaQuery.of(context).size.height;
     final widthScreen = MediaQuery.of(context).size.width;
 
@@ -359,7 +360,7 @@ class ProfileTeacherView extends StatelessWidget {
                                             itemBuilder: (_, index) => InkWell(
                                               onTap: () {
                                                 HomeCoursesController
-                                                    homeCourses = Get.find();
+                                                    homeCourses = Get.put(HomeCoursesController());
                                                 homeCourses.chapterId =
                                                     profileTeacherController
                                                         .coursesTeacher[index]

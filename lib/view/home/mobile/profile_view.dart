@@ -6,12 +6,6 @@ import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/login/mobile/home_login_view.dart';
-import 'package:edu_lens/view/package_teacher/choose_teacher_for_package.dart';
-import 'package:edu_lens/view/package_teacher/packages_view.dart';
-import 'package:edu_lens/view/purchasedLectures.dart';
-import 'package:edu_lens/view/who_we_are_view.dart';
-import 'package:edu_lens/view/widget/custom_buttom_deflated.dart';
-import 'package:edu_lens/view/widget/custom_dialog.dart';
 import 'package:edu_lens/view/widget/custom_social_media_icons.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +14,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Profile extends StatelessWidget {
-  Profile({Key? key}) : super(key: key);
-  final homeController = Get.put(HomeController());
+class Profile extends GetView<HomeController> {
+ const  Profile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(' helloooo${controller.studentProfile[0].firstName.toString()}');
+
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10),
       child: SingleChildScrollView(
@@ -57,7 +52,7 @@ class Profile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: Obx(
-                  () => homeController.studentProfile.isEmpty
+                  () => controller.studentProfile.isEmpty
                       ? const Center(
                           child: CircularProgressIndicator(
                           color: AppConstants.lightPrimaryColor,
@@ -95,7 +90,7 @@ class Profile extends StatelessWidget {
                                                 ),
                                                 CustomText(
                                                   text:
-                                                      "${homeController.studentProfile[0].firstName} ${homeController.studentProfile[0].lastName}",
+                                                      "${controller.studentProfile[0].firstName} ${controller.studentProfile[0].lastName}",
                                                   fontSize: 24,
                                                   alignment: Alignment.centerRight,
                                                   textAlign: TextAlign.start,
@@ -114,7 +109,7 @@ class Profile extends StatelessWidget {
                                                     fontSize: 18),
                                                 CustomText(
                                                   text:
-                                                      "${homeController.listYears[int.parse(homeController.studentProfile[0].studentClassId.toString()) - 1].name}",
+                                                      "${controller.listYears[int.parse(controller.studentProfile[0].studentClassId.toString()) - 1].name}",
                                                   fontSize: 18,
                                                   widthContainer: MediaQuery.of(context).size.width-258,
                                                   textAlign: TextAlign.start,
@@ -150,7 +145,7 @@ class Profile extends StatelessWidget {
                                           ),
                                           CustomText(
                                               text:
-                                                  "${homeController.studentProfile[0].parentPhone}",
+                                                  "${controller.studentProfile[0].parentPhone}",
                                               fontSize: 18)
                                         ],
                                       ),
@@ -171,7 +166,7 @@ class Profile extends StatelessWidget {
                                           ),
                                           CustomText(
                                               text:
-                                                  "${homeController.studentProfile[0].phone}",
+                                                  "${controller.studentProfile[0].phone}",
                                               fontSize: 18)
                                         ],
                                       ),
@@ -191,13 +186,13 @@ class Profile extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            if (!homeController.appleAndGoogleBool.value)
+            if (!controller.appleAndGoogleBool.value)
               InkWell(
                 onTap: () {
                   // showSimpleDialog(context);
                 },
                 child: Obx(
-                  () => homeController.studentProfile.isEmpty
+                  () => controller.studentProfile.isEmpty
                       ? const SizedBox(
                           height: 40,
                           child: Center(
@@ -230,7 +225,7 @@ class Profile extends StatelessWidget {
                           child: Center(
                               child: CustomText(
                                   text:
-                                      "رصيدك: ${homeController.studentProfile[0].bucket} ج")),
+                                      "رصيدك: ${controller.studentProfile[0].bucket} ج")),
                         ),
                 ),
               ),
@@ -250,7 +245,7 @@ class Profile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    if (!homeController.appleAndGoogleBool.value)
+                    if (!controller.appleAndGoogleBool.value)
                       buildItem(
                         onTap: () {
                           Get.toNamed(RoutesNames.purchasedLecture);
@@ -283,7 +278,7 @@ class Profile extends StatelessWidget {
                         // color: Colors.red,
                         icon: Icons.share,
                         text: "مشاركة التطبيق"),
-                    if (!homeController.appleAndGoogleBool.value)
+                    if (!controller.appleAndGoogleBool.value)
                       buildItem(
                         onTap: () {
                           PackageController packageController=Get.put(PackageController());
@@ -429,7 +424,7 @@ class Profile extends StatelessWidget {
                   onTap: () async {
                     GetStorage().remove("listTeacherLoves");
                     await CacheHelper.clearData();
-                    Get.offAll(() =>  HomeLogin());
+                    Get.offAll(() =>  const HomeLogin());
                   },
                   child: Center(
                     child: Container(

@@ -19,20 +19,20 @@ import '../../widget/custom_dialog/snackBar.dart';
 import '../../widget/custom_social_media_icons.dart';
 import '../../widget/custom_text.dart';
 
-class TeacherProfile extends StatelessWidget {
+class TeacherProfile extends GetView<ProfileTeacherController> {
   const TeacherProfile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final heightScreen = MediaQuery.of(context).size.height;
     final widthScreen = MediaQuery.of(context).size.width;
-    final profileTeacherController = Get.find();
-    final homeController = Get.find();
+  // final ProfileTeacherController profileTeacherController = Get.find();
+    final homeController = Get.put(HomeController());
 
     return CustomBackground(
         child: ConnectivityWidget(
             onlineCallback: () {
-              profileTeacherController.getCoursesAndExamAndBookings();
+             controller.getCoursesAndExamAndBookings();
             },
             builder: (context, isOnline) => Stack(
                   children: [
@@ -42,16 +42,18 @@ class TeacherProfile extends StatelessWidget {
                           alignment: Alignment.centerRight,
                           child: Padding(
                             padding: const EdgeInsets.only(right: 10.0),
-                            child: IconButton(
-                                onPressed: () {
-                                  profileTeacherController.cleanData();
+                            child:
+                               IconButton(
+                                  onPressed: () {
+                                    controller.cleanData();
 
-                                  Get.back();
-                                },
-                                icon: const Icon(
-                                  Icons.arrow_back_ios,
-                                  color: Colors.black,
-                                )),
+                                    Get.back();
+                                  },
+                                  icon: const Icon(
+                                    Icons.arrow_back_ios,
+                                    color: Colors.black,
+                                  )),
+
                           ),
                         ),
                         Container(
@@ -71,10 +73,10 @@ class TeacherProfile extends StatelessWidget {
                             children: [
                               Hero(
                                 tag:
-                                    "imageTeacher${profileTeacherController.index}",
+                                    "imageTeacher${controller.index}",
                                 child: CardImageTeacher(
                                   dateTeacher:
-                                      profileTeacherController.dateTeacher,
+                                     controller.dateTeacher,
                                   width: widthScreen * 0.1,
                                 ),
                               ),
@@ -88,7 +90,7 @@ class TeacherProfile extends StatelessWidget {
                                     children: [
                                       CustomText(
                                         text:
-                                            "${profileTeacherController.dateTeacher.firstName!} ${profileTeacherController.dateTeacher.lastName!}",
+                                            "${controller.dateTeacher.firstName!} ${controller.dateTeacher.lastName!}",
                                         fontSize: 23,
                                         heightContainer:
                                             heightScreen * 0.20 / 5,
@@ -101,7 +103,7 @@ class TeacherProfile extends StatelessWidget {
                                       ),
                                       CustomText(
                                           text:
-                                              "${profileTeacherController.dateTeacher.description} ",
+                                              "${controller.dateTeacher.description} ",
                                           fontSize: 18,
                                           alignment: Alignment.centerRight,
                                           color: Colors.black,
@@ -121,16 +123,16 @@ class TeacherProfile extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      if (profileTeacherController
+                                      if (controller
                                           .dateTeacher.youtubeLink !=
                                           null ||
-                                          profileTeacherController
+                                          controller
                                               .dateTeacher.youtubeLink !=
                                               "")
                                         SocialButton(
                                           function: () async {
                                             if (!await launchUrl(Uri.parse(
-                                                profileTeacherController
+                                                controller
                                                     .dateTeacher
                                                     .youtubeLink!))) {
                                               throw 'Could not launch ';
@@ -142,16 +144,16 @@ class TeacherProfile extends StatelessWidget {
                                       SizedBox(
                                         width: widthScreen * .02,
                                       ),
-                                      if (profileTeacherController
+                                      if (controller
                                                   .dateTeacher.phone !=
                                               null ||
-                                          profileTeacherController
+                                          controller
                                                   .dateTeacher.phone !=
                                               "")
                                         SocialButton(
                                           function: () async {
                                             if (!await launchUrl(Uri.parse(
-                                                "whatsapp://send?phone=+02${profileTeacherController.dateTeacher.phone}"))) {
+                                                "whatsapp://send?phone=+02${controller.dateTeacher.phone}"))) {
                                               throw 'Could not launch ';
                                             }
                                           },
@@ -166,16 +168,16 @@ class TeacherProfile extends StatelessWidget {
                                   Row(
                                     //mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
-                                      if (profileTeacherController
+                                      if (controller
                                           .dateTeacher.instaLink !=
                                           null ||
-                                          profileTeacherController
+                                          controller
                                               .dateTeacher.instaLink !=
                                               "")
                                         SocialButton(
                                           function: () async {
                                             if (!await launchUrl(Uri.parse(
-                                                profileTeacherController
+                                                controller
                                                     .dateTeacher.instaLink!))) {
                                               throw 'Could not launch ';
                                             }
@@ -186,16 +188,16 @@ class TeacherProfile extends StatelessWidget {
                                       SizedBox(
                                         width: widthScreen * .02,
                                       ),
-                                      if (profileTeacherController
+                                      if (controller
                                           .dateTeacher.faceLink !=
                                           null ||
-                                          profileTeacherController
+                                          controller
                                               .dateTeacher.faceLink !=
                                               "")
                                         SocialButton(
                                           function: () async {
                                             if (!await launchUrl(Uri.parse(
-                                                profileTeacherController
+                                                controller
                                                     .dateTeacher.faceLink!))) {
                                               throw 'Could not launch ';
                                             }
@@ -222,9 +224,9 @@ class TeacherProfile extends StatelessWidget {
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                Obx(() => profileTeacherController
+                                Obx(() => controller
                                         .coursesTeacher.isEmpty
-                                    ? !profileTeacherController
+                                    ? !controller
                                             .loadingCoursesTeacher.value
                                         ? SizedBox(
                                             child: Center(
@@ -277,12 +279,12 @@ class TeacherProfile extends StatelessWidget {
                                             )))
                                     : Column(
                                         children: [
-                                          if (profileTeacherController
+                                          if (controller
                                               .coursesTeacher.isNotEmpty)
                                             const SizedBox(
                                               height: 10,
                                             ),
-                                          if (profileTeacherController
+                                          if (controller
                                               .coursesTeacher.isNotEmpty)
                                             Container(
                                               width: widthScreen,
@@ -302,13 +304,13 @@ class TeacherProfile extends StatelessWidget {
                                                 color: Colors.black,
                                               ),
                                             ),
-                                          if (profileTeacherController
+                                          if (controller
                                               .coursesTeacher.isNotEmpty)
                                             SizedBox(
                                               width: widthScreen/2,
                                               child: GridView.builder(
                                                 itemCount:
-                                                    profileTeacherController
+                                                controller
                                                         .coursesTeacher.length,
                                                 gridDelegate:
                                                     SliverGridDelegateWithFixedCrossAxisCount(
@@ -328,7 +330,7 @@ class TeacherProfile extends StatelessWidget {
                                                         homeCourses = Get.put(
                                                             HomeCoursesController());
                                                     homeCourses.chapterId =
-                                                        profileTeacherController
+                                                    controller
                                                             .coursesTeacher[index]
                                                             .pivot!['course_id'];
                                                     homeCourses.getChapters();
@@ -336,9 +338,9 @@ class TeacherProfile extends StatelessWidget {
                                                   },
                                                   child: CustomCardCurses(
                                                     image:
-                                                        "https://edu-lens.com/images/courses/${profileTeacherController.coursesTeacher[index].image}",
+                                                        "https://edu-lens.com/images/courses/${controller.coursesTeacher[index].image}",
                                                     title:
-                                                        profileTeacherController
+                                                    controller
                                                             .coursesTeacher[index]
                                                             .name,
                                                   ),
@@ -353,12 +355,12 @@ class TeacherProfile extends StatelessWidget {
                                       )),
                                 Obx(() => Column(
                                       children: [
-                                        if (profileTeacherController
+                                        if (controller
                                             .monthExamTeacher.isNotEmpty)
                                           const SizedBox(
                                             height: 10,
                                           ),
-                                        if (profileTeacherController
+                                        if (controller
                                             .monthExamTeacher.isNotEmpty)
                                           Container(
                                             decoration: BoxDecoration(
@@ -383,12 +385,12 @@ class TeacherProfile extends StatelessWidget {
                                               color: Colors.black,
                                             ),
                                           ),
-                                        if (profileTeacherController
+                                        if (controller
                                             .monthExamTeacher.isNotEmpty)
                                           SizedBox(
                                             width: widthScreen/2,
                                             child: GridView.builder(
-                                              itemCount: profileTeacherController
+                                              itemCount: controller
                                                   .monthExamTeacher.length,
                                               gridDelegate:
                                                   SliverGridDelegateWithFixedCrossAxisCount(
@@ -412,25 +414,25 @@ class TeacherProfile extends StatelessWidget {
                                                               .solvedExams
                                                               .any((element) =>
                                                                   element.id ==
-                                                                  profileTeacherController
+                                                                      controller
                                                                       .monthExamTeacher[
                                                                           index]
                                                                       .id) ||
-                                                          profileTeacherController
+                                                          controller
                                                                   .monthExamTeacher[
                                                                       index]
                                                                   .cost ==
                                                               0,
                                                       cost:
-                                                          profileTeacherController
+                                                      controller
                                                               .monthExamTeacher[
                                                                   index]
                                                               .cost
                                                               .toString(),
                                                       image:
-                                                          "https://edu-lens.com/images/teachers/${profileTeacherController.dateTeacher.image}",
+                                                          "https://edu-lens.com/images/teachers/${controller.dateTeacher.image}",
                                                       title:
-                                                          profileTeacherController
+                                                      controller
                                                               .monthExamTeacher[
                                                                   index]
                                                               .title,
@@ -440,12 +442,12 @@ class TeacherProfile extends StatelessWidget {
                                                     if (homeController
                                                             .appleAndGoogleBool
                                                             .value ||
-                                                        (profileTeacherController.monthExamTeacher[index].cost ==
+                                                        (controller.monthExamTeacher[index].cost ==
                                                                 0 &&
                                                             homeController.solvedExams
                                                                 .where((v) =>
                                                                     v.id ==
-                                                                    profileTeacherController
+                                                                        controller
                                                                         .monthExamTeacher[
                                                                             index]
                                                                         .id)
@@ -454,13 +456,13 @@ class TeacherProfile extends StatelessWidget {
                                                                 .studentProfile[0]
                                                                 .phone ==
                                                             '01022535966') {
-                                                      profileTeacherController
+                                                      controller
                                                           .goToQuiz(index);
                                                     } else if (homeController
                                                         .solvedExams
                                                         .where((v) =>
                                                             v.id ==
-                                                            profileTeacherController
+                                                                controller
                                                                 .monthExamTeacher[
                                                                     index]
                                                                 .id)
@@ -468,18 +470,18 @@ class TeacherProfile extends StatelessWidget {
                                                       BottomSheetPey
                                                           .bottomSheetPaidForMonthExam(
                                                         dataMonthExam:
-                                                            profileTeacherController
+                                                        controller
                                                                     .monthExamTeacher[
                                                                 index],
                                                         context: context,
                                                       );
                                                     } else if (homeController
                                                             .solvedExams
-                                                            .where((v) => v.id == profileTeacherController.monthExamTeacher[index].id)
+                                                            .where((v) => v.id == controller.monthExamTeacher[index].id)
                                                             .first
                                                             .status ==
                                                         0) {
-                                                      profileTeacherController
+                                                      controller
                                                           .goToQuiz(index);
                                                     } else {
                                                       showCustomSnackBar(
@@ -506,12 +508,12 @@ class TeacherProfile extends StatelessWidget {
                                 if (!homeController.appleAndGoogleBool.value)
                                   Obx(() => Column(
                                         children: [
-                                          if (profileTeacherController
+                                          if (controller
                                               .bookingTeacher.isNotEmpty)
                                             const SizedBox(
                                               height: 10,
                                             ),
-                                          if (profileTeacherController
+                                          if (controller
                                               .bookingTeacher.isNotEmpty)
                                             Container(
                                               decoration: BoxDecoration(
@@ -535,13 +537,13 @@ class TeacherProfile extends StatelessWidget {
                                                 color: Colors.black,
                                               ),
                                             ),
-                                          if (profileTeacherController
+                                          if (controller
                                               .bookingTeacher.isNotEmpty)
                                             SizedBox(
                                               width: widthScreen/2,
                                               child: GridView.builder(
                                                 itemCount:
-                                                    profileTeacherController
+                                                controller
                                                         .bookingTeacher.length,
                                                 gridDelegate:
                                                     SliverGridDelegateWithFixedCrossAxisCount(
@@ -558,9 +560,9 @@ class TeacherProfile extends StatelessWidget {
                                                   () => InkWell(
                                                     child: CustomCardMonthExam(
                                                       image:
-                                                          "https://edu-lens.com/images/courses/${profileTeacherController.coursesTeacher[index].image}",
+                                                          "https://edu-lens.com/images/courses/${controller.coursesTeacher[index].image}",
                                                       title:
-                                                          profileTeacherController
+                                                      controller
                                                               .bookingTeacher[
                                                                   index]
                                                               .name,
@@ -568,12 +570,12 @@ class TeacherProfile extends StatelessWidget {
                                                           .studentReservations
                                                           .any((element) =>
                                                               element.id ==
-                                                              profileTeacherController
+                                                                  controller
                                                                   .bookingTeacher[
                                                                       index]
                                                                   .id),
                                                       cost:
-                                                          profileTeacherController
+                                                      controller
                                                               .bookingTeacher[
                                                                   index]
                                                               .cost
@@ -581,7 +583,7 @@ class TeacherProfile extends StatelessWidget {
                                                     ),
                                                     onTap: () {
                                                       debugPrint(
-                                                          profileTeacherController
+                                                          controller
                                                               .bookingTeacher[
                                                                   index]
                                                               .toJson()
@@ -590,7 +592,7 @@ class TeacherProfile extends StatelessWidget {
                                                           .solvedExams
                                                           .any((element) =>
                                                               element.id ==
-                                                              profileTeacherController
+                                                                  controller
                                                                   .monthExamTeacher[
                                                                       index]
                                                                   .id)) {
@@ -606,7 +608,7 @@ class TeacherProfile extends StatelessWidget {
                                                         BottomSheetPey
                                                             .bottomSheetReserveCourse(
                                                           bookingModel:
-                                                              profileTeacherController
+                                                          controller
                                                                       .bookingTeacher[
                                                                   index],
                                                           context: context,

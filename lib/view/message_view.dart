@@ -7,9 +7,9 @@ import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class MessageView extends StatelessWidget {
-  MessageView({Key? key}) : super(key: key);
-  MessageController messageController = Get.find();
+class MessageView extends GetView<MessageController> {
+  const MessageView({Key? key}) : super(key: key);
+ // MessageController messageController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +17,16 @@ class MessageView extends StatelessWidget {
     return CustomAppBar(
       title: "messagesTitle".tr,
       widget: Obx(
-        () =>messageController.messageList.isEmpty &&
-            messageController.apiLoadingMessage.value
+        () =>controller.messageList.isEmpty &&
+            controller.apiLoadingMessage.value
             ? const SizedBox(
             height: 170,
             child: Center(
                 child: CircularProgressIndicator(
                   color: AppConstants.lightPrimaryColor,
                 )))
-            : messageController.messageList.isEmpty &&
-            messageController.apiLoadingMessage.value == false
+            : controller.messageList.isEmpty &&
+            controller.apiLoadingMessage.value == false
             ?
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,7 +53,7 @@ class MessageView extends StatelessWidget {
             :  Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15,top: 20),
                 child: CustomListView(
-                  itemCount: messageController.messageList.length,
+                  itemCount: controller.messageList.length,
                   itemBuilder: (context, index) =>
                       MessageCard(index: index),
                   axis: Axis.vertical,

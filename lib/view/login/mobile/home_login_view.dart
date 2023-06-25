@@ -12,9 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class HomeLogin extends StatelessWidget {
-  HomeLogin({Key? key}) : super(key: key);
-  RegisterController registerController = Get.put(RegisterController());
+class HomeLogin extends GetView<RegisterController> {
+  const HomeLogin({Key? key}) : super(key: key);
+//  RegisterController registerController = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {

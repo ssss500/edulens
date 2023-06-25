@@ -12,15 +12,15 @@ import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PurchasedLectures extends StatelessWidget {
-  PurchasedLectures({Key? key}) : super(key: key);
-  HomeController homeController = Get.find();
+class PurchasedLectures extends GetView<HomeController> {
+  const PurchasedLectures({Key? key}) : super(key: key);
+  //HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
         title: "purchasedLectures".tr,
-        widget: homeController.lecturePaid.isEmpty
+        widget: controller.lecturePaid.isEmpty
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -43,7 +43,7 @@ class PurchasedLectures extends StatelessWidget {
             : Padding(
               padding: const EdgeInsets.all(8.0),
               child: GridView.builder(
-                  itemCount: homeController.lecturePaid.length,
+                  itemCount: controller.lecturePaid.length,
                   gridDelegate:   SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: MediaQuery.of(context).size.shortestSide < 600
                         ? 2
@@ -56,10 +56,10 @@ class PurchasedLectures extends StatelessWidget {
 
                       VideoController videoController =
                       Get.put(VideoController());
-                      await videoController.openVideo(lecturePaidModel:homeController.lecturePaid[index]);
-                      videoController.getVideoExtensionsPayed(lecturePaidModel:homeController.lecturePaid[index]);
+                      await videoController.openVideo(lecturePaidModel:controller.lecturePaid[index]);
+                      videoController.getVideoExtensionsPayed(lecturePaidModel:controller.lecturePaid[index]);
                       Get.back();
-                      Get.toNamed(RoutesNames.videoView, arguments: {'title': homeController.lecturePaid[index].name.toString()});
+                      Get.toNamed(RoutesNames.videoView, arguments: {'title': controller.lecturePaid[index].name.toString()});
                     },
                     child: Container(
                         margin: const EdgeInsets.only(
@@ -72,7 +72,7 @@ class PurchasedLectures extends StatelessWidget {
                           children: [
                             CustomImageUrlViewNotZoom(
                               image:
-                                  "https://edu-lens.com/images/courses/lectures/${homeController.lecturePaid[index].image}",
+                                  "https://edu-lens.com/images/courses/lectures/${controller.lecturePaid[index].image}",
                               fit: BoxFit.cover,
                               height: double.infinity,
                             ),
@@ -91,7 +91,7 @@ class PurchasedLectures extends StatelessWidget {
                                       left: 6, right: 6, bottom: 3, top: 3),
                                   child: CustomText(
                                     text:
-                                        "${homeController.lecturePaid[index].name}",
+                                        "${controller.lecturePaid[index].name}",
                                     color: Colors.white,
                                   ),
                                 ),
