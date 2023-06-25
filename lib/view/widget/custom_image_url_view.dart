@@ -3,7 +3,6 @@ import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:photo_view/photo_view.dart';
 
 class CustomImageUrlView extends StatelessWidget {
   final image, colorLodingIcon, width, height;
@@ -119,7 +118,6 @@ class ZoomImageView extends StatelessWidget {
     String imageUrl = Get.arguments['imageUrl'];
     return Scaffold(
       body: SafeArea(
-
         child: Hero(
           tag: 'imageZoom',
           child: Center(

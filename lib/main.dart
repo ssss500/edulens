@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:edu_lens/binding/view_model_binding.dart';
 import 'package:edu_lens/controllers/main_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
@@ -13,16 +12,35 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 import 'package:screen_protector/screen_protector.dart';
 import 'firebase_options.dart';
 import 'package:desktop_window/desktop_window.dart';
-
+import 'package:window_manager/window_manager.dart';
 import 'view/not_found_route_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+if(Platform.isWindows){
+  await windowManager.ensureInitialized();
+  WindowOptions windowOptions = const
+  WindowOptions(
+  center: true,
+   // backgroundColor: Colors.transparent,
+    skipTaskbar: true,
+    titleBarStyle: TitleBarStyle.normal,
+    windowButtonVisibility: true,
+  );
+  windowManager.setResizable(false);
+  windowManager.setFullScreen(false);
+  // windowManager.setMaximumSize(const Size(1200,1200));
+  windowManager.setMinimumSize(const Size(1200,700));
 
+  //windowManager.center();
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
+}
   //await Firebase.initializeApp();
 
   DioUtilNew.getInstance();
