@@ -118,12 +118,12 @@ class ZoomImageView extends StatelessWidget {
     // debugPrint(imageUrl);
     String imageUrl = Get.arguments['imageUrl'];
     return Scaffold(
-      body: SizedBox(
+      body: SafeArea(
 
         child: Hero(
           tag: 'imageZoom',
           child: Center(
-            child: Row(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 RotatedBox(
@@ -133,8 +133,8 @@ class ZoomImageView extends StatelessWidget {
                   }, icon: const Icon(Icons.arrow_back_ios_new)),
                 ),
                FittedBox(
-                 child:   Image.network(imageUrl,height: MediaQuery.sizeOf(context).height,
-                   width: MediaQuery.sizeOf(context).width-50,),
+                 child:   Image.network(imageUrl,height: MediaQuery.sizeOf(context).height/1.2,
+                   width: MediaQuery.sizeOf(context).width,),
 
                )
               ],
