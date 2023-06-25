@@ -92,11 +92,13 @@ class HomeView extends GetView<HomeController> {
                                           ? VideoPlay(
                                               pathh:
                                                   "https://edu-lens.com/images/covers/${controller.covers[itemIndex].image.toString()}")
-                                          : CustomImageUrlView(
-                                              fit: BoxFit.fill,
-                                              image:
-                                                  "https://edu-lens.com/images/covers/${controller.covers[itemIndex].image}",
-                                            ),
+                                          :
+                                              CustomImageUrlView(
+                                                  fit: BoxFit.fill,
+                                                  image:
+                                                      "https://edu-lens.com/images/covers/${controller.covers[itemIndex].image}",
+                                                ),
+
                                     ),
                                     options: CarouselOptions(
                                       autoPlay: kDebugMode ? false : true,

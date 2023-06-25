@@ -16,9 +16,9 @@ class CustomImageUrlView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: height,
-      child: CachedNetworkImage(
+    return Scaffold(
+     // height: height,
+      body: CachedNetworkImage(
         imageUrl: image,
         imageBuilder: (context, imageProvider) => InkWell(
           onTap: () {
@@ -61,8 +61,8 @@ class CustomImageUrlView extends StatelessWidget {
 class CustomImageUrlViewNotZoom extends StatelessWidget {
   final image, colorLodingIcon, width, fit, height;
 
-  CustomImageUrlViewNotZoom(
-      {required this.image,
+    const CustomImageUrlViewNotZoom(
+      {super.key, required this.image,
       this.colorLodingIcon = Colors.white,
       this.width = double.infinity,
       this.fit = BoxFit.cover,
@@ -117,10 +117,30 @@ class ZoomImageView extends StatelessWidget {
   Widget build(BuildContext context) {
     // debugPrint(imageUrl);
     String imageUrl = Get.arguments['imageUrl'];
-    return Hero(
-      tag: 'imageZoom',
-      child: PhotoView(
-        imageProvider: NetworkImage(imageUrl),
+    return Scaffold(
+      body: SizedBox(
+
+        child: Hero(
+          tag: 'imageZoom',
+          child: Center(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RotatedBox(
+                  quarterTurns: 2,
+                  child: IconButton(onPressed: (){
+                    Get.back();
+                  }, icon: const Icon(Icons.arrow_back_ios_new)),
+                ),
+               FittedBox(
+                 child:   Image.network(imageUrl,height: MediaQuery.sizeOf(context).height,
+                   width: MediaQuery.sizeOf(context).width-50,),
+
+               )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
