@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/home_courses_controller.dart';
 import 'package:edu_lens/model/courses_models/pdf_model.dart';
@@ -27,7 +29,9 @@ class VideoController extends GetxController {
   Future<void> dispose() async {
     super.dispose();
     try {
-      await ScreenProtector.preventScreenshotOff();
+      if(Platform.isIOS){
+        await ScreenProtector.preventScreenshotOff();
+      }
       // controller.dispose();
     } catch (e) {
       debugPrint(e.toString());
@@ -36,8 +40,10 @@ class VideoController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    await ScreenProtector.preventScreenshotOn();
+if(Platform.isIOS){
+  await ScreenProtector.preventScreenshotOn();
 
+}
   }
 
   openVideo({lecturePaidModel}) {
@@ -58,7 +64,6 @@ class VideoController extends GetxController {
       debugPrint("idVideo : $idVideo");
       idVideo = idVideo.split("?")[0];
       debugPrint("idVideo : $idVideo");
-
       // try {
       //   controller = PodPlayerController(
       //     playVideoFrom: PlayVideoFrom.vimeo(
@@ -84,6 +89,7 @@ class VideoController extends GetxController {
           .chapters[homeCoursesController.indexChapters]
           .lectures[homeCoursesController.indexLectures]
           .video:lecturePaidModel.video.toString();
+      debugPrint("idVideo : $idVideo");
       // debugPrint(
       //     "youtube link : ${homeCoursesController.chapters[homeCoursesController.indexChapters].lectures[homeCoursesController.indexLectures].toJson()}");
       // try {

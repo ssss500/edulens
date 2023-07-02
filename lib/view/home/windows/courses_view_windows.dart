@@ -204,7 +204,7 @@ class CoursesViewWindows extends GetView<HomeCoursesController> {
                                                         item[indexLectures].cost == 0 ||
                                                         homeController
                                                                 .studentProfile[0].phone ==
-                                                            '0102253596' ||
+                                                            '01125705024' ||
                                                         homeController.chapterPaid.any(
                                                             (element) =>
                                                                 element.id ==
@@ -219,8 +219,8 @@ class CoursesViewWindows extends GetView<HomeCoursesController> {
                                                           Get.find();
                                                       await videoController.openVideo();
                                                       videoController.getVideoExtensions();
-                                                      Get.back();
-                                                      Get.toNamed(RoutesNames.videoView,
+                                                     // Get.back();
+                                                      Get.offNamed(RoutesNames.videoView,
                                                           arguments: {
                                                             'title': controller
                                                                 .chapters[indexChapters]

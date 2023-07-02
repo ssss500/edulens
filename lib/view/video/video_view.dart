@@ -7,11 +7,8 @@ import 'package:edu_lens/controllers/video_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
 import 'package:edu_lens/routes/routes_names.dart';
-import 'package:edu_lens/view/pdf_view.dart';
-import 'package:edu_lens/view/quiz/question_view.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
-import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:edu_lens/view/widget/custom_list_view.dart';
 import 'package:edu_lens/view/widget/custom_loading.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
@@ -19,16 +16,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-//import 'package:pod_player/pod_player.dart';
 
-// import 'package:vimeo_player_flutter/vimeo_player_flutter.dart';
 // library vimeo_player_flutter;
 
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:screen_protector/screen_protector.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class VideoView extends GetView<VideoController> {
   //VideoController videoController = Get.find();
@@ -240,8 +233,7 @@ class VideoView extends GetView<VideoController> {
                     itemCount: controller.pdfList.length,
                     itemBuilder: (context, index) {
                       return itemPdf(
-                          title: controller.pdfList[index].title,
-                          index: index);
+                          title: controller.pdfList[index].title, index: index);
                     },
                   ),
                   if (controller.quizList.isNotEmpty)
@@ -420,8 +412,7 @@ class VideoView extends GetView<VideoController> {
                               ],
                             )
                           : CustomText(
-                              text:
-                                  "  ${controller.quizList[indexQuiz].title}",
+                              text: "  ${controller.quizList[indexQuiz].title}",
                               fontSize: 19,
                               maxLines: 3,
                               alignment: Alignment.centerRight,

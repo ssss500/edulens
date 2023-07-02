@@ -4,6 +4,7 @@ import 'package:edu_lens/controllers/login/register_controller.dart';
 import 'package:edu_lens/controllers/message_controller.dart';
 import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/home/common_view/package_common.dart';
+import 'package:edu_lens/view/home/common_view/video_view_common.dart';
 import 'package:edu_lens/view/login/common_view/login_view_common.dart';
 import 'package:edu_lens/view/home/windows/messages_screen.dart';
 import 'package:edu_lens/view/home/windows/paid_lectures.dart';
@@ -146,7 +147,9 @@ class Routes {
       name: RoutesNames.paidLecture,
       page: () => const PaidLectureScreen(),
     ),
-    GetPage(name: RoutesNames.videoView, page: () => VideoView(), bindings: [
+    GetPage(name: RoutesNames.videoView,
+        page: () => const VideoViewCommon(),
+        bindings: [
       BindingsBuilder(() {
         Get.lazyPut<VideoController>(
           () => VideoController(),
@@ -173,6 +176,11 @@ class Routes {
           BindingsBuilder(() {
             Get.lazyPut<HomeController>(
               () => HomeController(),
+            );
+          }),
+          BindingsBuilder(() {
+            Get.lazyPut<VideoController>(
+                  () => VideoController(),
             );
           }),
         ]),
