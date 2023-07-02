@@ -26,16 +26,16 @@ if(Platform.isWindows){
   WindowOptions(
   center: true,
    // backgroundColor: Colors.transparent,
-    skipTaskbar: true,
+    skipTaskbar: false,
     titleBarStyle: TitleBarStyle.normal,
     windowButtonVisibility: true,
   );
   windowManager.setResizable(false);
   windowManager.setFullScreen(false);
   // windowManager.setMaximumSize(const Size(1200,1200));
-  windowManager.setMinimumSize(const Size(1200,700));
+  windowManager.setMinimumSize(const Size(1200,750));
 
-  //windowManager.center();
+  windowManager.center();
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
     await windowManager.focus();

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/model/courses_models/chapter_model.dart';
@@ -45,7 +47,9 @@ class PackageController extends GetxController {
   getPackages() async {
     subjectId.value = homeController.subject.first.id!.toInt();
     indexSubject = 0;
+    log('subject id: $subjectId');
     plansList.value = (await services.getPlans())!;
+    log(plansList.toString());
     await getSubjectTeacherMethod();
   }
 

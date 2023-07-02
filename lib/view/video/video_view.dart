@@ -30,8 +30,8 @@ import 'package:flutter/material.dart';
 import 'package:screen_protector/screen_protector.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class VideoView extends GetView {
-  VideoController videoController = Get.find();
+class VideoView extends GetView<VideoController> {
+  //VideoController videoController = Get.find();
 
   HomeController homeController = Get.find();
   HomeCoursesController homeCoursesController = Get.find();
@@ -232,27 +232,27 @@ class VideoView extends GetView {
                   //     loaderBackgroundColor: Colors.white70,
                   //   ),
                   // ),
-                  if (videoController.pdfList.isNotEmpty)
+                  if (controller.pdfList.isNotEmpty)
                     const SizedBox(
                       height: 20,
                     ),
                   CustomListView(
-                    itemCount: videoController.pdfList.length,
+                    itemCount: controller.pdfList.length,
                     itemBuilder: (context, index) {
                       return itemPdf(
-                          title: videoController.pdfList[index].title,
+                          title: controller.pdfList[index].title,
                           index: index);
                     },
                   ),
-                  if (videoController.quizList.isNotEmpty)
+                  if (controller.quizList.isNotEmpty)
                     const SizedBox(
                       height: 15,
                     ),
                   CustomListView(
-                    itemCount: videoController.quizList.length,
+                    itemCount: controller.quizList.length,
                     itemBuilder: (context, index) {
                       return itemQuiz(
-                          idQuiz: videoController.quizList[index].id,
+                          idQuiz: controller.quizList[index].id,
                           indexQuiz: index);
                     },
                   ),
@@ -268,23 +268,23 @@ class VideoView extends GetView {
       padding: const EdgeInsets.only(top: 8.0, bottom: 8),
       child: InkWell(
         onTap: () {
-          videoController.indexPdf = index;
+          controller.indexPdf = index;
           try {
             // videoController.controller.pause();
           } catch (e) {
             debugPrint(e.toString());
           }
           PDFController pdfController = Get.put(PDFController());
-          pdfController.pdfUrl = videoController.pdfList[index].file;
+          pdfController.pdfUrl = controller.pdfList[index].file;
           // pdfController.type = item['pdfType'];
-          pdfController.title = videoController.pdfList[index].title;
-          pdfController.pdfUrl = videoController.pdfList[index].file;
+          pdfController.title = controller.pdfList[index].title;
+          pdfController.pdfUrl = controller.pdfList[index].file;
           // pdfController.downloadFile = item['downloadFile'];
           pdfController.loadPDF();
           pdfController.onInit();
           // debugPrint(videoController.pdfList.first.toJson().toString());
           Get.toNamed(RoutesNames.pdfView,
-              arguments: {'pdfModel': videoController.pdfList[index]});
+              arguments: {'pdfModel': controller.pdfList[index]});
         },
         child: Container(
           height: 90,
@@ -305,7 +305,7 @@ class VideoView extends GetView {
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, right: 8),
-                child: Container(
+                child: SizedBox(
                   // height: 40,
                   width: MediaQuery.of(Get.context!).size.width - 150,
                   child: CustomText(
@@ -337,8 +337,8 @@ class VideoView extends GetView {
               kDebugMode) {
             Get.dialog(CustomLoading());
             debugPrint(idQuiz.toString());
-            videoController.idQuiz = idQuiz;
-            videoController.indexQuiz = indexQuiz;
+            controller.idQuiz = idQuiz;
+            controller.indexQuiz = indexQuiz;
             try {
               // videoController.controller.pause();
             } catch (e) {
@@ -346,18 +346,18 @@ class VideoView extends GetView {
             }
             debugPrint(
                 "studentId : ${CacheHelper.getData(key: AppConstants.studentId)}");
-            await videoController.getQuestions();
+            await controller.getQuestions();
             Get.back();
-            debugPrint('after back : ${videoController.questionList.length}');
+            debugPrint('after back : ${controller.questionList.length}');
             QuestionController questionController =
                 Get.put(QuestionController());
             // questionController.start.value=videoController.quizList[indexQuiz].duration!;
             // questionController.startTimer();
             questionController.endTimerBool.value = false;
             Get.toNamed(RoutesNames.questionView, arguments: {
-              'questionList': videoController.questionList,
-              'quizList': videoController.quizList,
-              'indexQuiz': videoController.indexQuiz,
+              'questionList': controller.questionList,
+              'quizList': controller.quizList,
+              'indexQuiz': controller.indexQuiz,
             });
           } else {
             showCustomSnackBar(
@@ -397,7 +397,7 @@ class VideoView extends GetView {
                               children: [
                                 CustomText(
                                   text:
-                                      "  ${videoController.quizList[indexQuiz].title}",
+                                      "  ${controller.quizList[indexQuiz].title}",
                                   fontSize: 19,
                                   maxLines: 3,
                                   alignment: Alignment.centerRight,
@@ -421,7 +421,7 @@ class VideoView extends GetView {
                             )
                           : CustomText(
                               text:
-                                  "  ${videoController.quizList[indexQuiz].title}",
+                                  "  ${controller.quizList[indexQuiz].title}",
                               fontSize: 19,
                               maxLines: 3,
                               alignment: Alignment.centerRight,

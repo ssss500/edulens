@@ -3,6 +3,7 @@ import 'package:edu_lens/controllers/login/login_controller.dart';
 import 'package:edu_lens/controllers/login/register_controller.dart';
 import 'package:edu_lens/controllers/message_controller.dart';
 import 'package:edu_lens/routes/routes_names.dart';
+import 'package:edu_lens/view/home/common_view/package_common.dart';
 import 'package:edu_lens/view/login/common_view/login_view_common.dart';
 import 'package:edu_lens/view/home/windows/messages_screen.dart';
 import 'package:edu_lens/view/home/windows/paid_lectures.dart';
@@ -25,7 +26,9 @@ import '../controllers/quiz/question_controller.dart';
 import '../controllers/quiz/question_month_controller.dart';
 import '../controllers/subject_teacher_controller.dart';
 import '../controllers/video_controller.dart';
+import '../view/home/common_view/courses_common.dart';
 import '../view/home/common_view/home_common.dart';
+import '../view/home/common_view/subject_teacher_common.dart';
 import '../view/home/mobile/subject_teacher_view.dart';
 import '../view/home/windows/teacher_profile.dart';
 import '../view/home_courses_view.dart';
@@ -127,8 +130,9 @@ class Routes {
         Get.lazyPut<MessageController>(
           () => MessageController(),
         );
-
-
+        Get.lazyPut<PackageController>(
+          () => PackageController(),
+        );
       }),
     ),
 
@@ -140,29 +144,26 @@ class Routes {
 
     GetPage(
       name: RoutesNames.paidLecture,
-      page: () =>  const PaidLectureScreen(),
-
+      page: () => const PaidLectureScreen(),
     ),
-    GetPage(
-      name: RoutesNames.videoView,
-      page: () => VideoView(),
-        bindings: [
-          BindingsBuilder(() {
-            Get.lazyPut<VideoController>(
-                  () => VideoController(),
-            );
-          }),
-          BindingsBuilder(() {
-            Get.lazyPut<HomeController>(
-                  () => HomeController(),
-            );
-          }),
-          BindingsBuilder(() { Get.lazyPut<HomeCoursesController>(() => HomeCoursesController());})
-        ]
-    ),
+    GetPage(name: RoutesNames.videoView, page: () => VideoView(), bindings: [
+      BindingsBuilder(() {
+        Get.lazyPut<VideoController>(
+          () => VideoController(),
+        );
+      }),
+      BindingsBuilder(() {
+        Get.lazyPut<HomeController>(
+          () => HomeController(),
+        );
+      }),
+      BindingsBuilder(() {
+        Get.lazyPut<HomeCoursesController>(() => HomeCoursesController());
+      })
+    ]),
     GetPage(
         name: RoutesNames.coursesFromHome,
-        page: () => const HomeCoursesView(),
+        page: () => const CoursesCommon(),
         bindings: [
           BindingsBuilder(() {
             Get.lazyPut<HomeCoursesController>(
@@ -204,7 +205,7 @@ class Routes {
 
     GetPage(
       name: RoutesNames.subjectView,
-      page: () => const SubjectTeacher(),
+      page: () => const SubjectTeacherCommon(),
       binding: BindingsBuilder(() {
         Get.lazyPut<SubjectTeacherController>(
           () => SubjectTeacherController(),
@@ -260,7 +261,7 @@ class Routes {
 
     GetPage(
       name: RoutesNames.packageView,
-      page: () => const PackagesView(),
+      page: () => const PackageCommon(),
       binding: BindingsBuilder(() {
         Get.lazyPut<PackageController>(
           () => PackageController(),
@@ -296,12 +297,12 @@ class Routes {
         bindings: [
           BindingsBuilder(() {
             Get.lazyPut<QuestionMonthController>(
-                  () => QuestionMonthController(),
+              () => QuestionMonthController(),
             );
           }),
           BindingsBuilder(() {
             Get.lazyPut<ProfileTeacherController>(
-                  () => ProfileTeacherController(),
+              () => ProfileTeacherController(),
             );
           }),
         ]),
@@ -310,7 +311,7 @@ class Routes {
       page: () => const AnswerQuizMonthView(),
       binding: BindingsBuilder(() {
         Get.lazyPut<QuestionMonthController>(
-              () => QuestionMonthController(),
+          () => QuestionMonthController(),
         );
       }),
     ),
@@ -319,7 +320,7 @@ class Routes {
       page: () => PdfView(),
       binding: BindingsBuilder(() {
         Get.lazyPut<PDFController>(
-              () => PDFController(),
+          () => PDFController(),
         );
       }),
     ),
@@ -328,7 +329,7 @@ class Routes {
       page: () => QuestionView(),
       binding: BindingsBuilder(() {
         Get.lazyPut<QuestionController>(
-              () => QuestionController(),
+          () => QuestionController(),
         );
       }),
     ),
@@ -338,16 +339,16 @@ class Routes {
       page: () => const ZoomImageView(),
       binding: BindingsBuilder(() {
         Get.lazyPut<QuestionController>(
-              () => QuestionController(),
+          () => QuestionController(),
         );
       }),
     ),
     GetPage(
       name: RoutesNames.answerQuizView,
-      page: () =>  const AnswerQuizView(),
+      page: () => const AnswerQuizView(),
       binding: BindingsBuilder(() {
         Get.lazyPut<QuestionController>(
-              () => QuestionController(),
+          () => QuestionController(),
         );
       }),
     ),

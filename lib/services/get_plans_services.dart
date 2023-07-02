@@ -80,6 +80,7 @@ class GetPlansServices {
   }
 
   Future<List<PlanModel>?> getPlans() async {
+    log('xx');
     try {
       final response =
           await dio!.post(AppConstants.classPlan, queryParameters: {
@@ -90,7 +91,11 @@ class GetPlansServices {
       }, data: {
         "api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"
       });
+      log('student id: ${CacheHelper.getData(
+        key: AppConstants.studentClassId,
+      )}');
       if (response.statusCode == 200) {
+        log('200');
         final mList = List<PlanModel>.from(
             response.data.map((i) => PlanModel.fromJson(i)));
         debugPrint(mList.length.toString());

@@ -19,7 +19,6 @@ class Profile extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(' helloooo${controller.studentProfile[0].firstName.toString()}');
 
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 10),
