@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/controllers/quiz/question_controller.dart';
 import 'package:flutter/foundation.dart';
@@ -23,7 +22,7 @@ class VideoViewWindows extends GetView<VideoController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(VideoController());
+    //Get.put(VideoController());
     String title = Get.arguments['title'];
 
     Widget itemPdf({title, index}) {
