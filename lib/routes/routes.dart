@@ -40,7 +40,8 @@ import '../view/login/mobile/create_account_view.dart';
 import '../view/message_view.dart';
 import '../view/profile_teacher_view.dart';
 import '../view/purchasedLectures.dart';
-import '../view/quiz/common/question_view_common.dart';
+import '../view/quiz/common/answer_view_month_common.dart';
+import '../view/quiz/common/question_view_month_common.dart';
 import '../view/quiz/quiz_mobile/answer_quiz_month_view.dart';
 import '../view/quiz/quiz_mobile/answer_quiz_view.dart';
 import '../view/quiz/quiz_mobile/question_month_view.dart';
@@ -302,7 +303,7 @@ class Routes {
 
     GetPage(
         name: RoutesNames.qMonthView,
-        page: () => const QuestionViewCommon(),
+        page: () => const QuestionViewMonthCommon(),
         bindings: [
           BindingsBuilder(() {
             Get.lazyPut<QuestionMonthController>(
@@ -317,7 +318,7 @@ class Routes {
         ]),
     GetPage(
       name: RoutesNames.answerQuizMonthView,
-      page: () => const AnswerQuizMonthView(),
+      page: () => const AnswerViewMonthCommon(),
       binding: BindingsBuilder(() {
         Get.lazyPut<QuestionMonthController>(
           () => QuestionMonthController(),

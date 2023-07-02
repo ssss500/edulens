@@ -7,8 +7,8 @@ import '../quiz_mobile/question_month_view.dart';
 import '../quiz_mobile/question_view.dart';
 import '../quiz_windows/question_view_month_windows.dart';
 
-class QuestionViewCommon extends GetView<QuestionMonthController> {
-  const QuestionViewCommon({Key? key}) : super(key: key);
+class QuestionViewMonthCommon extends GetView<QuestionMonthController> {
+  const QuestionViewMonthCommon({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
