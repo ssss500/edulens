@@ -15,9 +15,7 @@ class CustomImageUrlView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-     // height: height,
-      body: CachedNetworkImage(
+    return CachedNetworkImage(
         imageUrl: image,
         imageBuilder: (context, imageProvider) => InkWell(
           onTap: () {
@@ -52,8 +50,7 @@ class CustomImageUrlView extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
+      );
   }
 }
 

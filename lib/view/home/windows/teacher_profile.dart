@@ -475,11 +475,14 @@ class TeacherProfile extends GetView<ProfileTeacherController> {
                                                                 index],
                                                         context: context,
                                                       );
-                                                    } else if (homeController
+                                                    }
+                                                    ///TODO(hadeer): invert the condition.:)
+                                                    else if (
+                                                    homeController
                                                             .solvedExams
                                                             .where((v) => v.id == controller.monthExamTeacher[index].id)
                                                             .first
-                                                            .status ==
+                                                            .status !=
                                                         0) {
                                                       controller
                                                           .goToQuiz(index);

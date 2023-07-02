@@ -4,7 +4,7 @@ import 'package:edu_lens/controllers/quiz/question_controller.dart';
 import 'package:edu_lens/controllers/quiz/question_month_controller.dart';
 import 'package:edu_lens/controllers/video_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
-import 'package:edu_lens/view/quiz/timer_quiz.dart';
+import 'package:edu_lens/view/quiz/quiz_mobile/timer_quiz.dart';
 import 'package:edu_lens/view/widget/custom_buttom.dart';
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';

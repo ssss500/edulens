@@ -7,7 +7,7 @@ import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/model/courses_models/solved_exams_model.dart';
 import 'package:edu_lens/view/buttom_sheet_paid.dart';
 import 'package:edu_lens/view/home_courses_view.dart';
-import 'package:edu_lens/view/quiz/question_month_view.dart';
+import 'package:edu_lens/view/quiz/quiz_mobile/question_month_view.dart';
 import 'package:edu_lens/view/video/video_view.dart';
 import 'package:edu_lens/view/widget/CustomCardMonthExam.dart';
 import 'package:edu_lens/view/widget/card_image_teacher.dart';

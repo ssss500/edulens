@@ -4,7 +4,7 @@ import 'package:edu_lens/model/profile_teacher_models/courses_model.dart';
 import 'package:edu_lens/model/profile_teacher_models/month_exam_model.dart';
 import 'package:edu_lens/model/teacher_model.dart';
 import 'package:edu_lens/services/get_courses.dart';
-import 'package:edu_lens/view/quiz/question_month_view.dart';
+import 'package:edu_lens/view/quiz/quiz_mobile/question_month_view.dart';
 import 'package:edu_lens/view/widget/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
