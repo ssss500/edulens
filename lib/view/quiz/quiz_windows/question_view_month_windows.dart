@@ -14,8 +14,6 @@ class QuestionViewMonthWindows extends GetView {
   QuestionViewMonthWindows({Key? key}) : super(key: key);
   final CarouselController _controller = CarouselController();
 
-//         profileTeacherController
-//       //         .monthExamTeacher[questionMonthController.indexQuiz].title!,
   @override
   Widget build(BuildContext context) {
     QuestionMonthController questionMonthController = Get.find();

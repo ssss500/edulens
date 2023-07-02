@@ -40,6 +40,8 @@ class VideoController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    openVideo();
+    getVideoExtensions();
 if(Platform.isIOS){
   await ScreenProtector.preventScreenshotOn();
 

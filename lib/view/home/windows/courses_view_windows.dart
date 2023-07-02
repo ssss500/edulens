@@ -215,10 +215,10 @@ class CoursesViewWindows extends GetView<HomeCoursesController> {
                                                       // await  controller.controller.initialise();
                                                       controller.indexLectures = indexLectures;
                                                       controller.indexChapters = indexChapters;
-                                                      VideoController videoController =
-                                                          Get.find();
-                                                      await videoController.openVideo();
-                                                      videoController.getVideoExtensions();
+                                                      // VideoController videoController =
+                                                      //     Get.find();
+                                                      // await videoController.openVideo();
+                                                      // videoController.getVideoExtensions();
                                                      // Get.back();
                                                       Get.offNamed(RoutesNames.videoView,
                                                           arguments: {
