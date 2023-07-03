@@ -46,7 +46,7 @@ class _FavouriteWindowsState extends State<FavouriteWindows> {
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [ 
+            children: [
               Container(
                 padding: const EdgeInsets.only(right: 20),
                 child: Image.asset(
@@ -63,45 +63,52 @@ class _FavouriteWindowsState extends State<FavouriteWindows> {
             ],
           )
         : Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CustomText(
-            text: 'المفضلة',
-            color: AppConstants.lightPrimaryColor, fontSize: 24,fontWeight: FontWeight.bold,
-          ),
-            CustomGridView(
-              itemCount: teachersLove.length,
-              crossAxisCount: 3,
-              itemBuilder: (_, index) => InkWell(
-                child: Container(
-                  margin:const EdgeInsets.all(20),
-
-                  child: Hero(
-                      tag: "imageTeacher$index",
-                      child: CardImageTeacher(
-                        name: true,
-                        dateTeacher: teachersLove[index],
-                        // image:
-                        //     "https://edu-lens.com/images/teachers/${teachersLove[index].image}",
-                      )),
+            children: [
+                CustomText(
+                  text: 'المفضلة',
+                  color: AppConstants.lightPrimaryColor,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
-                onTap: () {
-                  ProfileTeacherController profileTeacherController =
-                      Get.put(ProfileTeacherController());
-                  profileTeacherController.dateTeacher = teachersLove[index];
-                  profileTeacherController.index = index;
-                  profileTeacherController.getCoursesAndExamAndBookings();
+                const SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: CustomGridView(
+                    itemCount: teachersLove.length,
+                    crossAxisCount: 3,
+                    itemBuilder: (_, index) => InkWell(
+                      child: Container(
+                        margin: const EdgeInsets.all(20),
+                        child: Hero(
+                            tag: "imageTeacher$index",
+                            child: CardImageTeacher(
+                              name: true,
+                              dateTeacher: teachersLove[index],
+                              // image:
+                              //     "https://edu-lens.com/images/teachers/${teachersLove[index].image}",
+                            )),
+                      ),
+                      onTap: () {
+                        ProfileTeacherController profileTeacherController =
+                            Get.put(ProfileTeacherController());
+                        profileTeacherController.dateTeacher =
+                            teachersLove[index];
+                        profileTeacherController.index = index;
+                        profileTeacherController.getCoursesAndExamAndBookings();
 
-                  Get.toNamed(RoutesNames.profileTeacherView);
-                },
-              ),
-              padding: 10,
-              // physics: const NeverScrollableScrollPhysics(),
-            ),
-      CustomText(
-        text: "اضغط علي زر المفضلة لاضافة المزيد من المدرسين هنا",
-        fontSize: 24,
-      ),
-          ]);
+                        Get.toNamed(
+                            RoutesNames.subjectTeacher);                      },
+                    ),
+                    padding: 10,
+                    // physics: const NeverScrollableScrollPhysics(),
+                  ),
+                ),
+
+                CustomText(
+                  text: "اضغط علي زر المفضلة لاضافة المزيد من المدرسين هنا",
+                  fontSize: 24,
+                ),
+              ]);
   }
 }

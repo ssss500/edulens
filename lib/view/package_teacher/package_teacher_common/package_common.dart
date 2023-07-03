@@ -1,12 +1,10 @@
 import 'package:edu_lens/controllers/home/home_controllers.dart';
-import 'package:edu_lens/view/home/windows/packages.dart';
-import 'package:edu_lens/view/package_teacher/packages_view.dart';
+import 'package:edu_lens/view/package_teacher/package_teacher_windows/packages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
 import '../../../controllers/package_controller.dart';
 import '../../../responsive.dart';
+import '../package_teacher_mobile/packages_view.dart';
 
 class PackageCommon extends GetView<PackageController> {
   const PackageCommon({Key? key}) : super(key: key);

@@ -465,7 +465,7 @@ class HomeView extends GetView<HomeController> {
                                                     .getCoursesAndExamAndBookings();
 
                                                 Get.toNamed(
-                                                    RoutesNames.teacherView);
+                                                    RoutesNames.subjectTeacher);
                                               },
                                             ),
                                             padding: const EdgeInsets.all(10),

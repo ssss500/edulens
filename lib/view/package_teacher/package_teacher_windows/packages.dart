@@ -35,9 +35,7 @@ class Packages extends GetView<PackageController> {
                     text: 'الباقات',
                     color: AppConstants.lightPrimaryColor, fontSize: 24,fontWeight: FontWeight.bold,
                   ),
-                  Container(
-                      height: MediaQuery.sizeOf(context).height/1.2,
-                      width: MediaQuery.sizeOf(context).width / 1.8,
+                 Expanded(
                       child: CustomGridView(
                         itemCount: controller.plansList.length,
                         itemBuilder: (BuildContext context, int index) {

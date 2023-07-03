@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/helper/app_constants.dart';
@@ -90,98 +91,94 @@ class PackageController extends GetxController {
                             color: AppConstants.primaryColor,
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          width: widthScreen,
+                          width:widthScreen,
                           margin: const EdgeInsets.only(
                               left: 9, right: 9, bottom: 14, top: 15),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 18.0, top: 15, bottom: 10, left: 18),
-                                child: Obx(
-                                  () => Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        width: widthScreen * 0.65,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                              height: 40,
-                                              child: CustomText(
-                                                text:
-                                                    chapters[indexChapters].name!,
-                                                color: Colors.white,
-                                                textAlign: TextAlign.start,
-                                                alignment: Alignment.centerRight,
-                                                fontSize: 25,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 20,
-                                              child: CustomText(
-                                                text:
-                                                    "عدد المحاضرات  : ${chapters[indexChapters].lectures!.length}",
-                                                color: Colors.white,
-                                                textAlign: TextAlign.start,
-                                                alignment: Alignment.centerRight,
-                                                fontSize: 17,
-                                              ),
-                                            ),
-                                          ],
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                right: 18.0, top: 15, bottom: 10, left: 18),
+                            child: Obx(
+                              () => Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    width: widthScreen * 0.65,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: 40,
+                                          child: CustomText(
+                                            text:
+                                                chapters[indexChapters].name!,
+                                            color: Colors.white,
+                                            textAlign: TextAlign.start,
+                                            alignment: Alignment.centerRight,
+                                            fontSize: 25,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                          child: CustomText(
+                                            text:
+                                                "عدد المحاضرات  : ${chapters[indexChapters].lectures!.length}",
+                                            color: Colors.white,
+                                            textAlign: TextAlign.start,
+                                            alignment: Alignment.centerRight,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  if (!homeController.chapterPaid.any(
+                                      (element) =>
+                                          element.id ==
+                                          chapters[indexChapters].id))
+                                    Checkbox(
+                                      value: checkList.contains(chapters[indexChapters].id),
+                                      onChanged: (c) {
+
+                                        if(checkList.contains(chapters[indexChapters].id)){
+                                          checkList.remove(chapters[indexChapters].id);
+                                        }else{
+                                          if(checkList.length<selectedPackage.chapterNumber){
+                                          checkList.add(chapters[indexChapters].id);
+                                          debugPrint(checkList.toString());
+                                          }else{
+                                            showCustomSnackBar(
+                                                context: context,
+                                                title: "note".tr,
+                                                deck: "تم بلوغ الحد الاقصي من الفصول",
+                                                contentType: ContentType.failure);
+                                          }
+                                        }
+                                      },
+                                      activeColor:
+                                          AppConstants.lightPrimaryColor,
+                                    )
+                                  else if (!homeController
+                                      .appleAndGoogleBool.value)
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.green.shade400,
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: CustomText(
+                                          text: "تم الشراء",
+                                          color: Colors.white,
+                                          alignment: Alignment.center,
+                                          textAlign: TextAlign.center,
                                         ),
                                       ),
-                                      if (!homeController.chapterPaid.any(
-                                          (element) =>
-                                              element.id ==
-                                              chapters[indexChapters].id))
-                                        Checkbox(
-                                          value: checkList.contains(chapters[indexChapters].id),
-                                          onChanged: (c) {
-
-                                            if(checkList.contains(chapters[indexChapters].id)){
-                                              checkList.remove(chapters[indexChapters].id);
-                                            }else{
-                                              if(checkList.length<selectedPackage.chapterNumber){
-                                              checkList.add(chapters[indexChapters].id);
-                                              debugPrint(checkList.toString());
-                                              }else{
-                                                showCustomSnackBar(
-                                                    context: context,
-                                                    title: "note".tr,
-                                                    deck: "تم بلوغ الحد الاقصي من الفصول",
-                                                    contentType: ContentType.failure);
-                                              }
-                                            }
-                                          },
-                                          activeColor:
-                                              AppConstants.lightPrimaryColor,
-                                        )
-                                      else if (!homeController
-                                          .appleAndGoogleBool.value)
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: Colors.green.shade400,
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: CustomText(
-                                              text: "تم الشراء",
-                                              color: Colors.white,
-                                              alignment: Alignment.center,
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                        )
-                                    ],
-                                  ),
-                                ),
+                                    )
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         );
                       }),

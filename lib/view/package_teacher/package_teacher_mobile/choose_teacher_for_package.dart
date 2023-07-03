@@ -1,14 +1,10 @@
-import 'dart:ui';
-
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:connectivity_widget/connectivity_widget.dart';
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/package_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
-import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/view/widget/card_image_teacher.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
-import 'package:edu_lens/view/widget/custom_buttom.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 import 'package:edu_lens/view/widget/custom_list_view.dart';
 import 'package:edu_lens/view/widget/custom_loading.dart';
@@ -19,7 +15,6 @@ import 'package:get/get.dart';
 class ChooseTeacherForPackages extends GetView<PackageController> {
   ChooseTeacherForPackages({Key? key}) : super(key: key);
   HomeController homeController = Get.find();
-  //PackageController packageController = Get.find();
 
   @override
   Widget build(BuildContext context) {

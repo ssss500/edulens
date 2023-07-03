@@ -30,7 +30,7 @@ import 'package:root/root.dart';
 import '../../model/side_menu_item_model.dart';
 import '../../view/home/windows/home_view_windows.dart';
 import '../../view/home/windows/messages_screen.dart';
-import '../../view/home/windows/packages.dart';
+import '../../view/package_teacher/package_teacher_windows/packages.dart';
 
 class HomeController extends GetxController {
   final services = GetHomeServices();

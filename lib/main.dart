@@ -32,8 +32,8 @@ if(Platform.isWindows){
   );
   windowManager.setResizable(false);
   windowManager.setFullScreen(false);
-  // windowManager.setMaximumSize(const Size(1200,1200));
-  windowManager.setMinimumSize(const Size(1200,750));
+   windowManager.setMaximumSize(const Size(1400,780));
+  windowManager.setMinimumSize(const Size(1400,780));
 
   windowManager.center();
   windowManager.waitUntilReadyToShow(windowOptions, () async {

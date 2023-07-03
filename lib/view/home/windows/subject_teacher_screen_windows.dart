@@ -97,7 +97,7 @@ class SubjectTeacherScreen extends GetView<SubjectTeacherController> {
                                       profileTeacherController
                                           .getCoursesAndExamAndBookings();
                                       Get.toNamed(
-                                          RoutesNames.profileTeacherView);
+                                          RoutesNames.subjectTeacher);
                                     },
                                   ),
                                   padding: 10,
