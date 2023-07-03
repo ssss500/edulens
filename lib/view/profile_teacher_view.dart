@@ -688,14 +688,14 @@ class ProfileTeacherView extends GetView {
                                                         contentType: ContentType
                                                             .warning);
                                                   } else {
-                                                    BottomSheetPey
-                                                        .bottomSheetReserveCourse(
-                                                      bookingModel:
-                                                          profileTeacherController
-                                                                  .bookingTeacher[
-                                                              index],
-                                                      context: context,
-                                                    );
+                                                    // BottomSheetPey
+                                                    //     .bottomSheetReserveCourse(
+                                                    //   bookingModel:
+                                                    //       profileTeacherController
+                                                    //               .bookingTeacher[
+                                                    //           index],
+                                                    //   context: context,
+                                                    // );
                                                   }
                                                 },
                                               ),

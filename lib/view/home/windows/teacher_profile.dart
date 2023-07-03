@@ -26,7 +26,6 @@ class TeacherProfile extends GetView<ProfileTeacherController> {
   Widget build(BuildContext context) {
     final heightScreen = MediaQuery.of(context).size.height;
     final widthScreen = MediaQuery.of(context).size.width;
-  // final ProfileTeacherController profileTeacherController = Get.find();
     final homeController = Get.put(HomeController());
 
     return CustomBackground(
@@ -607,14 +606,14 @@ class TeacherProfile extends GetView<ProfileTeacherController> {
                                                                 ContentType
                                                                     .warning);
                                                       } else {
-                                                        BottomSheetPey
-                                                            .bottomSheetReserveCourse(
-                                                          bookingModel:
-                                                          controller
-                                                                      .bookingTeacher[
-                                                                  index],
-                                                          context: context,
-                                                        );
+                                                        // BottomSheetPey
+                                                        //     .bottomSheetReserveCourse(
+                                                        //   bookingModel:
+                                                        //   controller
+                                                        //               .bookingTeacher[
+                                                        //           index],
+                                                        //   context: context,
+                                                        // );
                                                       }
                                                     },
                                                   ),
