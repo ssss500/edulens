@@ -28,7 +28,7 @@ class AnswerQuizMonthView extends GetView<QuestionMonthController> {
             Get.back();
             Get.back();
           },
-          title: "نموذج حل الامتحان",
+          title: 'modelAnswer'.tr,
           widget: CustomListView(
               itemCount: controller.questionList.length,
               itemBuilder: (context, index) {

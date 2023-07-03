@@ -54,6 +54,7 @@ class LocaleString extends Translations {
           "numberOfWrongAnswers": "عدد الإجابات الخاطئة",
           "numberOfQuestion": "عدد الاسئلة",
           "showModelAnswer": "عرض نموذج الاجابة",
+          "modelAnswer": "نموذج اجابه الامتحان",
           "bakeToVideo": "العودة للصفحة الرئيسية",
           "tryAgain": "حاول مره اخري",
           "logoutText": "تسجيل الخروج",

@@ -10,16 +10,15 @@ import '../../widget/custom_buttom.dart';
 import '../../widget/custom_image_url_view.dart';
 import '../../widget/custom_text.dart';
 
-class QuestionViewMonthWindows extends GetView {
+class QuestionViewMonthWindows extends GetView<QuestionMonthController> {
   QuestionViewMonthWindows({Key? key}) : super(key: key);
   final CarouselController _controller = CarouselController();
 
   @override
   Widget build(BuildContext context) {
-    QuestionMonthController questionMonthController = Get.find();
     ProfileTeacherController profileTeacherController = Get.find();
-    questionMonthController.screenWidth = MediaQuery.of(context).size.width;
-    questionMonthController.screenHeight = MediaQuery.of(context).size.height;
+    controller.screenWidth = MediaQuery.of(context).size.width;
+    controller.screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: SafeArea(
@@ -41,7 +40,7 @@ class QuestionViewMonthWindows extends GetView {
                           SizedBox(width: MediaQuery.sizeOf(context).width*0.35,),
                           Text(
                             profileTeacherController
-                                .monthExamTeacher[questionMonthController.indexQuiz].title!,
+                                .monthExamTeacher[controller.indexQuiz].title!,
                             style: const TextStyle(color: Colors.black, fontSize: 23),
                           ),
                         ],
@@ -50,24 +49,24 @@ class QuestionViewMonthWindows extends GetView {
                         height: 30,
                       ),
                       Obx(
-                        () => questionMonthController.endTimerBool.value
+                        () => controller.endTimerBool.value
                             ? Container()
                             : TweenAnimationBuilder<Duration>(
                                 duration: Duration(
                                     minutes: profileTeacherController
                                         .monthExamTeacher[
-                                            questionMonthController.indexQuiz]
+                                            controller.indexQuiz]
                                         .duration!),
                                 tween: Tween(
                                     begin: Duration(
                                         minutes: profileTeacherController
                                             .monthExamTeacher[
-                                                questionMonthController
+                                                controller
                                                     .indexQuiz]
                                             .duration!),
                                     end: Duration.zero),
                                 onEnd: () {
-                                  questionMonthController
+                                  controller
                                       .getFinalDegreeAndEndExam();
                                 },
                                 builder: (BuildContext context, Duration value,
@@ -85,7 +84,7 @@ class QuestionViewMonthWindows extends GetView {
                                     percent: value.inSeconds.toDouble() /
                                         (profileTeacherController
                                                 .monthExamTeacher[
-                                                    questionMonthController
+                                                    controller
                                                         .indexQuiz]
                                                 .duration! *
                                             60),
@@ -134,7 +133,7 @@ class QuestionViewMonthWindows extends GetView {
                         items: [
                           for (int index = 0;
                               index <
-                                  questionMonthController.questionList.length;
+                                  controller.questionList.length;
                               index++)
                             Container(
                               width: MediaQuery.sizeOf(context).width / 3,
@@ -167,13 +166,13 @@ class QuestionViewMonthWindows extends GetView {
                                         child: Column(
                                           children: [
                                             //الصوره
-                                            if (questionMonthController
+                                            if (controller
                                                     .questionList[index]
                                                     .image !=
                                                 null)
                                               CustomImageUrlView(
                                                 image:
-                                                    "https://edu-lens.com/images/questions/${questionMonthController.questionList[index].image}",
+                                                    "https://edu-lens.com/images/questions/${controller.questionList[index].image}",
                                                 colorLodingIcon:
                                                     AppConstants.primaryColor,
                                               ),
@@ -186,7 +185,7 @@ class QuestionViewMonthWindows extends GetView {
                                                   left: 8.0, right: 8),
                                               child: CustomText(
                                                 text:
-                                                    "${questionMonthController.questionList[index].title}",
+                                                    "${controller.questionList[index].title}",
                                                 textDirection:
                                                     TextDirection.ltr,
                                                 fontSize: 20,
@@ -197,11 +196,11 @@ class QuestionViewMonthWindows extends GetView {
                                             ),
                                             // //الازرار
                                             for (var i
-                                                in questionMonthController
+                                                in controller
                                                     .questionList[index]
                                                     .choices!)
                                               GetBuilder<
-                                                      QuestionMonthController>(
+                                                  QuestionMonthController>(
                                                   builder: (controller) {
                                                 return Padding(
                                                   padding:
@@ -210,7 +209,7 @@ class QuestionViewMonthWindows extends GetView {
                                                           right: 10),
                                                   child: InkWell(
                                                       onTap: () async {
-                                                        questionMonthController
+                                                        controller
                                                             .questionList[index]
                                                             .answer = i.choice!;
                                                         controller.update();
@@ -228,7 +227,7 @@ class QuestionViewMonthWindows extends GetView {
                                                             .only(top: 20),
                                                         decoration:
                                                             BoxDecoration(
-                                                          color: questionMonthController
+                                                          color: controller
                                                                       .questionList[
                                                                           index]
                                                                       .answer ==
@@ -238,7 +237,7 @@ class QuestionViewMonthWindows extends GetView {
                                                               : AppConstants
                                                                   .primaryColor,
                                                           border: Border.all(
-                                                              color: questionMonthController
+                                                              color: controller
                                                                           .questionList[
                                                                               index]
                                                                           .answer ==
@@ -295,10 +294,10 @@ class QuestionViewMonthWindows extends GetView {
                       ),
                       CustomButton(
                         function: () {
-                          questionMonthController.endTimerBool.value = true;
+                          controller.endTimerBool.value = true;
 
                           try {
-                            questionMonthController.checkTheQuestionAnswer(
+                            controller.checkTheQuestionAnswer(
                                 context: context, controller: _controller);
                           } catch (E) {
                             debugPrint(E.toString());

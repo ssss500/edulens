@@ -20,7 +20,6 @@ class HomeWorkView extends StatelessWidget {
             itemCount: 10,
             itemBuilder: (context, index) {
               return Container(
-
                 decoration: BoxDecoration(
                   border: Border.all(color: AppConstants.primaryColor, width: 2.0),
                   borderRadius: BorderRadius.circular(30),

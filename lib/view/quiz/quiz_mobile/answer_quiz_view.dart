@@ -9,10 +9,12 @@ import 'package:get/get.dart';
 import 'package:screen_protector/screen_protector.dart';
 
 class AnswerQuizView extends GetView<QuestionController> {
- const AnswerQuizView({Key? key,}) : super(key: key);
+  const AnswerQuizView({
+    Key? key,
+  }) : super(key: key);
 
   //QuestionController questionController = Get.put(QuestionController());
- // var questionList;
+  // var questionList;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +34,8 @@ class AnswerQuizView extends GetView<QuestionController> {
 
             Get.back();
             await ScreenProtector.preventScreenshotOn();
-
           },
-          title: "نموذج حل الامتحان",
+          title: "modelAnswer".tr,
           widget: CustomListView(
               itemCount: questionList.length,
               itemBuilder: (context, index) {
