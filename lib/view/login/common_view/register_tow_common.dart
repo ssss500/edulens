@@ -9,7 +9,7 @@ class RegisterTwoCommon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Responsive(
-        mobile: const CreateAccountViewTow(), desktop: RegisterTwoScreen());
+    return const Responsive(
+        mobile:  CreateAccountViewTow(), desktop: RegisterTwoScreen());
   }
 }

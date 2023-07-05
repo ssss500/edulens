@@ -9,6 +9,6 @@ class WelcomeViewCommon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Responsive(mobile: HomeLogin(), desktop: const GetStartedScreen());
+    return const Responsive(mobile: HomeLogin(), desktop:  GetStartedScreen());
   }
 }

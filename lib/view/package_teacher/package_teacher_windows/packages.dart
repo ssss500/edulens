@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/home/home_controllers.dart';
 import '../../../controllers/package_controller.dart';
-import '../../../custom_grid_view.dart';
+import '../../custom_grid_view.dart';
 import '../../../helper/app_constants.dart';
 import '../../../routes/routes_names.dart';
 import '../../widget/custom_buttom.dart';

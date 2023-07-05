@@ -1,12 +1,8 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_buttom.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 
 class UpdateScreen extends StatelessWidget {
@@ -35,18 +31,18 @@ class UpdateScreen extends StatelessWidget {
           CustomButton(
             function: () async {
               if (Platform.isIOS) {
-                final Uri _url = Uri.parse(
+                final Uri url = Uri.parse(
                     "https://apps.apple.com/app/edu-lens/id1666623278");
                 await launchUrl(
-                  _url,
+                  url,
                   mode: LaunchMode.externalApplication,
                 );
               } else {
-                final Uri _url = Uri.parse(
+                final Uri url = Uri.parse(
                     "https://play.google.com/store/apps/details?id=com.edulens.edulens");
 
                 await launchUrl(
-                  _url,
+                  url,
                   mode: LaunchMode.externalApplication,
                 );
               }

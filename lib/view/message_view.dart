@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 
 class MessageView extends GetView<MessageController> {
   const MessageView({Key? key}) : super(key: key);
- // MessageController messageController = Get.find();
 
   @override
   Widget build(BuildContext context) {

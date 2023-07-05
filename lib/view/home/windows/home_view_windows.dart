@@ -65,7 +65,7 @@ class HomeView extends GetView<HomeController> {
                           height: size.height * .02,
                         ),
                         SizedBox(
-                          height: size.height / 3,
+                          height: size.height / 3.1,
                           width: size.width / 1.2,
                           child: Obx(
                             () => controller.covers.isNotEmpty
@@ -113,7 +113,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                         SizedBox(
-                          height: size.height * .02,
+                          height: size.height * .03,
                         ),
                         CustomText(
                           text: 'المواد',
@@ -127,7 +127,7 @@ class HomeView extends GetView<HomeController> {
                         ),
                         Container(
                           padding: EdgeInsets.only(right: size.width * .035),
-                          height: size.height / 3,
+                          height: 155,
                           width: size.width / 1.75,
                           child: Obx(
                             () => controller.subject.isEmpty &&
@@ -142,7 +142,7 @@ class HomeView extends GetView<HomeController> {
                                         !controller.apiLoadingSubject.value
                                     ? const SizedBox()
                                     : SizedBox(
-                                        height: 170,
+                                        height: 130,
                                         child: CustomListView(
                                             itemCount:
                                                 controller.subject.length,
@@ -172,6 +172,7 @@ class HomeView extends GetView<HomeController> {
                                                         const EdgeInsets.only(
                                                             left: 8, right: 8),
                                                     width: 130,
+                                                    height: 130,
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -413,7 +414,7 @@ class HomeView extends GetView<HomeController> {
                                       )
                                     : Padding(
                                         padding:
-                                            const EdgeInsets.only(right: 80.0),
+                                            const EdgeInsets.only(right: 35.0),
                                         child: SizedBox(
                                           height: size.height * 1.35,
                                           width: size.width / 1.85,
@@ -429,14 +430,9 @@ class HomeView extends GetView<HomeController> {
                                                     : controller
                                                         .teachers.length,
                                             gridDelegate:
-                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              const   SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount:
-                                                  MediaQuery.of(context)
-                                                              .size
-                                                              .shortestSide <
-                                                          600
-                                                      ? 2
-                                                      : 3,
+                                                  4,
                                               childAspectRatio: (0.8),
                                             ),
                                             itemBuilder: (_, index) => InkWell(

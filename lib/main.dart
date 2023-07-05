@@ -64,13 +64,11 @@ if(Platform.isWindows){
     try {
       Size size = await DesktopWindow.getWindowSize();
       print(size);
-
-      DesktopWindow.setMinWindowSize(const Size(1530, 800));
-      DesktopWindow.setMaxWindowSize(const Size(1530, 800));
-
+      DesktopWindow.setMinWindowSize(const Size(1300, 800));
+      DesktopWindow.setMaxWindowSize(const Size(1300, 800));
       DesktopWindow.resetMaxWindowSize();
       DesktopWindow.toggleFullScreen();
-      DesktopWindow.setFullScreen(true);
+      //DesktopWindow.setFullScreen(true);
     } catch (e) {}
   }
 
@@ -119,36 +117,3 @@ if(Platform.isWindows){
     ),
   ));
 }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     SystemChrome.setPreferredOrientations([
-//       DeviceOrientation.portraitUp,
-//       DeviceOrientation.portraitDown,
-//     ]);
-//
-//     return GetMaterialApp(
-//       defaultTransition: Transition.fadeIn,
-//       opaqueRoute: Get.isOpaqueRouteDefault,
-//       popGesture: Get.isPopGestureEnable,
-//       transitionDuration: Get.defaultDialogTransitionDuration,
-//       textDirection: TextDirection.rtl,
-//       translations: LocaleString(),
-//       locale: const Locale('ar', 'EG'),
-//       debugShowCheckedModeBanner: false,
-//       home: token == null ? const HomeLogin() : Home(),
-//       // home: Scaffold(
-//       //   body: SplachScreen(),
-//       // ),
-//       theme: ThemeData(
-//         fontFamily: 'Font1',
-//
-//         // fontFamily: GoogleFonts.tajawal().fontFamily,
-//         // fontFamily: GoogleFonts.balooBhaijaan2().fontFamily,
-//         // fontFamily: GoogleFonts.notoSansArabic().fontFamily,
-//         platform: TargetPlatform.iOS,
-//       ),
-//     );
-//   }
-// }

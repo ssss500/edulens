@@ -1,5 +1,5 @@
 import 'package:connectivity_widget/connectivity_widget.dart';
-import 'package:edu_lens/custom_grid_view.dart';
+import 'package:edu_lens/view/custom_grid_view.dart';
 import 'package:edu_lens/view/widget/custom_background.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';

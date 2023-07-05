@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:edu_lens/custom_grid_view.dart';
+import 'package:edu_lens/view/custom_grid_view.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

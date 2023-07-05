@@ -133,18 +133,7 @@ alertDialogError({context, text, barrierDismissible = false}) {
       height: 105.0,
       width: 105.0,
     ),
-    // Container(
-    //   child: Column(
-    //     mainAxisSize: MainAxisSize.min,
-    //     children: <Widget>[
-    //
-    //       Center(
-    //           child: CustomText(
-    //         text: "note".tr,
-    //       )),
-    //     ],
-    //   ),
-    // ),
+
     content: CustomText(
       text: text,
     ),
@@ -185,11 +174,6 @@ alertDialogWifi( ) {
             CustomButtonDeflated(
               text: "tryAgain".tr,
               function: () async {
-                // var result = await Connectivity().checkConnectivity();
-                // if (result == ConnectivityResult.none) {
-                // } else {
-                //   Get.back();
-                // }
               },
             ),
             const SizedBox(height: 20,)
@@ -208,8 +192,8 @@ showExitDialog(context) {
       return AlertDialog(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(32.0))),
-        title: Column(
-          children: const [
+        title:const Column(
+          children:  [
             Center(child: Text("!تأكيد الخروج")),
           ],
         ),

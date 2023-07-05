@@ -525,65 +525,6 @@ class ProfileTeacherView extends GetView {
                                                            contentType: ContentType
                                                                .failure);
                                                 }
-                                                // if (homeController
-                                                //         .appleAndGoogleBool
-                                                //         .value ||
-                                                //     profileTeacherController
-                                                //             .monthExamTeacher[
-                                                //                 index]
-                                                //             .cost ==
-                                                //         0 ||
-                                                //     homeController.solvedExams
-                                                //         .any((element) =>
-                                                //             element.id ==
-                                                //             profileTeacherController
-                                                //                 .monthExamTeacher[
-                                                //                     index]
-                                                //                 .id) ||
-                                                //     homeController
-                                                //             .studentProfile[0]
-                                                //             .phone ==
-                                                //         '01022535966') {
-                                                //   if (homeController
-                                                //               .solvedExams
-                                                //               .where((v) =>
-                                                //                   v.id ==
-                                                //                   profileTeacherController
-                                                //                       .monthExamTeacher[
-                                                //                           index]
-                                                //                       .id)
-                                                //               .first
-                                                //               .status !=
-                                                //           2 &&
-                                                //       homeController.solvedExams
-                                                //           .any((element) =>
-                                                //               element.id ==
-                                                //               profileTeacherController
-                                                //                   .monthExamTeacher[
-                                                //                       index]
-                                                //                   .id)) {
-                                                //     profileTeacherController
-                                                //         .goToQuiz(index);
-                                                //   } else {
-                                                //     showCustomSnackBar(
-                                                //         context: context,
-                                                //         title: "note".tr,
-                                                //         deck:
-                                                //         "تم حل الامتحان من قبل",
-                                                //         contentType: ContentType
-                                                //             .failure);
-                                                //
-                                                //   }
-                                                // } else {
-                                                //   BottomSheetPey
-                                                //       .bottomSheetPaidForMonthExam(
-                                                //     dataMonthExam:
-                                                //         profileTeacherController
-                                                //                 .monthExamTeacher[
-                                                //             index],
-                                                //     context: context,
-                                                //   );
-                                                // }
                                               },
                                             );
                                           },
@@ -688,14 +629,6 @@ class ProfileTeacherView extends GetView {
                                                         contentType: ContentType
                                                             .warning);
                                                   } else {
-                                                    // BottomSheetPey
-                                                    //     .bottomSheetReserveCourse(
-                                                    //   bookingModel:
-                                                    //       profileTeacherController
-                                                    //               .bookingTeacher[
-                                                    //           index],
-                                                    //   context: context,
-                                                    // );
                                                   }
                                                 },
                                               ),

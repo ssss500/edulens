@@ -1,7 +1,4 @@
-
-
 import 'dart:io';
-
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_buttom.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';

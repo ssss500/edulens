@@ -16,7 +16,6 @@ class EditProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     return CustomAppBar(
       title: "editProfileView".tr,
       widget: SingleChildScrollView(
@@ -126,7 +125,6 @@ class EditProfileView extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              // InkWell(onTap: (){},child: ,),
               InkWell(
                 onTap: () async {
 
@@ -141,7 +139,6 @@ class EditProfileView extends StatelessWidget {
                   debugPrint(newDateTime.toString());
                 },
                   child: Container(
-                    // margin: EdgeInsets.only(left: 20,right: 20),
                     width: screenWidth - 66,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),

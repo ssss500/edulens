@@ -11,7 +11,6 @@ class MessageCard extends GetView<MessageController> {
 
   @override
   Widget build(BuildContext context) {
-    //MessageController messageController = Get.find();
     double width = MediaQuery.of(context).size.width;
     if (width >= 800) {
       return Column(

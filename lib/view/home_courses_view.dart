@@ -4,16 +4,13 @@ import 'package:edu_lens/controllers/home_courses_controller.dart';
 import 'package:edu_lens/controllers/video_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/view/buttom_sheet_paid.dart';
-import 'package:edu_lens/view/video/video_view.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_buttom.dart';
-import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:edu_lens/view/widget/custom_list_view.dart';
 import 'package:edu_lens/view/widget/custom_loading.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../routes/routes_names.dart';
 
 class HomeCoursesView extends GetView {
@@ -77,7 +74,7 @@ class HomeCoursesView extends GetView {
                                             child: CustomText(
                                               text: homeCoursesController
                                                   .chapters[indexChapters]
-                                                  .name!,
+                                                  .name,
                                               color: Colors.white,
                                               textAlign: TextAlign.start,
                                               alignment: Alignment.centerRight,
@@ -105,7 +102,7 @@ class HomeCoursesView extends GetView {
                                                 .appleAndGoogleBool.value)
                                               CustomText(
                                                 text:
-                                                    "سعر الفصل كامل :  ${homeCoursesController.chapters[indexChapters].cost!} جنيها",
+                                                    "سعر الفصل كامل :  ${homeCoursesController.chapters[indexChapters].cost} جنيها",
                                                 textAlign: TextAlign.start,
                                                 alignment:
                                                     Alignment.centerRight,
@@ -165,18 +162,13 @@ class HomeCoursesView extends GetView {
                                   padding: 0,
                                   scroll: false,
                                   itemCount: homeCoursesController
-                                      .chapters[indexChapters].lectures!.length,
+                                      .chapters[indexChapters].lectures.length,
                                   itemBuilder: (BuildContext context,
                                       int indexLectures) {
                                     final item = homeCoursesController
                                         .chapters[indexChapters].lectures;
                                     return InkWell(
                                       onTap: () async {
-                                        // debugPrint(homeCoursesController
-                                        //     .chapters[indexChapters]
-                                        //     .lectures![indexLectures]
-                                        //     .id
-                                        //     .toString());
                                         if (homeController
                                                 .appleAndGoogleBool.value ||
                                             homeController.lecturePaid.any(
@@ -184,7 +176,7 @@ class HomeCoursesView extends GetView {
                                                     element.id ==
                                                     homeCoursesController
                                                         .chapters[indexChapters]
-                                                        .lectures![
+                                                        .lectures[
                                                             indexLectures]
                                                         .id) ||
                                             item[indexLectures].cost == 0 ||
@@ -197,8 +189,7 @@ class HomeCoursesView extends GetView {
                                                     homeCoursesController
                                                         .chapters[indexChapters]
                                                         .id)) {
-                                          Get.dialog(CustomLoading());
-                                          // await  homeCoursesController.controller.initialise();
+                                          Get.dialog(const CustomLoading());
                                           homeCoursesController.indexLectures =
                                               indexLectures;
                                           homeCoursesController.indexChapters =
@@ -212,7 +203,7 @@ class HomeCoursesView extends GetView {
                                               arguments: {
                                                 'title': homeCoursesController
                                                     .chapters[indexChapters]
-                                                    .lectures![indexLectures]
+                                                    .lectures[indexLectures]
                                                     .name,
                                               });
                                         } else {
@@ -243,16 +234,12 @@ class HomeCoursesView extends GetView {
                                         ),
                                         child: Column(
                                           children: [
-                                            // CustomImageUrlViewNotZoom(
-                                            //   image:
-                                            //       "https://images.wallpaperscraft.com/image/single/moon_surface_relief_409277_1280x720.jpg",
-                                            // ),
                                             const SizedBox(
                                               height: 15,
                                             ),
                                             CustomText(
                                               text:
-                                                  "${item![indexLectures].name}",
+                                                  item[indexLectures].name,
                                               color: Colors.white,
                                               fontSize: 23,
                                             ),
@@ -288,7 +275,7 @@ class HomeCoursesView extends GetView {
                                                                       homeCoursesController
                                                                           .chapters[
                                                                               indexChapters]
-                                                                          .lectures![
+                                                                          .lectures[
                                                                               indexLectures]
                                                                           .id)
                                                               ? "تم شراء المحاضرة"
@@ -305,7 +292,7 @@ class HomeCoursesView extends GetView {
                                                                       homeCoursesController
                                                                           .chapters[
                                                                               indexChapters]
-                                                                          .lectures![
+                                                                          .lectures[
                                                                               indexLectures]
                                                                           .id)
                                                               ? Colors.black54
@@ -319,8 +306,8 @@ class HomeCoursesView extends GetView {
                                                           fontSize: 16,
                                                         ),
                                                       )
-                                                    : SizedBox()
-                                                : SizedBox()),
+                                                    : const SizedBox()
+                                                : const SizedBox()),
 
                                             const SizedBox(
                                               height: 5,

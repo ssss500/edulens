@@ -10,6 +10,6 @@ class FavouriteCommon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Responsive(mobile: FavouriteMobile(), desktop: const FavouriteWindows());
+    return const Responsive(mobile: FavouriteMobile(), desktop:  FavouriteWindows());
   }
 }

@@ -9,6 +9,6 @@ class LoginViewCommon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Responsive(mobile: LoginView(), desktop: LoginScreen());
+    return const Responsive(mobile: LoginView(), desktop: LoginScreen());
   }
 }

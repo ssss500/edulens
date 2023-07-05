@@ -1,12 +1,9 @@
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/video_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
-import 'package:edu_lens/model/lecture_paid_model.dart';
 import 'package:edu_lens/routes/routes_names.dart';
-import 'package:edu_lens/view/video/video_view.dart';
 import 'package:edu_lens/view/widget/custom_app_bar.dart';
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
-import 'package:edu_lens/view/widget/custom_list_view.dart';
 import 'package:edu_lens/view/widget/custom_loading.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +11,6 @@ import 'package:get/get.dart';
 
 class PurchasedLectures extends GetView<HomeController> {
   const PurchasedLectures({Key? key}) : super(key: key);
-  //HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +48,7 @@ class PurchasedLectures extends GetView<HomeController> {
                   ),
                   itemBuilder: (_, index) => InkWell(
                     onTap: () async {
-                      Get.dialog(CustomLoading());
-
+                      Get.dialog(const CustomLoading());
                       VideoController videoController =
                       Get.put(VideoController());
                       await videoController.openVideo(lecturePaidModel:controller.lecturePaid[index]);

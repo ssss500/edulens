@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 import '../../../controllers/quiz/question_controller.dart';
-import '../../../custom_grid_view.dart';
+import '../../custom_grid_view.dart';
 import '../../../helper/app_constants.dart';
 import '../../widget/custom_app_bar.dart';
 import '../../widget/custom_image_url_view.dart';

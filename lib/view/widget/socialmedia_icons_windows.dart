@@ -70,12 +70,6 @@ class SocialMediaIconsWindows extends StatelessWidget {
           onPressed: () {
             Clipboard.setData(const ClipboardData(text: "01092884278"))
                 .then((_) {
-              // Get.back();
-              //  showCustomSnackBar(
-              //      context: Get.context!,
-              //      title: "note".tr,
-              //      deck: "تم نسخ الرقم بنجاح",
-              //      contentType: ContentType.success);
             });
           },
         ),
