@@ -56,7 +56,7 @@ class VideoView extends GetView<VideoController> {
       },
       child: CustomAppBar(
           functionBake: () async {
-            // videoController.controller.dispose();
+             controller.dispose();
             await ScreenProtector.preventScreenshotOff();
 
             Get.delete<VideoController>();
@@ -256,6 +256,7 @@ class VideoView extends GetView<VideoController> {
   }
 
   Widget itemPdf({title, index}) {
+    Get.put(VideoController());
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, bottom: 8),
       child: InkWell(
@@ -321,6 +322,8 @@ class VideoView extends GetView<VideoController> {
   }
 
   Widget itemQuiz({idQuiz, indexQuiz}) {
+    Get.put(VideoController());
+
     return Obx(
       () => InkWell(
         onTap: () async {

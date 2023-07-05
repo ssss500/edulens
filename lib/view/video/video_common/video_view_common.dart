@@ -10,7 +10,7 @@ class VideoViewCommon extends GetView<VideoController> {
 
   @override
   Widget build(BuildContext context) {
-  //  Get.put(VideoController());
+   Get.put(VideoController());
     return Responsive(mobile: VideoView(), desktop: const VideoViewWindows());
   }
 }

@@ -4,6 +4,7 @@ import 'package:edu_lens/controllers/login/register_controller.dart';
 import 'package:edu_lens/controllers/message_controller.dart';
 import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/package_teacher/package_teacher_common/package_common.dart';
+import 'package:edu_lens/view/pdf/pdf_common/pdf_view_common.dart';
 import 'package:edu_lens/view/video/video_common/video_view_common.dart';
 import 'package:edu_lens/view/login/common_view/login_view_common.dart';
 import 'package:edu_lens/view/home/windows/messages_screen.dart';
@@ -12,7 +13,6 @@ import 'package:edu_lens/view/login/windows/regester_student/regieter_three_scre
 import 'package:edu_lens/view/login/windows/register_college/register_one_college_screen.dart';
 import 'package:edu_lens/view/login/windows/register_college/register_three_college_screen.dart';
 import 'package:edu_lens/view/login/windows/register_college/register_two_college_screen.dart';
-import 'package:edu_lens/view/pdf_view.dart';
 import 'package:edu_lens/view/splash.dart';
 import 'package:edu_lens/view/who_we_are_view.dart';
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
@@ -37,6 +37,7 @@ import '../view/login/common_view/register_tow_common.dart';
 import '../view/login/common_view/welcom_view_common.dart';
 import '../view/login/mobile/create_account_view.dart';
 import '../view/message_view.dart';
+import '../view/pdf/pdf_mobile/pdf_view.dart';
 import '../view/profile_teacher_view.dart';
 import '../view/purchasedLectures.dart';
 import '../view/quiz/common/answer_view_month_common.dart';
@@ -324,7 +325,7 @@ class Routes {
     ),
     GetPage(
       name: RoutesNames.pdfView,
-      page: () => PdfView(),
+      page: () => const PdfViewCommon(),
       binding: BindingsBuilder(() {
         Get.lazyPut<PDFController>(
           () => PDFController(),

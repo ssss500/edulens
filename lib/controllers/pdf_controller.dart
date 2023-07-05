@@ -4,17 +4,20 @@ import 'dart:io';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:dio/dio.dart';
-import 'package:edu_lens/view/pdf_view.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 import 'package:edu_lens/view/widget/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+
+import '../view/pdf/pdf_mobile/pdf_view.dart';
 
 class PDFController extends GetxController {
   String? pdfUrl, title, type;
   bool? night ;
+  final GlobalKey<SfPdfViewerState> pdfViewerKey = GlobalKey();
 
   int? totalPages;
   int? currentPages;
