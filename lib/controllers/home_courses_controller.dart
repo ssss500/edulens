@@ -22,19 +22,19 @@ class HomeCoursesController extends GetxController {
     // lectures.value = (await services.getLectures())!;
   }
 
-
-  void animateToIndex(int index, int itemCount) {
-    final ScrollController scrollController = ScrollController();
-
-    final contentSize = scrollController.position.viewportDimension + scrollController.position.maxScrollExtent;
-    final index = 10;
-    final target = contentSize * index / itemCount;
-    scrollController.position.animateTo(
-      target,
-      duration: const Duration(seconds: 2),
-      curve: Curves.easeInOut,
-    );
-  }
+  //
+  // void animateToIndex(int index, int itemCount) {
+  //   final ScrollController scrollController = ScrollController();
+  //
+  //   final contentSize = scrollController.position.viewportDimension + scrollController.position.maxScrollExtent;
+  //   final index = 10;
+  //   final target = contentSize * index / itemCount;
+  //   scrollController.position.animateTo(
+  //     target,
+  //     duration: const Duration(seconds: 2),
+  //     curve: Curves.easeInOut,
+  //   );
+  // }
  //    scrollController.position.axisDirection;
  // //   scrollController.createScrollPosition(AlwaysScrollableScrollPhysics(), context, oldPosition)
  //    scrollController.animateTo(
