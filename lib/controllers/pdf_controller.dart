@@ -10,14 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+//import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../view/pdf/pdf_mobile/pdf_view.dart';
 
 class PDFController extends GetxController {
   String? pdfUrl, title, type;
   bool? night ;
-  final GlobalKey<SfPdfViewerState> pdfViewerKey = GlobalKey();
+  //final GlobalKey<SfPdfViewerState> pdfViewerKey = GlobalKey();
 
   int? totalPages;
   int? currentPages;

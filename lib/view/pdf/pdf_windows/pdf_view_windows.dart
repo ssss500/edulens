@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+//import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../../../controllers/pdf_controller.dart';
 import '../../../helper/app_constants.dart';
@@ -99,27 +99,30 @@ class _PdfViewWindowsState extends State<PdfViewWindows> {
               ],
             ),
           ),
-          SizedBox(
-              height: MediaQuery.sizeOf(context).height - 150,
-              width: MediaQuery.sizeOf(context).width - 150,
-              child: Stack(
-                children: <Widget>[
-                  (widget.localfile != null)
-                      ?
-
-                  SfPdfViewer.file(
-                          File(widget.localfile),
-                          key: widget.pdfController.pdfViewerKey,
-                      canShowScrollHead: false,
-                      canShowScrollStatus: false,
-                      pageLayoutMode: PdfPageLayoutMode.single
-                        )
-                      : const Center(
-                          child: CircularProgressIndicator(
-                          color: AppConstants.primaryColor,
-                        )),
-                ],
-              )),
+          // SizedBox(
+          //     height: MediaQuery.sizeOf(context).height - 150,
+          //     width: MediaQuery.sizeOf(context).width - 150,
+          //     child:
+          //
+              // Stack(
+              //   children: <Widget>[
+              //     (widget.localfile != null)
+              //         ?
+              //
+              //     SfPdfViewer.file(
+              //             File(widget.localfile),
+              //             key: widget.pdfController.pdfViewerKey,
+              //         canShowScrollHead: false,
+              //         canShowScrollStatus: false,
+              //         pageLayoutMode: PdfPageLayoutMode.single
+              //           )
+              //         : const Center(
+              //             child: CircularProgressIndicator(
+              //             color: AppConstants.primaryColor,
+              //           )),
+              //   ],
+              // )
+          //),
         ],
       ),
     );

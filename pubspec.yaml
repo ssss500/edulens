@@ -63,7 +63,7 @@ dependencies:
   #desktop_webview_window: ^0.2.0
   #webview_dart: ^1.0.1
   #flutter_webview_plugin: ^0.4.0
-  syncfusion_flutter_pdfviewer:
+  #syncfusion_flutter_pdfviewer:
 
   #dart
   screen_protector: ^1.2.0
@@ -75,7 +75,7 @@ dependencies:
   package_info_plus: any
   device_info_plus: ^9.0.2
   root: ^2.0.4
-  webview_flutter: ^3.0.0
+  #webview_flutter: ^3.0.0
   window_manager: ^0.3.4
 
   #firebase

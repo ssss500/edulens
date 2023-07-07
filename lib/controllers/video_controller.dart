@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 //import 'package:pod_player/pod_player.dart';
 import 'package:screen_protector/screen_protector.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+//import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 //import 'package:webview_windows/webview_windows.dart';
 
@@ -30,7 +30,7 @@ class VideoController extends GetxController {
   //late final Video? youtubeExplode;
   //final webController = WebviewController();
 
-  final GlobalKey<SfPdfViewerState> pdfViewerKey = GlobalKey();
+  //final GlobalKey<SfPdfViewerState> pdfViewerKey = GlobalKey();
 
 
   var indexQuiz = 0;
