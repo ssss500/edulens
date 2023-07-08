@@ -13,15 +13,20 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:screen_protector/screen_protector.dart';
+import 'package:windows_single_instance/windows_single_instance.dart';
 import 'firebase_options.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'package:window_manager/window_manager.dart';
 import 'view/not_found_route_view.dart';
 
-void main() async {
+void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 if(Platform.isWindows){
   await windowManager.ensureInitialized();
+  WindowsSingleInstance.ensureSingleInstance( args,
+      "custom_identifier",
+      onSecondWindow: (args) {
+      });
   WindowOptions windowOptions = const
   WindowOptions(
   center: true,
@@ -30,10 +35,10 @@ if(Platform.isWindows){
     titleBarStyle: TitleBarStyle.normal,
     windowButtonVisibility: true,
   );
-  windowManager.setResizable(false);
-  windowManager.setFullScreen(false);
-   windowManager.setMaximumSize(const Size(1400,780));
-  windowManager.setMinimumSize(const Size(1400,780));
+  windowManager.setResizable(true);
+  windowManager.setFullScreen(true);
+//  windowManager.setMaximumSize(const Size(1400,780));
+  windowManager.setMinimumSize(const Size(1200,540));
 
   windowManager.center();
   windowManager.waitUntilReadyToShow(windowOptions, () async {

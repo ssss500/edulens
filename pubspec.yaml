@@ -77,6 +77,7 @@ dependencies:
   root: ^2.0.4
   #webview_flutter: ^3.0.0
   window_manager: ^0.3.4
+  windows_single_instance: ^0.1.6
 
   #firebase
   firebase_core: ^2.13.0

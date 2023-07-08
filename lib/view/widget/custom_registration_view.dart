@@ -58,29 +58,27 @@ class CustomRegistrationView extends StatelessWidget {
                           height: height * 0.03,
                         ),
                         if(buttonBack)
-                          Center(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                RotatedBox(
-                                  quarterTurns: 2,
-                                  child: NextButton(
-                                      function:(){
-                                        funNextButton!();
-                                      },
-                                      icon: Icons.arrow_back_ios_new_outlined),
-                                ),
-                                SizedBox(
-                                  width: width * 0.03,
-                                ),
-                                NextButton(
-                                    function: () {
-                                      Get.back();
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RotatedBox(
+                                quarterTurns: 2,
+                                child: NextButton(
+                                    function:(){
+                                      funNextButton!();
                                     },
                                     icon: Icons.arrow_back_ios_new_outlined),
-                              ],
-                            ),
+                              ),
+                              SizedBox(
+                                width: width * 0.03,
+                              ),
+                              NextButton(
+                                  function: () {
+                                    Get.back();
+                                  },
+                                  icon: Icons.arrow_back_ios_new_outlined),
+                            ],
                           )
                       ],
                     ),

@@ -28,7 +28,7 @@ class RegisterThreeScreen extends GetView<RegisterController> {
               SizedBox(
                 height: height * 0.04,
               ),
-              CustomText(text: 'welcomeCon'.tr, fontSize: width * 0.02),
+              CustomText(text: 'welcomeCon'.tr, fontSize: width * 0.015),
               SizedBox(
                 height: height * 0.02,
               ),

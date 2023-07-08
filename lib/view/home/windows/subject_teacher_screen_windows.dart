@@ -30,14 +30,7 @@ class SubjectTeacherScreen extends GetView<SubjectTeacherController> {
             controller.getSubjectTeacherMethod();
           },
           builder: (context, isOnline) =>
-              Obx(() => controller.subjectTeachers.isEmpty
-                  ? const SizedBox(
-                      height: 170,
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: AppConstants.lightPrimaryColor,
-                      )))
-                  : Row(
+              Obx(() =>  Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Align(
@@ -66,7 +59,19 @@ class SubjectTeacherScreen extends GetView<SubjectTeacherController> {
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
-                            Center(
+                            controller.subjectTeachers.isEmpty
+                                ?  SizedBox(
+                              height: MediaQuery.sizeOf(context).height / 1.2,
+                              width: MediaQuery.sizeOf(context).width / 1.3,
+                              child:  Center(
+                                child: CustomText(
+                                  text: "لا يوجد أي مدرسين حتي الأن",
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),)
+
+                                :  Center(
                               child: SizedBox(
                                 height: MediaQuery.sizeOf(context).height / 1.2,
                                 width: MediaQuery.sizeOf(context).width / 1.3,

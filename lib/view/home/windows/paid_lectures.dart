@@ -47,7 +47,7 @@ class PaidLectureScreen extends GetView<HomeController> {
                   padding: const EdgeInsets.all(20.0),
                   child: CustomGridView(
                     itemCount: controller.lecturePaid.length,
-                    crossAxisCount: 3,
+                    crossAxisCount: 4,
                     itemBuilder: (_, index) => InkWell(
                       onTap: () async {
                         Get.dialog(const CustomLoading());
@@ -65,7 +65,7 @@ class PaidLectureScreen extends GetView<HomeController> {
                       },
                       child: Container(
                           margin: const EdgeInsets.only(
-                              left: 9, right: 9, bottom: 10, top: 5),
+                              left: 9, right: 9, bottom: 5 , top: 5),
                           decoration: BoxDecoration(
                             color: AppConstants.primaryColor,
                             borderRadius: BorderRadius.circular(25.0),

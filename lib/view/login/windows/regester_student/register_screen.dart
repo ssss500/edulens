@@ -33,83 +33,66 @@ class RegisterScreen extends GetView<RegisterController> {
               Text(
                 'welcomeRegister'.tr,
                 style: TextStyle(
-                  fontSize: width * 0.02,
+                  fontSize: width * 0.015,
                 ),
               ),
               SizedBox(
                 height: height * 0.03,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                          text: 'firstName'.tr, fontSize: width * 0.012),
-                      SizedBox(
-                        height: height * 0.005,
-                      ),
-                      CustomTextFieldLogin(
-                        isMobile: false,
-                        function: (v) {
-                          controller.firstName.value = v;
-                        },
-                        iconData: Icons.person,
-                        hint: "سيف",
-                        textInputType: TextInputType.name,
-                        colorBorder: AppConstants.primaryColor,
-                        width: width * 0.085,
-                        validator: (value) {
-                          if (value.length < 3) {
-                            showCustomSnackBar(
-                                context: context,
-                                title: "note".tr,
-                                deck: "يجب كتابة الاسم الاول بشكل صحيح",
-                                contentType: ContentType.failure);
-                            return "";
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: width * 0.0123,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                          text: 'lastName'.tr, fontSize: width * 0.012),
-                      SizedBox(
-                        height: height * 0.005,
-                      ),
-                      CustomTextFieldLogin(
-                        function: (v) {
-                          controller.lastName.value = v;
-                        },
-                        iconData: Icons.person,
-                        isMobile: false,
-                        hint: "احمد",
-                        textInputType: TextInputType.name,
-                        colorBorder: AppConstants.primaryColor,
-                        width: width * 0.085,
-                        validator: (value) {
-                          if (value.length < 3) {
-                            showCustomSnackBar(
-                                context: context,
-                                title: "note".tr,
-                                deck: "يجب كتابة الاسم الاخير بشكل صحيح",
-                                contentType: ContentType.failure);
-                            return "";
-                          }
-                        },
-                        // inputFormatters: [PhoneNumberFormatter()],
-                      ),
-                    ],
-                  ),
-                ],
+              CustomText(
+                  text: 'firstName'.tr, fontSize: width * 0.012),
+              SizedBox(
+                height: height * 0.005,
               ),
+              CustomTextFieldLogin(
+                isMobile: false,
+                function: (v) {
+                  controller.firstName.value = v;
+                },
+                iconData: Icons.person,
+                hint: "سيف",
+                textInputType: TextInputType.name,
+                colorBorder: AppConstants.primaryColor,
+                width: width * 0.183,
+                validator: (value) {
+                  if (value.length < 3) {
+                    showCustomSnackBar(
+                        context: context,
+                        title: "note".tr,
+                        deck: "يجب كتابة الاسم الاول بشكل صحيح",
+                        contentType: ContentType.failure);
+                    return "";
+                  }
+                },
+              ),
+              CustomText(
+                  text: 'lastName'.tr, fontSize: width * 0.012),
+              SizedBox(
+                height: height * 0.005,
+              ),
+              CustomTextFieldLogin(
+                function: (v) {
+                  controller.lastName.value = v;
+                },
+                iconData: Icons.person,
+                isMobile: false,
+                hint: "احمد",
+                textInputType: TextInputType.name,
+                colorBorder: AppConstants.primaryColor,
+                width: width * 0.183,
+                validator: (value) {
+                  if (value.length < 3) {
+                    showCustomSnackBar(
+                        context: context,
+                        title: "note".tr,
+                        deck: "يجب كتابة الاسم الاخير بشكل صحيح",
+                        contentType: ContentType.failure);
+                    return "";
+                  }
+                },
+                // inputFormatters: [PhoneNumberFormatter()],
+              ),
+
               CustomText(text: 'parentName'.tr, fontSize: width * 0.012),
               SizedBox(
                 height: height * 0.005,

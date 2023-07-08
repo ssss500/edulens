@@ -1,4 +1,4 @@
-import 'package:edu_lens/routes/routes_names.dart';
+ import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/login/windows/register_college/register_three_college_screen.dart';
 import 'package:edu_lens/view/widget/custom_registration_view.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +32,7 @@ class RegisterTwoCollegeScreen extends GetView<RegisterController> {
               Text(
                 'welcomeCon'.tr,
                 style: TextStyle(
-                  fontSize: width * 0.02,
+                  fontSize: width * 0.015,
                 ),
               ),
               SizedBox(

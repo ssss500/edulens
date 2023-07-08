@@ -21,6 +21,7 @@ class Packages extends GetView<PackageController> {
     debugPrint('fired');
     controller.getPackages();
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: ConnectivityWidget(
         onlineCallback: () {
           controller.getPackages();

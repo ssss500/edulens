@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/model/teacher_model.dart';
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
@@ -41,7 +42,7 @@ class CardImageTeacher extends GetView<HomeController> {
             CustomImageUrlViewNotZoom(
               image:
                   "https://edu-lens.com/images/teachers/${dateTeacher.image}",
-              fit: BoxFit.fitHeight,
+              fit: Platform.isWindows?BoxFit.fill:BoxFit.fitHeight,
               height: height,
             ),
             if (love == true)

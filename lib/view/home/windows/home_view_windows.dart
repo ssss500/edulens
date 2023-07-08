@@ -3,7 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:connectivity_widget/connectivity_widget.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/routes/routes_names.dart';
-import 'package:edu_lens/view/home/windows/teacher_profile.dart';
 import 'package:edu_lens/view/widget/custom_text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../controllers/home/home_controllers.dart';
 import '../../../controllers/profile_teacher_controller.dart';
 import '../../../controllers/subject_teacher_controller.dart';
-import '../../profile_teacher_view.dart';
 
 // <<<<<<< HEAD
 import '../mobile/subject_teacher_view_mobile.dart';
@@ -64,12 +62,12 @@ class HomeView extends GetView<HomeController> {
                         SizedBox(
                           height: size.height * .02,
                         ),
-                        SizedBox(
-                          height: size.height / 3.1,
-                          width: size.width / 1.2,
-                          child: Obx(
-                            () => controller.covers.isNotEmpty
-                                ? CarouselSlider.builder(
+                        Obx(
+                          () => controller.covers.isNotEmpty
+                              ? SizedBox(
+                            height: size.height / 3.1,
+                            width: size.width / 1.2,
+                                child: CarouselSlider.builder(
                                     itemCount: controller.covers.length,
                                     itemBuilder: (BuildContext context,
                                             int itemIndex, int pageViewIndex) =>
@@ -108,9 +106,9 @@ class HomeView extends GetView<HomeController> {
                                       aspectRatio: 2.0,
                                       initialPage: 2,
                                     ),
-                                  )
-                                : const SizedBox(),
-                          ),
+                                  ),
+                              )
+                              : const SizedBox(),
                         ),
                         SizedBox(
                           height: size.height * .03,
@@ -128,7 +126,7 @@ class HomeView extends GetView<HomeController> {
                         Container(
                           padding: EdgeInsets.only(right: size.width * .035),
                           height: 155,
-                          width: size.width / 1.75,
+                          width: size.width / 1.5,
                           child: Obx(
                             () => controller.subject.isEmpty &&
                                     controller.apiLoadingSubject.value
@@ -417,7 +415,7 @@ class HomeView extends GetView<HomeController> {
                                             const EdgeInsets.only(right: 35.0),
                                         child: SizedBox(
                                           height: size.height * 1.35,
-                                          width: size.width / 1.85,
+                                          width: size.width / 1.5,
                                           child: GridView.builder(
                                             itemCount:
                                                 controller.teachers.length > 8
@@ -432,7 +430,7 @@ class HomeView extends GetView<HomeController> {
                                             gridDelegate:
                                               const   SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount:
-                                                  4,
+                                                  5,
                                               childAspectRatio: (0.8),
                                             ),
                                             itemBuilder: (_, index) => InkWell(

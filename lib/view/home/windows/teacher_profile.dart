@@ -318,8 +318,8 @@ class TeacherProfile extends GetView<ProfileTeacherController> {
                                                                   .size
                                                                   .shortestSide <
                                                               600
-                                                          ? 2
-                                                          : 3,
+                                                          ? 3
+                                                          : 4,
                                                   childAspectRatio: (0.8),
                                                 ),
                                                 itemBuilder: (_, index) =>
@@ -398,8 +398,8 @@ class TeacherProfile extends GetView<ProfileTeacherController> {
                                                                 .size
                                                                 .shortestSide <
                                                             600
-                                                        ? 2
-                                                        : 3,
+                                                        ? 3
+                                                        : 4,
                                                 childAspectRatio: (0.8),
                                               ),
                                               itemBuilder: (_, index) {
@@ -480,7 +480,7 @@ class TeacherProfile extends GetView<ProfileTeacherController> {
                                                             .solvedExams
                                                             .where((v) => v.id == controller.monthExamTeacher[index].id)
                                                             .first
-                                                            .status ==
+                                                            .status !=
                                                         0) {
                                                       controller
                                                           .goToQuiz(index);

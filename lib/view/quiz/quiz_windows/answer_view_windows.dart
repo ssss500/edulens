@@ -26,33 +26,34 @@ class AnswerViewWindows extends GetView<QuestionController> {
         },
         child: Scaffold(
           body: CustomBackground(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: const Icon(Icons.arrow_back_ios)),
-                      SizedBox(
-                        width: MediaQuery.sizeOf(context).width * 0.42,
-                      ),
-                      Text(
-                        'modelAnswer'.tr,
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 23),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  CustomGridView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: const Icon(Icons.arrow_back_ios)),
+                    SizedBox(
+                      width: MediaQuery.sizeOf(context).width * 0.42,
+                    ),
+                    Text(
+                      'modelAnswer'.tr,
+                      style:
+                      const TextStyle(color: Colors.black, fontSize: 23),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(
+                  height: 40,
+                ),
+                Expanded(
+                  child: CustomGridView(
                       itemCount: questionList.length,
                       itemBuilder: (context, index) {
                         return Container(
@@ -152,8 +153,8 @@ class AnswerViewWindows extends GetView<QuestionController> {
                           ),
                         );
                       }),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ));

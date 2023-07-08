@@ -76,7 +76,7 @@ class _FavouriteWindowsState extends State<FavouriteWindows> {
                 Expanded(
                   child: CustomGridView(
                     itemCount: teachersLove.length,
-                    crossAxisCount: 3,
+                    crossAxisCount: 4,
                     itemBuilder: (_, index) => InkWell(
                       child: Container(
                         margin: const EdgeInsets.all(20),
