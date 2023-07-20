@@ -1,23 +1,22 @@
 import 'dart:async';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/cashe_helper.dart';
-import 'package:edu_lens/view/login/windows/get_started_screen.dart';
-import 'package:flutter/foundation.dart';
+  import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../routes/routes_names.dart';
+import '../../routes/routes_names.dart';
 
-class Splash extends StatefulWidget {
-  const Splash({
+class SplashMobile extends StatefulWidget {
+  const SplashMobile({
     super.key,
   });
 
   @override
-  SplashState createState() => SplashState();
+  SplashMobileState createState() => SplashMobileState();
 }
 
-class SplashState extends State<Splash> {
+class SplashMobileState extends State<SplashMobile> {
 
   fun() async {
     Timer(const Duration(milliseconds: kDebugMode ? 1000 : 3500), () {

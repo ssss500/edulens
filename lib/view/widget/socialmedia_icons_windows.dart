@@ -14,21 +14,26 @@ class SocialMediaIconsWindows extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         IconButton(
-          icon: const Icon(Icons.phone_rounded),
+          icon: const Icon(
+            Icons.facebook,
+            color: Colors.blue,
+          ),
           iconSize: width * 0.02,
-          onPressed: () {
-            launchUrl(Uri(scheme: 'tel', path: "01092884278"));
+          onPressed: () async {
+            final Uri url = Uri.parse('https://www.facebook.com/EdulensEgy');
+
+            await launchUrl(url);
           },
         ),
         SizedBox(
-          width: width * 0.0015,
+          width: width * 0.0016,
         ),
         InkWell(
           onTap: () async {
-            // final Uri _url = Uri.parse(
-            //     'whatsapp://send?phone=+201092884278');
-            //
-            // await launchUrl(_url);
+            final Uri url = Uri.parse('https://www.edu-lens.com/');
+
+            await launchUrl(url);
+            // https://www.edu-lens.com/
           },
           child: Image.asset(
             "assets/images/logo-edu-lens.png",
@@ -40,26 +45,16 @@ class SocialMediaIconsWindows extends StatelessWidget {
           width: width * 0.009,
         ),
         InkWell(
-          onTap: () async {
-            final Uri url = Uri.parse('whatsapp://send?phone=+201092884278');
-            await launchUrl(url);
-          },
-          child: Image.asset(
-            "assets/images/whatsapp.png",
-            height: height * 0.04,
-            width: width * 0.04,
-          ),
-        ),
-        SizedBox(
-          width: width * 0.009,
-        ),
-        InkWell(
           child: Image.asset(
             'assets/images/youtube2.png',
             width: width * 0.04,
             height: height * 0.04,
           ),
-          onTap: () {},
+          onTap: () async {
+            final Uri url = Uri.parse('https://www.youtube.com/@edulens1553');
+
+            await launchUrl(url);
+          },
         ),
         SizedBox(
           width: width * 0.009,
@@ -67,10 +62,11 @@ class SocialMediaIconsWindows extends StatelessWidget {
         IconButton(
           icon: const Icon(Icons.tiktok),
           iconSize: width * 0.02,
-          onPressed: () {
-            Clipboard.setData(const ClipboardData(text: "01092884278"))
-                .then((_) {
-            });
+          onPressed: () async {
+            //https://www.tiktok.com/@edulens.egy
+            final Uri url = Uri.parse('https://www.tiktok.com/@edulens.egy');
+
+            await launchUrl(url);
           },
         ),
       ],

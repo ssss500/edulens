@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:connectivity_widget/connectivity_widget.dart';
 import 'package:edu_lens/view/widget/custom_background.dart';
@@ -152,9 +154,10 @@ class TeacherProfile extends GetView<ProfileTeacherController> {
                                         SocialButton(
                                           function: () async {
                                             if (!await launchUrl(Uri.parse(
-                                                "whatsapp://send?phone=+02${controller.dateTeacher.phone}"))) {
+                                                "whatsapp://send?phone=+2${controller.dateTeacher.phone}"))) {
                                               throw 'Could not launch ';
                                             }
+                                            log(controller.dateTeacher.phone.toString());
                                           },
                                           image: Image.asset(
                                               "assets/images/whatsapp.png"),
