@@ -194,10 +194,10 @@ class HomeCoursesView extends GetView {
                                               indexLectures;
                                           homeCoursesController.indexChapters =
                                               indexChapters;
-                                          VideoController videoController =
-                                              Get.find();
-                                          await videoController.openVideo();
-                                          videoController.getVideoExtensions();
+                                          // VideoController videoController =
+                                          //     Get.put(VideoController());
+                                          // await videoController.openVideo();
+                                          // videoController.getVideoExtensions();
                                           Get.back();
                                           Get.toNamed(RoutesNames.videoView,
                                               arguments: {

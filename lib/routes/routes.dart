@@ -13,7 +13,7 @@ import 'package:edu_lens/view/login/windows/regester_student/regieter_three_scre
 import 'package:edu_lens/view/login/windows/register_college/register_one_college_screen.dart';
 import 'package:edu_lens/view/login/windows/register_college/register_three_college_screen.dart';
 import 'package:edu_lens/view/login/windows/register_college/register_two_college_screen.dart';
-import 'package:edu_lens/view/splash.dart';
+import 'package:edu_lens/view/splash/splash_mobile.dart';
 import 'package:edu_lens/view/who_we_are_view.dart';
 import 'package:edu_lens/view/widget/custom_image_url_view.dart';
 import 'package:get/get.dart';
@@ -44,12 +44,13 @@ import '../view/quiz/common/answer_view_month_common.dart';
 import '../view/quiz/common/question_view_month_common.dart';
 import '../view/quiz/quiz_mobile/answer_quiz_view.dart';
 import '../view/quiz/quiz_mobile/question_view.dart';
+import '../view/splash/splash_common.dart';
 
 class Routes {
   static List<GetPage<dynamic>> pages = [
     GetPage(
       name: RoutesNames.splash,
-      page: () => const Splash(),
+      page: () => const SplashCommon(),
     ),
     GetPage(
       name: RoutesNames.welcomeScreen,
@@ -126,6 +127,7 @@ class Routes {
       binding: BindingsBuilder(() {
         Get.lazyPut<HomeController>(
           () => HomeController(),
+          fenix: true,
         );
         Get.lazyPut<MessageController>(
           () => MessageController(),
@@ -155,13 +157,15 @@ class Routes {
               () => VideoController(),
             );
           }),
+          // BindingsBuilder(() {
+          //   Get.lazyPut<HomeController>(
+          //     () => HomeController(),
+          //   );
+          // }),
           BindingsBuilder(() {
-            Get.lazyPut<HomeController>(
-              () => HomeController(),
+            Get.lazyPut<HomeCoursesController>(
+              () => HomeCoursesController(),
             );
-          }),
-          BindingsBuilder(() {
-            Get.lazyPut<HomeCoursesController>(() => HomeCoursesController());
           })
         ]),
     GetPage(

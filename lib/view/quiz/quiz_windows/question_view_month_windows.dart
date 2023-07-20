@@ -154,7 +154,7 @@ class QuestionViewMonthWindows extends GetView<QuestionMonthController> {
                                                   ),
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 8.0, right: 8),
+                                    left: 8.0, right: 8.0),
                                 child: CustomText(
                                   text:
                                   "${controller.questionList[index].title}",
@@ -162,78 +162,6 @@ class QuestionViewMonthWindows extends GetView<QuestionMonthController> {
                                   fontSize: 20,
                                 ),
                               ),
-//                               SizedBox(
-//                                 height: 200,
-//                                 child: CustomGridView(itemCount: controller
-//                                     .questionList[index].choices!.length,
-//                                   itemBuilder: (context, i) => Padding(
-//                                   padding: const EdgeInsets.only(
-//                                       left: 10.0, right: 10),
-//                                   child: SizedBox(
-//                                     height: 100,
-//                                     child: InkWell(
-//                                         onTap: () {
-//                                           controller
-//                                               .questionList[index]
-//                                               .answer = controller
-//                                               .questionList[index].choices![i].choice!;
-//                                           controller.update();
-//                                         },
-//                                         child: Container(
-// height: 100,
-//                                           padding:
-//                                           const EdgeInsets.only(
-//                                               top: 9,
-//                                               bottom: 9,
-//                                               right: 7,
-//                                               left: 7),
-//                                           margin:
-//                                           const EdgeInsets.only(
-//                                               top: 20),
-//                                           decoration: BoxDecoration(
-//                                             color: controller
-//                                                 .questionList[
-//                                             index]
-//                                                 .answer ==
-//                                                 controller
-//                                                     .questionList[index].choices![i].choice
-//                                                 ? AppConstants
-//                                                 .lightPrimaryColor
-//                                                 : AppConstants
-//                                                 .primaryColor,
-//                                             border: Border.all(
-//                                                 color: controller
-//                                                     .questionList[
-//                                                 index]
-//                                                     .answer ==
-//                                                     controller
-//                                                     .questionList[index].choices![i].choice
-//                                                     ? AppConstants
-//                                                     .lightPrimaryColor
-//                                                     : AppConstants
-//                                                     .primaryColor,
-//                                                 width: 2.0),
-//                                             borderRadius:
-//                                             BorderRadius
-//                                                 .circular(30.0),
-//                                           ),
-//                                           child: CustomText(
-//                                             text: "${controller
-//                                                 .questionList[index].choices![i].choice}",
-//                                             fontSize: 18,
-//                                             textDirection:
-//                                             TextDirection.ltr,
-//                                             color: Colors.white,
-//                                             fontWeight:
-//                                             FontWeight.bold,
-//                                           ),
-//                                         )),
-//                                   ),
-//                                 ),
-//                                 crossAxisCount: 2,
-//                                 ),
-//                               )
-                              // //الازرار
                               for (var i in controller
                                   .questionList[index].choices!)
                                 GetBuilder<QuestionMonthController>(
@@ -258,7 +186,7 @@ class QuestionViewMonthWindows extends GetView<QuestionMonthController> {
                                                   left: 7),
                                               margin:
                                               const EdgeInsets.only(
-                                                  top: 20),
+                                                  top: 10),
                                               decoration: BoxDecoration(
                                                 color: controller
                                                     .questionList[
@@ -300,6 +228,8 @@ class QuestionViewMonthWindows extends GetView<QuestionMonthController> {
                                             )),
                                       );
                                     }),
+                                SizedBox(height: controller.screenHeight!*0.05,),
+                               Container(height: 1,width: controller.screenWidth!*0.5 ,color: Colors.grey,),
                             ],
                           ),
                         ),

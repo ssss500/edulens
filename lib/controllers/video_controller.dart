@@ -10,28 +10,29 @@ import 'package:edu_lens/model/lecture_paid_model.dart';
 import 'package:edu_lens/services/get_video_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pod_player/pod_player.dart';
+
 //import 'package:pod_player/pod_player.dart';
 import 'package:screen_protector/screen_protector.dart';
 //import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 //import 'package:webview_windows/webview_windows.dart';
 
-
 class VideoController extends GetxController {
   final services = GetVideoExtensions();
   final pdfList = <PdfModel>[].obs;
   final quizList = <QuizModel>[].obs;
   final questionList = <QuestionModel>[].obs;
-  //late final PodPlayerController controller;
+  late final PodPlayerController controller;
   RxBool mustSolveExam = false.obs;
   late String idVideoForPaidModel = "", idVideoForPaidModelYoutube;
   var indexPdf = 0;
   var idQuiz = 0;
+
   //late final Video? youtubeExplode;
   //final webController = WebviewController();
 
   //final GlobalKey<SfPdfViewerState> pdfViewerKey = GlobalKey();
-
 
   var indexQuiz = 0;
 
@@ -51,14 +52,15 @@ class VideoController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     //showWebView();
-   // await webController.loadUrl(_videoPage());
-log(videoPage());
+    // await webController.loadUrl(_videoPage());
+    // log(videoPage());
     openVideo();
     getVideoExtensions();
     if (Platform.isIOS) {
       await ScreenProtector.preventScreenshotOn();
     }
   }
+
   // showWebView()async{
   //   final url = videoPage();
   //   Webview(true)
@@ -68,39 +70,51 @@ log(videoPage());
   //       .navigate(url)
   //       .run();
   // }
-  String videoPage() {
-    const html = '''
-            <html>
-              <head>
-                <style>
-                  body {
-                   background-color: lightgray;
-                   margin: 0px;
-                   }
-                </style>
-                <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
-                <meta http-equiv="Content-Security-Policy"
-                content="default-src * gap:; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src *;
-                img-src * data: blob: android-webview-video-poster:; style-src * 'unsafe-inline';">
-             </head>
-             <body>
-                <iframe
-                src="https://player.vimeo.com/video/70591644?loop=0&autoplay=0"
-                width="100%" height="100%" frameborder="0" allow="fullscreen"
-                allowfullscreen></iframe>
-             </body>
-            </html>
-            ''';
-    final String contentBase64 =
-    base64Encode(const Utf8Encoder().convert(html));
-    return 'data:text/html;base64,$contentBase64';
-  }
+  // String videoPage() {
+  //   const html = '''
+  //           <html>
+  //             <head>
+  //               <style>
+  //                 body {
+  //                  background-color: lightgray;
+  //                  margin: 0px;
+  //                  }
+  //               </style>
+  //               <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0">
+  //               <meta http-equiv="Content-Security-Policy"
+  //               content="default-src * gap:; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src *;
+  //               img-src * data: blob: android-webview-video-poster:; style-src * 'unsafe-inline';">
+  //            </head>
+  //            <body>
+  //               <iframe
+  //               src="https://player.vimeo.com/video/70591644?loop=0&autoplay=0"
+  //               width="100%" height="100%" frameborder="0" allow="fullscreen"
+  //               allowfullscreen></iframe>
+  //            </body>
+  //           </html>
+  //           ''';
+  //   final String contentBase64 =
+  //       base64Encode(const Utf8Encoder().convert(html));
+  //   return 'data:text/html;base64,$contentBase64';
+  // }
+
   openVideo({lecturePaidModel}) async {
+    //الفنكش دي بتشتغل لمه تيجي تشغل الفيديو من مصدرين الاول انك تخش علي المدرس و بعد كده علي المواد و بعد كده الحصه
+    //المصدر التاني انك تخش من المحاضرات التي تم شرائوها و تخش علي الحصه
+
+    HomeCoursesController homeCoursesController =
+    Get.put(HomeCoursesController());
+    debugPrint("lecturePaidModel : ${homeCoursesController.chapters[homeCoursesController.indexChapters]
+        .lectures[homeCoursesController.indexLectures].toJson()}")  ;
+    debugPrint("link : ${homeCoursesController.chapters[homeCoursesController.indexChapters]
+        .lectures[homeCoursesController.indexLectures].link}")  ;
+    debugPrint("lecturePaidModel : ${homeCoursesController.chapters[homeCoursesController.indexChapters]
+        .lectures[homeCoursesController.indexLectures].link}")  ;
+
     if (lecturePaidModel != null) {
       idVideoForPaidModelYoutube = lecturePaidModel.video.toString();
     }
-    HomeCoursesController homeCoursesController =
-        Get.put(HomeCoursesController());
+
     if (lecturePaidModel == null
         ? homeCoursesController.chapters[homeCoursesController.indexChapters]
                 .lectures[homeCoursesController.indexLectures].video ==
@@ -118,25 +132,25 @@ log(videoPage());
       try {
         if (Platform.isWindows) {
         } else {
-          // controller = PodPlayerController(
-          //   playVideoFrom: PlayVideoFrom.vimeo(
-          //     idVideo,
-          //     videoPlayerOptions: VideoPlayerOptions(
-          //       allowBackgroundPlayback: true,
-          //     ),
-          //   ),
-          // )..initialise();
+          controller = PodPlayerController(
+            playVideoFrom: PlayVideoFrom.vimeo(
+              idVideo,
+              videoPlayerOptions: VideoPlayerOptions(
+                allowBackgroundPlayback: true,
+              ),
+            ),
+          )..initialise();
         }
       } catch (e) {
         debugPrint(e.toString());
-        // controller.changeVideo(
-        //   playVideoFrom: PlayVideoFrom.vimeo(
-        //     idVideo,
-        //     videoPlayerOptions: VideoPlayerOptions(
-        //       allowBackgroundPlayback: true,
-        //     ),
-        //   ),
-        // );
+        controller.changeVideo(
+          playVideoFrom: PlayVideoFrom.vimeo(
+            idVideo,
+            videoPlayerOptions: VideoPlayerOptions(
+              allowBackgroundPlayback: true,
+            ),
+          ),
+        );
       }
     } else {
       String? idVideo = lecturePaidModel == null
@@ -147,31 +161,31 @@ log(videoPage());
       // debugPrint(
       //     "youtube link : ${homeCoursesController.chapters[homeCoursesController.indexChapters].lectures[homeCoursesController.indexLectures].toJson()}");
       try {
-        if (Platform.isWindows) {
-          // youtubeExplode = await YoutubeExplode()
-          //     .videos
-          //     .get('https://youtube.com/watch?v=$idVideo');
-          // log('windows video: ${youtubeExplode!.id}');
-        } else {
-          // controller = PodPlayerController(
-          //   playVideoFrom: PlayVideoFrom.youtube(
-          //     idVideo!,
-          //     videoPlayerOptions: VideoPlayerOptions(
-          //       allowBackgroundPlayback: true,
-          //     ),
-          //   ),
-          // )..initialise();
-        }
+        // if (Platform.isWindows) {
+        //   youtubeExplode = await YoutubeExplode()
+        //       .videos
+        //       .get('https://youtube.com/watch?v=$idVideo');
+        //   log('windows video: ${youtubeExplode!.id}');
+        // } else {
+        controller = PodPlayerController(
+          playVideoFrom: PlayVideoFrom.youtube(
+            idVideo!,
+            videoPlayerOptions: VideoPlayerOptions(
+              allowBackgroundPlayback: true,
+            ),
+          ),
+        )..initialise();
+        // }
       } catch (e) {
         debugPrint(e.toString());
-        // controller.changeVideo(
-        //   playVideoFrom: PlayVideoFrom.youtube(
-        //     idVideo!,
-        //     videoPlayerOptions: VideoPlayerOptions(
-        //       allowBackgroundPlayback: true,
-        //     ),
-        //   ),
-        // );
+        controller.changeVideo(
+          playVideoFrom: PlayVideoFrom.youtube(
+            idVideo!,
+            videoPlayerOptions: VideoPlayerOptions(
+              allowBackgroundPlayback: true,
+            ),
+          ),
+        );
       }
     }
   }
@@ -198,6 +212,7 @@ log(videoPage());
   void checkMustSolveExam() {
     HomeController homeController = Get.put(HomeController());
     for (var item in quizList) {
+      debugPrint("item.must : ${item.toJson()}");
       if (item.must == 1) {
         if (homeController.solvedExams
             .any((element) => element.id == item.id)) {
@@ -270,30 +285,31 @@ log(videoPage());
     quizList.value =
         (await services.getQuizPayed(lecturePaidModel: lecturePaidModel))!;
   }
+
   final navigatorKey = GlobalKey<NavigatorState>();
 
-  // Future<WebviewPermissionDecision> onPermissionRequested(
-  //     String url, WebviewPermissionKind kind, bool isUserInitiated) async {
-  //   final decision = await showDialog<WebviewPermissionDecision>(
-  //     context: navigatorKey.currentContext!,
-  //     builder: (BuildContext context) => AlertDialog(
-  //       title: const Text('WebView permission requested'),
-  //       content: Text('WebView has requested permission \'$kind\''),
-  //       actions: <Widget>[
-  //         TextButton(
-  //           onPressed: () =>
-  //               Navigator.pop(context, WebviewPermissionDecision.deny),
-  //           child: const Text('Deny'),
-  //         ),
-  //         TextButton(
-  //           onPressed: () =>
-  //               Navigator.pop(context, WebviewPermissionDecision.allow),
-  //           child: const Text('Allow'),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  //
-  //   return decision ?? WebviewPermissionDecision.none;
-  // }
+// Future<WebviewPermissionDecision> onPermissionRequested(
+//     String url, WebviewPermissionKind kind, bool isUserInitiated) async {
+//   final decision = await showDialog<WebviewPermissionDecision>(
+//     context: navigatorKey.currentContext!,
+//     builder: (BuildContext context) => AlertDialog(
+//       title: const Text('WebView permission requested'),
+//       content: Text('WebView has requested permission \'$kind\''),
+//       actions: <Widget>[
+//         TextButton(
+//           onPressed: () =>
+//               Navigator.pop(context, WebviewPermissionDecision.deny),
+//           child: const Text('Deny'),
+//         ),
+//         TextButton(
+//           onPressed: () =>
+//               Navigator.pop(context, WebviewPermissionDecision.allow),
+//           child: const Text('Allow'),
+//         ),
+//       ],
+//     ),
+//   );
+//
+//   return decision ?? WebviewPermissionDecision.none;
+// }
 }

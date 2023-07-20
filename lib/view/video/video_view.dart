@@ -16,6 +16,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:pod_player/pod_player.dart';
 
 // library vimeo_player_flutter;
 
@@ -24,7 +25,8 @@ import 'dart:convert';
 import 'package:screen_protector/screen_protector.dart';
 
 class VideoView extends GetView<VideoController> {
-  //VideoController videoController = Get.find();
+  // VideoController videoController = Get.find();
+  String title = Get.arguments['title'];
 
   HomeController homeController = Get.find();
   HomeCoursesController homeCoursesController = Get.find();
@@ -37,17 +39,13 @@ class VideoView extends GetView<VideoController> {
 
   @override
   Widget build(BuildContext context) {
-    String title = Get.arguments['title'];
     SystemChrome.setPreferredOrientations([
-      // DeviceOrientation.portraitUp,
-      // DeviceOrientation.portraitDown,
     ]);
     return WillPopScope(
       onWillPop: () async {
         try {
           await ScreenProtector.preventScreenshotOff();
-          // videoController.controller.dispose();
-          Get.delete<VideoController>();
+           Get.delete<VideoController>();
         } catch (e) {
           debugPrint(e.toString());
         }
@@ -56,7 +54,7 @@ class VideoView extends GetView<VideoController> {
       },
       child: CustomAppBar(
           functionBake: () async {
-             controller.dispose();
+            controller.dispose();
             await ScreenProtector.preventScreenshotOff();
 
             Get.delete<VideoController>();
@@ -67,151 +65,61 @@ class VideoView extends GetView<VideoController> {
             child: Obx(
               () => Column(
                 children: [
-                  ///
-                  // if (!videoController.mustSolveExam.value)
-                  // FutureBuilder(builder: (context, snap) {
-                  //   // try {
-                  //     // if (homeCoursesController
-                  //     //         .chapters[homeCoursesController.indexChapters]
-                  //     //         .lectures[homeCoursesController.indexLectures]
-                  //     //         .dailymotion!=
-                  //     //     null) {
-                  //     //   debugPrint(" FutureBuilder catch1");
-                  //
-                  //       return     PodVideoPlayer(
-                  //         controller: videoController.controller,
-                  //         onVideoError: () => Stack(
-                  //           children: [
-                  //             AspectRatio(
-                  //                 aspectRatio: 16 / 9,
-                  //                 child: Image.asset(
-                  //                   "assets/images/errorvideo.jpg",
-                  //                   fit: BoxFit.cover,
-                  //                 )),
-                  //             Positioned(
-                  //                 bottom: 10,
-                  //                 left: 0,
-                  //                 right: 0,
-                  //                 child: CustomText(
-                  //                   text:
-                  //                   ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
-                  //                   color: Colors.white,
-                  //                   fontWeight: FontWeight.bold,
-                  //                 )),
-                  //           ],
-                  //         ),
-                  //       );
-                  //   ///لو فتحت هنا تاني و كان مفيش مشاكل امسح ده
-                  //
-                  //   // }
-                  //     // else {
-                  //     //   debugPrint(" FutureBuilder catch2");
-                  //     //
-                  //     //   return PodVideoPlayer(
-                  //     //     controller: videoController.controller,
-                  //     //     onVideoError: () => Stack(
-                  //     //       children: [
-                  //     //         AspectRatio(
-                  //     //             aspectRatio: 16 / 9,
-                  //     //             child: Image.asset(
-                  //     //               "assets/images/errorvideo.jpg",
-                  //     //               fit: BoxFit.cover,
-                  //     //             )),
-                  //     //         Positioned(
-                  //     //             bottom: 10,
-                  //     //             left: 0,
-                  //     //             right: 0,
-                  //     //             child: CustomText(
-                  //     //               text:
-                  //     //                   ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
-                  //     //               color: Colors.white,
-                  //     //               fontWeight: FontWeight.bold,
-                  //     //             )),
-                  //     //       ],
-                  //     //     ),
-                  //     //   );
-                  //     // }
-                  //     ///لو فتحت هنا تاني و كان مفيش مشاكل امسح ده
-                  //   // } catch (e) {
-                  //   //   try {
-                  //   //     debugPrint(
-                  //   //         " FutureBuilder catch ${videoController.idVideoForPaidModelYoutube}");
-                  //   //
-                  //   //     // ignore: unnecessary_null_comparison
-                  //   //     if (videoController.idVideoForPaidModelYoutube ==
-                  //   //             'null' ||
-                  //   //         videoController.idVideoForPaidModelYoutube ==
-                  //   //             null ||
-                  //   //         videoController.idVideoForPaidModelYoutube ==
-                  //   //             '') {
-                  //   //       debugPrint(" FutureBuilder catch3");
-                  //   //
-                  //   //       debugPrint(
-                  //   //           "videoController.idVideoForPaidModel ${videoController.idVideoForPaidModel}");
-                  //   //       return AspectRatio(
-                  //   //         aspectRatio: 16 / 9,
-                  //   //         child: VimeoPlayer(
-                  //   //           videoId: videoController.idVideoForPaidModel,
-                  //   //         ),
-                  //   //       );
-                  //   //     } else {
-                  //   //       debugPrint(" FutureBuilder catch4");
-                  //   //
-                  //   //       return PodVideoPlayer(
-                  //   //         controller: videoController.controller,
-                  //   //       );
-                  //   //     }
-                  //   //   } catch (e) {
-                  //   //     return Stack(
-                  //   //       children: [
-                  //   //         AspectRatio(
-                  //   //             aspectRatio: 16 / 9,
-                  //   //             child: Image.asset(
-                  //   //               "assets/images/errorvideo.jpg",
-                  //   //               fit: BoxFit.cover,
-                  //   //             )),
-                  //   //         Positioned(
-                  //   //             bottom: 10,
-                  //   //             left: 0,
-                  //   //             right: 0,
-                  //   //             child: CustomText(
-                  //   //               text:
-                  //   //                   ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
-                  //   //               color: Colors.white,
-                  //   //               fontWeight: FontWeight.bold,
-                  //   //             )),
-                  //   //       ],
-                  //   //     );
-                  //   //   }
-                  //   // }
-                  // })
-                  // else
-                  //   Container(
-                  //     decoration: const BoxDecoration(
-                  //         color: Colors.white,
-                  //         borderRadius: BorderRadius.only(
-                  //             topRight: Radius.elliptical(40, 40),
-                  //             topLeft: Radius.elliptical(40, 40))),
-                  //     child: AspectRatio(
-                  //       aspectRatio: 16 / 9,
-                  //       child: Column(
-                  //         mainAxisAlignment: MainAxisAlignment.center,
-                  //         mainAxisSize: MainAxisSize.min,
-                  //         children: [
-                  //           const Icon(
-                  //             Icons.error_outline,
-                  //             size: 80,
-                  //           ),
-                  //           const SizedBox(
-                  //             height: 30,
-                  //           ),
-                  //           CustomText(
-                  //             text: "mustSolveExamBeforeWatchVideos".tr,
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //   ),
+                  if (!controller.mustSolveExam.value)
+                    Builder(
+                        builder: (context) {
+                      return PodVideoPlayer(
+                        controller: controller.controller,
+                        onVideoError: () => Stack(
+                          children: [
+                            AspectRatio(
+                                aspectRatio: 16 / 9,
+                                child: Image.asset(
+                                  "assets/images/errorvideo.jpg",
+                                  fit: BoxFit.cover,
+                                )),
+                            Positioned(
+                                bottom: 10,
+                                left: 0,
+                                right: 0,
+                                child: CustomText(
+                                  text:
+                                      ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                )),
+                          ],
+                        ),
+                      );
+                    })
+                  else
+                    Container(
+                      decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.elliptical(40, 40),
+                              topLeft: Radius.elliptical(40, 40))),
+                      child: AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.error_outline,
+                              size: 80,
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            CustomText(
+                              text: "mustSolveExamBeforeWatchVideos".tr,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+
                   ///
                   // BetterPlayer(
                   //     controller: homeCoursesController.betterPlayerController),

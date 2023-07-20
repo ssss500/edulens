@@ -369,42 +369,41 @@ class HomeView extends GetView<HomeController> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: [
-                                                IconButton(
-                                                  icon: const Icon(Icons.phone),
-                                                  iconSize: 25,
-                                                  onPressed: () {
-                                                    launchUrl(Uri(
-                                                        scheme: 'tel',
-                                                        path: "01099613267"));
-                                                  },
-                                                ),
+                                                // IconButton(
+                                                //   icon: const Icon(Icons.phone),
+                                                //   iconSize: 25,
+                                                //   onPressed: () {
+                                                //     launchUrl(Uri(
+                                                //         scheme: 'tel',
+                                                //         path: "01099613267"));
+                                                //   },
+                                                // ),
+                                                // const SizedBox(
+                                                //   width: 10,
+                                                // ),
+                                                // const Text(
+                                                //   "01099613267",
+                                                //   style: TextStyle(
+                                                //       fontSize: 20,
+                                                //       color: Colors.black,
+                                                //       fontWeight:
+                                                //           FontWeight.bold),
+                                                // ),
                                                 const SizedBox(
                                                   width: 10,
                                                 ),
-                                                const Text(
-                                                  "01099613267",
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                const SizedBox(
-                                                  width: 10,
-                                                ),
-                                                InkWell(
-                                                  onTap: () async {
-                                                    final Uri url = Uri.parse(
-                                                        'whatsapp://send?phone=+201099613267');
-
-                                                    await launchUrl(url);
-                                                  },
-                                                  child: Image.asset(
-                                                    "assets/images/whatsapp.png",
-                                                    height: 35,
-                                                    width: 35,
-                                                  ),
-                                                ),
+                                                // InkWell(
+                                                //   onTap: () async {
+                                                //     final Uri url = Uri.parse(
+                                                //         'whatsapp://send?phone=+201099613267');
+                                                //     await launchUrl(url);
+                                                //   },
+                                                //   child: Image.asset(
+                                                //     "assets/images/whatsapp.png",
+                                                //     height: 35,
+                                                //     width: 35,
+                                                //   ),
+                                                // ),
                                               ],
                                             ),
                                           ),

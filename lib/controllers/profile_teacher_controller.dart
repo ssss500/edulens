@@ -49,8 +49,12 @@ class ProfileTeacherController extends GetxController {
 
     monthExamTeacher.value =
         (await services.getTeacherMonthExams(id: dateTeacher.id))!;
-    bookingTeacher.value =
-        (await services.getTeacherBookings(id: dateTeacher.id))!;
+    try{
+      bookingTeacher.value =
+          (await services.getTeacherBookings(id: dateTeacher.id))!;
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
   goToQuiz(index) async {
       QuestionMonthController questionMonthController =
