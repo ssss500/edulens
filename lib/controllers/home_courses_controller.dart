@@ -11,36 +11,37 @@ class HomeCoursesController extends GetxController {
   int indexChapters = 0;
   final chapters = <ChapterModel>[].obs;
 
-  var chapterId=0;
+  var chapterId = 0;
+
   // final lectures = <LectureModel>[].obs;
 
   // late BetterPlayerController betterPlayerController;
 
+  List<ScrollController> scrollControllerList = [];
 
-  getChapters( ) async {
-    chapters.value = (await services.getChapter(id: chapterId))!;
-    // lectures.value = (await services.getLectures())!;
+  List<ScrollController> createListOfScrollController(int count) {
+    List<void>.generate(
+        count, (index) => scrollControllerList.add(ScrollController()));
+    return scrollControllerList;
   }
 
-  //
-  // void animateToIndex(int index, int itemCount) {
-  //   final ScrollController scrollController = ScrollController();
-  //
-  //   final contentSize = scrollController.position.viewportDimension + scrollController.position.maxScrollExtent;
-  //   final index = 10;
-  //   final target = contentSize * index / itemCount;
-  //   scrollController.position.animateTo(
-  //     target,
-  //     duration: const Duration(seconds: 2),
-  //     curve: Curves.easeInOut,
-  //   );
-  // }
- //    scrollController.position.axisDirection;
- // //   scrollController.createScrollPosition(AlwaysScrollableScrollPhysics(), context, oldPosition)
- //    scrollController.animateTo(
- //      index * 100,
- //      duration: const Duration(seconds: 2),
- //      curve: Curves.fastOutSlowIn,
- //    );
-  //}
+  void scrollLeft({required ScrollController scrollController}) {
+    scrollController.animateTo(
+        duration: const Duration(milliseconds: 1000),
+        curve: Curves.fastOutSlowIn,
+        scrollController.position.maxScrollExtent);
+  }
+
+  void scrollRight({required ScrollController scrollController}) {
+    scrollController.animateTo(
+        duration: const Duration(milliseconds: 1000),
+        curve: Curves.fastOutSlowIn,
+        scrollController.position.minScrollExtent);
+  }
+
+  getChapters() async {
+    chapters.value = (await services.getChapter(id: chapterId))!;
+  }
+
+
 }
