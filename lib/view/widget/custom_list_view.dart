@@ -6,10 +6,12 @@ class CustomListView extends StatelessWidget {
   final double padding;
   final Axis axis;
   final bool scroll;
+  final ScrollController? scrollController;
 
   const CustomListView(
       {super.key,
       this.scroll = true,
+        this.scrollController,
       required this.itemCount,
       required this.itemBuilder,
       this.padding = 10,
@@ -22,6 +24,7 @@ class CustomListView extends StatelessWidget {
       padding: EdgeInsets.only(bottom: padding),
       scrollDirection: axis,
       primary: false,
+      controller: scrollController,
       shrinkWrap: true,
       physics: scroll
           ? const AlwaysScrollableScrollPhysics()
