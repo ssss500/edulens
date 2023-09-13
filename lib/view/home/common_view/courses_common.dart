@@ -13,7 +13,7 @@ class CoursesCommon extends GetView<SubjectTeacherController> {
 
   @override
   Widget build(BuildContext context) {
-    return const Responsive(
+    return   Responsive(
         mobile: HomeCoursesView(), desktop: CoursesViewWindows());
   }
 }

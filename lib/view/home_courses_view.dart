@@ -13,15 +13,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../routes/routes_names.dart';
 
-class HomeCoursesView extends GetView {
-  const HomeCoursesView({super.key});
-
-
-
+class HomeCoursesView extends StatelessWidget {
+    HomeCoursesView({super.key});
+  HomeCoursesController homeCoursesController = Get.find();
+  HomeController homeController = Get.find();
   @override
   Widget build(BuildContext context) {
-    HomeCoursesController homeCoursesController = Get.find();
-    HomeController homeController = Get.find();
+
     // final heightScreen = MediaQuery.of(context).size.height;
     final widthScreen = MediaQuery.of(context).size.width;
 
@@ -73,8 +71,7 @@ class HomeCoursesView extends GetView {
                                             height: 40,
                                             child: CustomText(
                                               text: homeCoursesController
-                                                  .chapters[indexChapters]
-                                                  .name,
+                                                  .chapters[indexChapters].name,
                                               color: Colors.white,
                                               textAlign: TextAlign.start,
                                               alignment: Alignment.centerRight,
@@ -176,8 +173,7 @@ class HomeCoursesView extends GetView {
                                                     element.id ==
                                                     homeCoursesController
                                                         .chapters[indexChapters]
-                                                        .lectures[
-                                                            indexLectures]
+                                                        .lectures[indexLectures]
                                                         .id) ||
                                             item[indexLectures].cost == 0 ||
                                             homeController
@@ -238,8 +234,7 @@ class HomeCoursesView extends GetView {
                                               height: 15,
                                             ),
                                             CustomText(
-                                              text:
-                                                  item[indexLectures].name,
+                                              text: item[indexLectures].name,
                                               color: Colors.white,
                                               fontSize: 23,
                                             ),
@@ -308,7 +303,6 @@ class HomeCoursesView extends GetView {
                                                       )
                                                     : const SizedBox()
                                                 : const SizedBox()),
-
                                             const SizedBox(
                                               height: 5,
                                             ),

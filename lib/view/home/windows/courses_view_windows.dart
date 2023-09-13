@@ -13,12 +13,13 @@ import '../../widget/custom_list_view.dart';
 import '../../widget/custom_loading.dart';
 import '../../widget/custom_text.dart';
 
-class CoursesViewWindows extends GetView<HomeCoursesController> {
-  const CoursesViewWindows({Key? key}) : super(key: key);
+class CoursesViewWindows extends StatelessWidget {
+    CoursesViewWindows({Key? key}) : super(key: key);
+  HomeCoursesController controller = Get.find();
+  HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    HomeController homeController = Get.put(HomeController());
     final widthScreen = MediaQuery.sizeOf(context).width;
     return CustomBackground(
         child: ConnectivityWidget(
@@ -135,12 +136,9 @@ class CoursesViewWindows extends GetView<HomeCoursesController> {
                                                                         .chapters[
                                                                             indexChapters]
                                                                         .id))
-                                                              if (!homeController
-                                                                  .appleAndGoogleBool
-                                                                  .value)
-                                                                const SizedBox(
-                                                                  height: 5,
-                                                                ),
+                                                              const SizedBox(
+                                                                height: 5,
+                                                              ),
                                                             if (!homeController
                                                                 .chapterPaid
                                                                 .any((element) =>
@@ -150,22 +148,18 @@ class CoursesViewWindows extends GetView<HomeCoursesController> {
                                                                         .chapters[
                                                                             indexChapters]
                                                                         .id))
-                                                              if (!homeController
-                                                                  .appleAndGoogleBool
-                                                                  .value)
-                                                                CustomText(
-                                                                  text:
-                                                                      "سعر الفصل كامل :  ${controller.chapters[indexChapters].cost} جنيها",
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .start,
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .centerRight,
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 14,
-                                                                )
+                                                              CustomText(
+                                                                text:
+                                                                    "سعر الفصل كامل :  ${controller.chapters[indexChapters].cost} جنيها",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                alignment: Alignment
+                                                                    .centerRight,
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 14,
+                                                              )
                                                           ],
                                                         ),
                                                       ),
@@ -177,33 +171,25 @@ class CoursesViewWindows extends GetView<HomeCoursesController> {
                                                                   .chapters[
                                                                       indexChapters]
                                                                   .id))
-                                                        if (!homeController
-                                                            .appleAndGoogleBool
-                                                            .value)
-                                                          CustomButton(
-                                                            height: 33,
-                                                            width: widthScreen *
-                                                                0.08,
-                                                            borderRadius: 10,
-                                                            function: () {
-                                                              BottomSheetPey
-                                                                  .bottomSheetPaidForChapter(
-                                                                dataChapter: controller
-                                                                        .chapters[
-                                                                    indexChapters],
-                                                                context:
-                                                                    context,
-                                                              );
-                                                            },
-                                                            text:
-                                                                "شراء الفصل كامل",
-                                                            sizeText: 15,
-                                                          )
-                                                        else
-                                                          const SizedBox()
-                                                      else if (!homeController
-                                                          .appleAndGoogleBool
-                                                          .value)
+                                                        CustomButton(
+                                                          height: 33,
+                                                          width: widthScreen *
+                                                              0.08,
+                                                          borderRadius: 10,
+                                                          function: () {
+                                                            BottomSheetPey
+                                                                .bottomSheetPaidForChapter(
+                                                              dataChapter: controller
+                                                                      .chapters[
+                                                                  indexChapters],
+                                                              context: context,
+                                                            );
+                                                          },
+                                                          text:
+                                                              "شراء الفصل كامل",
+                                                          sizeText: 15,
+                                                        )
+                                                      else
                                                         Container(
                                                           height: 30,
                                                           width: widthScreen *
@@ -231,227 +217,219 @@ class CoursesViewWindows extends GetView<HomeCoursesController> {
                                               ),
                                               Obx(
                                                 () {
-                                                  List<ScrollController> scrollControllers=controller.createListOfScrollController(controller.chapters.length);
+                                                  List<ScrollController>
+                                                      scrollControllers =
+                                                      controller
+                                                          .createListOfScrollController(
+                                                              controller
+                                                                  .chapters
+                                                                  .length);
                                                   return SizedBox(
-                                                  width: widthScreen / 1.15,
-                                                  height:
-                                                      MediaQuery.sizeOf(context)
-                                                              .height /
-                                                          9,
-                                                  child: Row(
-                                                    children: [
-                                                      RotatedBox(
-                                                        quarterTurns: 2,
-                                                        child: IconButton(
-                                                          onPressed: () {
-                                                            controller
-                                                                .scrollRight(scrollController: scrollControllers[indexChapters]);
-
-                                                          },
-                                                          icon:const Icon(Icons
-                                                              .arrow_forward_ios),),
-                                                      ),
-                                                      Expanded(
-                                                        child: CustomListView(
-                                                            padding: 0,
-                                                            scrollController: scrollControllers[indexChapters],
-                                                            scroll: true,
-                                                            axis:
-                                                                Axis.horizontal,
-                                                            itemCount: controller
-                                                                .chapters[
-                                                                    indexChapters]
-                                                                .lectures
-                                                                .length,
-                                                            itemBuilder:
-                                                                (BuildContext
-                                                                        context,
-                                                                    int indexLectures) {
-                                                             indexLectures = controller.indexLectures;
-                                                              final item =
-                                                                  controller
-                                                                      .chapters[
-                                                                          indexChapters]
-                                                                      .lectures;
-                                                              return InkWell(
-                                                                onTap:
-                                                                    () async {
-                                                                  // debugPrint(controller
-                                                                  //     .chapters[indexChapters]
-                                                                  //     .lectures![indexLectures]
-                                                                  //     .id
-                                                                  //     .toString());
-                                                                  if (homeController
-                                                                          .appleAndGoogleBool
-                                                                          .value ||
-                                                                      homeController.lecturePaid.any((element) =>
-                                                                          element
-                                                                              .id ==
-                                                                          controller
-                                                                              .chapters[
-                                                                                  indexChapters]
-                                                                              .lectures[
-                                                                                  indexLectures]
-                                                                              .id) ||
-                                                                      item[indexLectures]
-                                                                              .cost ==
-                                                                          0 ||
-                                                                      homeController
-                                                                              .studentProfile[
-                                                                                  0]
-                                                                              .phone ==
-                                                                          '01125705024' ||
-                                                                      homeController
-                                                                          .chapterPaid
-                                                                          .any((element) =>
-                                                                              element.id ==
-                                                                              controller.chapters[indexChapters].id)) {
-                                                                    Get.dialog(
-                                                                        const CustomLoading());
-                                                                    // await  controller.controller.initialise();
-                                                                    controller
-                                                                            .indexLectures =
-                                                                        indexLectures;
-                                                                    controller
-                                                                            .indexChapters =
-                                                                        indexChapters;
-                                                                    // VideoController videoController =
-                                                                    //     Get.find();
-                                                                    // await videoController.openVideo();
-                                                                    // videoController.getVideoExtensions();
-                                                                    // Get.back();
-                                                                    Get.offNamed(
-                                                                        RoutesNames
-                                                                            .videoView,
-                                                                        arguments: {
-                                                                          'title': controller
-                                                                              .chapters[indexChapters]
-                                                                              .lectures[indexLectures]
-                                                                              .name,
-                                                                        });
-                                                                  } else {
-                                                                    BottomSheetPey
-                                                                        .bottomSheetPaidForLecture(
-                                                                      dataLecture: controller
-                                                                          .chapters[
-                                                                              indexChapters]
-                                                                          .lectures[indexLectures],
-                                                                      context:
+                                                    width: widthScreen / 1.15,
+                                                    height: MediaQuery.sizeOf(
+                                                                context)
+                                                            .height /
+                                                        9,
+                                                    child: Row(
+                                                      children: [
+                                                        RotatedBox(
+                                                          quarterTurns: 2,
+                                                          child: IconButton(
+                                                            onPressed: () {
+                                                              controller.scrollRight(
+                                                                  scrollController:
+                                                                      scrollControllers[
+                                                                          indexChapters]);
+                                                            },
+                                                            icon: const Icon(Icons
+                                                                .arrow_forward_ios),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: CustomListView(
+                                                              padding: 0,
+                                                              scrollController:
+                                                                  scrollControllers[
+                                                                      indexChapters],
+                                                              scroll: true,
+                                                              axis: Axis
+                                                                  .horizontal,
+                                                              itemCount: controller
+                                                                  .chapters[
+                                                                      indexChapters]
+                                                                  .lectures
+                                                                  .length,
+                                                              itemBuilder:
+                                                                  (BuildContext
                                                                           context,
-                                                                    );
-                                                                  }
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  margin: const EdgeInsets
-                                                                          .only(
-                                                                      left: 9,
-                                                                      right: 9,
-                                                                      bottom:
-                                                                          10,
-                                                                      top: 5),
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      left: 5,
-                                                                      right: 5,
-                                                                      bottom:
-                                                                          10,
-                                                                      top: 5),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    boxShadow: [
-                                                                      BoxShadow(
-                                                                        color: Colors
-                                                                            .grey
-                                                                            .withOpacity(0.4),
-                                                                        spreadRadius:
-                                                                            2,
-                                                                        blurRadius:
-                                                                            4,
-                                                                      )
-                                                                    ],
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            20.0),
-                                                                  ),
-                                                                  child: Column(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Expanded(
-                                                                        child:
-                                                                            CustomText(
-                                                                          //  textOverflow: TextOverflow.ellipsis,
-                                                                          text:
-                                                                              item[indexLectures].name,
-                                                                          color:
-                                                                              Colors.black,
-                                                                          fontSize:
-                                                                              widthScreen * .01,
+                                                                      int indexLectures) {
+                                                                indexLectures =
+                                                                    controller
+                                                                        .indexLectures;
+                                                                final item = controller
+                                                                    .chapters[
+                                                                        indexChapters]
+                                                                    .lectures;
+                                                                return InkWell(
+                                                                  onTap:
+                                                                      () async {
+                                                                    // debugPrint(controller
+                                                                    //     .chapters[indexChapters]
+                                                                    //     .lectures![indexLectures]
+                                                                    //     .id
+                                                                    //     .toString());
+                                                                    if (homeController.lecturePaid.any((element) =>
+                                                                            element.id ==
+                                                                            controller
+                                                                                .chapters[
+                                                                                    indexChapters]
+                                                                                .lectures[
+                                                                                    indexLectures]
+                                                                                .id) ||
+                                                                        item[indexLectures].cost ==
+                                                                            0 ||
+                                                                        homeController.studentProfile[0].phone ==
+                                                                            homeController.chapterPaid.any((element) =>
+                                                                                element.id ==
+                                                                                controller.chapters[indexChapters].id)) {
+                                                                      Get.dialog(
+                                                                          const CustomLoading());
+                                                                      // await  controller.controller.initialise();
+                                                                      controller
+                                                                              .indexLectures =
+                                                                          indexLectures;
+                                                                      controller
+                                                                              .indexChapters =
+                                                                          indexChapters;
+                                                                      // VideoController videoController =
+                                                                      //     Get.find();
+                                                                      // await videoController.openVideo();
+                                                                      // videoController.getVideoExtensions();
+                                                                      // Get.back();
+                                                                      Get.offNamed(
+                                                                          RoutesNames
+                                                                              .videoView,
+                                                                          arguments: {
+                                                                            'title':
+                                                                                controller.chapters[indexChapters].lectures[indexLectures].name,
+                                                                          });
+                                                                    } else {
+                                                                      BottomSheetPey
+                                                                          .bottomSheetPaidForLecture(
+                                                                        dataLecture: controller
+                                                                            .chapters[indexChapters]
+                                                                            .lectures[indexLectures],
+                                                                        context:
+                                                                            context,
+                                                                      );
+                                                                    }
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    margin: const EdgeInsets
+                                                                        .only(
+                                                                        left: 9,
+                                                                        right:
+                                                                            9,
+                                                                        bottom:
+                                                                            10,
+                                                                        top: 5),
+                                                                    padding: const EdgeInsets
+                                                                        .only(
+                                                                        left: 5,
+                                                                        right:
+                                                                            5,
+                                                                        bottom:
+                                                                            10,
+                                                                        top: 5),
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color: Colors
+                                                                              .grey
+                                                                              .withOpacity(0.4),
+                                                                          spreadRadius:
+                                                                              2,
+                                                                          blurRadius:
+                                                                              4,
+                                                                        )
+                                                                      ],
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              20.0),
+                                                                    ),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Expanded(
+                                                                          child:
+                                                                              CustomText(
+                                                                            //  textOverflow: TextOverflow.ellipsis,
+                                                                            text:
+                                                                                item[indexLectures].name,
+                                                                            color:
+                                                                                Colors.black,
+                                                                            fontSize:
+                                                                                widthScreen * .01,
+                                                                          ),
                                                                         ),
-                                                                      ),
-                                                                      if (!homeController.chapterPaid.any((element) =>
-                                                                          element
-                                                                              .id ==
-                                                                          controller
-                                                                              .chapters[
-                                                                                  indexChapters]
-                                                                              .id))
-                                                                        if (!homeController
-                                                                            .appleAndGoogleBool
-                                                                            .value)
+                                                                        if (!homeController.chapterPaid.any((element) =>
+                                                                            element.id ==
+                                                                            controller.chapters[indexChapters].id))
                                                                           const SizedBox(
                                                                             height:
                                                                                 9,
                                                                           ),
-                                                                      Obx(() => !homeController.chapterPaid.any((element) =>
-                                                                              element.id ==
-                                                                              controller.chapters[indexChapters].id)
-                                                                          ? !homeController.appleAndGoogleBool.value
-                                                                              ? Expanded(
-                                                                                  child: Obx(
-                                                                                    () => CustomText(
-                                                                                      text: homeController.lecturePaid.any((element) => element.id == controller.chapters[indexChapters].lectures[indexLectures].id)
-                                                                                          ? "تم شراء المحاضرة"
-                                                                                          : item[indexLectures].cost == 0
-                                                                                              ? "المحاضرة مجانية"
-                                                                                              : "سعر المحاضرة: ${item[indexLectures].cost} جنيها ",
-                                                                                      color: homeController.lecturePaid.any((element) => element.id == controller.chapters[indexChapters].lectures[indexLectures].id)
-                                                                                          ? Colors.black54
-                                                                                          : item[indexLectures].cost == 0
-                                                                                              ? Colors.green.shade800
-                                                                                              : Colors.red.shade300,
-                                                                                      fontSize: 16,
-                                                                                    ),
+                                                                        Obx(() => !homeController.chapterPaid.any((element) =>
+                                                                                element.id ==
+                                                                                controller.chapters[indexChapters].id)
+                                                                            ? Expanded(
+                                                                                child: Obx(
+                                                                                  () => CustomText(
+                                                                                    text: homeController.lecturePaid.any((element) => element.id == controller.chapters[indexChapters].lectures[indexLectures].id)
+                                                                                        ? "تم شراء المحاضرة"
+                                                                                        : item[indexLectures].cost == 0
+                                                                                            ? "المحاضرة مجانية"
+                                                                                            : "سعر المحاضرة: ${item[indexLectures].cost} جنيها ",
+                                                                                    color: homeController.lecturePaid.any((element) => element.id == controller.chapters[indexChapters].lectures[indexLectures].id)
+                                                                                        ? Colors.black54
+                                                                                        : item[indexLectures].cost == 0
+                                                                                            ? Colors.green.shade800
+                                                                                            : Colors.red.shade300,
+                                                                                    fontSize: 16,
                                                                                   ),
-                                                                                )
-                                                                              : const SizedBox()
-                                                                          : const SizedBox()),
-                                                                      const SizedBox(
-                                                                        height:
-                                                                            5,
-                                                                      ),
-                                                                    ],
+                                                                                ),
+                                                                              )
+                                                                            : const SizedBox()),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              5,
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                   ),
-                                                                ),
-                                                              );
-                                                            }),
-                                                      ),
-                                                      IconButton(
+                                                                );
+                                                              }),
+                                                        ),
+                                                        IconButton(
                                                           onPressed: () {
-
-                                                              controller
-                                                                  .scrollLeft(scrollController: scrollControllers[indexChapters]);
-
+                                                            controller.scrollLeft(
+                                                                scrollController:
+                                                                    scrollControllers[
+                                                                        indexChapters]);
                                                           },
-                                                          icon:const Icon(Icons
-                                                              .arrow_back_ios_new),),
-                                                    ],
-                                                  ),
-                                                );
+                                                          icon: const Icon(Icons
+                                                              .arrow_back_ios_new),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  );
                                                 },
                                               ),
                                             ],
