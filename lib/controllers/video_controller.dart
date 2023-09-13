@@ -39,6 +39,8 @@ class VideoController extends GetxController {
   @override
   Future<void> dispose() async {
     super.dispose();
+    controller.pause();
+    controller.dispose();
     try {
       if (Platform.isIOS) {
         await ScreenProtector.preventScreenshotOff();
@@ -197,12 +199,11 @@ class VideoController extends GetxController {
   }
 
   getQuestions() async {
-    debugPrint("getQuestions1");
+    // debugPrint("getQuestions1");
     questionList.value = (await services.getQuestion(idQuiz: idQuiz))!;
-    debugPrint("getQuestions2");
+    // debugPrint("getQuestions2");
     await services.startExam(examId: idQuiz);
-    debugPrint(" questionList.value : $questionList");
-  }
+   }
 
   endExam({degree}) async {
     final result = await services.endExam(examId: idQuiz, degree: degree);
@@ -212,7 +213,9 @@ class VideoController extends GetxController {
   void checkMustSolveExam() {
     HomeController homeController = Get.put(HomeController());
     for (var item in quizList) {
-      debugPrint("item.must : ${item.toJson()}");
+      debugPrint("item.id : ${item.id}");
+      log(" quizList : ${quizList.toJson()}");
+      debugPrint("item.must : ${item.must}");
       if (item.must == 1) {
         if (homeController.solvedExams
             .any((element) => element.id == item.id)) {
@@ -222,6 +225,7 @@ class VideoController extends GetxController {
         }
       }
     }
+    update();
   }
 
   openVideoPayed({required LecturePaidModel lecturePaidModel}) {

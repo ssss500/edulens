@@ -325,7 +325,7 @@ class Profile extends GetView<HomeController> {
                         },
                         // color: Colors.yellow,
                         icon: Icons.star,
-                        text: "تقيم التطبيق"),
+                        text: "تقييم التطبيق"),
                   ],
                 ),
                 const SizedBox(

@@ -76,7 +76,7 @@ class CreateAccountView extends GetView<RegisterController> {
                 controller.parentName.value = v;
               },
               iconData: Icons.person,
-              title: "dadPhoneNumberText".tr,
+              title: "اسم ولي الامر",
               hint: "اب ،ام ،اخ",
               textInputType: TextInputType.name,
               colorBorder: AppConstants.primaryColor,

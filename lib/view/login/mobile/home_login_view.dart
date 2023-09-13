@@ -48,9 +48,9 @@ class HomeLogin extends GetView<RegisterController> {
             function: () {
               Get.toNamed(RoutesNames.register1);
 
-              Get.to(
-                () => const CreateAccountView(),
-              );
+              // Get.to(
+              //   () => const CreateAccountView(),
+              // );
             },
             text: "createAccountText".tr,
           ),

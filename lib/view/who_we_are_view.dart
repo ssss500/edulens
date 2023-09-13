@@ -72,7 +72,7 @@ class HowWeAreView extends StatelessWidget {
                   children: [
                     CustomText(
                       text: title,
-                      fontSize: 40,
+                      fontSize: 30,
                     ),
                   ],
                 ),
@@ -89,7 +89,7 @@ class HowWeAreView extends StatelessWidget {
                 ),
                 Expanded(
                   child: CustomText(
-                    fontSize: 30,
+                    fontSize: 20,
                     text: details,
                   ),
                 )

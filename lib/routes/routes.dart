@@ -357,7 +357,7 @@ class Routes {
     ),
     GetPage(
       name: RoutesNames.answerQuizView,
-      page: () => const SubjectTeacherCommon(),
+      page: () => const AnswerQuizView(),
       binding: BindingsBuilder(() {
         Get.lazyPut<QuestionController>(
           () => QuestionController(),

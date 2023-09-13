@@ -45,7 +45,7 @@ class QuestionMonthController extends GetxController {
   }
 
   getFinalDegreeAndEndExam() async {
-    Get.dialog(CustomLoading());
+    Get.dialog(const CustomLoading());
     finalDegree = 0;
     for (var element in questionList) {
       for (var element2 in element.choices!) {
@@ -146,7 +146,7 @@ class QuestionMonthController extends GetxController {
 
             InkWell(
               onTap: () async {
-                Get.dialog(CustomLoading());
+                Get.dialog(const CustomLoading());
                 await homeController.updateSolvedExams();
                 Get.back();
 

@@ -9,13 +9,18 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 import '../view/update_screen.dart';
 import '../view/widget/custom_social_media_icons.dart';
 // import 'package:package_info_plus/package_info_plus.dart';
+final _shorebirdCodePush = ShorebirdCodePush();
+
 class MainController extends GetxController {
   final dio = DioUtilNew.dio;
   final appVersion = <AppVersionModel>[].obs;
+  int? _currentPatchVersion;
+  bool _isCheckingForUpdate = false;
 
   @override
   Future<void> onInit() async {
@@ -24,11 +29,35 @@ class MainController extends GetxController {
         if(Platform.isIOS||Platform.isAndroid){
       checkUpdate();
       notificationMethod();
-
         }
     debugPrint("onInit Main Controller");
+    _checkForUpdate();
   }
+  Future<void> _checkForUpdate() async {
+    try {
+      _shorebirdCodePush.currentPatchNumber().then((currentPatchVersion) {
+        // if (!mounted) return;
 
+        _currentPatchVersion = currentPatchVersion;
+        update();
+      });
+      _isCheckingForUpdate = true;
+      update();
+
+      // Ask the Shorebird servers if there is a new patch available.
+      final isUpdateAvailable =
+      await _shorebirdCodePush.isNewPatchAvailableForDownload();
+
+      if (isUpdateAvailable) {
+// If there is a new patch available, download it.
+        await _shorebirdCodePush.downloadUpdateIfAvailable();
+      }
+      // remoteConfigFun();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+
+  }
   checkUpdate() async {
     Timer(Duration(milliseconds: 3500), () async {
       appVersion.value = (await getAppVersion())!;

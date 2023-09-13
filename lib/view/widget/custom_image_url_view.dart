@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomImageUrlView extends StatelessWidget {
-  final image, colorLodingIcon, width, height;
+  final image, colorLodingIcon ;
+  double? width, height;
   final fit;
-  const CustomImageUrlView(
+    CustomImageUrlView(
       {super.key, required this.image,
         this.fit=BoxFit.cover,this.height=100.0,
       this.colorLodingIcon = Colors.white,
@@ -24,6 +25,7 @@ class CustomImageUrlView extends StatelessWidget {
             }, preventDuplicates: false);
           },
           child: Container(
+            height: height,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
@@ -47,6 +49,7 @@ class CustomImageUrlView extends StatelessWidget {
             ),
             CustomText(
               text: "imageErrorMessage".tr,
+              color: Colors.red,
             )
           ],
         ),

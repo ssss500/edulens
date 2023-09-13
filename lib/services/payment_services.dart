@@ -30,7 +30,6 @@ class PaymentServices {
     //   key: AppConstants.studentClassId,
     // )}");
     try {
-     
       final response =
           await dio!.post(AppConstants.activateCouponLecture, queryParameters: {
         "student_id": CacheHelper.getData(
@@ -51,7 +50,7 @@ class PaymentServices {
       if (response.statusCode == 200) {
         HomeController homeController = Get.put(HomeController());
         showCustomSnackBar(
-            context: context,
+            context: Get.context!,
             title: "note".tr,
             deck: "تم شراء المحاضرة بنجاح 🫶",
             contentType: ContentType.success);
@@ -62,14 +61,14 @@ class PaymentServices {
       } else if (response.statusCode == 400) {
         debugPrint("else 400");
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
       } else {
         debugPrint("else");
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
@@ -79,7 +78,7 @@ class PaymentServices {
 
       debugPrint(e.toString());
       showCustomSnackBar(
-          context: Get.context,
+          context: Get.context!,
           title: "note".tr,
           deck: e.toString(),
           contentType: ContentType.warning);
@@ -92,35 +91,32 @@ class PaymentServices {
   Future<String> buyLectureByBucket({
     required lectureId,
     required teacherId,
-    required context,
+    context,
   }) async {
     try {
-      debugPrint("studentId ${CacheHelper.getData(
-        key: AppConstants.studentId,
-      )}");
+      // debugPrint("studentId ${CacheHelper.getData(
+      //   key: AppConstants.studentId,
+      // )}");
       final response =
           await dio!.post(AppConstants.buyThisLecture, queryParameters: {
         "lecture_id": lectureId,
-
         "student_id": CacheHelper.getData(
           key: AppConstants.studentId,
         ),
-
         "teacher_id": teacherId,
         "student_class_id": CacheHelper.getData(
           key: AppConstants.studentClassId,
         ),
-        // "code": code,
       }, data: {
         "api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"
       });
 
-      debugPrint(response.statusCode.toString());
-      debugPrint(response.data.toString());
+      // debugPrint(response.statusCode.toString());
+      // debugPrint(response.data.toString());
       if (response.statusCode == 200) {
         HomeController homeController = Get.put(HomeController());
         showCustomSnackBar(
-            context: context,
+            context: Get.context!,
             title: "note".tr,
             deck: "تم شراء المحاضرة بنجاح 🫶",
             contentType: ContentType.success);
@@ -135,13 +131,13 @@ class PaymentServices {
         // return mList;
       } else if (response.statusCode == 400) {
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
       } else {
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
@@ -149,7 +145,7 @@ class PaymentServices {
     } catch (e) {
       debugPrint(e.toString());
       showCustomSnackBar(
-          context: Get.context,
+          context: Get.context!,
           title: "note".tr,
           deck: e.toString(),
           contentType: ContentType.warning);
@@ -162,7 +158,7 @@ class PaymentServices {
   Future<String> buyChapterByBucket({
     required chapterId,
     required teacherId,
-    required context,
+    context,
   }) async {
     try {
       debugPrint("studentId ${CacheHelper.getData(
@@ -190,7 +186,7 @@ class PaymentServices {
       if (response.statusCode == 200) {
         HomeController homeController = Get.put(HomeController());
         showCustomSnackBar(
-            context: context,
+            context: Get.context!,
             title: "note".tr,
             deck: "تم شراء الفصل بنجاح 🫶",
             contentType: ContentType.success);
@@ -205,13 +201,13 @@ class PaymentServices {
         // return mList;
       } else if (response.statusCode == 400) {
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
       } else {
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
@@ -219,7 +215,7 @@ class PaymentServices {
     } catch (e) {
       debugPrint(e.toString());
       showCustomSnackBar(
-          context: Get.context,
+          context: Get.context!,
           title: "note".tr,
           deck: e.toString(),
           contentType: ContentType.warning);
@@ -242,10 +238,10 @@ class PaymentServices {
       debugPrint("code : $code");
       debugPrint("chapter_id : $chapterId");
       debugPrint("teacher_id : $teacherId");
-      debugPrint("student_id : ${ CacheHelper.getData(
+      debugPrint("student_id : ${CacheHelper.getData(
         key: AppConstants.studentId,
       )}");
-      debugPrint("student_class_id : ${ CacheHelper.getData(
+      debugPrint("student_class_id : ${CacheHelper.getData(
         key: AppConstants.studentClassId,
       )}");
       final response =
@@ -268,7 +264,7 @@ class PaymentServices {
       if (response.statusCode == 200) {
         HomeController homeController = Get.put(HomeController());
         showCustomSnackBar(
-            context: context,
+            context: Get.context!,
             title: "note".tr,
             deck: "تم شراء الفصل بنجاح 🫶",
             contentType: ContentType.success);
@@ -280,17 +276,15 @@ class PaymentServices {
         // debugPrint(mList.length.toString());
         //
         // return mList;
-      }
-      else if (response.statusCode == 400) {
+      } else if (response.statusCode == 400) {
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
-      }
-      else {
+      } else {
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
@@ -298,7 +292,7 @@ class PaymentServices {
     } catch (e) {
       debugPrint(e.toString());
       showCustomSnackBar(
-          context: Get.context,
+          context: Get.context!,
           title: "note".tr,
           deck: e.toString(),
           contentType: ContentType.warning);
@@ -330,7 +324,7 @@ class PaymentServices {
       if (response.statusCode == 200) {
         HomeController homeController = Get.put(HomeController());
         showCustomSnackBar(
-            context: context,
+            context: Get.context!,
             title: "note".tr,
             deck: "تم شراء الامتحان بنجاح 🫶",
             contentType: ContentType.success);
@@ -340,13 +334,13 @@ class PaymentServices {
         });
       } else if (response.statusCode == 400) {
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
       } else {
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
@@ -354,7 +348,7 @@ class PaymentServices {
     } catch (e) {
       debugPrint(e.toString());
       showCustomSnackBar(
-          context: Get.context,
+          context: Get.context!,
           title: "note".tr,
           deck: e.toString(),
           contentType: ContentType.warning);
@@ -384,7 +378,7 @@ class PaymentServices {
       if (response.statusCode == 200) {
         HomeController homeController = Get.put(HomeController());
         showCustomSnackBar(
-            context: context,
+            context: Get.context!,
             title: "note".tr,
             deck: "تم الحجز بنجاح",
             contentType: ContentType.success);
@@ -394,13 +388,13 @@ class PaymentServices {
         });
       } else if (response.statusCode == 400) {
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
       } else {
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
@@ -408,7 +402,7 @@ class PaymentServices {
     } catch (e) {
       debugPrint(e.toString());
       showCustomSnackBar(
-          context: Get.context,
+          context: Get.context!,
           title: "note".tr,
           deck: e.toString(),
           contentType: ContentType.warning);
@@ -431,14 +425,14 @@ class PaymentServices {
       debugPrint("code : $code");
       debugPrint("monthExam_id : $monthExamId");
       debugPrint("teacher_id : $teacherId");
-      debugPrint("student_id : ${ CacheHelper.getData(
+      debugPrint("student_id : ${CacheHelper.getData(
         key: AppConstants.studentId,
       )}");
-      debugPrint("student_class_id : ${ CacheHelper.getData(
+      debugPrint("student_class_id : ${CacheHelper.getData(
         key: AppConstants.studentClassId,
       )}");
       final response =
-      await dio!.post(AppConstants.activateCouponExam, queryParameters: {
+          await dio!.post(AppConstants.activateCouponExam, queryParameters: {
         "exam_id": monthExamId,
         "student_id": CacheHelper.getData(
           key: AppConstants.studentId,
@@ -457,29 +451,23 @@ class PaymentServices {
       if (response.statusCode == 200) {
         HomeController homeController = Get.put(HomeController());
         showCustomSnackBar(
-            context: context,
+            context: Get.context!,
             title: "note".tr,
             deck: "تم شراء الامتحان بنجاح 🫶",
             contentType: ContentType.success);
         await homeController.updateSolvedExams();
         Timer(const Duration(milliseconds: 1000), () {
           Get.back();
-        }); // final mList = List<CoursesModel>.from(
-        //     response.data.map((i) => CoursesModel.fromJson(i)));
-        // debugPrint(mList.length.toString());
-        //
-        // return mList;
-      }
-      else if (response.statusCode == 400) {
+        });
+      } else if (response.statusCode == 400) {
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
-      }
-      else {
+      } else {
         showCustomSnackBar(
-            context: Get.context,
+            context: Get.context!,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
@@ -487,7 +475,7 @@ class PaymentServices {
     } catch (e) {
       debugPrint(e.toString());
       showCustomSnackBar(
-          context: Get.context,
+          context: Get.context!,
           title: "note".tr,
           deck: e.toString(),
           contentType: ContentType.warning);

@@ -16,6 +16,7 @@ class CustomLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: AppConstants.primaryColor,
+
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(33.0))),
       content: SizedBox(

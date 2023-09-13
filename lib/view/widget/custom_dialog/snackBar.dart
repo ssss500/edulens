@@ -1,5 +1,6 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
   showCustomSnackBar({context,title,deck,ContentType? contentType}){
@@ -19,7 +20,7 @@ import 'package:flutter/material.dart';
       inMaterialBanner: true,
     ),
   );
- return ScaffoldMessenger.of(context)
+ return ScaffoldMessenger.of(Navigator.of(context).context)
     ..hideCurrentSnackBar()
     ..showSnackBar(snackBar);
 }

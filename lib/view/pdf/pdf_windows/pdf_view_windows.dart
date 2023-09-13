@@ -6,7 +6,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:share_plus/share_plus.dart';
 //import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import '../../../controllers/pdf_controller.dart';
 import '../../../helper/app_constants.dart';
 import '../../../model/courses_models/pdf_model.dart';

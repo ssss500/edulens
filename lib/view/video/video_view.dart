@@ -24,11 +24,12 @@ import 'dart:convert';
 
 import 'package:screen_protector/screen_protector.dart';
 
-class VideoView extends GetView<VideoController> {
+class VideoView extends StatelessWidget {
   // VideoController videoController = Get.find();
-  String title = Get.arguments['title'];
+  String title = Get.arguments['title']??"";
 
   HomeController homeController = Get.find();
+  VideoController controller = Get.find();
   HomeCoursesController homeCoursesController = Get.find();
 
   VideoView({
@@ -39,13 +40,13 @@ class VideoView extends GetView<VideoController> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-    ]);
+    SystemChrome.setPreferredOrientations([]);
     return WillPopScope(
       onWillPop: () async {
         try {
           await ScreenProtector.preventScreenshotOff();
-           Get.delete<VideoController>();
+          controller.dispose();
+          Get.delete<VideoController>();
         } catch (e) {
           debugPrint(e.toString());
         }
@@ -54,11 +55,15 @@ class VideoView extends GetView<VideoController> {
       },
       child: CustomAppBar(
           functionBake: () async {
-            controller.dispose();
-            await ScreenProtector.preventScreenshotOff();
+            try {
+              controller.dispose();
+              await ScreenProtector.preventScreenshotOff();
 
-            Get.delete<VideoController>();
-            debugPrint("pause");
+              Get.delete<VideoController>();
+              debugPrint("pause");
+            } catch (e) {
+              debugPrint(e.toString());
+            }
           },
           title: title,
           widget: SingleChildScrollView(
@@ -66,8 +71,7 @@ class VideoView extends GetView<VideoController> {
               () => Column(
                 children: [
                   if (!controller.mustSolveExam.value)
-                    Builder(
-                        builder: (context) {
+                    Builder(builder: (context) {
                       return PodVideoPlayer(
                         controller: controller.controller,
                         onVideoError: () => Stack(
@@ -171,7 +175,7 @@ class VideoView extends GetView<VideoController> {
         onTap: () {
           controller.indexPdf = index;
           try {
-            // videoController.controller.pause();
+            controller.controller.pause();
           } catch (e) {
             debugPrint(e.toString());
           }
@@ -235,10 +239,15 @@ class VideoView extends GetView<VideoController> {
     return Obx(
       () => InkWell(
         onTap: () async {
+          try {
+            controller.controller.pause();
+          } catch (e) {
+            debugPrint(e.toString());
+          }
           if (!homeController.solvedExams
                   .any((element) => element.id == idQuiz) ||
               kDebugMode) {
-            Get.dialog(CustomLoading());
+            Get.dialog(const CustomLoading());
             debugPrint(idQuiz.toString());
             controller.idQuiz = idQuiz;
             controller.indexQuiz = indexQuiz;
@@ -251,7 +260,7 @@ class VideoView extends GetView<VideoController> {
                 "studentId : ${CacheHelper.getData(key: AppConstants.studentId)}");
             await controller.getQuestions();
             Get.back();
-            debugPrint('after back : ${controller.questionList.length}');
+            // debugPrint('after back : ${controller.questionList.length}');
             QuestionController questionController =
                 Get.put(QuestionController());
             // questionController.start.value=videoController.quizList[indexQuiz].duration!;

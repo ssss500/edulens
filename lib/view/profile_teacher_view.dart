@@ -24,6 +24,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ProfileTeacherView extends GetView {
  const   ProfileTeacherView({super.key});
@@ -143,10 +144,10 @@ class ProfileTeacherView extends GetView {
                                           Expanded(
                                             child: SocialButton(
                                               function: () async {
-                                                if (!await launchUrl(Uri.parse(
-                                                    "whatsapp://send?phone=+02${profileTeacherController.dateTeacher.phone}"))) {
-                                                  throw 'Could not launch ';
-                                                }
+                                                await launchUrlString(
+                                                    "whatsapp://send?phone=+02${profileTeacherController.dateTeacher.phone}",
+                                                    mode: LaunchMode.externalApplication);
+
                                               },
                                               image: Image.asset(
                                                   "assets/images/whatsapp.png"),
@@ -161,12 +162,12 @@ class ProfileTeacherView extends GetView {
                                           Expanded(
                                             child: SocialButton(
                                               function: () async {
-                                                if (!await launchUrl(Uri.parse(
+                                                await launchUrlString(
                                                     profileTeacherController
                                                         .dateTeacher
-                                                        .faceLink!))) {
-                                                  throw 'Could not launch ';
-                                                }
+                                                        .faceLink!,
+                                                    mode: LaunchMode.externalApplication);
+
                                               },
                                               image: Image.asset(
                                                   "assets/images/facebook.png"),
@@ -181,12 +182,12 @@ class ProfileTeacherView extends GetView {
                                           Expanded(
                                             child: SocialButton(
                                               function: () async {
-                                                if (!await launchUrl(Uri.parse(
+                                                await launchUrlString(
                                                     profileTeacherController
                                                         .dateTeacher
-                                                        .youtubeLink!))) {
-                                                  throw 'Could not launch ';
-                                                }
+                                                        .youtubeLink!,
+                                                    mode: LaunchMode.externalApplication);
+
                                               },
                                               image: Image.asset(
                                                   "assets/images/youtube.png"),
@@ -201,12 +202,12 @@ class ProfileTeacherView extends GetView {
                                           Expanded(
                                             child: SocialButton(
                                               function: () async {
-                                                if (!await launchUrl(Uri.parse(
+                                                await launchUrlString(
                                                     profileTeacherController
                                                         .dateTeacher
-                                                        .instaLink!))) {
-                                                  throw 'Could not launch ';
-                                                }
+                                                        .instaLink!,
+                                                    mode: LaunchMode.externalApplication);
+
                                               },
                                               image: Image.asset(
                                                   "assets/images/instagram.png"),

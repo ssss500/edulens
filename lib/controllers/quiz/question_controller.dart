@@ -41,7 +41,7 @@ RxBool endTimerBool=false.obs;
           controller.animateToPage(i);
 
           return showCustomSnackBar(
-              context: context,
+              context: Get.context!,
               title: "note".tr,
               deck: "لم تقم بحل هذا السوال",
               contentType: ContentType.warning);
@@ -62,7 +62,6 @@ RxBool endTimerBool=false.obs;
       }
     }
 
-    debugPrint("finalDegree : $finalDegree");
     final result = await videoController.endExam(degree: finalDegree);
     if (result == 200) {
       Get.back();

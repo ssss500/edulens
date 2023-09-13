@@ -1,3 +1,4 @@
+import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/home_courses_controller.dart';
 import 'package:edu_lens/controllers/video_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
@@ -126,18 +127,18 @@ class GetVideoExtensions {
   }
 
   Future<List<QuestionModel>?> getQuestion({required idQuiz}) async {
-    debugPrint("idQuiz : ${idQuiz.toString()}");
+    // debugPrint("idQuiz : ${idQuiz.toString()}");
     try {
       final response = await dio!.post(AppConstants.customExamQuestion,
           queryParameters: {"exam_id": idQuiz},
           data: {"api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"});
 
-      debugPrint("statusCode : ${response.statusCode}");
-      debugPrint("response.data:  ${response.data}");
+      // debugPrint("statusCode : ${response.statusCode}");
+      // debugPrint("response.data:  ${response.data}");
       if (response.statusCode == 200) {
         final mList = List<QuestionModel>.from(
             response.data.map((i) => QuestionModel.fromJson(i)));
-        debugPrint("mList.length : ${mList.length}");
+        // debugPrint("mList.length : ${mList.length}");
 
         return mList;
       }
@@ -161,15 +162,8 @@ class GetVideoExtensions {
         "api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"
       });
 
-      debugPrint(response.statusCode.toString());
-      debugPrint(response.data.toString());
-      // if (response.statusCode == 200) {
-      //   final mList = List<QuizModel>.from(
-      //       response.data.map((i) => QuizModel.fromJson(i)));
-      //   print(mList.length);
-      //
-      //   return mList;
-      // }
+      // debugPrint(response.statusCode.toString());
+      // debugPrint(response.data.toString());
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -187,9 +181,8 @@ class GetVideoExtensions {
       }, data: {
         "api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"
       });
-
-      debugPrint(response.statusCode.toString());
-      debugPrint("response.data : ${response.data}");
+      HomeController homeController = Get.put(HomeController());
+      await homeController.updateSolvedExams();
       return response.statusCode;
     } catch (e) {
       debugPrint(e.toString());

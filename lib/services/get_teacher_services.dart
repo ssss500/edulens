@@ -23,9 +23,9 @@ class GetHomeServices {
   final dio = DioUtilNew.dio;
 
   Future<List<TeacherModel>?> getTeacherList() async {
-    debugPrint("studentId : ${CacheHelper.getData(
-      key: AppConstants.studentId,
-    )}");
+    // debugPrint("studentId : ${CacheHelper.getData(
+    //   key: AppConstants.studentId,
+    // )}");
     try {
       final response = await dio!.post(AppConstants.teachers, queryParameters: {
         "student_class_id": CacheHelper.getData(
@@ -51,9 +51,9 @@ class GetHomeServices {
   }
 
   Future<List<CoverModel>?> getCovers() async {
-    debugPrint("studentId : ${CacheHelper.getData(
-      key: AppConstants.studentId,
-    )}");
+    // debugPrint("studentId : ${CacheHelper.getData(
+    //   key: AppConstants.studentId,
+    // )}");
     try {
       final response = await dio!.post(AppConstants.covers, queryParameters: {
         "student_class_id": CacheHelper.getData(
@@ -94,10 +94,10 @@ class GetHomeServices {
       if (response.statusCode == 200) {
         final mList = List<SubjectModel>.from(
             response.data.map((i) => SubjectModel.fromJson(i)));
-        for (var element in mList) {
-          log("getSubject List : ${element.toJson().toString()}");
-        }
-        debugPrint("getSubject List : ${mList.length.toString()}");
+        // for (var element in mList) {
+        //   log("getSubject List : ${element.toJson().toString()}");
+        // }
+        // debugPrint("getSubject List : ${mList.length.toString()}");
 
         return mList;
       }
@@ -109,9 +109,9 @@ class GetHomeServices {
 
   Future<List<StudentModel>?> getDataUser() async {
     try {
-      debugPrint("AppConstants.studentId : ${CacheHelper.getData(
-        key: AppConstants.studentId,
-      )}");
+      // debugPrint("AppConstants.studentId : ${CacheHelper.getData(
+      //   key: AppConstants.studentId,
+      // )}");
       final response =
           await dio!.post(AppConstants.studentsData, queryParameters: {
         "id": CacheHelper.getData(
@@ -124,7 +124,7 @@ class GetHomeServices {
       if (response.statusCode == 200) {
         final mList = List<StudentModel>.from(
             response.data.map((i) => StudentModel.fromJson(i)));
-        debugPrint("response user data : ${mList.length.toString()}");
+        // debugPrint("response user data : ${mList.length.toString()}");
         if (mList.isEmpty) {
           GetStorage().remove("listTeacherLoves");
           await CacheHelper.clearData();
@@ -202,7 +202,7 @@ class GetHomeServices {
         "api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"
       });
       if (response.statusCode == 200) {
-        log("Chapter Lecture: ${response.data} ");
+        // log("Chapter Lecture: ${response.data} ");
         final mList = List<ChapterPaidModel>.from(
             response.data.map((i) => ChapterPaidModel.fromJson(i)));
         return mList;
@@ -225,7 +225,7 @@ class GetHomeServices {
         "api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"
       });
       if (response.statusCode == 200) {
-        log("Student Reservations: ${response.data} ");
+        // log("Student Reservations: ${response.data} ");
         final mList = List<StudentReservationsModel>.from(
             response.data.map((i) => StudentReservationsModel.fromJson(i)));
         return mList;
