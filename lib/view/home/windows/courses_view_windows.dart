@@ -14,7 +14,7 @@ import '../../widget/custom_loading.dart';
 import '../../widget/custom_text.dart';
 
 class CoursesViewWindows extends StatelessWidget {
-    CoursesViewWindows({Key? key}) : super(key: key);
+  CoursesViewWindows({Key? key}) : super(key: key);
   HomeCoursesController controller = Get.find();
   HomeController homeController = Get.find();
 
@@ -172,7 +172,7 @@ class CoursesViewWindows extends StatelessWidget {
                                                                       indexChapters]
                                                                   .id))
                                                         CustomButton(
-                                                          height: 33,
+                                                          height: 43,
                                                           width: widthScreen *
                                                               0.08,
                                                           borderRadius: 10,
@@ -263,13 +263,16 @@ class CoursesViewWindows extends StatelessWidget {
                                                                   (BuildContext
                                                                           context,
                                                                       int indexLectures) {
-                                                                indexLectures =
-                                                                    controller
-                                                                        .indexLectures;
                                                                 final item = controller
-                                                                    .chapters[
-                                                                        indexChapters]
-                                                                    .lectures;
+                                                                        .chapters[
+                                                                            indexChapters]
+                                                                        .lectures[
+                                                                    indexLectures];
+                                                                // debugPrint(
+                                                                //     "item[indexLectures].cost.toString() : ${controller
+                                                                //         .chapters[
+                                                                //     indexChapters]
+                                                                //         .lectures.}");
                                                                 return InkWell(
                                                                   onTap:
                                                                       () async {
@@ -286,7 +289,7 @@ class CoursesViewWindows extends StatelessWidget {
                                                                                 .lectures[
                                                                                     indexLectures]
                                                                                 .id) ||
-                                                                        item[indexLectures].cost ==
+                                                                        item.cost ==
                                                                             0 ||
                                                                         homeController.studentProfile[0].phone ==
                                                                             homeController.chapterPaid.any((element) =>
@@ -301,11 +304,7 @@ class CoursesViewWindows extends StatelessWidget {
                                                                       controller
                                                                               .indexChapters =
                                                                           indexChapters;
-                                                                      // VideoController videoController =
-                                                                      //     Get.find();
-                                                                      // await videoController.openVideo();
-                                                                      // videoController.getVideoExtensions();
-                                                                      // Get.back();
+
                                                                       Get.offNamed(
                                                                           RoutesNames
                                                                               .videoView,
@@ -328,17 +327,17 @@ class CoursesViewWindows extends StatelessWidget {
                                                                       Container(
                                                                     margin: const EdgeInsets
                                                                         .only(
-                                                                        left: 9,
+                                                                        left: 12,
                                                                         right:
-                                                                            9,
+                                                                            12,
                                                                         bottom:
                                                                             10,
                                                                         top: 5),
                                                                     padding: const EdgeInsets
                                                                         .only(
-                                                                        left: 5,
+                                                                        left: 10,
                                                                         right:
-                                                                            5,
+                                                                            10,
                                                                         bottom:
                                                                             10,
                                                                         top: 5),
@@ -366,43 +365,46 @@ class CoursesViewWindows extends StatelessWidget {
                                                                       mainAxisAlignment:
                                                                           MainAxisAlignment
                                                                               .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .center,
                                                                       children: [
                                                                         Expanded(
                                                                           child:
                                                                               CustomText(
                                                                             //  textOverflow: TextOverflow.ellipsis,
                                                                             text:
-                                                                                item[indexLectures].name,
+                                                                                item.name,
                                                                             color:
                                                                                 Colors.black,
                                                                             fontSize:
-                                                                                widthScreen * .01,
+                                                                               18,
                                                                           ),
                                                                         ),
-                                                                        if (!homeController.chapterPaid.any((element) =>
-                                                                            element.id ==
-                                                                            controller.chapters[indexChapters].id))
-                                                                          const SizedBox(
-                                                                            height:
-                                                                                9,
-                                                                          ),
+                                                                        // if (!homeController.chapterPaid.any((element) =>
+                                                                        //     element.id ==
+                                                                        //     controller.chapters[indexChapters].id))
+                                                                        //   const SizedBox(
+                                                                        //     height:
+                                                                        //         7,
+                                                                        //   ),
                                                                         Obx(() => !homeController.chapterPaid.any((element) =>
                                                                                 element.id ==
                                                                                 controller.chapters[indexChapters].id)
                                                                             ? Expanded(
                                                                                 child: Obx(
                                                                                   () => CustomText(
-                                                                                    text: homeController.lecturePaid.any((element) => element.id == controller.chapters[indexChapters].lectures[indexLectures].id)
+                                                                                    text: homeController.lecturePaid.any((element) => element.id == item.id)
                                                                                         ? "تم شراء المحاضرة"
-                                                                                        : item[indexLectures].cost == 0
+                                                                                        : item.cost == 0
                                                                                             ? "المحاضرة مجانية"
-                                                                                            : "سعر المحاضرة: ${item[indexLectures].cost} جنيها ",
-                                                                                    color: homeController.lecturePaid.any((element) => element.id == controller.chapters[indexChapters].lectures[indexLectures].id)
+                                                                                            : "سعر المحاضرة: ${item.cost} جنيها ",
+                                                                                    color: homeController.lecturePaid.any((element) => element.id == item.id)
                                                                                         ? Colors.black54
-                                                                                        : item[indexLectures].cost == 0
+                                                                                        : item.cost == 0
                                                                                             ? Colors.green.shade800
                                                                                             : Colors.red.shade300,
-                                                                                    fontSize: 16,
+                                                                                    fontSize: 14,
                                                                                   ),
                                                                                 ),
                                                                               )

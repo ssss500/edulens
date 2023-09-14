@@ -21,7 +21,7 @@ class GetChapter {
         "api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"
       });
 
-      debugPrint("statusCode : ${response.statusCode.toString()}");
+      // debugPrint("statusCode : ${response.statusCode.toString()}");
       // log(response.data[1].toString());
       if (response.statusCode == 200) {
         final mList = List<ChapterModel>.from(
