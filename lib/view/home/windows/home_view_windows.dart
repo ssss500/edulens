@@ -13,11 +13,8 @@ import '../../../controllers/home/home_controllers.dart';
 import '../../../controllers/profile_teacher_controller.dart';
 import '../../../controllers/subject_teacher_controller.dart';
 
-// <<<<<<< HEAD
-import '../mobile/subject_teacher_view_mobile.dart';
 
-// =======
-// >>>>>>> origin/master
+
 import '../../widget/card_image_teacher.dart';
 import '../../widget/custom_image_url_view.dart';
 import '../../widget/custom_list_view.dart';
@@ -125,7 +122,7 @@ class HomeView extends GetView<HomeController> {
                         ),
                         Container(
                           padding: EdgeInsets.only(right: size.width * .035),
-                          height: 155,
+
                           width: size.width / 1.5,
                           child: Obx(
                             () => controller.subject.isEmpty &&
@@ -139,22 +136,22 @@ class HomeView extends GetView<HomeController> {
                                 : controller.subject.isEmpty &&
                                         !controller.apiLoadingSubject.value
                                     ? const SizedBox()
-                                    : SizedBox(
-                                        height: 130,
-                                        child: CustomListView(
-                                            itemCount:
-                                                controller.subject.length,
-                                            axis: Axis.horizontal,
-                                            scroll: true,
-                                            itemBuilder: (context, index) {
+                                    : Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                                          alignment: WrapAlignment.spaceBetween,
+                                          // direction: Axis.horizontaltal,
+                                          spacing: 15,
+
+                                          children: [
+                                            ...controller.subject.map((element) {
                                               return InkWell(
                                                 onTap: () async {
                                                   final SubjectTeacherController
-                                                      subjectController =
-                                                      Get.put(
-                                                          SubjectTeacherController());
+                                                  subjectController =
+                                                  Get.put(
+                                                      SubjectTeacherController());
                                                   subjectController
-                                                      .indexSubject = index;
+                                                      .indexSubject = controller.subject.indexOf(element);
                                                   subjectController
                                                       .getSubjectTeacherMethod();
                                                   Get.toNamed(
@@ -162,31 +159,31 @@ class HomeView extends GetView<HomeController> {
                                                 },
                                                 child: CachedNetworkImage(
                                                   imageUrl:
-                                                      "https://edu-lens.com/images/subjects/${controller.subject[index].image!}",
+                                                  "https://edu-lens.com/images/subjects/${element.image!}",
                                                   imageBuilder: (context,
-                                                          imageProvider) =>
+                                                      imageProvider) =>
                                                       Container(
-                                                    margin:
+                                                        margin:
                                                         const EdgeInsets.only(
-                                                            left: 8, right: 8),
-                                                    width: 130,
-                                                    height: 130,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
+                                                            left: 8, right: 8,bottom: 20),
+                                                        width: 130,
+                                                        height: 130,
+                                                        decoration: BoxDecoration(
+                                                          borderRadius:
                                                           BorderRadius.circular(
                                                               20),
-                                                      image: DecorationImage(
-                                                        image: imageProvider,
-                                                        fit: BoxFit.fill,
+                                                          image: DecorationImage(
+                                                            image: imageProvider,
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ),
                                                   placeholder: (context, url) =>
-                                                      const SizedBox(
+                                                  const SizedBox(
                                                     width: 130,
                                                     child: Center(
                                                       child:
-                                                          CircularProgressIndicator(
+                                                      CircularProgressIndicator(
                                                         color: AppConstants
                                                             .lightPrimaryColor,
                                                       ),
@@ -194,30 +191,40 @@ class HomeView extends GetView<HomeController> {
                                                   ),
                                                   errorWidget:
                                                       (context, url, error) =>
-                                                          Column(
-                                                    crossAxisAlignment:
+                                                      Column(
+                                                        crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .center,
-                                                    mainAxisAlignment:
+                                                        mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .center,
-                                                    children: [
-                                                      const Icon(Icons
-                                                          .broken_image_rounded),
-                                                      const SizedBox(
-                                                        height: 8,
-                                                      ),
-                                                      CustomText(
-                                                        text:
+                                                        children: [
+                                                          const Icon(Icons
+                                                              .broken_image_rounded),
+                                                          const SizedBox(
+                                                            height: 8,
+                                                          ),
+                                                          CustomText(
+                                                            text:
                                                             "imageErrorMessage"
                                                                 .tr,
-                                                      )
-                                                    ],
-                                                  ),
+                                                          )
+                                                        ],
+                                                      ),
                                                 ),
                                               );
-                                            }),
-                                      ),
+                                            })
+                                          ],
+                                        )
+                                        // CustomListView(
+                                        //     itemCount:
+                                        //         controller.subject.length,
+                                        //     axis: Axis.horizontal,
+                                        //     scroll: true,
+                                        //     itemBuilder: (context, index) {
+                                        //       return 
+                                        //     }),
+
                           ),
                         ),
                         SizedBox(
