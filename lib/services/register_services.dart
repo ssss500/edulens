@@ -19,7 +19,7 @@ class RegisterServices {
     String? idDevice;
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
 
-    if(Platform.isWindows){
+    if(Platform.isWindows||Platform.isMacOS){
       final windowsInfo = await deviceInfo.windowsInfo;
       idDevice=windowsInfo.deviceId;
     }
@@ -36,7 +36,7 @@ class RegisterServices {
       debugPrint(response.data.toString());
       debugPrint("1");
       if (response.statusCode == 200) {
-        if(Platform.isWindows) {
+        if(Platform.isWindows||Platform.isMacOS) {
           var idDevice = await getWindowsId();
           CacheHelper.saveData(
               key: AppConstants.token, value:idDevice);

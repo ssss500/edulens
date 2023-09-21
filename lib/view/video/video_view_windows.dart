@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 //import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:get/get.dart';
+import 'package:pod_player/pod_player.dart';
 import 'package:screen_protector/screen_protector.dart';
 
 //import 'package:webview_windows/webview_windows.dart';
@@ -22,8 +23,10 @@ import '../widget/custom_list_view.dart';
 import '../widget/custom_loading.dart';
 import '../widget/custom_text.dart';
 
-class VideoViewWindows extends GetView<VideoController> {
+class VideoViewWindows extends StatelessWidget {
   VideoViewWindows({Key? key}) : super(key: key);
+  VideoController controller = Get.find();
+
   PDFController pdfController = Get.put(PDFController());
   HomeController homeController = Get.find();
   String title = Get.arguments['title']??"";
@@ -35,7 +38,7 @@ class VideoViewWindows extends GetView<VideoController> {
     return WillPopScope(
       onWillPop: () async {
         try {
-          // videoController.controller.dispose();
+          controller.dispose();
           Get.delete<VideoController>();
         } catch (e) {
           log(e.toString());
@@ -44,11 +47,11 @@ class VideoViewWindows extends GetView<VideoController> {
         return Future.value(true);
       },
       child: CustomBackground(
+
           child: SingleChildScrollView(
         child: Obx(
           () => Column(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+               children: [
                 Row(
                   children: [
                     IconButton(
@@ -66,31 +69,59 @@ class VideoViewWindows extends GetView<VideoController> {
                     ),
                   ],
                 ),
-                // Webview(
-                //   controller.webController,
-                //   permissionRequested: controller.onPermissionRequested,
-                // ),
-                // StreamBuilder<LoadingState>(
-                //     stream: controller.webController.loadingState,
-                //     builder: (context, snapshot) {
-                //       if (snapshot.hasData &&
-                //           snapshot.data == LoadingState.loading) {
-                //         return LinearProgressIndicator();
-                //       } else {
-                //         return SizedBox();
-                //       }
-                //     }),
-
-                // SizedBox(
-                //   height: 600,
-                //   width: 1000,
-                //   child: WebviewScaffold(
-                //     url: controller.videoPage(),
-                //     //controller.videoPage(), // Replace with your desired URL
-                //     withZoom: true,
-                //     withLocalStorage: true,
-                //   ),
-                // ),
+                 if (!controller.mustSolveExam.value)
+                   Builder(builder: (context) {
+                     return PodVideoPlayer(
+                       controller: controller.controller,
+                       onVideoError: () => Stack(
+                         children: [
+                           AspectRatio(
+                               aspectRatio: 16 / 9,
+                               child: Image.asset(
+                                 "assets/images/errorvideo.jpg",
+                                 fit: BoxFit.cover,
+                               )),
+                           Positioned(
+                               bottom: 10,
+                               left: 0,
+                               right: 0,
+                               child: CustomText(
+                                 text:
+                                 ' انت جي تذاكر دلوقتي طيب مش شغال \n شويه كده و جرب تاني',
+                                 color: Colors.white,
+                                 fontWeight: FontWeight.bold,
+                               )),
+                         ],
+                       ),
+                     );
+                   })
+                 else
+                   Container(
+                     decoration: const BoxDecoration(
+                         color: Colors.white,
+                         borderRadius: BorderRadius.only(
+                             topRight: Radius.elliptical(40, 40),
+                             topLeft: Radius.elliptical(40, 40))),
+                     child: AspectRatio(
+                       aspectRatio: 16 / 9,
+                       child: Column(
+                         mainAxisAlignment: MainAxisAlignment.center,
+                         mainAxisSize: MainAxisSize.min,
+                         children: [
+                           const Icon(
+                             Icons.error_outline,
+                             size: 80,
+                           ),
+                           const SizedBox(
+                             height: 30,
+                           ),
+                           CustomText(
+                             text: "mustSolveExamBeforeWatchVideos".tr,
+                           )
+                         ],
+                       ),
+                     ),
+                   ),
                 Padding(
                   padding: const EdgeInsets.all(30.0),
                   child: Row(

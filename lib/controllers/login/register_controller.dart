@@ -358,7 +358,7 @@ class RegisterController extends GetxController {
     var idDevice;
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
 
-    if(Platform.isWindows){
+    if(Platform.isWindows||Platform.isMacOS){
       final windowsInfo = await deviceInfo.windowsInfo;
       idDevice=windowsInfo.deviceId;
     }

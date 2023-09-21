@@ -42,7 +42,7 @@ class CardImageTeacher extends GetView<HomeController> {
             CustomImageUrlViewNotZoom(
               image:
                   "https://edu-lens.com/images/teachers/${dateTeacher.image}",
-              fit: Platform.isWindows?BoxFit.fill:BoxFit.fitHeight,
+              fit: Platform.isWindows||Platform.isMacOS?BoxFit.fill:BoxFit.fitHeight,
               height: height,
             ),
             if (love == true)

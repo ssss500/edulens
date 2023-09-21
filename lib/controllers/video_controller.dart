@@ -132,7 +132,7 @@ class VideoController extends GetxController {
       idVideo = idVideo.split("?")[0];
       debugPrint("idVideo : $idVideo");
       try {
-        if (Platform.isWindows) {
+        if (Platform.isWindows||Platform.isMacOS) {
         } else {
           controller = PodPlayerController(
             playVideoFrom: PlayVideoFrom.vimeo(

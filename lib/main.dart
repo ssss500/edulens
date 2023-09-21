@@ -9,6 +9,7 @@ import 'package:edu_lens/utils/lacale_string.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fvp/fvp.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +22,9 @@ import 'view/not_found_route_view.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-if(Platform.isWindows){
+if(Platform.isWindows||Platform.isMacOS){
+  registerWith(); // in main(), or anywhere before creating a player
+
   await windowManager.ensureInitialized();
   WindowsSingleInstance.ensureSingleInstance( args,
       "custom_identifier",
@@ -45,7 +48,12 @@ if(Platform.isWindows){
     await windowManager.show();
     await windowManager.focus();
   });
-}
+  try{
+    if(Platform.isWindows) channel();
+    }catch(e){
+    debugPrint("error windows channel : $e");
+  }
+  }
   //await Firebase.initializeApp();
 
   DioUtilNew.getInstance();
@@ -121,4 +129,11 @@ if(Platform.isWindows){
       platform: TargetPlatform.iOS,
     ),
   ));
+
+}
+Future<void> channel() async {
+  MethodChannel channel = const MethodChannel('test_channel');
+
+  var result =await  channel.invokeMethod('test');
+  debugPrint("result $result");
 }

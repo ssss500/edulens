@@ -24,7 +24,7 @@ class BottomSheetPey {
     GlobalKey<FormState> formScaffoldMobile = GlobalKey<FormState>();
 
     TextEditingController controller = TextEditingController();
-    if (Platform.isWindows) {
+    if (Platform.isWindows||Platform.isMacOS) {
       Get.bottomSheet(
         ClipRRect(
           borderRadius: const BorderRadius.only(
@@ -430,7 +430,7 @@ class BottomSheetPey {
     GlobalKey<FormState> formState = GlobalKey<FormState>();
     TextEditingController controller = TextEditingController();
     // String code = '';
-    if (Platform.isWindows) {
+    if (Platform.isWindows||Platform.isMacOS) {
       Get.bottomSheet(
         ClipRRect(
           borderRadius: const BorderRadius.only(
@@ -830,7 +830,7 @@ class BottomSheetPey {
     final paymentServices = PaymentServices();
     GlobalKey<FormState> formState = GlobalKey<FormState>();
     TextEditingController controller = TextEditingController();
-    if (Platform.isWindows) {
+    if (Platform.isWindows||Platform.isMacOS) {
       Get.bottomSheet(
         ClipRRect(
           borderRadius: const BorderRadius.only(

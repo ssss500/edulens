@@ -6,6 +6,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   connectivity_plus
   desktop_window
   firebase_core
+  fvp
   permission_handler_windows
   screen_retriever
   share_plus

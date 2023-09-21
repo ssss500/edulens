@@ -21,7 +21,7 @@ macos:
 dependencies:
   flutter:
     sdk: flutter
-
+  fvp: ^0.8.0
   cupertino_icons: ^1.0.5
   shorebird_code_push: ^1.1.0
   #ui_ux

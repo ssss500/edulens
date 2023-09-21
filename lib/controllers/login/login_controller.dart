@@ -53,7 +53,7 @@ class LoginController extends GetxController {
 
       log('Running on ${iosInfo.identifierForVendor}');
       idDevice = iosInfo.identifierForVendor;
-    } else if (!Platform.isWindows&&!Platform.isMacOS) {
+    } else if (!Platform.isWindows||!Platform.isMacOS) {
       WindowsDeviceInfo windowsDeviceInfo = await deviceInfo.windowsInfo;
 
       idDevice = windowsDeviceInfo.platformId;
