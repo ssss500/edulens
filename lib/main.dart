@@ -135,5 +135,5 @@ Future<void> channel() async {
   MethodChannel channel = const MethodChannel('test_channel');
 
   var result =await  channel.invokeMethod('test');
-  debugPrint("result $result");
+  debugPrint("result channel : $result");
 }

@@ -21,7 +21,8 @@ macos:
 dependencies:
   flutter:
     sdk: flutter
-  fvp: ^0.8.0
+  fvp:
+    path: ./package/fvp
   cupertino_icons: ^1.0.5
   webview_flutter: ^4.2.4
   shorebird_code_push: ^1.1.0
