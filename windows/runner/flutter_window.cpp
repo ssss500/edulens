@@ -1,7 +1,9 @@
 // In ScreenCaptureDetector.h
 #include "flutter_window.h"
 // other includes 
-
+#include <flutter/dart_project.h>
+#include <flutter/flutter_view_controller.h>
+#include <flutter/binary_messenger.h>
 // Global vars
 HWND hwnd;
 bool recordingInProgress = false;
