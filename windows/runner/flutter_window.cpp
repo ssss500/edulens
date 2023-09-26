@@ -18,55 +18,55 @@ FlutterWindow::FlutterWindow(const flutter::DartProject& project)
 
 FlutterWindow::~FlutterWindow() {}
 
-void initMethodChannel(flutter::FlutterEngine* flutter_instance) {
+// Global vars
+HWND hwnd; // Application window handle
+bool recordingInProgress = false;
 
-    const static std::string channel_name("test_channel");
+void initMethodChannel(FlutterEngine* engine) {
 
-    auto channel =
-        std::make_unique<flutter::MethodChannel<>>(
-            flutter_instance->messenger(), channel_name,
-            &flutter::StandardMethodCodec::GetInstance());
+  auto channel = std::make_unique<MethodChannel<>>(
+    engine->messenger(), "com/example/hide", &StandardMethodCodec::GetInstance());
 
-    channel->SetMethodCallHandler(
-        [](const flutter::MethodCall<>& call,
-         std::unique_ptr<flutter::MethodResult<>> result) {
+  channel->SetMethodCallHandler([=](const MethodCall<>& call, MethodResult<> result) {
 
-            if (call.method_name().compare("test") == 0) {
-  PROCESSENTRY32 entry;
-  entry.dwSize = sizeof(PROCESSENTRY32);
+    if(call.method_name() == "onScreenshot") {
+      recordingInProgress = true;
+      ProtectFromScreenCapture();
+    }
 
-  HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    result->Success(nullptr);
+  });
 
-  std::vector<std::string> processes;
+}
 
-  Process32First(snapshot, &entry);
-  do {
-     std::wstring wname(entry.szExeFile);
-     #pragma warning(disable : 4244)
+void ProtectFromScreenCapture() {
 
-    std::string name = std::string(wname.begin(), wname.end());
-    #pragma warning(disable : 4244)
+  // Hide window
+  SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_TOOLWINDOW);
 
-    processes.push_back(name);
-  } while (Process32Next(snapshot, &entry));
+  // Draw blank surface
+  HDC screen = GetDC(NULL);
+  HDC memDC = CreateCompatibleDC(screen);
 
-  CloseHandle(snapshot);
+  while(recordingInProgress) {
 
+   RECT rc;
+    GetClientRect(hwnd, &rc);
 
+    HBITMAP bmp = CreateCompatibleBitmap(screen, rc.right, rc.bottom);
+    HGDIOBJ old = SelectObject(memDC, bmp);
 
+    DrawRect(memDC, 0, 0, rc.right, rc.bottom, RGB(0,0,0));
 
-  flutter::EncodableList list;
+    BitBlt(screen, 0, 0, rc.right, rc.bottom, memDC, 0, 0, SRCCOPY);
 
- for (const std::string& process : processes) {
-   list.push_back(flutter::EncodableValue(process));
- }
-  result->Success(list);
+    SelectObject(memDC, old);
+    DeleteObject(bmp);
+  }
 
-            }
-            else {
-              result->NotImplemented();
-            }
-        });
+  DeleteDC(memDC);
+  ReleaseDC(NULL, screen);
+
 }
 bool FlutterWindow::OnCreate() {
   if (!Win32Window::OnCreate()) {
