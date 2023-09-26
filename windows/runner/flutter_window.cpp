@@ -14,32 +14,32 @@
 #include <ScreenCapture.h>
 
 using namespace std;
-
+bool IsScreenRecordingCurrentlyInProgress() {
+    // Define this function or include its header file if it is defined elsewhere.
+    return false;
+}
 FlutterWindow::FlutterWindow(const flutter::DartProject &project)
         : project_(project) {}
 
 FlutterWindow::~FlutterWindow() {}
 
 void initMethodChannel(flutter::FlutterEngine *flutter_instance) {
-
     const static std::string channel_name("test_channel");
+    auto channel = std::make_shared<flutter::MethodChannel<>>(
+            flutter_instance->messenger(), channel_name,
+            &flutter::StandardMethodCodec::GetInstance());
 
     channel->SetMethodCallHandler(
-            [](const flutter::MethodCall<> &call,
-               std::unique_ptr <flutter::MethodResult<>> result) {
-
+            [](const flutter::MethodCall<>& call,
+               std::unique_ptr<flutter::MethodResult<>> result) {
                 if (call.method_name().compare("test") == 0) {
-
                     // Check for screen recording
                     if (IsScreenRecordingCurrentlyInProgress()) {
-
                         // Send message back to Dart
                         result->Success("Screen recording detected!");
                         return;
                     }
-
                     // Existing process listing code...
-
                 } else {
                     result->NotImplemented();
                 }
@@ -63,9 +63,8 @@ bool FlutterWindow::OnCreate() {
     }
     RegisterPlugins(flutter_controller_->engine());
     // initialize method channel here ******
-    initMethodChannel(flutter_controller_->engine());
+    initMethodChannel(flutter_controller_->engine()); 
 
-    // RegisterFlutterInstance(flutter_controller_->engine());
     SetChildContent(flutter_controller_->view()->GetNativeWindow());
     return true;
 }

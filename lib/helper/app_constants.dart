@@ -52,21 +52,20 @@ class AppConstants {
   ];
   static List listTitles = [
     'homeTitle'.tr,
-    // 'questionBank'.tr,
     'favourites'.tr,
+    "متجر الكتب",
     'profile'.tr,
   ];
   static List<TabItem> itemsBottomBar = [
     const TabItem(
       icon: Icons.home,
     ),
-    // const TabItem(
-    //   icon: Icons.menu_book_outlined,
-    // ),
     const TabItem(
       icon: Icons.favorite,
     ),
-
+    const TabItem(
+      icon: Icons.menu_book_outlined,
+    ),
     const TabItem(
       icon: Icons.person,
     ),

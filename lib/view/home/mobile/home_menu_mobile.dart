@@ -4,15 +4,17 @@ import 'package:edu_lens/controllers/message_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/view/home/mobile/profile_view.dart';
+import 'package:edu_lens/view/home/mobile/store_book.dart';
 import 'package:edu_lens/view/widget/custom_dialog/exit_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'favourite_view.dart';
- import 'home_view_mobile.dart';
+import 'home_view_mobile.dart';
 
-class HomeMenuMobile extends GetView<HomeController> {
-const  HomeMenuMobile({Key? key}) : super(key: key);
+class HomeMenuMobile extends StatelessWidget {
+  const HomeMenuMobile({Key? key}) : super(key: key);
 
+  HomeController get controller => Get.find<HomeController>();
 
   //HomeController homeController = Get.put(HomeController());
 
@@ -49,7 +51,8 @@ const  HomeMenuMobile({Key? key}) : super(key: key);
                 child: controller.pageIndex == 0
                     ? IconButton(
                         onPressed: () {
-                          MessageController messageController=Get.put(MessageController());
+                          MessageController messageController =
+                              Get.put(MessageController());
                           messageController.getMessage();
                           Get.toNamed(RoutesNames.messageView);
                         },
@@ -115,10 +118,11 @@ const  HomeMenuMobile({Key? key}) : super(key: key);
                 body: PageView(
                   controller: controller.pageController,
                   physics: const NeverScrollableScrollPhysics(),
-                  children:const <Widget>  [
-                     HomeViewMobile(),
+                  children: const <Widget>[
+                    HomeViewMobile(),
                     FavouriteMobile(),
-                     Profile(),
+                    StoreBook(),
+                    Profile(),
                   ],
                 ),
               ),

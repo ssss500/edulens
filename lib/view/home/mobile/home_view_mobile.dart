@@ -21,11 +21,12 @@ class HomeViewMobile extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return ConnectivityWidget(
-      onlineCallback: () {
+    return RefreshIndicator(
+      onRefresh: () {
         controller.refresherMethod();
-      },
-      builder: (context, isOnline) => SingleChildScrollView(
+        controller.update();
+        return Future.value(true);
+      }, child: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(
