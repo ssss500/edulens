@@ -190,56 +190,59 @@
 using namespace std;
 
 FlutterWindow::FlutterWindow(const flutter::DartProject& project)
-        : project_(project) {}
+    : project_(project) {}
 
 FlutterWindow::~FlutterWindow() {}
 
 void initMethodChannel(flutter::FlutterEngine* flutter_instance) {
 
-  const static std::string channel_name("test_channel");
+    const static std::string channel_name("test_channel");
 
-  auto channel =
-          std::make_unique<flutter::MethodChannel<>>(
-                  flutter_instance->messenger(), channel_name,
-                  &flutter::StandardMethodCodec::GetInstance());
+    auto channel =
+        std::make_unique<flutter::MethodChannel<>>(
+            flutter_instance->messenger(), channel_name,
+            &flutter::StandardMethodCodec::GetInstance());
 
-  channel->SetMethodCallHandler(
-          [](const flutter::MethodCall<>& call,
-             std::unique_ptr<flutter::MethodResult<>> result) {
+    channel->SetMethodCallHandler(
+        [](const flutter::MethodCall<>& call,
+         std::unique_ptr<flutter::MethodResult<>> result) {
 
-              if (call.method_name().compare("test") == 0) {
-                PROCESSENTRY32 entry;
-                entry.dwSize = sizeof(PROCESSENTRY32);
+            if (call.method_name().compare("test") == 0) {
+  PROCESSENTRY32 entry;
+  entry.dwSize = sizeof(PROCESSENTRY32);
 
-                HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 
-                std::vector<std::string> processes;
+  std::vector<std::string> processes;
 
-                Process32First(snapshot, &entry);
-                do {
-                  std::wstring wname(entry.szExeFile);
-#pragma warning(disable : 4244)
+  Process32First(snapshot, &entry);
+  do {
+     std::wstring wname(entry.szExeFile);
+     #pragma warning(disable : 4244)
 
-                  std::string name = std::string(wname.begin(), wname.end());
-#pragma warning(disable : 4244)
+    std::string name = std::string(wname.begin(), wname.end());
+    #pragma warning(disable : 4244)
 
-                  processes.push_back(name);''
-                } while (Process32Next(snapshot, &entry));
+    processes.push_back(name);
+  } while (Process32Next(snapshot, &entry));
 
-                CloseHandle(snapshot);
+  CloseHandle(snapshot);
 
-                flutter::EncodableList list;
 
-                for (const std::string& process : processes) {
-                  list.push_back(flutter::EncodableValue(process));
-                }
-                result->Success(list);
 
-              }
-              else {
-                result->NotImplemented();
-              }
-          });
+
+  flutter::EncodableList list;
+
+ for (const std::string& process : processes) {
+   list.push_back(flutter::EncodableValue(process));
+ }
+  result->Success(list);
+
+            }
+            else {
+              result->NotImplemented();
+            }
+        });
 }
 bool FlutterWindow::OnCreate() {
   if (!Win32Window::OnCreate()) {
@@ -251,16 +254,16 @@ bool FlutterWindow::OnCreate() {
   // The size here must match the window dimensions to avoid unnecessary surface
   // creation / destruction in the startup path.
   flutter_controller_ = std::make_unique<flutter::FlutterViewController>(
-          frame.right - frame.left, frame.bottom - frame.top, project_);
+      frame.right - frame.left, frame.bottom - frame.top, project_);
   // Ensure that basic setup of the controller was successful.
   if (!flutter_controller_->engine() || !flutter_controller_->view()) {
     return false;
   }
   RegisterPlugins(flutter_controller_->engine());
-  // initialize method channel here ******
+    // initialize method channel here ******************
   initMethodChannel(flutter_controller_->engine());
 
-  // RegisterFlutterInstance(flutter_controller_->engine());
+ // RegisterFlutterInstance(flutter_controller_->engine());
   SetChildContent(flutter_controller_->view()->GetNativeWindow());
   return true;
 }
@@ -274,24 +277,24 @@ void FlutterWindow::OnDestroy() {
 }
 
 LRESULT
-        FlutterWindow::MessageHandler(HWND hwnd, UINT const message,
-        WPARAM const wparam,
-LPARAM const lparam) noexcept {
-// Give Flutter, including plugins, an opportunity to handle window messages.
-if (flutter_controller_) {
-std::optional<LRESULT> result =
+FlutterWindow::MessageHandler(HWND hwnd, UINT const message,
+                              WPARAM const wparam,
+                              LPARAM const lparam) noexcept {
+  // Give Flutter, including plugins, an opportunity to handle window messages.
+  if (flutter_controller_) {
+    std::optional<LRESULT> result =
         flutter_controller_->HandleTopLevelWindowProc(hwnd, message, wparam,
                                                       lparam);
-if (result) {
-return *result;
-}
-}
+    if (result) {
+      return *result;
+    }
+  }
 
-switch (message) {
-case WM_FONTCHANGE:
-flutter_controller_->engine()->ReloadSystemFonts();
-return 0;
-}
+  switch (message) {
+    case WM_FONTCHANGE:
+      flutter_controller_->engine()->ReloadSystemFonts();
+  return 0;
+  }
 
-return Win32Window::MessageHandler(hwnd, message, wparam, lparam);
+  return Win32Window::MessageHandler(hwnd, message, wparam, lparam);
 }
