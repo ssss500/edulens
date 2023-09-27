@@ -7,6 +7,7 @@ import 'package:edu_lens/model/classes_model.dart';
 import 'package:edu_lens/model/gender_model.dart';
 import 'package:edu_lens/model/section_model.dart';
 import 'package:edu_lens/model/register_model.dart';
+import 'package:edu_lens/routes/routes_names.dart';
 import 'package:edu_lens/services/register_services.dart';
 import 'package:edu_lens/view/widget/custom_dialog/snackBar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -28,7 +29,7 @@ class RegisterController extends GetxController {
   final university = "".obs;
   final faculty = "".obs;
   final cityId = 0.obs;
-  final gradeId = "1".obs;
+  final gradeId = "3".obs;
   final studentClassId = 0.obs;
   final studentSectionId = 0.obs;
   final genderId = 0.obs;
@@ -48,11 +49,14 @@ class RegisterController extends GetxController {
   final genders = <String>[].obs;
   final gendersId = <String, num>{}.obs;
   final classesList = <ClassesModel>[].obs;
+  final classesCollegeList = <ClassesModel>[].obs;
+
   final classes = <String>[].obs;
   final classesId = <String, num>{}.obs;
   final listYearString = [
     // 'تعليم حر',
-    'تعليم جامعى', 'تعليم مدرسى'];
+    'تعليم جامعى', 'تعليم مدرسى'
+  ];
   final sectionName = "division".tr.obs;
   final classesName = "chooseYear".tr.obs;
   final genderName = "${"nationality".tr} ${Platform.isIOS ? "*" : ""}".obs;
@@ -77,12 +81,6 @@ class RegisterController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     classesList.value = [
-      // ClassesModel(
-      //     id: 1,
-      //     name: "تعليم حر",
-      //     gradeId: 1,
-      //     createdAt: "2022-04-14T23:00:22.000000Z",
-      //     updatedAt: "2022-04-14T23:00:22.000000Z"),
       ClassesModel(
           id: 9,
           name: "الصف الأول الإعدادي",
@@ -119,6 +117,8 @@ class RegisterController extends GetxController {
           gradeId: 3,
           createdAt: "2022-04-14T23:00:22.000000Z",
           updatedAt: "2022-04-14T23:00:22.000000Z"),
+    ];
+    classesCollegeList.value = [
       ClassesModel(
           id: 2,
           name: "الفرقة الأولى",
@@ -334,7 +334,9 @@ class RegisterController extends GetxController {
           updatedAt: "2022-04-14T23:00:21.000000Z")
     ];
 
-    for (var element in classesList) {
+    for (var element in Get.currentRoute == RoutesNames.registerUni1
+        ? classesCollegeList
+        : classesList) {
       classes.add(element.name!);
       classesId.addAll({element.name!: element.id!});
     }
@@ -358,9 +360,9 @@ class RegisterController extends GetxController {
     var idDevice;
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
 
-    if(Platform.isWindows||Platform.isMacOS){
+    if (Platform.isWindows || Platform.isMacOS) {
       final windowsInfo = await deviceInfo.windowsInfo;
-      idDevice=windowsInfo.deviceId;
+      idDevice = windowsInfo.deviceId;
     }
     if (Platform.isAndroid) {
       AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
@@ -376,8 +378,6 @@ class RegisterController extends GetxController {
   }
 
   register(BuildContext context) async {
-
-
     if (sectionName.value == "division".tr) {
       return showCustomSnackBar(
           context: context,
@@ -397,13 +397,7 @@ class RegisterController extends GetxController {
           title: "note".tr,
           deck: "يجب عليك اخيتار اذا كنت ذكر ام انثي",
           contentType: ContentType.failure);
-    } else if (year.value == "المرحله الدراسيه") {
-      return showCustomSnackBar(
-          context: context,
-          title: "note".tr,
-          deck: "يجب عليك اختيار المرحلة الدراسية",
-          contentType: ContentType.failure);
-    } else if (cityName.value ==
+    }   else if (cityName.value ==
         "${"governorate".tr} ${Platform.isIOS ? "*" : null}") {
       return showCustomSnackBar(
           context: context,
@@ -411,10 +405,9 @@ class RegisterController extends GetxController {
           deck: "يجب عليك اختيار المحافظة",
           contentType: ContentType.failure);
     } else {
-
       loading.value = true;
-      if(!Platform.isWindows&&!Platform.isMacOS){
-        debugPrint((!Platform.isWindows&&!Platform.isMacOS).toString());
+      if (!Platform.isWindows && !Platform.isMacOS) {
+        // debugPrint((!Platform.isWindows && !Platform.isMacOS).toString());
         final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
         try {
@@ -424,7 +417,6 @@ class RegisterController extends GetxController {
         }
 
         FocusManager.instance.primaryFocus?.unfocus();
-
       }
       idDevice = await getIDDevise();
       // debugPrint(token.toString());
@@ -440,7 +432,7 @@ class RegisterController extends GetxController {
             edara: department.value,
             firstName: firstName.value,
             genderId: "${genderId.value}",
-            gradeId: gradeId.value,
+            gradeId: "3",
             lastName: lastName.value,
             parentName: parentName.value,
             parentPhone: parentPhone.value,
@@ -459,7 +451,6 @@ class RegisterController extends GetxController {
   }
 
   registerUniversity(BuildContext context) async {
-
     if (classesName.value == "chooseYear".tr) {
       return showCustomSnackBar(
           context: context,
@@ -480,7 +471,7 @@ class RegisterController extends GetxController {
     //       title: "note".tr,
     //       deck: "يجب عليك اختيار المرحلة الدراسية",
     //       contentType: ContentType.failure);
-   // }
+    // }
     else if (cityName.value ==
         "${"governorate".tr} ${Platform.isIOS ? "*" : null}") {
       return showCustomSnackBar(
@@ -490,13 +481,13 @@ class RegisterController extends GetxController {
           contentType: ContentType.failure);
     } else {
       loading.value = true;
-      if(!Platform.isWindows&&!Platform.isMacOS){
+      if (!Platform.isWindows && !Platform.isMacOS) {
         final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
         FocusManager.instance.primaryFocus?.unfocus();
-        try{
+        try {
           await firebaseMessaging.getToken().then((value) => token = value);
-        }catch(e){
+        } catch (e) {
           debugPrint(e.toString());
         }
       }
@@ -531,6 +522,4 @@ class RegisterController extends GetxController {
       loading.value = false;
     }
   }
-
-
-  }
+}

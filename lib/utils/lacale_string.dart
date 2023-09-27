@@ -17,7 +17,7 @@ class LocaleString extends Translations {
           "createAccountText": "إنشاء حساب",
           "phoneNumberText": " رقم الهاتف بالانجليزي",
           "dadPhoneNumberText": "رقم ولي الامر",
-          "studentName": "اسم الطالب",
+          "studentName": "اسم الطالب رباعي بالعربي",
           "uniName": "اسم الجامعة",
           "collegeName": "اسم الكلية",
           "depName": "القسم",

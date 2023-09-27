@@ -13,7 +13,7 @@ class GetChapter {
 
   Future<List<ChapterModel>?> getChapter({id}) async {
     try {
-      debugPrint("id teacher $id");
+      debugPrint("id chapter $id");
       final response =
           await dio!.post(AppConstants.customChapters, queryParameters: {
         "course_id": id,

@@ -25,16 +25,16 @@ android:
 dependencies:
   flutter:
     sdk: flutter
-  fvp:
-    path: ./package/fvp
+#  fvp:
+#    path: ./package/fvp
   cupertino_icons: ^1.0.5
   webview_flutter: ^4.2.4
   shorebird_code_push: ^1.1.0
-  webview_flutter_wkwebview: ^3.8.0
+#  webview_flutter_wkwebview: ^3.8.0
   #ui_ux
   pod_player: ^0.2.1
   responsive_framework: ^1.1.0
-  google_fonts: ^4.0.0
+  google_fonts: ^6.1.0
   proste_bezier_curve: ^2.0.2
   desktop_window: ^0.4.0
   connectivity_plus: any
@@ -44,15 +44,15 @@ dependencies:
   awesome_bottom_bar: ^1.2.1
   smooth_page_indicator: ^1.0.0+2
   carousel_slider: ^4.1.1
-  expansion_tile_card: ^2.0.0
-  slide_countdown: ^0.3.4
+  expansion_tile_card: ^3.0.0
+  slide_countdown: ^0.6.0
   cached_network_image: ^3.2.3
   photo_view: ^0.14.0
   flutter_pdfview: ^1.2.5
-  syncfusion_flutter_pdfviewer: ^22.2.12
-  responsive_builder: ^0.4.3
+  syncfusion_flutter_pdfviewer: ^23.1.38
+  responsive_builder: ^0.7.0
   dio:
-  either_dart: ^0.3.0
+  either_dart: ^1.0.0
   shared_preferences:
   url_launcher: ^6.1.6
   awesome_snackbar_content:
@@ -70,13 +70,13 @@ dependencies:
   path_provider: ^2.0.12
   get: ^4.6.5
   get_storage: ^2.0.3
-  permission_handler: ^10.2.0
+  permission_handler: ^11.0.0
   mask_text_input_formatter: ^2.4.0
   package_info_plus: any
   device_info_plus: ^9.0.2
   root: ^2.0.4
   window_manager: ^0.3.4
-  windows_single_instance: ^0.1.6
+  windows_single_instance: ^1.0.0
 
   firebase_core: ^2.16.0
   firebase_messaging: ^14.6.8

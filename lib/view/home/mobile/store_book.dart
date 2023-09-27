@@ -11,6 +11,8 @@ class StoreBook extends StatefulWidget {
 class _StoreBookState extends State<StoreBook> {
   WebViewController? controller;
 
+  bool isLoading = true;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -23,8 +25,16 @@ class _StoreBookState extends State<StoreBook> {
           onProgress: (int progress) {
             // Update loading bar.
           },
-          onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
+          onPageStarted: (String url) {
+            setState(() {
+              isLoading = true;
+            });
+          },
+          onPageFinished: (String url) {
+            setState(() {
+              isLoading = false;
+            });
+          },
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {
@@ -41,7 +51,16 @@ class _StoreBookState extends State<StoreBook> {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(25.0)),
-      child: WebViewWidget(controller: controller!),
+      child: Stack(
+        children: [
+          WebViewWidget(controller: controller!),
+          isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              :   Container(),
+        ],
+      ),
     );
   }
 }

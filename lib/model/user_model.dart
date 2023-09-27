@@ -106,9 +106,9 @@ class StudentModel {
     String? createdAt,
     String? updatedAt,
   }) {
-    _id = id;
-    _firstName = firstName;
-    _lastName = lastName;
+    _id = id??0;
+    _firstName = firstName??'';
+    _lastName = lastName??'';
     _email = email;
     _phone = phone;
     _password = password;
@@ -308,33 +308,33 @@ class StudentModel {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = _id;
-    map['first_name'] = _firstName;
-    map['last_name'] = _lastName;
-    map['email'] = _email;
-    map['phone'] = _phone;
-    map['password'] = _password;
-    map['image'] = _image;
-    map['university'] = _university;
-    map['faculty'] = _faculty;
-    map['department'] = _department;
-    map['city_id'] = _cityId;
-    map['grade_id'] = _gradeId;
-    map['student_class_id'] = _studentClassId;
-    map['student_section_id'] = _studentSectionId;
-    map['gender_id'] = _genderId;
-    map['edara'] = _edara;
-    map['school'] = _school;
-    map['parent_name'] = _parentName;
-    map['parent_phone'] = _parentPhone;
-    map['birthday'] = _birthday;
-    map['bucket'] = _bucket;
-    map['note'] = _note;
-    map['status'] = _status;
-    map['last_session'] = _lastSession;
-    map['created_by'] = _createdBy;
-    map['created_at'] = _createdAt;
-    map['updated_at'] = _updatedAt;
+    map['id'] = _id??0;
+    map['first_name'] = _firstName??'';
+    map['last_name'] = _lastName??'';
+    map['email'] = _email??'';
+    map['phone'] = _phone??'';
+    map['password'] = _password??'';
+    map['image'] = _image?? '';
+    map['university'] = _university?? '';
+    map['faculty'] = _faculty?? '';
+    map['department'] = _department?? '';
+    map['city_id'] = _cityId??0;
+    map['grade_id'] = _gradeId??0;
+    map['student_class_id'] = _studentClassId?? 0;
+    map['student_section_id'] = _studentSectionId?? 0;
+    map['gender_id'] = _genderId??  0;
+    map['edara'] = _edara?? '';
+    map['school'] = _school?? '';
+    map['parent_name'] = _parentName?? '';
+    map['parent_phone'] = _parentPhone?? '';
+    map['birthday'] = _birthday?? '';
+    map['bucket'] = _bucket?? 0;
+    map['note'] = _note?? '';
+    map['status'] = _status?? 0;
+    map['last_session'] = _lastSession?? '';
+    map['created_by'] = _createdBy?? '';
+    map['created_at'] = _createdAt?? '';
+    map['updated_at'] = _updatedAt?? '';
     return map;
   }
 }
