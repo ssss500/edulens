@@ -108,7 +108,7 @@ class StudentModel {
   }) {
     _id = id??0;
     _firstName = firstName??'';
-    _lastName = lastName??'';
+    _lastName = lastName??'.';
     _email = email;
     _phone = phone;
     _password = password;
@@ -310,7 +310,7 @@ class StudentModel {
     final map = <String, dynamic>{};
     map['id'] = _id??0;
     map['first_name'] = _firstName??'';
-    map['last_name'] = _lastName??'';
+    map['last_name'] = _lastName==""||_lastName==null?'.':_lastName;
     map['email'] = _email??'';
     map['phone'] = _phone??'';
     map['password'] = _password??'';
