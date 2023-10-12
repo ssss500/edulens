@@ -1,69 +1,65 @@
 #include "flutter_window.h"
-#include <locale>
-#include <codecvt>
+
 #include <optional>
 
-#include <TlHelp32.h>
-#include <psapi.h>
-#include <iostream>
-#include <windows.h>
 #include "flutter/generated_plugin_registrant.h"
+#include "flutter_window.h"
+#include <windows.h>
 #include <flutter/binary_messenger.h>
 #include <flutter/standard_method_codec.h>
 #include <flutter/method_channel.h>
 #include <flutter/method_result_functions.h>
-using namespace std;
-
 FlutterWindow::FlutterWindow(const flutter::DartProject& project)
         : project_(project) {}
 
 FlutterWindow::~FlutterWindow() {}
+bool ProtectScreenFromRecording(HWND windowHandle)
+{
+    DWORD affinity = WDA_NONE; // تعيين القدرة على التسجيل إلى القيمة الافتراضية (WDA_NONE)
+
+    // تحديد القدرة على التسجيل للنافذة باستخدام SetWindowDisplayAffinity
+    if (!SetWindowDisplayAffinity(windowHandle, affinity))
+    {
+        // فشل في تعيين القدرة على التسجيل
+        return false;
+    }
+
+    // تم تعيين القدرة على التسجيل بنجاح
+    return true;
+}
+bool Protect = true; // Declare and define the Protect variable
 
 void initMethodChannel(flutter::FlutterEngine* flutter_instance) {
-    const static std::string channel_name("test_channel");
+    const std::string channel_name("my_channel");
 
     auto channel = std::make_unique<flutter::MethodChannel<>>(
             flutter_instance->messenger(), channel_name,
-            &flutter::StandardMethodCodec::GetInstance());
+            &flutter::StandardMethodCodec::GetInstance()
+    );
 
     channel->SetMethodCallHandler(
-            [](const flutter::MethodCall<>& call,
-               std::unique_ptr<flutter::MethodResult<>> result) {
+            [](const flutter::MethodCall<flutter::EncodableValue>& call,
+               std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result) {
+                std::string method = call.method_name();
 
-                HWND hwnd = GetConsoleWindow();
+                if (method == "protectScreen") {
+                    HWND windowHandle = FindWindow(NULL, L"test_screen_protect"); // Replace this with the window handle of your application
 
-                // Hide the window
-                ShowWindow(hwnd, SW_HIDE);
-
-                // Start a loop to check if the user is taking a screenshot or video recording
-                while (true) {
-                    // Check if the user is taking a screenshot
-                    if (GetAsyncKeyState(VK_SNAPSHOT) & 1) {
-                        // Send a message to the window to hide it
-                        SendMessage(hwnd, WM_SYSCOMMAND, SC_MINIMIZE, 0);
+                    if (windowHandle != NULL) {
+                        if (Protect) {
+                            bool setResult = SetWindowDisplayAffinity(windowHandle, WDA_MONITOR);
+                            result->Success(flutter::EncodableValue(setResult));
+                        } else {
+                            bool setResult = SetWindowDisplayAffinity(windowHandle, WDA_NONE);
+                            result->Success(flutter::EncodableValue(setResult));
+                        }
+                    } else {
+                        result->Error("Error", "Failed to get the window handle.");
                     }
-
-                    // Check if the user is recording a video
-                    if (GetAsyncKeyState(VK_F12) & 1) {
-                        // Send a message to the window to hide it
-                        SendMessage(hwnd, WM_SYSCOMMAND, SC_MINIMIZE, 0);
-                    }
-
-                    // Sleep for 1 second
-                    Sleep(1000);
                 }
-
-                // Show the window again
-                ShowWindow(hwnd, SW_SHOW);
-
-                // Return a result to the Flutter app if needed
-                result->Success();
-
-                return 0;
-            });
+            }
+    );
 }
-
-
 
 bool FlutterWindow::OnCreate() {
     if (!Win32Window::OnCreate()) {
@@ -81,11 +77,21 @@ bool FlutterWindow::OnCreate() {
         return false;
     }
     RegisterPlugins(flutter_controller_->engine());
-    // initialize method channel here ****************
-    initMethodChannel(flutter_controller_->engine());
-
-    // RegisterFlutterInstance(flutter_controller_->engine());
     SetChildContent(flutter_controller_->view()->GetNativeWindow());
+
+    flutter_controller_->engine()->SetNextFrameCallback([&]() {
+        this->Show();
+    });
+   initMethodChannel(flutter_controller_->engine());
+    SystemParametersInfo(SPI_SETSCREENSAVERRUNNING, TRUE, NULL, SPIF_SENDCHANGE);
+
+    // تعطيل تسجيل الفيديو
+   // SystemParametersInfo(SPI_SETAUDIOSCREENCAPTUREENABLED, FALSE, NULL, SPIF_SENDCHANGE);
+    // Flutter can complete the first frame before the "show window" callback is
+    // registered. The following call ensures a frame is pending to ensure the
+    // window is shown. It is a no-op if the first frame hasn't completed yet.
+    flutter_controller_->ForceRedraw();
+
     return true;
 }
 
@@ -114,7 +120,7 @@ return *result;
 switch (message) {
 case WM_FONTCHANGE:
 flutter_controller_->engine()->ReloadSystemFonts();
-return 0;
+break;
 }
 
 return Win32Window::MessageHandler(hwnd, message, wparam, lparam);

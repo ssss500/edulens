@@ -37,7 +37,7 @@ dependencies:
   google_fonts: ^6.1.0
   proste_bezier_curve: ^2.0.2
   desktop_window: ^0.4.0
-  connectivity_plus: any
+  connectivity_plus: ^5.0.0
   auto_size_text: ^3.0.0
   dropdown_button2: ^2.3.9
   flutter_rounded_date_picker: ^3.0.4

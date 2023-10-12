@@ -22,6 +22,7 @@ import 'view/not_found_route_view.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+
 if(Platform.isWindows||Platform.isMacOS){
   // registerWith(); // in main(), or anywhere before creating a player
 
@@ -137,8 +138,16 @@ if(Platform.isWindows||Platform.isMacOS){
 
 }
 Future<void> channel() async {
-  MethodChannel channel = const MethodChannel('test_channel');
+  try {
+    const platform = MethodChannel('my_channel');
 
-  var result =await  channel.invokeMethod('test');
-  debugPrint("result channel : $result");
+    final bool result = await platform.invokeMethod('protectScreen');
+    debugPrint("value initMethodChannel : $result");
+
+  } on PlatformException catch (e) {
+    print('Error: ${e.message}');
+    print('Error hi: ${e.message}');
+  }
 }
+
+
