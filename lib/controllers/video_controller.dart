@@ -42,7 +42,7 @@ class VideoController extends GetxController {
     controller.pause();
     controller.dispose();
     try {
-      if (Platform.isIOS) {
+      if (Platform.isIOS||Platform.isAndroid) {
         await ScreenProtector.preventScreenshotOff();
       }
     } catch (e) {
@@ -58,7 +58,7 @@ class VideoController extends GetxController {
     // log(videoPage());
     openVideo();
     getVideoExtensions();
-    if (Platform.isIOS) {
+    if (Platform.isIOS||Platform.isAndroid) {
       await ScreenProtector.preventScreenshotOn();
     }
   }

@@ -26,6 +26,7 @@ import '../controllers/quiz/question_month_controller.dart';
 import '../controllers/subject_teacher_controller.dart';
 import '../controllers/video_controller.dart';
 import '../view/home/common_view/teacher_profile.dart';
+import '../view/login/mobile/create_account_for_college_student.dart';
 import '../view/package_teacher/package_teacher_common/choose_teacher_package_common.dart';
 import '../view/home/common_view/courses_common.dart';
 import '../view/home/common_view/home_common.dart';
@@ -94,7 +95,7 @@ class Routes {
     ),
     GetPage(
       name: RoutesNames.registerUni1,
-      page: () => const RegisterOneCollegeScreen(),
+      page: () => const CreateAccountForCollegeStudent(),
       binding: BindingsBuilder(() {
         Get.lazyPut<RegisterController>(
           () => RegisterController(),

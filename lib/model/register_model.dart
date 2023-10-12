@@ -198,27 +198,27 @@ class RegisterModel {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['first_name'] = _firstName;
-    map['last_name'] = _lastName;
-    map['email'] = _email;
-    map['faculty'] = _faculty   ;
-    map['department'] = _department;
-    map['university'] = _university;
-    map['phone'] = _phone;
-    map['password'] = _password;
-    map['password2'] = _password2;
-    map['city_id'] = _cityId;
-    map['grade_id'] = _gradeId;
-    map['student_class_id'] = _studentClassId;
-    map['student_section_id'] = _studentSectionId;
-    map['gender_id'] = _genderId;
-    map['edara'] = _edara;
-    map['school'] = _school;
-    map['parent_name'] = _parentName;
-    map['parent_phone'] = _parentPhone;
-    map['birthday'] = _birthday;
-    map['token'] = _token;
-    map['device_id'] = _deviceId;
+    map['first_name'] = _firstName??'';
+    map['last_name'] = _lastName??'';
+    map['email'] = _email??'';
+    map['faculty'] = _faculty??''   ;
+    map['department'] = _department??'';
+    map['university'] = _university??'';
+    map['phone'] = _phone??'';
+    map['password'] = _password??'';
+    map['password2'] = _password2??'';
+    map['city_id'] = _cityId??  '';
+    map['grade_id'] = _gradeId??'';
+    map['student_class_id'] = _studentClassId?? '';
+    map['student_section_id'] = _studentSectionId??'';
+    map['gender_id'] = _genderId??'';
+    map['edara'] = _edara??'';
+    map['school'] = _school??'';
+    map['parent_name'] = _parentName??'';
+    map['parent_phone'] = _parentPhone??'';
+    map['birthday'] = _birthday??'';
+    map['token'] = _token??'';
+    map['device_id'] = _deviceId??'';
     return map;
   }
 }

@@ -34,7 +34,7 @@ class CreateAccountForCollegeStudent extends GetView<RegisterController> {
                 controller.firstName.value = v;
               },
               iconData: Icons.person,
-              title: 'studentName'.tr,
+              title: 'الاسم الاول',
               hint: "سيف",
               textInputType: TextInputType.name,
               colorBorder: AppConstants.primaryColor,

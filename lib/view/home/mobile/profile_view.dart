@@ -266,7 +266,7 @@ class Profile extends GetView<HomeController> {
                   children: [
                     buildItem(
                         onTap: () {
-                          if (Platform.isIOS) {
+                          if (Platform.isIOS||Platform.isAndroid) {
                             Share.share(
                                 "https://apps.apple.com/app/edu-lens/id1666623278");
                           } else {

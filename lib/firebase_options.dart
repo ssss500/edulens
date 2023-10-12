@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -49,9 +40,19 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDOeCQhTmgD6_bJiqsBCb34LHTbnD5tZWU',
+    appId: '1:331459705049:web:74d9edb52efefd973b66c8',
+    messagingSenderId: '331459705049',
+    projectId: 'edulens-8fed5',
+    authDomain: 'edulens-8fed5.firebaseapp.com',
+    storageBucket: 'edulens-8fed5.appspot.com',
+    measurementId: 'G-EN08GHBMJ3',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC4sS3sRRT7hZ6esfO0w_1sD4mRO_KIOlw',
-    appId: '1:331459705049:android:fb79e723c21319cb3b66c8',
+    appId: '1:331459705049:android:ee818793705380353b66c8',
     messagingSenderId: '331459705049',
     projectId: 'edulens-8fed5',
     storageBucket: 'edulens-8fed5.appspot.com',
@@ -59,11 +60,19 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyARmTYnbY3F-ALd4CGmXhyMUm7aWVVsRLk',
-    appId: '1:331459705049:ios:6ce56bac3c874f3a3b66c8',
+    appId: '1:331459705049:ios:89fc3d1c959844ae3b66c8',
     messagingSenderId: '331459705049',
     projectId: 'edulens-8fed5',
     storageBucket: 'edulens-8fed5.appspot.com',
-    iosClientId: '331459705049-qh0u9v7q9fvjmod3eqep1g7h1ftpfj0o.apps.googleusercontent.com',
-    iosBundleId: 'com.edulens.edulens.eduLens',
+    iosBundleId: 'edulens.tec.saif',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyARmTYnbY3F-ALd4CGmXhyMUm7aWVVsRLk',
+    appId: '1:331459705049:ios:db49fee57d9f92293b66c8',
+    messagingSenderId: '331459705049',
+    projectId: 'edulens-8fed5',
+    storageBucket: 'edulens-8fed5.appspot.com',
+    iosBundleId: 'com.edulens.edulens.RunnerTests',
   );
 }
