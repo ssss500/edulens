@@ -5,63 +5,74 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomImageUrlView extends StatelessWidget {
-  final image, colorLodingIcon ;
+  final image, colorLodingIcon;
+
   double? width, height;
   final fit;
-    CustomImageUrlView(
-      {super.key, required this.image,
-        this.fit=BoxFit.cover,this.height=100.0,
+
+  CustomImageUrlView(
+      {super.key,
+      required this.image,
+      this.fit = BoxFit.cover,
+      this.height = 100.0,
       this.colorLodingIcon = Colors.white,
-      this.width = 100.0});
+      this.width});
 
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-        imageUrl: image,
-        imageBuilder: (context, imageProvider) => InkWell(
-          onTap: () {
-            Get.toNamed(RoutesNames.zoomImageView, arguments: {
-              'imageUrl': image,
-            }, preventDuplicates: false);
-          },
-          child: Container(
-            height: height,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                image: imageProvider,
-                fit: fit,
-              ),
+      imageUrl: image,
+      height: height,
+      width: width,
+      fit: fit,
+      imageBuilder: (context, imageProvider) => InkWell(
+        onTap: () {
+          Get.toNamed(RoutesNames.zoomImageView,
+              arguments: {
+                'imageUrl': image,
+              },
+              preventDuplicates: false);
+        },
+        child: Container(
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(
+              image: imageProvider,
+              fit: BoxFit.fitWidth,
             ),
           ),
         ),
-        placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(
-          color: colorLodingIcon,
-        )),
-        errorWidget: (context, url, error) => Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.broken_image_rounded),
-            const SizedBox(
-              height: 8,
-            ),
-            CustomText(
-              text: "imageErrorMessage".tr,
-              color: Colors.red,
-            )
-          ],
-        ),
-      );
+      ),
+      placeholder: (context, url) => Center(
+          child: CircularProgressIndicator(
+        color: colorLodingIcon,
+      )),
+      errorWidget: (context, url, error) => Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.broken_image_rounded),
+          const SizedBox(
+            height: 8,
+          ),
+          CustomText(
+            text: "imageErrorMessage".tr,
+            color: Colors.red,
+          )
+        ],
+      ),
+    );
   }
 }
 
 class CustomImageUrlViewNotZoom extends StatelessWidget {
   final image, colorLodingIcon, width, fit, height;
 
-    const CustomImageUrlViewNotZoom(
-      {super.key, required this.image,
+  const CustomImageUrlViewNotZoom(
+      {super.key,
+      required this.image,
       this.colorLodingIcon = Colors.white,
       this.width = double.infinity,
       this.fit = BoxFit.cover,
@@ -108,9 +119,11 @@ class CustomImageUrlViewNotZoom extends StatelessWidget {
 }
 
 class ZoomImageView extends StatelessWidget {
- // final imageUrl;
+  // final imageUrl;
 
-  const ZoomImageView({super.key, });
+  const ZoomImageView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -126,15 +139,19 @@ class ZoomImageView extends StatelessWidget {
               children: [
                 RotatedBox(
                   quarterTurns: 2,
-                  child: IconButton(onPressed: (){
-                    Get.back();
-                  }, icon: const Icon(Icons.arrow_back_ios_new)),
+                  child: IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: const Icon(Icons.arrow_back_ios_new)),
                 ),
-               FittedBox(
-                 child:   Image.network(imageUrl,height: MediaQuery.sizeOf(context).height/1.2,
-                   width: MediaQuery.sizeOf(context).width,),
-
-               )
+                FittedBox(
+                  child: Image.network(
+                    imageUrl,
+                    height: MediaQuery.sizeOf(context).height / 1.2,
+                    width: MediaQuery.sizeOf(context).width,
+                  ),
+                )
               ],
             ),
           ),

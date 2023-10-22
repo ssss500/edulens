@@ -12,11 +12,13 @@ import 'package:get/get.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class QuestionView extends GetView<QuestionController> {
+class QuestionView extends StatelessWidget {
   QuestionView({
     Key? key,
   }) : super(key: key);
   final CarouselController _controller = CarouselController();
+  QuestionController controller = Get.put(QuestionController());
+
   List questionList = Get.arguments['questionList'];
   List quizList = Get.arguments['quizList'];
   int indexQuiz = Get.arguments['indexQuiz'];

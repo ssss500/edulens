@@ -14,259 +14,225 @@ import '../../widget/custom_image_url_view.dart';
 import '../../widget/custom_list_view.dart';
 import '../../widget/custom_text.dart';
 
-class QuestionViewWindows extends GetView<QuestionController> {
+class QuestionViewWindows extends StatelessWidget {
   QuestionViewWindows({Key? key}) : super(key: key);
+  QuestionController controller = Get.put(QuestionController());
   final CarouselController _controller = CarouselController();
+  List questionList = Get.arguments['questionList'];
+  List quizList = Get.arguments['quizList'];
+  int indexQuiz = Get.arguments['indexQuiz'];
 
   @override
   Widget build(BuildContext context) {
-    List questionList = Get.arguments['questionList'];
-    List quizList = Get.arguments['quizList'];
-    int indexQuiz = Get.arguments['indexQuiz'];
-    controller.screenWidth = MediaQuery.of(context).size.width;
-    controller.screenHeight = MediaQuery.of(context).size.height;
-//          quizList[indexQuiz].title.toString(),
+    // controller.screenWidth = MediaQuery.of(context).size.width;
+    // controller.screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(
             height: 10,
           ),
-          ConnectivityWidget(
-            onlineCallback: () {},
-            builder: (context, isOnline) => Column(
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
+          Row(
+            children: [
+              IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: const Icon(Icons.arrow_back_ios)),
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width * 0.35,
+              ),
+              Text(
+                quizList[indexQuiz].title.toString(),
+                style: const TextStyle(color: Colors.black, fontSize: 23),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Obx(
+            () => controller.endTimerBool.value
+                ? Container()
+                : TweenAnimationBuilder<Duration>(
+                    duration: Duration(minutes: quizList[indexQuiz].duration!),
+                    tween: Tween(
+                        begin: Duration(minutes: quizList[indexQuiz].duration!),
+                        end: Duration.zero),
+                    onEnd: () {
+                      controller.getFinalDegreeAndEndExam(
+                          questionList: questionList);
+                    },
+                    builder:
+                        (BuildContext context, Duration value, Widget? child) {
+                      final minutes = value.inMinutes;
+                      final seconds = value.inSeconds % 60;
+                      return LinearPercentIndicator(
+                        width: MediaQuery.of(context).size.width - 50,
+                        animation: false,
+                        lineHeight: 30.0,
+                        barRadius: const Radius.circular(15),
+                        alignment: MainAxisAlignment.center,
+                        animationDuration: 0,
+                        percent: value.inSeconds.toDouble() /
+                            (quizList[indexQuiz].duration! * 60),
+                        center: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            IconButton(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                icon: const Icon(Icons.arrow_back_ios)),
-                            SizedBox(
-                              width: MediaQuery.sizeOf(context).width * 0.35,
+                            const Icon(
+                              Icons.timer,
+                              color: Colors.white70,
+                            ),
+                            const SizedBox(
+                              width: 10,
                             ),
                             Text(
-                              quizList[indexQuiz].title.toString(),
+                              '$seconds',
+                              textAlign: TextAlign.center,
                               style: const TextStyle(
-                                  color: Colors.black, fontSize: 23),
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
+                            Text(
+                              ':$minutes',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Expanded(
-                          child: Obx(
-                            () => controller.endTimerBool.value
-                                ? Container()
-                                : TweenAnimationBuilder<Duration>(
-                                    duration: Duration(
-                                        minutes: quizList[indexQuiz].duration!),
-                                    tween: Tween(
-                                        begin: Duration(
-                                            minutes:
-                                                quizList[indexQuiz].duration!),
-                                        end: Duration.zero),
-                                    onEnd: () {
-                                      controller.getFinalDegreeAndEndExam(
-                                          questionList: questionList);
-                                    },
-                                    builder: (BuildContext context,
-                                        Duration value, Widget? child) {
-                                      final minutes = value.inMinutes;
-                                      final seconds = value.inSeconds % 60;
-                                      return LinearPercentIndicator(
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                50,
-                                        animation: false,
-                                        lineHeight: 30.0,
-                                        barRadius: const Radius.circular(15),
-                                        alignment: MainAxisAlignment.center,
-                                        animationDuration: 0,
-                                        percent: value.inSeconds.toDouble() /
-                                            (quizList[indexQuiz].duration! *
-                                                60),
-                                        center: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            const Icon(
-                                              Icons.timer,
-                                              color: Colors.white70,
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            minutes > 1
-                                                ? Text('$minutes:00 ',
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                        color: Colors.white70,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 15))
-                                                : Text(' 00:$seconds',
-                                                    textAlign: TextAlign.center,
-                                                    style: const TextStyle(
-                                                        color: Colors.white70,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 15))
-                                          ],
-                                        ),
-                                        linearStrokeCap: LinearStrokeCap.butt,
-                                        progressColor: minutes > minutes / 5
-                                            ? Colors.green
-                                            : minutes < 1
-                                                ? Colors.red
-                                                : Colors.red.shade300,
-                                      );
-                                    }),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Expanded(
-                          child: CustomListView(
-                            itemCount: questionList.length,
-                            itemBuilder: (context, index) => SizedBox(
-                              width: 400,
-                              height: 360,
-                              child: Column
-                                (
-                                children: [
-                                  CustomText(
-                                    text: "( ${index + 1} )",
-                                    fontSize: 30,
-                                  ),
-                                  if ( questionList[index].image !=
-                                      null)
-                                    CustomImageUrlView(
-                                      image:
-                                      "https://edu-lens.com/images/questions/${questionList[index].image}",
-                                      colorLodingIcon:
-                                      AppConstants.primaryColor,
-                                    ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8.0, right: 8),
-                                    child: CustomText(
-                                      text:
-                                      "${questionList[index].title}",
-                                      textDirection: TextDirection.ltr,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-
-                                  for (var i in questionList[index].choices!)
-                                    GetBuilder<QuestionController>(
-                                        builder: (controller) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 10.0, right: 10),
-                                            child: InkWell(
-                                                onTap: () async {
-                                                  questionList[index]
-                                                      .answer = i.choice!;
-                                                  controller.update();
-                                                },
-                                                child: Container(
-                                                  width: 300,
-                                                  padding:
-                                                  const EdgeInsets.only(
-                                                      top: 9,
-                                                      bottom: 9,
-                                                      right: 7,
-                                                      left: 7),
-                                                  margin:
-                                                  const EdgeInsets.only(
-                                                      top: 10),
-                                                  decoration: BoxDecoration(
-                                                    color: questionList[
-                                                    index]
-                                                        .answer ==
-                                                        i.choice
-                                                        ? AppConstants
-                                                        .lightPrimaryColor
-                                                        :  Colors.white,
-                                                    border: Border.all(
-                                                        color:questionList[
-                                                        index]
-                                                            .answer ==
-                                                            i.choice
-                                                            ? AppConstants
-                                                            .lightPrimaryColor
-                                                            : AppConstants.primaryColor,
-                                                        width: 2.0),
-                                                    borderRadius:
-                                                    BorderRadius
-                                                        .circular(30.0),
-                                                  ),
-                                                  child: Center(
-                                                      child: CustomText(
-                                                        text: "${i.choice}",
-                                                        fontSize: 18,
-                                                        textDirection:
-                                                        TextDirection.ltr,
-                                                        color: questionList[
-                                                        index]
-                                                            .answer ==
-                                                            i.choice
-                                                            ?  Colors.white:AppConstants.primaryColor,
-                                                        fontWeight:
-                                                        FontWeight.bold,
-                                                      )),
-                                                )),
-                                          );
-                                        }),
-                                  SizedBox(height: controller.screenHeight!*0.05,),
-                                  Container(height: 1,width: controller.screenWidth!*0.5 ,color: Colors.grey,),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        const SizedBox(
-                          height: 18,
-                        ),
-                        CustomButton(
-                          function: () async {
-                            try {
-                              controller.endTimerBool.value = true;
-                              controller.checkTheQuestionAnswer(
-                                  context: context,
-                                  controller: _controller,
-                                  questionList: questionList);
-                            } catch (E) {
-                              debugPrint(E.toString());
-                            }
-                            // checkTheQuestionAnswer(context: context);
-                          },
-                          text: "saveAnswer".tr,
-                          height: 50,
-                          width: 200,
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                      ],
+                        linearStrokeCap: LinearStrokeCap.butt,
+                        progressColor: minutes > minutes / 5
+                            ? Colors.green
+                            : minutes < 1
+                                ? Colors.red
+                                : Colors.red.shade300,
+                      );
+                    }),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: CustomListView(
+              itemCount: questionList.length,
+              scroll: true,
+              itemBuilder: (context, index) => Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Divider(
+                    color: AppConstants.primaryColor.withOpacity(0.5),
+                    indent: 100,
+                    endIndent: 100,
+                    thickness: 2,),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomText(
+                    text: "( ${index + 1} )",
+                    fontSize: 30,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  if (questionList[index].image != null)
+                    CustomImageUrlView(
+                      image:
+                          "https://edu-lens.com/images/questions/${questionList[index].image}",
+                      colorLodingIcon: AppConstants.primaryColor,
+                      height: 250,
+                      width: 800,
+                      fit: BoxFit.cover,
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8),
+                    child: CustomText(
+                      text: "${questionList[index].title}",
+                      textDirection: TextDirection.ltr,
+                      fontSize: 20,
                     ),
                   ),
-                ),
-              ],
+                  for (var i in questionList[index].choices!)
+                    GetBuilder<QuestionController>(builder: (controller) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 10.0, right: 10),
+                        child: InkWell(
+                            onTap: () async {
+                              questionList[index].answer = i.choice!;
+                              controller.update();
+                            },
+                            child: Container(
+                              width: 300,
+                              padding: const EdgeInsets.only(
+                                  top: 9, bottom: 9, right: 7, left: 7),
+                              margin: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                color: questionList[index].answer == i.choice
+                                    ? AppConstants.lightPrimaryColor
+                                    : Colors.white,
+                                border: Border.all(
+                                    color:
+                                        questionList[index].answer == i.choice
+                                            ? AppConstants.lightPrimaryColor
+                                            : AppConstants.primaryColor,
+                                    width: 2.0),
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                              child: Center(
+                                  child: CustomText(
+                                text: "${i.choice}",
+                                fontSize: 18,
+                                textDirection: TextDirection.ltr,
+                                color: questionList[index].answer == i.choice
+                                    ? Colors.white
+                                    : AppConstants.primaryColor,
+                                fontWeight: FontWeight.bold,
+                              )),
+                            )),
+                      );
+                    }),
+                  SizedBox(
+                    height: controller.screenHeight! * 0.05,
+                  ),
+                  Container(
+                    height: 1,
+                    width: controller.screenWidth! * 0.5,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
             ),
+          ),
+          const SizedBox(
+            height: 18,
+          ),
+          CustomButton(
+            function: () async {
+              try {
+                controller.endTimerBool.value = true;
+                controller.checkTheQuestionAnswer(
+                    context: context,
+                    controller: _controller,
+                    questionList: questionList);
+              } catch (E) {
+                debugPrint(E.toString());
+              }
+              // checkTheQuestionAnswer(context: context);
+            },
+            text: "saveAnswer".tr,
+            height: 50,
+            width: 200,
+          ),
+          const SizedBox(
+            height: 30,
           ),
         ],
       ),

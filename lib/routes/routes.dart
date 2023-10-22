@@ -42,6 +42,7 @@ import '../view/pdf/pdf_mobile/pdf_view.dart';
 import '../view/profile_teacher_view.dart';
 import '../view/purchasedLectures.dart';
 import '../view/quiz/common/answer_view_month_common.dart';
+import '../view/quiz/common/question_view_common.dart';
 import '../view/quiz/common/question_view_month_common.dart';
 import '../view/quiz/quiz_mobile/answer_quiz_view.dart';
 import '../view/quiz/quiz_mobile/question_view.dart';
@@ -339,7 +340,7 @@ class Routes {
     ),
     GetPage(
       name: RoutesNames.questionView,
-      page: () => QuestionView(),
+      page: () => QuestionViewCommon(),
       binding: BindingsBuilder(() {
         Get.lazyPut<QuestionController>(
           () => QuestionController(),

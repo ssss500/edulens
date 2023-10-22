@@ -325,26 +325,26 @@ class CoursesViewWindows extends StatelessWidget {
                                                                   },
                                                                   child:
                                                                       Container(
-                                                                    margin: const EdgeInsets
-                                                                        .only(
-                                                                        left: 12,
+                                                                    margin:
+                                                                        const EdgeInsets
+                                                                            .only(
+                                                                      left: 12,
+                                                                      right: 12,
+                                                                      bottom: 5,
+                                                                      top: 5,
+                                                                    ),
+                                                                    padding: const EdgeInsets.only(
+                                                                        left:
+                                                                            10,
                                                                         right:
-                                                                            12,
+                                                                            10,
                                                                         bottom:
                                                                             10,
-                                                                        top: 5),
-                                                                    padding: const EdgeInsets
-                                                                        .only(
-                                                                        left: 10,
-                                                                        right:
-                                                                            10,
-                                                                        bottom:
-                                                                            10,
-                                                                        top: 5),
+                                                                        top: 10),
                                                                     decoration:
                                                                         BoxDecoration(
-                                                                      color: Colors
-                                                                          .white,
+                                                                      color: AppConstants
+                                                                          .primaryColor,
                                                                       boxShadow: [
                                                                         BoxShadow(
                                                                           color: Colors
@@ -376,9 +376,9 @@ class CoursesViewWindows extends StatelessWidget {
                                                                             text:
                                                                                 item.name,
                                                                             color:
-                                                                                Colors.black,
+                                                                                Colors.white,
                                                                             fontSize:
-                                                                               18,
+                                                                                18,
                                                                           ),
                                                                         ),
                                                                         // if (!homeController.chapterPaid.any((element) =>
@@ -402,8 +402,8 @@ class CoursesViewWindows extends StatelessWidget {
                                                                                     color: homeController.lecturePaid.any((element) => element.id == item.id)
                                                                                         ? Colors.black54
                                                                                         : item.cost == 0
-                                                                                            ? Colors.green.shade800
-                                                                                            : Colors.red.shade300,
+                                                                                            ? Colors.green.shade900
+                                                                                            : Colors.red.shade900,
                                                                                     fontSize: 14,
                                                                                   ),
                                                                                 ),
