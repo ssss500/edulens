@@ -44,7 +44,7 @@ class _StoreBookState extends State<StoreBook> {
           },
         ),
       )
-      ..loadRequest(Uri.parse('https://sllr.co/edulens-bookstore'));
+      ..loadRequest(Uri.parse('https://sllr.co/edulens-booxtore'));
   }
 
   @override

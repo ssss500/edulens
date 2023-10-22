@@ -547,7 +547,7 @@ class ProfileTeacherView extends GetView {
                                             height: 10,
                                           ),
                                         if (profileTeacherController
-                                            .bookingTeacher.isNotEmpty)
+                                            .bookingTeacher.isNotEmpty&&profileTeacherController.coursesTeacher.isNotEmpty)
                                           Container(
                                             decoration: BoxDecoration(
                                               color: Colors.black38,
@@ -573,7 +573,7 @@ class ProfileTeacherView extends GetView {
                                             ),
                                           ),
                                         if (profileTeacherController
-                                            .bookingTeacher.isNotEmpty)
+                                            .bookingTeacher.isNotEmpty&&profileTeacherController.coursesTeacher.isNotEmpty)
                                           GridView.builder(
                                             itemCount: profileTeacherController
                                                 .bookingTeacher.length,
@@ -588,52 +588,59 @@ class ProfileTeacherView extends GetView {
                                                       : 3,
                                               childAspectRatio: (0.8),
                                             ),
-                                            itemBuilder: (_, index) => Obx(
-                                              () => InkWell(
-                                                child: CustomCardMonthExam(
-                                                  image:
-                                                      "https://edu-lens.com/images/courses/${profileTeacherController.coursesTeacher[index].image}",
-                                                  title:
-                                                      profileTeacherController
-                                                          .bookingTeacher[index]
-                                                          .name,
-                                                  free: homeController
-                                                      .studentReservations
-                                                      .any((element) =>
-                                                          element.id ==
-                                                          profileTeacherController
-                                                              .bookingTeacher[
-                                                                  index]
-                                                              .id),
-                                                  cost: profileTeacherController
-                                                      .bookingTeacher[index]
-                                                      .cost
-                                                      .toString(),
+                                            itemBuilder: (_, index) {
+                                              debugPrint(
+                                                 "bookingTeacher : ${ profileTeacherController
+                                                  .bookingTeacher[index]
+                                                  .toJson()
+        .toString()}");
+                                            return  Obx(
+                                                    () => InkWell(
+                                                  child: CustomCardMonthExam(
+                                                    image:
+                                                    "https://edu-lens.com/images/courses/${profileTeacherController.coursesTeacher[index].image}",
+                                                    title:
+                                                    profileTeacherController
+                                                        .bookingTeacher[index]
+                                                        .name,
+                                                    free: homeController
+                                                        .studentReservations
+                                                        .any((element) =>
+                                                    element.id ==
+                                                        profileTeacherController
+                                                            .bookingTeacher[
+                                                        index]
+                                                            .id),
+                                                    cost: profileTeacherController
+                                                        .bookingTeacher[index]
+                                                        .cost
+                                                        .toString(),
+                                                  ),
+                                                  onTap: () {
+                                                    debugPrint(
+                                                        profileTeacherController
+                                                            .bookingTeacher[index]
+                                                            .toJson()
+                                                            .toString());
+                                                    if (homeController.solvedExams
+                                                        .any((element) =>
+                                                    element.id ==
+                                                        profileTeacherController
+                                                            .monthExamTeacher[
+                                                        index]
+                                                            .id)) {
+                                                      showCustomSnackBar(
+                                                          context: context,
+                                                          title: "note".tr,
+                                                          deck: "تم الحجز بنجاح",
+                                                          contentType: ContentType
+                                                              .warning);
+                                                    } else {
+                                                    }
+                                                  },
                                                 ),
-                                                onTap: () {
-                                                  debugPrint(
-                                                      profileTeacherController
-                                                          .bookingTeacher[index]
-                                                          .toJson()
-                                                          .toString());
-                                                  if (homeController.solvedExams
-                                                      .any((element) =>
-                                                          element.id ==
-                                                          profileTeacherController
-                                                              .monthExamTeacher[
-                                                                  index]
-                                                              .id)) {
-                                                    showCustomSnackBar(
-                                                        context: context,
-                                                        title: "note".tr,
-                                                        deck: "تم الحجز بنجاح",
-                                                        contentType: ContentType
-                                                            .warning);
-                                                  } else {
-                                                  }
-                                                },
-                                              ),
-                                            ),
+                                              );
+                                            },
                                             padding: const EdgeInsets.all(10),
                                             shrinkWrap: true,
                                             physics:

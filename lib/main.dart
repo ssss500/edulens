@@ -9,6 +9,7 @@ import 'package:edu_lens/utils/lacale_string.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fvp/fvp.dart';
 // import 'package:fvp/fvp.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -24,7 +25,7 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
 if(Platform.isWindows||Platform.isMacOS){
-  // registerWith(); // in main(), or anywhere before creating a player
+  registerWith(); // in main(), or anywhere before creating a player
 
   await windowManager.ensureInitialized();
   WindowsSingleInstance.ensureSingleInstance( args,
@@ -70,16 +71,19 @@ if(Platform.isWindows||Platform.isMacOS){
 //     await DesktopWindow.setMinWindowSize(Size(1920,1080));
 //     await DesktopWindow.setMaxWindowSize(Size(1920,1080));
 //   }
-  try{
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-  }catch(e){
-    debugPrint("error firebase : $e");
-  }
-  if (Platform.isAndroid || Platform.isIOS){
 
+  if (Platform.isAndroid || Platform.isIOS){
+    try{
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }catch(e){
+      debugPrint("error firebase : $e");
+    }
   } else {
+    await Firebase.initializeApp(
+
+    );
     try {
       Size size = await DesktopWindow.getWindowSize();
       print(size);

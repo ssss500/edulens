@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:edu_lens/controllers/home/home_controllers.dart';
 import 'package:edu_lens/controllers/video_controller.dart';
@@ -18,19 +19,21 @@ class QuestionController extends GetxController {
   VideoController videoController = Get.put(VideoController());
   int finalDegree = 0;
   double? screenWidth = 0.0, screenHeight = 0.0;
-RxBool endTimerBool=false.obs;
+  RxBool endTimerBool = false.obs;
+
   @override
   Future<void> onInit() async {
     super.onInit();
-    await ScreenProtector.preventScreenshotOff();
-
+    //windows or mac
+    if (!Platform.isWindows &&!Platform.isMacOS) {
+      await ScreenProtector.preventScreenshotOff();
+    }
   }
-  @override
 
+  @override
   Future<void> onClose() async {
     super.onClose();
     await ScreenProtector.preventScreenshotOn();
-
   }
 
   checkTheQuestionAnswer({context, controller, questionList}) {
@@ -152,11 +155,11 @@ RxBool endTimerBool=false.obs;
 
             InkWell(
               onTap: () async {
-                Get.dialog(CustomLoading());
+                Get.dialog(const CustomLoading());
                 await homeController.updateSolvedExams();
                 Get.back();
-                Get.toNamed(RoutesNames.answerQuizView, arguments:  {
-                  'questionList':  questionList,
+                Get.toNamed(RoutesNames.answerQuizView, arguments: {
+                  'questionList': questionList,
                 });
               },
               child: Container(

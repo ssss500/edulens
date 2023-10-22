@@ -79,7 +79,7 @@ class _PdfViewWindowsState extends State<PdfViewWindows> {
             ),
             Expanded(
               child: SfPdfViewer.network(
-                 "https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf",
+                 "https://www.edu-lens.com/books/${widget.pdfModel.file}",
                 enableDocumentLinkAnnotation: false,   canShowScrollHead: false, canShowScrollStatus: false,enableDoubleTapZooming: false,),
                  // "https://www.edu-lens.com/books/${widget.pdfModel.file}"),
             ),
