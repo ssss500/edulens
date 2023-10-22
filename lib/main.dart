@@ -81,9 +81,9 @@ if(Platform.isWindows||Platform.isMacOS){
       debugPrint("error firebase : $e");
     }
   } else {
-    await Firebase.initializeApp(
-
-    );
+    // awaitait Firebase.initializeApp(
+    //
+    // );
     try {
       Size size = await DesktopWindow.getWindowSize();
       print(size);
