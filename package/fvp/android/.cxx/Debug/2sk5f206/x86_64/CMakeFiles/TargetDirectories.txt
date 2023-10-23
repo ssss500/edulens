@@ -1,0 +1,3 @@
+/Users/saif/StudioProjects/edulens/package/fvp/android/.cxx/Debug/2sk5f206/x86_64/CMakeFiles/fvp_plugin.dir
+/Users/saif/StudioProjects/edulens/package/fvp/android/.cxx/Debug/2sk5f206/x86_64/CMakeFiles/edit_cache.dir
+/Users/saif/StudioProjects/edulens/package/fvp/android/.cxx/Debug/2sk5f206/x86_64/CMakeFiles/rebuild_cache.dir

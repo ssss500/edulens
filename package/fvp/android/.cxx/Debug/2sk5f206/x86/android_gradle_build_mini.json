@@ -1,0 +1,31 @@
+{
+  "buildFiles": [
+    "/Users/saif/StudioProjects/edulens/package/fvp/android/CMakeLists.txt",
+    "/Users/saif/StudioProjects/edulens/package/fvp/android/mdk-sdk/lib/cmake/FindMDK.cmake"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/saif/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/saif/StudioProjects/edulens/package/fvp/android/.cxx/Debug/2sk5f206/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/saif/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/saif/StudioProjects/edulens/package/fvp/android/.cxx/Debug/2sk5f206/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "fvp_plugin::@6890427a1f51a3e7e1df": {
+      "artifactName": "fvp_plugin",
+      "abi": "x86",
+      "output": "/Users/saif/StudioProjects/edulens/build/fvp/intermediates/cxx/Debug/2sk5f206/obj/x86/libfvp_plugin.so",
+      "runtimeFiles": [
+        "/Users/saif/StudioProjects/edulens/package/fvp/android/mdk-sdk/lib/x86/libmdk.so",
+        "/Users/saif/StudioProjects/edulens/package/fvp/android/mdk-sdk/lib/x86/libffmpeg.so"
+      ]
+    }
+  }
+}

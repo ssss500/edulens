@@ -1,11 +1,12 @@
-// import 'dart:convert';
-// import 'dart:io';
-//
-// import 'package:dio/dio.dart';
-// import 'package:flutter/material.dart';
-// import 'package:http/http.dart' as http;
-// import 'package:path_provider/path_provider.dart';
-//
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
+
 // void main() {
 //   WidgetsFlutterBinding.ensureInitialized();
 //   runApp(const MyApp());
@@ -193,3 +194,131 @@
 //     );
 //   }
 // }
+class UpdateWindowsController extends GetxController {
+  static UpdateWindowsController get to => Get.find();
+  final _dio = Dio();
+  final _downloadProgress = 0.0.obs;
+  final _isDownloading = false.obs;
+  final _downloadedFilePath = "".obs;
+  final _currentVersion = 1.1.obs;
+
+  double get downloadProgress => _downloadProgress.value;
+
+  bool get isDownloading => _isDownloading.value;
+
+  String get downloadedFilePath => _downloadedFilePath.value;
+
+  double get currentVersion => _currentVersion.value;
+
+  Future<Map<String, dynamic>> loadJsonFromGithub() async {
+    final response = await http.read(Uri.parse(
+        "https://github.com/ssss500/edulens/blob/master/app_versions_check/version.json"));
+    debugPrint("Response git hub versions : $response");
+    return jsonDecode(response);
+  }
+
+  Future<void> openExeFile(String filePath) async {
+    await Process.start(filePath, ["-t", "-l", "1000"]).then((value) {});
+  }
+
+  // Future<void> openDMGFile(String filePath) async {
+  //   await Process.start(
+  //       "MOUNTDEV=\$(hdiutil mount '$filePath' | awk '/dev.disk/{print\$1}')",
+  //       []).then((value) {
+  //     debugPrint("Value: $value");
+  //   });
+  // }
+
+  Future downloadNewVersion(String appPath) async {
+    final fileName = appPath.split("/").last;
+    _isDownloading.value = true;
+update();
+    _downloadedFilePath.value =
+        "${(await getApplicationDocumentsDirectory()).path}/$fileName";
+
+    await _dio.download(
+      "",
+      downloadedFilePath,
+      onReceiveProgress: (received, total) {
+        final progress = (received / total) * 100;
+        debugPrint('Rec: $received , Total: $total, $progress%');
+        _downloadProgress.value = double.parse(progress.toStringAsFixed(1));
+      },
+    );
+    debugPrint("File Downloaded Path: $downloadedFilePath");
+    if (Platform.isWindows) {
+      await openExeFile(downloadedFilePath);
+    }
+
+    _isDownloading.value = false;
+    update();
+  }
+
+  Future<void> checkForUpdates() async {
+    final jsonVal = await loadJsonFromGithub();
+    debugPrint("Response: $jsonVal");
+    if (jsonVal['version'] > currentVersion) {
+      downloadNewVersion(jsonVal["windows_file_name"]);
+    }
+  }
+
+// showUpdateDialog(Map<String, dynamic> versionJson) {
+//   final version = versionJson['version'];
+//   final updates = versionJson['description'] as List;
+//   return showDialog(
+//       context: Get.context!,
+//       builder: (context) {
+//         return SimpleDialog(
+//           contentPadding: const EdgeInsets.all(10),
+//           title: Text("Latest Version $version"),
+//           children: [
+//             Text("What's new in $version"),
+//             const SizedBox(
+//               height: 5,
+//             ),
+//             ...updates
+//                 .map((e) => Row(
+//                       children: [
+//                         Container(
+//                           width: 4,
+//                           height: 4,
+//                           decoration: BoxDecoration(
+//                               color: Colors.grey[400],
+//                               borderRadius: BorderRadius.circular(20)),
+//                         ),
+//                         const SizedBox(
+//                           width: 10,
+//                         ),
+//                         Text(
+//                           "$e",
+//                           style: TextStyle(
+//                             color: Colors.grey[600],
+//                           ),
+//                         ),
+//                       ],
+//                     ))
+//                 .toList(),
+//             const SizedBox(
+//               height: 10,
+//             ),
+//             if (version > currentVersion)
+//               TextButton.icon(
+//                   onPressed: () {
+//                     Navigator.pop(context);
+//                     if (Platform.isMacOS) {
+//                       downloadNewVersion(versionJson["macos_file_name"]);
+//                     }
+//                     if (Platform.isWindows) {
+//                     }
+//                   },
+//                   icon: const Icon(Icons.update),
+//                   label: const Text("Update")),
+//           ],
+//         );
+//       });
+// }
+}
+
+// Path: lib/modules/quiz/view/quiz_view.dart
+// Compare this snippet from lib/modules/quiz/view/quiz_view.dart:
+// import 'package:quiz_app/modules/quiz/controller/quiz_controller.dart';

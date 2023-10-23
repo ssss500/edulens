@@ -1,0 +1,13 @@
+# ninja log v5
+0	501	1695724646741265541	CMakeFiles/fvp_plugin.dir/fvp_plugin.cpp.o	5a3117bc1f74d3c9
+0	785	1695724647023802916	CMakeFiles/fvp_plugin.dir/Users/saif/StudioProjects/edulens/package/fvp/lib/src/callbacks.cpp.o	846cd9d04845357e
+785	833	1695724647068257624	/Users/saif/StudioProjects/edulens/build/fvp/intermediates/cxx/Debug/2sk5f206/obj/x86/libfvp_plugin.so	fa411d5810edab33
+2	87	1695724984279277208	/Users/saif/StudioProjects/edulens/build/fvp/intermediates/cxx/Debug/2sk5f206/obj/x86/libfvp_plugin.so	fa411d5810edab33
+2	60	1695725171474151124	/Users/saif/StudioProjects/edulens/build/fvp/intermediates/cxx/Debug/2sk5f206/obj/x86/libfvp_plugin.so	fa411d5810edab33
+1	96	1695725276179698708	/Users/saif/StudioProjects/edulens/build/fvp/intermediates/cxx/Debug/2sk5f206/obj/x86/libfvp_plugin.so	fa411d5810edab33
+5	285	1695725366176759999	/Users/saif/StudioProjects/edulens/build/fvp/intermediates/cxx/Debug/2sk5f206/obj/x86/libfvp_plugin.so	fa411d5810edab33
+1	61	1695725425108904166	/Users/saif/StudioProjects/edulens/build/fvp/intermediates/cxx/Debug/2sk5f206/obj/x86/libfvp_plugin.so	fa411d5810edab33
+0	4	0	clean	557ae25d278362b0
+2	572	1695727410380538374	CMakeFiles/fvp_plugin.dir/fvp_plugin.cpp.o	5a3117bc1f74d3c9
+2	870	1695727410677171791	CMakeFiles/fvp_plugin.dir/Users/saif/StudioProjects/edulens/package/fvp/lib/src/callbacks.cpp.o	846cd9d04845357e
+870	921	1695727410726926124	/Users/saif/StudioProjects/edulens/build/fvp/intermediates/cxx/Debug/2sk5f206/obj/x86/libfvp_plugin.so	fa411d5810edab33

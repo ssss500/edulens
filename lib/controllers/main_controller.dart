@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:edu_lens/controllers/update_windows_controller.dart';
 import 'package:edu_lens/helper/app_constants.dart';
 import 'package:edu_lens/helper/dio_integration.dart';
 import 'package:edu_lens/model/app_version_model.dart';
@@ -13,6 +14,7 @@ import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 import '../view/update_screen.dart';
 import '../view/widget/custom_social_media_icons.dart';
+
 // import 'package:package_info_plus/package_info_plus.dart';
 final _shorebirdCodePush = ShorebirdCodePush();
 
@@ -26,13 +28,18 @@ class MainController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     // TODO: implement onInit
-        if(Platform.isIOS||Platform.isAndroid){
+    if (Platform.isIOS || Platform.isAndroid) {
       checkUpdate();
       notificationMethod();
-        }
+    } else if (Platform.isWindows) {
+      debugPrint("onInit Main Controller Windows checkForUpdates");
+      // final updateWindowsController = Get.put(UpdateWindowsController());
+      UpdateWindowsController().checkForUpdates();
+    }
     debugPrint("onInit Main Controller");
     _checkForUpdate();
   }
+
   Future<void> _checkForUpdate() async {
     try {
       _shorebirdCodePush.currentPatchNumber().then((currentPatchVersion) {
@@ -46,7 +53,7 @@ class MainController extends GetxController {
 
       // Ask the Shorebird servers if there is a new patch available.
       final isUpdateAvailable =
-      await _shorebirdCodePush.isNewPatchAvailableForDownload();
+          await _shorebirdCodePush.isNewPatchAvailableForDownload();
 
       if (isUpdateAvailable) {
 // If there is a new patch available, download it.
@@ -56,8 +63,8 @@ class MainController extends GetxController {
     } catch (e) {
       debugPrint(e.toString());
     }
-
   }
+
   checkUpdate() async {
     Timer(Duration(milliseconds: 3500), () async {
       appVersion.value = (await getAppVersion())!;
