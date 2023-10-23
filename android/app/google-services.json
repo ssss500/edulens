@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "331459705049",
+    "project_id": "edulens-8fed5",
+    "storage_bucket": "edulens-8fed5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331459705049:android:ee818793705380353b66c8",
+        "android_client_info": {
+          "package_name": "com.edulens.edulens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "331459705049-gp875tkvmth09o4ncsdk1bj2arpbcafp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4sS3sRRT7hZ6esfO0w_1sD4mRO_KIOlw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "331459705049-gp875tkvmth09o4ncsdk1bj2arpbcafp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "331459705049-qh0u9v7q9fvjmod3eqep1g7h1ftpfj0o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.edulens.saif.eduLens"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331459705049:android:fb79e723c21319cb3b66c8",
+        "android_client_info": {
+          "package_name": "com.edulens.saif.edu_lens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "331459705049-gp875tkvmth09o4ncsdk1bj2arpbcafp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4sS3sRRT7hZ6esfO0w_1sD4mRO_KIOlw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "331459705049-gp875tkvmth09o4ncsdk1bj2arpbcafp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "331459705049-qh0u9v7q9fvjmod3eqep1g7h1ftpfj0o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.edulens.saif.eduLens"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

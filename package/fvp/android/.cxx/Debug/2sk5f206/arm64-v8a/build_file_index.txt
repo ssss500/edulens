@@ -1,0 +1,2 @@
+/Users/saif/StudioProjects/edulens/package/fvp/android/CMakeLists.txt
+/Users/saif/StudioProjects/edulens/package/fvp/android/mdk-sdk/lib/cmake/FindMDK.cmake
