@@ -212,7 +212,7 @@ class UpdateWindowsController extends GetxController {
 
   Future<Map<String, dynamic>> loadJsonFromGithub() async {
     final response = await http.read(Uri.parse(
-        "https://github.com/ssss500/edulens/blob/master/app_versions_check/version.json"));
+        "https://raw.githubusercontent.com/ssss500/edulens/master/app_versions_check/version.json"));
     debugPrint("Response git hub versions : $response");
     return jsonDecode(response);
   }

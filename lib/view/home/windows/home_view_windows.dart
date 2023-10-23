@@ -34,16 +34,16 @@ class HomeView extends GetView<HomeController> {
         },
         builder: (context, isOnline) => Column(
               children: [
-                // CustomText(
-                //   text: 'الصفحة الرئيسية',
-                //   fontWeight: FontWeight.bold,
-                //   textAlign: TextAlign.right,
-                //   fontSize: size.width * .02,
-                //   color: AppConstants.lightPrimaryColor,
-                // ),
-                // SizedBox(
-                //   height: size.height * .02,
-                // ),
+                CustomText(
+                  text: 'الصفحة الرئيسية',
+                  fontWeight: FontWeight.bold,
+                  textAlign: TextAlign.right,
+                  fontSize: size.width * .02,
+                  color: AppConstants.lightPrimaryColor,
+                ),
+                SizedBox(
+                  height: size.height * .02,
+                ),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
