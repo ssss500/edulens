@@ -16,6 +16,13 @@ macos:
     - url_launcher_macos
     - firebase_core
     - firebase_messaging
+windows:
+  excluded:
+    - wakelock
+    - url_launcher
+    - url_launcher_macos
+    - firebase_core
+    - firebase_messaging
 android:
   excluded:
     - fvp
