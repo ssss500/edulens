@@ -171,7 +171,7 @@ class GetHomeServices {
         "api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"
       });
       if (response.statusCode == 200) {
-        debugPrint("response Lecture: ${response.data[0]} ");
+      //  debugPrint("response Lecture: ${response.data[0]} ");
         var mList;
         try {
           mList = List<LecturePaidModel>.from(
@@ -181,7 +181,7 @@ class GetHomeServices {
           mList = [];
           debugPrint("catch : 186${e.toString()}");
         }
-        debugPrint("response Lecture done");
+        //debugPrint("response Lecture done");
 
         return mList;
       }
