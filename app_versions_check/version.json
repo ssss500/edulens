@@ -6,6 +6,6 @@
         "Minor Bug Fixes"
     ],
     "macos_file_name": "installers/macos/in_app_update_flutter.dmg",
-    "windows_file_name": "installers/windows/mysetup.exe",
+    "windows_file_name": "https://github.com/ssss500/edulens/tree/master/app_versions_check/installers/windows/edulens setup.exe",
     "linux_file_name": ""
 }
