@@ -230,14 +230,14 @@ class UpdateWindowsController extends GetxController {
   // }
 
   Future downloadNewVersion(String appPath) async {
-    final fileName = appPath.split("/").last;
+
     _isDownloading.value = true;
 update();
     _downloadedFilePath.value =
-        "${(await getApplicationDocumentsDirectory()).path}/$fileName";
+        "${(await getApplicationDocumentsDirectory()).path}/edulens_setup.exe";
 
     await _dio.download(
-      "",
+      appPath,
       downloadedFilePath,
       onReceiveProgress: (received, total) {
         final progress = (received / total) * 100;
