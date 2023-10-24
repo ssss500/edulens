@@ -318,8 +318,8 @@ class CoursesViewWindows extends StatelessWidget {
                                                                         dataLecture: controller
                                                                             .chapters[indexChapters]
                                                                             .lectures[indexLectures],
-                                                                        context:
-                                                                            context,
+                                                                        // context:
+                                                                        //     context,
                                                                       );
                                                                     }
                                                                   },

@@ -15,9 +15,9 @@ import 'package:get/get.dart';
 class BottomSheetPey {
   static void bottomSheetPaidForLecture({
     required Lecture dataLecture,
-    required BuildContext context,
+    // required BuildContext context,
   }) {
-    HomeController homeController = Get.put(HomeController());
+   final homeController = Get.put(HomeController());
     final paymentServices = PaymentServices();
     GlobalKey<FormState> formState = GlobalKey<FormState>();
     GlobalKey<FormState> formScaffoldWidows = GlobalKey<FormState>();
@@ -49,7 +49,7 @@ class BottomSheetPey {
                       height: 25,
                     ),
                     Padding(
-                      padding:  EdgeInsets.only(right: MediaQuery.sizeOf(context).width/8),
+                      padding:  EdgeInsets.only(right: MediaQuery.sizeOf(Get.context!).width/8),
                       child: CustomText(
                         text: "${"nameLecture".tr} : ${dataLecture.name}",
                         fontSize: 18,
@@ -60,7 +60,7 @@ class BottomSheetPey {
                       height: 25,
                     ),
                     Padding(
-                      padding:  EdgeInsets.only(right: MediaQuery.sizeOf(context).width/8),
+                      padding:  EdgeInsets.only(right: MediaQuery.sizeOf(Get.context!).width/8),
                       child: CustomText(
                         text: "${"costLecture".tr} : ${dataLecture.cost}",
                         fontSize: 18,
@@ -112,7 +112,7 @@ class BottomSheetPey {
                                         code: controller.text,
                                         lectureId: dataLecture.id,
                                         teacherId: dataLecture.teacherId,
-                                        context: context);
+                                        context: Get.context!);
                                     Get.back();
                                   }
                                 },
@@ -160,12 +160,12 @@ class BottomSheetPey {
                               ),
                               InkWell(
                                 onTap: () async {
-                                  Get.dialog(const CustomLoading());
+                                  // Get.dialog(const CustomLoading());
                                   await paymentServices.buyLectureByBucket(
                                       lectureId: dataLecture.id,
                                       teacherId: dataLecture.teacherId,
-                                      context: context);
-                                  Get.back();
+                                       );
+                                  // Get.back();
                                 },
                                 child: Container(
                                     width: 300,
@@ -317,7 +317,7 @@ class BottomSheetPey {
                                   code: controller.text,
                                   lectureId: dataLecture.id,
                                   teacherId: dataLecture.teacherId,
-                                  context: context);
+                                  context: Get.context!);
                               Get.back();
                             }
                           },

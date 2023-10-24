@@ -8,7 +8,8 @@ class CustomLoading extends StatelessWidget {
   final String? textLoading;
 
   const CustomLoading(
-      {super.key, this.boolUploading = false,
+      {super.key,
+      this.boolUploading = false,
       this.doubleUploadTask = 0.0,
       this.textLoading});
 
@@ -16,9 +17,8 @@ class CustomLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: AppConstants.primaryColor,
-
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(33.0))),
+          borderRadius: BorderRadius.all(Radius.circular(33.0),),),
       content: SizedBox(
         height: 90,
         child: Center(
@@ -28,7 +28,8 @@ class CustomLoading extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(AppConstants.lightPrimaryColor),
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    AppConstants.lightPrimaryColor),
               ),
               const SizedBox(
                 height: 15,

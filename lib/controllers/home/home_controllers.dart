@@ -60,12 +60,12 @@ class HomeController extends GetxController {
       screen: const PaidLectureScreen(),
       routeScreen: RoutesNames.paidLecture,
     ),
-    SideMenuItemModel(
-      title: "packages".tr,
-      icon: Icons.wallet,
-      screen: const Packages(),
-      routeScreen: RoutesNames.packages,
-    ),
+    // SideMenuItemModel(
+    //   title: "packages".tr,
+    //   icon: Icons.wallet,
+    //   screen: const Packages(),
+    //   routeScreen: RoutesNames.packages,
+    // ),
   ];
 
   RxInt sideMenuItemIndex = 0.obs;

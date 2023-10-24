@@ -208,7 +208,7 @@ class HomeCoursesView extends StatelessWidget {
                                             dataLecture: homeCoursesController
                                                 .chapters[indexChapters]
                                                 .lectures[indexLectures],
-                                            context: context,
+                                            // context: context,
                                           );
                                         }
                                       },
