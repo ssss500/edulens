@@ -1,11 +1,10 @@
 {
     "name": "In App Update Flutter Desktop App",
-    "version": 1.0,
+    "version": 2,
     "description": [
         "Added New Screen",
         "Minor Bug Fixes"
     ],
     "macos_file_name": "installers/macos/in_app_update_flutter.dmg",
-    "windows_file_name": "installers/windows/mysetup.exe",
-    "linux_file_name": ""
+    "windows_file_name": "https://raw.githubusercontent.com/ssss500/edulens/master/app_versions_check/installers/windows/edulens_setup.exe"
 }

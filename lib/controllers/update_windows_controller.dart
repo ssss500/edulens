@@ -200,7 +200,7 @@ class UpdateWindowsController extends GetxController {
   final _downloadProgress = 0.0.obs;
   final _isDownloading = false.obs;
   final _downloadedFilePath = "".obs;
-  final _currentVersion = 1.1.obs;
+  final _currentVersion = 1.0.obs;
 
   double get downloadProgress => _downloadProgress.value;
 
@@ -212,7 +212,7 @@ class UpdateWindowsController extends GetxController {
 
   Future<Map<String, dynamic>> loadJsonFromGithub() async {
     final response = await http.read(Uri.parse(
-        "https://github.com/ssss500/edulens/blob/master/app_versions_check/version.json"));
+        "https://raw.githubusercontent.com/ssss500/edulens/master/app_versions_check/version.json"));
     debugPrint("Response git hub versions : $response");
     return jsonDecode(response);
   }
@@ -230,14 +230,14 @@ class UpdateWindowsController extends GetxController {
   // }
 
   Future downloadNewVersion(String appPath) async {
-    final fileName = appPath.split("/").last;
+
     _isDownloading.value = true;
 update();
     _downloadedFilePath.value =
-        "${(await getApplicationDocumentsDirectory()).path}/$fileName";
+        "${(await getApplicationDocumentsDirectory()).path}/edulens_setup.exe";
 
     await _dio.download(
-      "",
+      appPath,
       downloadedFilePath,
       onReceiveProgress: (received, total) {
         final progress = (received / total) * 100;
