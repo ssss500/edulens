@@ -28,6 +28,7 @@ class UpdateScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
+          if(Platform.isIOS||Platform.isAndroid)
           CustomButton(
             function: () async {
               if (Platform.isIOS) {
