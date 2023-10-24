@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 
 class PaymentServices {
   final dio = DioUtilNew.dio;
-  PaymentController paymentController = Get.put(PaymentController());
+  // PaymentController paymentController = Get.put(PaymentController());
 
   Future<String> buyLectureByCoupon({
     required code,
@@ -91,12 +91,10 @@ class PaymentServices {
   Future<String> buyLectureByBucket({
     required lectureId,
     required teacherId,
-    context,
+
   }) async {
     try {
-      // debugPrint("studentId ${CacheHelper.getData(
-      //   key: AppConstants.studentId,
-      // )}");
+
       final response =
           await dio!.post(AppConstants.buyThisLecture, queryParameters: {
         "lecture_id": lectureId,
@@ -111,12 +109,10 @@ class PaymentServices {
         "api_developer": "EdUK3fbVl96SVBJQ5U2HxU5rLens"
       });
 
-      // debugPrint(response.statusCode.toString());
-      // debugPrint(response.data.toString());
       if (response.statusCode == 200) {
         HomeController homeController = Get.put(HomeController());
         showCustomSnackBar(
-            context: Get.context!,
+            context: Get.key.currentContext,
             title: "note".tr,
             deck: "تم شراء المحاضرة بنجاح 🫶",
             contentType: ContentType.success);
@@ -124,20 +120,16 @@ class PaymentServices {
         Timer(const Duration(milliseconds: 1000), () {
           Get.back();
         });
-        // final mList = List<CoursesModel>.from(
-        //     response.data.map((i) => CoursesModel.fromJson(i)));
-        // debugPrint(mList.length.toString());
-        //
-        // return mList;
+
       } else if (response.statusCode == 400) {
         showCustomSnackBar(
-            context: Get.context!,
+            context: Get.key.currentContext,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
       } else {
         showCustomSnackBar(
-            context: Get.context!,
+            context: Get.key.currentContext,
             title: "note".tr,
             deck: response.data.toString(),
             contentType: ContentType.warning);
@@ -308,6 +300,16 @@ class PaymentServices {
     required context,
   }) async {
     try {
+      // debugPrint("student_id : ${CacheHelper.getData(
+      //   key: AppConstants.studentId,
+      // )}");
+      // debugPrint("student_id : ${CacheHelper.getData(
+      //   key: AppConstants.studentId,
+      // ).runtimeType}");
+      // debugPrint("exam_id : $examId");
+      // debugPrint("exam_id : ${examId.runtimeType}");
+      // debugPrint("teacher_id : $teacherId");
+      // debugPrint("teacher_id : ${teacherId.runtimeType}");
       final response =
           await dio!.post(AppConstants.buyExamByBucket, queryParameters: {
         "exam_id": examId,

@@ -20,7 +20,7 @@ import 'package:get/get.dart';
       inMaterialBanner: true,
     ),
   );
- return ScaffoldMessenger.of(Navigator.of(context).context)
+ return ScaffoldMessenger.of(Get.key.currentContext!)
     ..hideCurrentSnackBar()
     ..showSnackBar(snackBar);
 }

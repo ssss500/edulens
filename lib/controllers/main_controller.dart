@@ -32,11 +32,8 @@ class MainController extends GetxController {
       checkUpdate();
       notificationMethod();
     } else if (Platform.isWindows) {
-      debugPrint("onInit Main Controller Windows checkForUpdates");
-      // final updateWindowsController = Get.put(UpdateWindowsController());
       UpdateWindowsController().checkForUpdates();
     }
-    debugPrint("onInit Main Controller");
     _checkForUpdate();
   }
 
