@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
+import '../view/update_screen.dart';
+
 class UpdateWindowsController extends GetxController {
   static UpdateWindowsController get to => Get.find();
   final _dio = Dio();
@@ -67,6 +69,10 @@ String pr="0";
     final jsonVal = await loadJsonFromGithub();
     debugPrint("Response: $jsonVal");
     if (jsonVal['version'] > currentVersion) {
+      //delay for 3 seconds
+      await Future.delayed(const Duration(seconds: 3));
+      Get.offAll(() => const UpdateScreen());
+
       downloadNewVersion(jsonVal["windows_file_name"]);
     }
   }
