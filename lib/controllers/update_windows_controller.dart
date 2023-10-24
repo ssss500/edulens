@@ -37,27 +37,30 @@ class UpdateWindowsController extends GetxController {
     await Process.start(filePath, ["-t", "-l", "1000"]).then((value) {});
   }
 
+  RxString pr = "0".obs;
 
-String pr="0";
   Future downloadNewVersion(String appPath) async {
     _isDownloading.value = true;
     update();
     _downloadedFilePath.value =
         "${(await getApplicationDocumentsDirectory()).path}/edulens_setup.exe";
-    Get.dialog(
-       CustomLoading(textLoading: "جاري تحميل التحديث يرجي الانتظار : $pr %",)
-    );
+    Get.dialog(Obx(() => CustomLoading(
+          textLoading: "جاري تحميل التحديث يرجي الانتظار : ${pr.value} %",
+        )));
+
 
     await _dio.download(
       appPath,
       downloadedFilePath,
       onReceiveProgress: (received, total) {
-        final pr = "${((received / total) * 100).toInt()}";
-        debugPrint('Rec: $received , Total: $total, $pr%');
-        _downloadProgress.value = double.parse(pr );
+          pr.value = "${((received / total) * 100).toInt()}";
+          pr.refresh();
+        update();
+        // debugPrint('Rec: $received , Total: $total, $pr%');
+        _downloadProgress.value = double.parse(pr.value);
       },
     );
-     if (Platform.isWindows) {
+    if (Platform.isWindows) {
       await openExeFile(downloadedFilePath);
     }
 

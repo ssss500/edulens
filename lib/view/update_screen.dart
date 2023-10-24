@@ -13,44 +13,49 @@ class UpdateScreen extends StatelessWidget {
     return CustomAppBar(
       title: 'تحديث اجباري',
       bakeButtonBool: false,
-      widget: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(25.0),
-              child: Image.asset(
-                'assets/images/update_screen2.png',
+      widget: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(25.0),
+                  child: Image.asset(
+                    'assets/images/update_screen2.png',height: 400,
+                  ),
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          if(Platform.isIOS||Platform.isAndroid)
-          CustomButton(
-            function: () async {
-              if (Platform.isIOS) {
-                final Uri url = Uri.parse(
-                    "https://apps.apple.com/app/edu-lens/id1666623278");
-                await launchUrl(
-                  url,
-                  mode: LaunchMode.externalApplication,
-                );
-              } else {
-                final Uri url = Uri.parse(
-                    "https://play.google.com/store/apps/details?id=com.edulens.edulens");
+            const SizedBox(
+              height: 30,
+            ),
+            if(Platform.isIOS||Platform.isAndroid)
+            CustomButton(
+              function: () async {
+                if (Platform.isIOS) {
+                  final Uri url = Uri.parse(
+                      "https://apps.apple.com/app/edu-lens/id1666623278");
+                  await launchUrl(
+                    url,
+                    mode: LaunchMode.externalApplication,
+                  );
+                } else {
+                  final Uri url = Uri.parse(
+                      "https://play.google.com/store/apps/details?id=com.edulens.edulens");
 
-                await launchUrl(
-                  url,
-                  mode: LaunchMode.externalApplication,
-                );
-              }
-            },
-            text: 'تحديث',
-          )
-        ],
+                  await launchUrl(
+                    url,
+                    mode: LaunchMode.externalApplication,
+                  );
+                }
+              },
+              text: 'تحديث',
+            )
+          ],
+        ),
       ),
     );
   }
