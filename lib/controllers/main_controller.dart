@@ -31,10 +31,12 @@ class MainController extends GetxController {
     if (Platform.isIOS || Platform.isAndroid) {
       checkUpdate();
       notificationMethod();
-    } else if (Platform.isWindows) {
+      _checkForUpdate();
+
+    } else if (Platform.isWindows||Platform.isMacOS) {
       UpdateWindowsController().checkForUpdates();
     }
-    _checkForUpdate();
+
   }
 
   Future<void> _checkForUpdate() async {
