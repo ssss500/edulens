@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "edulesn"
-#define MyAppVersion "1.0"
+#define MyAppVersion "2"
 #define MyAppPublisher "My Company, Inc."
 #define MyAppURL "https://edu-lens.com/"
 #define MyAppExeName "edulens.exe"
@@ -23,7 +23,7 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=C:\Users\hp\StudioProjects\edulens\app_versions_check\installers\windows
-OutputBaseFilename=edulens setup
+OutputBaseFilename=EdulensSetup
 SetupIconFile=C:\Users\hp\StudioProjects\edulens\windows\runner\resources\app_icon.ico
 Compression=lzma
 SolidCompression=yes

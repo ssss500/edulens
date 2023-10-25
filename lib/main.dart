@@ -146,7 +146,7 @@ Future<void> channel() async {
     const platform = MethodChannel('my_channel');
 
     final bool result = await platform.invokeMethod('protectScreen');
-    debugPrint("value initMethodChannel : $result");
+
 
   } on PlatformException catch (e) {
     print('Error: ${e.message}');

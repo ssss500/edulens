@@ -58,22 +58,7 @@ class _PdfViewWindowsState extends State<PdfViewWindows> {
                   // SizedBox(
                   //   width: MediaQuery.sizeOf(context).width * 0.15,
                   // ),
-                  widget.pdfModel.canDownload == 1
-                      ? Obx(() => !widget.pdfController.files
-                              .cast<String>()
-                              .contains("${widget.pdfModel.title}.pdf")
-                          ? IconButton(
-                              icon: const Icon(Icons.download_rounded),
-                              onPressed: () => widget.pdfController.download2(),
-                            )
-                          : IconButton(
-                              icon: const Icon(Icons.share),
-                              onPressed: () {
-                                Share.shareFiles([widget.localfile],
-                                    text: widget.pdfModel.title);
-                              },
-                            ))
-                      : const SizedBox(),
+                   const SizedBox(),
                 ],
               ),
             ),

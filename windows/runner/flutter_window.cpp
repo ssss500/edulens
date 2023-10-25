@@ -43,7 +43,7 @@ void initMethodChannel(flutter::FlutterEngine* flutter_instance) {
                 std::string method = call.method_name();
 
                 if (method == "protectScreen") {
-                    HWND windowHandle = FindWindow(NULL, L"test_screen_protect"); // Replace this with the window handle of your application
+                    HWND windowHandle = FindWindow(NULL, L"edulens"); // Replace this with the window handle of your application
 
                     if (windowHandle != NULL) {
                         if (Protect) {

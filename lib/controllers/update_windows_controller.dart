@@ -16,7 +16,7 @@ class UpdateWindowsController extends GetxController {
   final _downloadProgress = 0.0.obs;
   final _isDownloading = false.obs;
   final _downloadedFilePath = "".obs;
-  final _currentVersion = 1.0.obs;
+  final _currentVersion = 2.0.obs;
 
   double get downloadProgress => _downloadProgress.value;
 
